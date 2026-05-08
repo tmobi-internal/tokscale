@@ -142,11 +142,13 @@ pub fn compute_time_metrics(intervals: &[SessionInterval], _idle_gap_ms: i64) ->
     // --- Longest continuous usage ---
     // Collect all session [start, end] as activity windows, merge overlapping
     // ones (with idle_gap_ms tolerance), find the longest merged span.
+    // Use active_duration_ms instead of wall-clock span to exclude idle gaps
+    // within sessions from inflating the metric.
     let longest_continuous_ms = {
         let mut windows: Vec<(i64, i64)> = intervals
             .iter()
-            .filter(|s| s.start_ts > 0)
-            .map(|s| (s.start_ts, s.end_ts.max(s.start_ts)))
+            .filter(|s| s.start_ts > 0 && s.active_duration_ms > 0)
+            .map(|s| (s.start_ts, s.start_ts + s.active_duration_ms))
             .collect();
         windows.sort_unstable_by_key(|w| w.0);
 
