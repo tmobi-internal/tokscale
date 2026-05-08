@@ -168,6 +168,7 @@ pub fn generate_graph_result(
         summary,
         years,
         contributions,
+        time_metrics: None,
     }
 }
 
@@ -391,6 +392,7 @@ impl DayAccumulator {
             intensity: 0,
             token_breakdown,
             clients,
+            active_time_ms: None,
         }
     }
 }

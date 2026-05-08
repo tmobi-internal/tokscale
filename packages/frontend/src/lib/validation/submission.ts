@@ -55,6 +55,7 @@ const ClientContributionSchema = z.object({
 const DailyContributionSchema = z.object({
   date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
   timestampMs: z.number().int().min(1e12).max(Number.MAX_SAFE_INTEGER).optional(),
+  activeTimeMs: z.number().int().min(0).optional(),
   totals: z.object({
     tokens: z.number().int().min(0),
     cost: z.number().min(0),
@@ -158,11 +159,19 @@ function normalizeLegacySources(data: unknown): unknown {
   return d;
 }
 
+const TimeMetricsSchema = z.object({
+  totalActiveTimeMs: z.number().int().min(0),
+  longestContinuousMs: z.number().int().min(0),
+  maxConcurrentSessions: z.number().int().min(0),
+  sessionCount: z.number().int().min(0),
+});
+
 const SubmissionDataSchema = z.preprocess(normalizeLegacySources, z.object({
   meta: ExportMetaSchema,
   summary: DataSummarySchema,
   years: z.array(YearSummarySchema),
   contributions: z.array(DailyContributionSchema),
+  timeMetrics: TimeMetricsSchema.optional(),
 }));
 
 export type SubmissionData = z.infer<typeof SubmissionDataSchema>;
