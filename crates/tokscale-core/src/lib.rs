@@ -1635,11 +1635,10 @@ pub async fn get_time_metrics_report(options: ReportOptions) -> Result<TimeMetri
         clients
     });
 
-    let pricing = load_pricing_for_local_parse().await;
     let all_messages = parse_all_messages_with_pricing_with_env_strategy(
         &home_dir,
         &clients,
-        pricing.as_deref(),
+        None,
         options.use_env_roots,
         &options.scanner_settings,
     );

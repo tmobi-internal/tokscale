@@ -142,11 +142,34 @@ pub fn compute_time_metrics(intervals: &[SessionInterval], _idle_gap_ms: i64) ->
     // --- Longest continuous usage ---
     // Collect all session [start, end] as activity windows, merge overlapping
     // ones (with idle_gap_ms tolerance), find the longest merged span.
-    let longest_continuous_ms = intervals
-        .iter()
-        .map(|s| s.active_duration_ms)
-        .max()
-        .unwrap_or(0);
+    let longest_continuous_ms = {
+        let mut windows: Vec<(i64, i64)> = intervals
+            .iter()
+            .filter(|s| s.start_ts > 0)
+            .map(|s| (s.start_ts, s.end_ts.max(s.start_ts)))
+            .collect();
+        windows.sort_unstable_by_key(|w| w.0);
+
+        let mut longest: i64 = 0;
+        if let Some(&first) = windows.first() {
+            let mut merged_start = first.0;
+            let mut merged_end = first.1;
+
+            for &(start, end) in &windows[1..] {
+                if start <= merged_end + _idle_gap_ms {
+                    // Overlapping or within idle gap tolerance — extend
+                    merged_end = merged_end.max(end);
+                } else {
+                    // Gap too large — finalize previous window
+                    longest = longest.max(merged_end - merged_start);
+                    merged_start = start;
+                    merged_end = end;
+                }
+            }
+            longest = longest.max(merged_end - merged_start);
+        }
+        longest
+    };
 
     // --- Max concurrent sessions ---
     let max_concurrent_sessions = compute_max_concurrent(intervals);
@@ -166,20 +189,21 @@ fn compute_max_concurrent(intervals: &[SessionInterval]) -> u32 {
         return 0;
     }
 
-    // Events: +1 at start, -1 at end
     let mut events: Vec<(i64, i32)> = Vec::with_capacity(intervals.len() * 2);
     for s in intervals {
         if s.start_ts <= 0 {
             continue;
         }
         events.push((s.start_ts, 1));
-        // Use end_ts; if start == end (single message), still counts as 1
-        events.push((s.end_ts, -1));
+        // For zero-duration sessions (start == end), push end as start+1
+        // so the +1 event is processed before the -1 event at the same logical point
+        let end = if s.end_ts <= s.start_ts { s.start_ts + 1 } else { s.end_ts };
+        events.push((end, -1));
     }
 
-    // Sort by time; ties broken by end (-1) before start (+1) to avoid
-    // over-counting at exact boundaries
-    events.sort_unstable_by(|a, b| a.0.cmp(&b.0).then(a.1.cmp(&b.1)));
+    // Sort by time; ties broken by start (+1) before end (-1) so concurrent
+    // sessions at the same timestamp are counted together
+    events.sort_unstable_by(|a, b| a.0.cmp(&b.0).then(b.1.cmp(&a.1)));
 
     let mut max_concurrent: u32 = 0;
     let mut current: i32 = 0;

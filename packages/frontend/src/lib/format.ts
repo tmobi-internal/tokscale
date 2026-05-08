@@ -45,7 +45,7 @@ export function formatCurrency(value: number, compact = false): string {
 
 /**
  * Format milliseconds into a human-readable duration string.
- * e.g. 3661000 → "1h 1m", 90000 → "1m 30s", 500 → "<1m"
+ * e.g. 3661000 → "1h 1m", 90000 → "1m 30s", 500 → "<1s"
  */
 export function formatDuration(ms: number | null | undefined): string {
   if (ms == null || !Number.isFinite(ms) || ms <= 0) return "—";

@@ -6,7 +6,7 @@ import { isValidGitHubUsername } from "@/lib/validation/username";
 export const revalidate = 60;
 
 const VALID_PERIODS: Period[] = ["all", "month", "week"];
-const VALID_SORT_BY: SortBy[] = ["tokens", "cost"];
+const VALID_SORT_BY: SortBy[] = ["tokens", "cost", "time"];
 
 export async function GET(
   request: NextRequest,
