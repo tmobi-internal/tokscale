@@ -3844,6 +3844,7 @@ fn format_duration_ms(ms: i64) -> String {
     }
 }
 
+#[allow(clippy::too_many_arguments)]
 fn run_graph_command(
     output: Option<String>,
     home_dir: Option<String>,

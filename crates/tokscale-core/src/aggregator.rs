@@ -622,6 +622,7 @@ mod tests {
                 intensity: 0,
                 token_breakdown: TokenBreakdown::default(),
                 clients: Vec::new(),
+                active_time_ms: None,
             },
             DailyContribution {
                 date: "2024-01-02".to_string(),
@@ -633,6 +634,7 @@ mod tests {
                 intensity: 0,
                 token_breakdown: TokenBreakdown::default(),
                 clients: Vec::new(),
+                active_time_ms: None,
             },
         ];
 
@@ -720,6 +722,7 @@ mod tests {
             intensity: 0,
             token_breakdown: TokenBreakdown::default(),
             clients: Vec::new(),
+            active_time_ms: None,
         }];
 
         let years = calculate_years(&contributions);
@@ -777,6 +780,7 @@ mod tests {
                 intensity: 0,
                 token_breakdown: TokenBreakdown::default(),
                 clients: Vec::new(),
+                active_time_ms: None,
             },
             DailyContribution {
                 date: "2024-01-02".to_string(),
@@ -788,6 +792,7 @@ mod tests {
                 intensity: 0,
                 token_breakdown: TokenBreakdown::default(),
                 clients: Vec::new(),
+                active_time_ms: None,
             },
         ];
 
@@ -809,6 +814,7 @@ mod tests {
                 intensity: 0,
                 token_breakdown: TokenBreakdown::default(),
                 clients: Vec::new(),
+                active_time_ms: None,
             },
             DailyContribution {
                 date: "2024-01-02".to_string(),
@@ -820,6 +826,7 @@ mod tests {
                 intensity: 0,
                 token_breakdown: TokenBreakdown::default(),
                 clients: Vec::new(),
+                active_time_ms: None,
             },
             DailyContribution {
                 date: "2024-01-03".to_string(),
@@ -831,6 +838,7 @@ mod tests {
                 intensity: 0,
                 token_breakdown: TokenBreakdown::default(),
                 clients: Vec::new(),
+                active_time_ms: None,
             },
             DailyContribution {
                 date: "2024-01-04".to_string(),
@@ -842,6 +850,7 @@ mod tests {
                 intensity: 0,
                 token_breakdown: TokenBreakdown::default(),
                 clients: Vec::new(),
+                active_time_ms: None,
             },
             DailyContribution {
                 date: "2024-01-05".to_string(),
@@ -853,6 +862,7 @@ mod tests {
                 intensity: 0,
                 token_breakdown: TokenBreakdown::default(),
                 clients: Vec::new(),
+                active_time_ms: None,
             },
         ];
 
@@ -878,6 +888,7 @@ mod tests {
                 intensity: 0,
                 token_breakdown: TokenBreakdown::default(),
                 clients: Vec::new(),
+                active_time_ms: None,
             },
             DailyContribution {
                 date: "2024-01-02".to_string(),
@@ -889,6 +900,7 @@ mod tests {
                 intensity: 0,
                 token_breakdown: TokenBreakdown::default(),
                 clients: Vec::new(),
+                active_time_ms: None,
             },
             DailyContribution {
                 date: "2024-01-03".to_string(),
@@ -900,6 +912,7 @@ mod tests {
                 intensity: 0,
                 token_breakdown: TokenBreakdown::default(),
                 clients: Vec::new(),
+                active_time_ms: None,
             },
             DailyContribution {
                 date: "2024-01-04".to_string(),
@@ -911,6 +924,7 @@ mod tests {
                 intensity: 0,
                 token_breakdown: TokenBreakdown::default(),
                 clients: Vec::new(),
+                active_time_ms: None,
             },
         ];
 
