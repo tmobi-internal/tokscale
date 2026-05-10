@@ -4689,6 +4689,7 @@ mod tests {
                 cost: total_cost,
                 messages: 1,
             }],
+            active_time_ms: None,
         }
     }
 
