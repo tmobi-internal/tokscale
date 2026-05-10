@@ -231,6 +231,8 @@ export const dailyBreakdown = pgTable(
     outputTokens: bigint("output_tokens", { mode: "number" }).notNull(),
     /** Unix ms timestamp of earliest message in this UTC day bucket. NULL for legacy data. */
     timestampMs: bigint("timestamp_ms", { mode: "number" }),
+    /** Active coding time in this UTC day bucket (ms). NULL for legacy data. */
+    activeTimeMs: bigint("active_time_ms", { mode: "number" }),
 
     providerBreakdown: jsonb("provider_breakdown").$type<
       Record<string, number>
@@ -262,8 +264,6 @@ export const dailyBreakdown = pgTable(
       >
     >(),
     modelBreakdown: jsonb("model_breakdown").$type<Record<string, number>>(),
-    /** Total active coding time in this UTC day bucket (milliseconds). NULL for legacy data. */
-    activeTimeMs: bigint("active_time_ms", { mode: "number" }),
   },
   (table) => [
     index("idx_daily_breakdown_submission_id").on(table.submissionId),
