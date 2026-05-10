@@ -199,7 +199,11 @@ fn compute_max_concurrent(intervals: &[SessionInterval]) -> u32 {
         events.push((s.start_ts, 1));
         // For zero-duration sessions (start == end), push end as start+1
         // so the +1 event is processed before the -1 event at the same logical point
-        let end = if s.end_ts <= s.start_ts { s.start_ts + 1 } else { s.end_ts };
+        let end = if s.end_ts <= s.start_ts {
+            s.start_ts + 1
+        } else {
+            s.end_ts
+        };
         events.push((end, -1));
     }
 
@@ -225,7 +229,9 @@ fn compute_max_concurrent(intervals: &[SessionInterval]) -> u32 {
 /// For each interval, distributes its `active_duration_ms` proportionally
 /// across the UTC days it spans. Single-day sessions get their full active
 /// time assigned to that day.
-pub fn compute_daily_active_time(intervals: &[SessionInterval]) -> std::collections::HashMap<String, i64> {
+pub fn compute_daily_active_time(
+    intervals: &[SessionInterval],
+) -> std::collections::HashMap<String, i64> {
     use std::collections::HashMap;
 
     let mut daily: HashMap<String, i64> = HashMap::new();
@@ -306,7 +312,9 @@ fn ymd_to_days(y: i64, m: i64, d: i64) -> i64 {
 fn dates_between(start: &str, end: &str) -> Vec<String> {
     let start_days = {
         let parts: Vec<&str> = start.split('-').collect();
-        if parts.len() != 3 { return vec![start.to_string()]; }
+        if parts.len() != 3 {
+            return vec![start.to_string()];
+        }
         let y: i64 = parts[0].parse().unwrap_or(0);
         let m: i64 = parts[1].parse().unwrap_or(0);
         let d: i64 = parts[2].parse().unwrap_or(0);
@@ -314,7 +322,9 @@ fn dates_between(start: &str, end: &str) -> Vec<String> {
     };
     let end_days = {
         let parts: Vec<&str> = end.split('-').collect();
-        if parts.len() != 3 { return vec![start.to_string()]; }
+        if parts.len() != 3 {
+            return vec![start.to_string()];
+        }
         let y: i64 = parts[0].parse().unwrap_or(0);
         let m: i64 = parts[1].parse().unwrap_or(0);
         let d: i64 = parts[2].parse().unwrap_or(0);

@@ -1597,7 +1597,8 @@ async fn generate_graph_with_loaded_pricing(
     let filtered = filter_messages_for_report(all_messages, &options);
 
     let intervals = sessionize::sessionize(&filtered, sessionize::DEFAULT_IDLE_GAP_MS);
-    let time_metrics = sessionize::compute_time_metrics(&intervals, sessionize::DEFAULT_IDLE_GAP_MS);
+    let time_metrics =
+        sessionize::compute_time_metrics(&intervals, sessionize::DEFAULT_IDLE_GAP_MS);
 
     let daily_active_time = sessionize::compute_daily_active_time(&intervals);
     let contributions = aggregator::aggregate_by_date(filtered);

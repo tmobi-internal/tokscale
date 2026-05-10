@@ -263,7 +263,9 @@ enum Commands {
     },
     #[command(about = "Delete all submitted usage data from the server")]
     DeleteSubmittedData,
-    #[command(about = "Show session time metrics (usage time, longest continuous, max concurrent)")]
+    #[command(
+        about = "Show session time metrics (usage time, longest continuous, max concurrent)"
+    )]
     TimeMetrics {
         #[arg(long)]
         json: bool,
@@ -625,7 +627,15 @@ fn main() -> Result<()> {
             let (since, until) = build_date_filter(today, week, month, date.since, date.until);
             let year = normalize_year_filter(today, week, month, date.year);
             let clients = build_client_filter(clients);
-            run_time_metrics_report(json, cli.home.clone(), clients, since, until, year, no_spinner)
+            run_time_metrics_report(
+                json,
+                cli.home.clone(),
+                clients,
+                since,
+                until,
+                year,
+                no_spinner,
+            )
         }
         Some(Commands::WarmTuiCache) => run_warm_tui_cache(),
         None => {
@@ -3817,10 +3827,7 @@ fn run_time_metrics_report(
         );
         println!("Max concurrent sessions: {}", m.max_concurrent_sessions);
         println!("Total sessions:          {}", m.session_count);
-        println!(
-            "Processing time:         {}ms",
-            report.processing_time_ms
-        );
+        println!("Processing time:         {}ms", report.processing_time_ms);
     }
 
     Ok(())
