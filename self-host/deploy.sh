@@ -49,6 +49,24 @@ case "${1:-help}" in
     log "Running database migrations..."
     $DC exec app npx drizzle-kit push --force
 
+    log "Seeding admin user..."
+    ADMIN_USERNAME="admin"
+    ADMIN_TOKEN="tt_${ADMIN_USERNAME}"
+    ADMIN_TOKEN_HASH=$(echo -n "$ADMIN_TOKEN" | shasum -a 256 | cut -d' ' -f1)
+    $DC exec -T db psql -U tokscale -d tokscale -q <<SQL
+INSERT INTO users (github_id, username, display_name, is_admin)
+VALUES (abs(hashtext('$ADMIN_USERNAME')), '$ADMIN_USERNAME', '$ADMIN_USERNAME', true)
+ON CONFLICT (username) DO UPDATE SET is_admin = true;
+
+DELETE FROM api_tokens
+WHERE user_id = (SELECT id FROM users WHERE username = '$ADMIN_USERNAME')
+  AND name = 'default';
+
+INSERT INTO api_tokens (user_id, token, name)
+VALUES ((SELECT id FROM users WHERE username = '$ADMIN_USERNAME'), '$ADMIN_TOKEN_HASH', 'default');
+SQL
+    log "Admin seeded (token: $ADMIN_TOKEN)"
+
     log ""
     log "Tokscale is live at ${NEXT_PUBLIC_URL}"
     log ""
