@@ -1,0 +1,39 @@
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: tokscale
+      POSTGRES_USER: tokscale
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "127.0.0.1:5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U tokscale"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  app:
+    build:
+      context: ..
+      dockerfile: self-host/Dockerfile
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "0.0.0.0:80:3000"
+    environment:
+      DATABASE_URL: postgresql://tokscale:${POSTGRES_PASSWORD}@db:5432/tokscale
+      DB_SSL: "false"
+      GITHUB_CLIENT_ID: ${GITHUB_CLIENT_ID}
+      GITHUB_CLIENT_SECRET: ${GITHUB_CLIENT_SECRET}
+      NEXT_PUBLIC_URL: ${NEXT_PUBLIC_URL}
+      AUTH_SECRET: ${AUTH_SECRET}
+      NODE_ENV: production
+
+volumes:
+  pgdata:

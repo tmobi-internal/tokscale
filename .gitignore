@@ -29,3 +29,9 @@ ai-todolist.md
 *.tgz
 .sisyphus
 crates/tokscale-cli/tokscale-export-*.json
+
+# Self-host secrets
+self-host/.env
+self-host/*.pem
+self-host/ec2-ip.txt
+self-host/ec2-instance-id.txt
