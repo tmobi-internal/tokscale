@@ -582,7 +582,7 @@ export async function POST(request: Request) {
             maxConcurrentSessions: data.timeMetrics.maxConcurrentSessions,
             sessionCount: data.timeMetrics.sessionCount,
           } : {}),
-          ...(mcpServers && mcpServers.length > 0 ? { mcpServers } : {}),
+          mcpServers: mcpServers && mcpServers.length > 0 ? mcpServers : null,
           updatedAt: new Date(),
         })
         .where(eq(submissions.id, submissionId));
