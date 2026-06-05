@@ -17,6 +17,7 @@ interface StatsPanelProps {
   palette: GraphColorPalette;
   totalActiveTimeMs?: number | null;
   sessionCount?: number | null;
+  mcpServers?: string[];
 }
 
 const Container = styled.div`
@@ -143,7 +144,7 @@ const StatItemSubValue = styled.div`
   color: var(--color-fg-muted);
 `;
 
-export function StatsPanel({ data, palette, totalActiveTimeMs, sessionCount }: StatsPanelProps) {
+export function StatsPanel({ data, palette, totalActiveTimeMs, sessionCount, mcpServers }: StatsPanelProps) {
   const { summary, contributions } = data;
   const currentStreak = calculateCurrentStreak(contributions);
   const longestStreak = calculateLongestStreak(contributions);
@@ -183,6 +184,20 @@ export function StatsPanel({ data, palette, totalActiveTimeMs, sessionCount }: S
           </SourceBadge>
         ))}
       </SourcesContainer>
+
+      {mcpServers && mcpServers.length > 0 && (
+        <SourcesContainer>
+          <SourcesLabel>MCPs:</SourcesLabel>
+          {mcpServers.map((server) => (
+            <SourceBadge
+              key={server}
+              $backgroundColor={`${palette.grade3}20`}
+            >
+              {server}
+            </SourceBadge>
+          ))}
+        </SourcesContainer>
+      )}
     </Container>
   );
 }
