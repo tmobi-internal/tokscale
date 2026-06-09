@@ -483,10 +483,12 @@ fn main() -> Result<()> {
                 std::process::exit(1);
             });
             let today = date.today;
+            let yesterday = date.yesterday;
             let week = date.week;
             let month = date.month;
-            let (since, until) = build_date_filter(today, week, month, date.since, date.until);
-            let year = normalize_year_filter(today, week, month, date.year);
+            let (since, until) =
+                build_date_filter(today, yesterday, week, month, date.since, date.until);
+            let year = normalize_year_filter(today, yesterday, week, month, date.year);
             let clients = build_client_filter(clients, &cli.home);
             if json || light || !can_use_tui {
                 run_models_report(
@@ -499,6 +501,7 @@ fn main() -> Result<()> {
                     benchmark,
                     no_spinner || !can_use_tui,
                     today,
+                    yesterday,
                     week,
                     month,
                     group_by,
@@ -529,10 +532,12 @@ fn main() -> Result<()> {
             no_spinner,
         }) => {
             let today = date.today;
+            let yesterday = date.yesterday;
             let week = date.week;
             let month = date.month;
-            let (since, until) = build_date_filter(today, week, month, date.since, date.until);
-            let year = normalize_year_filter(today, week, month, date.year);
+            let (since, until) =
+                build_date_filter(today, yesterday, week, month, date.since, date.until);
+            let year = normalize_year_filter(today, yesterday, week, month, date.year);
             let clients = build_client_filter(clients, &cli.home);
             if json || light || !can_use_tui {
                 run_monthly_report(
@@ -545,6 +550,7 @@ fn main() -> Result<()> {
                     benchmark,
                     no_spinner || !can_use_tui,
                     today,
+                    yesterday,
                     week,
                     month,
                 )
@@ -572,10 +578,12 @@ fn main() -> Result<()> {
             no_spinner,
         }) => {
             let today = date.today;
+            let yesterday = date.yesterday;
             let week = date.week;
             let month = date.month;
-            let (since, until) = build_date_filter(today, week, month, date.since, date.until);
-            let year = normalize_year_filter(today, week, month, date.year);
+            let (since, until) =
+                build_date_filter(today, yesterday, week, month, date.since, date.until);
+            let year = normalize_year_filter(today, yesterday, week, month, date.year);
             let clients = build_client_filter(clients, &cli.home);
             if json || light || !can_use_tui {
                 run_hourly_report(
@@ -588,6 +596,7 @@ fn main() -> Result<()> {
                     benchmark,
                     no_spinner || !can_use_tui,
                     today,
+                    yesterday,
                     week,
                     month,
                 )
@@ -640,10 +649,12 @@ fn main() -> Result<()> {
             no_spinner,
         }) => {
             let today = date.today;
+            let yesterday = date.yesterday;
             let week = date.week;
             let month = date.month;
-            let (since, until) = build_date_filter(today, week, month, date.since, date.until);
-            let year = normalize_year_filter(today, week, month, date.year);
+            let (since, until) =
+                build_date_filter(today, yesterday, week, month, date.since, date.until);
+            let year = normalize_year_filter(today, yesterday, week, month, date.year);
             let clients = build_client_filter(clients, &cli.home);
             run_graph_command(
                 output,
@@ -659,10 +670,12 @@ fn main() -> Result<()> {
         Some(Commands::Tui { clients, date }) => {
             ensure_home_supported_for_tui(&cli.home)?;
             let today = date.today;
+            let yesterday = date.yesterday;
             let week = date.week;
             let month = date.month;
-            let (since, until) = build_date_filter(today, week, month, date.since, date.until);
-            let year = normalize_year_filter(today, week, month, date.year);
+            let (since, until) =
+                build_date_filter(today, yesterday, week, month, date.since, date.until);
+            let year = normalize_year_filter(today, yesterday, week, month, date.year);
             let clients = build_client_filter(clients, &cli.home);
             auto_sync_cursor_before_tui(&cli.home, &clients)?;
             tui::run(
@@ -683,10 +696,12 @@ fn main() -> Result<()> {
         }) => {
             reject_unsupported_home_override(&cli.home, "submit")?;
             let today = date.today;
+            let yesterday = date.yesterday;
             let week = date.week;
             let month = date.month;
-            let (since, until) = build_date_filter(today, week, month, date.since, date.until);
-            let year = normalize_year_filter(today, week, month, date.year);
+            let (since, until) =
+                build_date_filter(today, yesterday, week, month, date.since, date.until);
+            let year = normalize_year_filter(today, yesterday, week, month, date.year);
             // Bypass settings.json defaultClients for the submit path: we want the
             // submit-specific default_submit_clients() fallback (in run_submit_command)
             // to fire when the user passes no client flags, not the user's general
@@ -762,10 +777,12 @@ fn main() -> Result<()> {
             no_spinner,
         }) => {
             let today = date.today;
+            let yesterday = date.yesterday;
             let week = date.week;
             let month = date.month;
-            let (since, until) = build_date_filter(today, week, month, date.since, date.until);
-            let year = normalize_year_filter(today, week, month, date.year);
+            let (since, until) =
+                build_date_filter(today, yesterday, week, month, date.since, date.until);
+            let year = normalize_year_filter(today, yesterday, week, month, date.year);
             let clients = build_client_filter(clients, &cli.home);
             run_time_metrics_report(
                 json,
@@ -780,12 +797,19 @@ fn main() -> Result<()> {
         Some(Commands::WarmTuiCache) => run_warm_tui_cache(),
         None => {
             let today = cli.date.today;
+            let yesterday = cli.date.yesterday;
             let week = cli.date.week;
             let month = cli.date.month;
             let clients = build_client_filter(cli.clients, &cli.home);
-            let (since, until) =
-                build_date_filter(today, week, month, cli.date.since, cli.date.until);
-            let year = normalize_year_filter(today, week, month, cli.date.year);
+            let (since, until) = build_date_filter(
+                today,
+                yesterday,
+                week,
+                month,
+                cli.date.since,
+                cli.date.until,
+            );
+            let year = normalize_year_filter(today, yesterday, week, month, cli.date.year);
             let group_by: tokscale_core::GroupBy = cli.group_by.parse().unwrap_or_else(|e| {
                 eprintln!("Error: {}", e);
                 std::process::exit(1);
@@ -802,6 +826,7 @@ fn main() -> Result<()> {
                     cli.benchmark,
                     cli.no_spinner || cli.json,
                     today,
+                    yesterday,
                     week,
                     month,
                     group_by,
@@ -819,6 +844,7 @@ fn main() -> Result<()> {
                     cli.benchmark,
                     cli.no_spinner || !can_use_tui,
                     today,
+                    yesterday,
                     week,
                     month,
                     group_by,
@@ -1112,6 +1138,8 @@ pub struct ClientFlags {
 pub struct DateRangeFlags {
     #[arg(long, help = "Show only today's usage")]
     pub today: bool,
+    #[arg(long, help = "Show only yesterday's usage")]
+    pub yesterday: bool,
     #[arg(long, help = "Show last 7 days")]
     pub week: bool,
     #[arg(long, help = "Show current month")]
@@ -1556,6 +1584,7 @@ fn ensure_home_supported_for_tui(home_dir: &Option<String>) -> Result<()> {
 
 fn build_date_filter(
     today: bool,
+    yesterday: bool,
     week: bool,
     month: bool,
     since: Option<String>,
@@ -1563,6 +1592,7 @@ fn build_date_filter(
 ) -> (Option<String>, Option<String>) {
     build_date_filter_for_date(
         today,
+        yesterday,
         week,
         month,
         since,
@@ -1573,6 +1603,7 @@ fn build_date_filter(
 
 fn build_date_filter_for_date(
     today: bool,
+    yesterday: bool,
     week: bool,
     month: bool,
     since: Option<String>,
@@ -1583,6 +1614,13 @@ fn build_date_filter_for_date(
 
     if today {
         let date = current_date.format("%Y-%m-%d").to_string();
+        return (Some(date.clone()), Some(date));
+    }
+
+    if yesterday {
+        let date = (current_date - Duration::days(1))
+            .format("%Y-%m-%d")
+            .to_string();
         return (Some(date.clone()), Some(date));
     }
 
@@ -1607,11 +1645,12 @@ fn build_date_filter_for_date(
 
 fn normalize_year_filter(
     today: bool,
+    yesterday: bool,
     week: bool,
     month: bool,
     year: Option<String>,
 ) -> Option<String> {
-    if today || week || month {
+    if today || yesterday || week || month {
         None
     } else {
         year
@@ -1620,6 +1659,7 @@ fn normalize_year_filter(
 
 fn get_date_range_label(
     today: bool,
+    yesterday: bool,
     week: bool,
     month: bool,
     since: &Option<String>,
@@ -1628,6 +1668,7 @@ fn get_date_range_label(
 ) -> Option<String> {
     get_date_range_label_for_date(
         today,
+        yesterday,
         week,
         month,
         since,
@@ -1637,8 +1678,10 @@ fn get_date_range_label(
     )
 }
 
+#[allow(clippy::too_many_arguments)]
 fn get_date_range_label_for_date(
     today: bool,
+    yesterday: bool,
     week: bool,
     month: bool,
     since: &Option<String>,
@@ -1648,6 +1691,9 @@ fn get_date_range_label_for_date(
 ) -> Option<String> {
     if today {
         return Some("Today".to_string());
+    }
+    if yesterday {
+        return Some("Yesterday".to_string());
     }
     if week {
         return Some("Last 7 days".to_string());
@@ -1795,6 +1841,7 @@ fn run_models_report(
     benchmark: bool,
     no_spinner: bool,
     today: bool,
+    yesterday: bool,
     week: bool,
     month_flag: bool,
     group_by: tokscale_core::GroupBy,
@@ -1805,7 +1852,8 @@ fn run_models_report(
     use tokio::runtime::Runtime;
     use tokscale_core::{get_model_report, GroupBy, ReportOptions};
 
-    let date_range = get_date_range_label(today, week, month_flag, &since, &until, &year);
+    let date_range =
+        get_date_range_label(today, yesterday, week, month_flag, &since, &until, &year);
     let effective_home_dir = resolve_effective_home_dir(&home_dir);
 
     let had_cursor_cache = has_cursor_usage_cache_for_report(&home_dir);
@@ -2591,6 +2639,7 @@ fn run_monthly_report(
     benchmark: bool,
     no_spinner: bool,
     today: bool,
+    yesterday: bool,
     week: bool,
     month_flag: bool,
 ) -> Result<()> {
@@ -2598,7 +2647,8 @@ fn run_monthly_report(
     use tokio::runtime::Runtime;
     use tokscale_core::{get_monthly_report, GroupBy, ReportOptions};
 
-    let date_range = get_date_range_label(today, week, month_flag, &since, &until, &year);
+    let date_range =
+        get_date_range_label(today, yesterday, week, month_flag, &since, &until, &year);
 
     let had_cursor_cache = has_cursor_usage_cache_for_report(&home_dir);
     let explicit_cursor_filter = client_filter_explicitly_requests_cursor(&clients);
@@ -2890,6 +2940,7 @@ fn run_hourly_report(
     benchmark: bool,
     no_spinner: bool,
     today: bool,
+    yesterday: bool,
     week: bool,
     month_flag: bool,
 ) -> Result<()> {
@@ -2897,7 +2948,8 @@ fn run_hourly_report(
     use tokio::runtime::Runtime;
     use tokscale_core::{get_hourly_report, GroupBy, ReportOptions};
 
-    let date_range = get_date_range_label(today, week, month_flag, &since, &until, &year);
+    let date_range =
+        get_date_range_label(today, yesterday, week, month_flag, &since, &until, &year);
 
     let had_cursor_cache = has_cursor_usage_cache_for_report(&home_dir);
     let explicit_cursor_filter = client_filter_explicitly_requests_cursor(&clients);
@@ -6600,6 +6652,7 @@ mod tests {
             false,
             false,
             false,
+            false,
             Some("2024-01-01".to_string()),
             Some("2024-12-31".to_string()),
         );
@@ -6609,7 +6662,7 @@ mod tests {
 
     #[test]
     fn test_build_date_filter_no_filters() {
-        let (since, until) = build_date_filter(false, false, false, None, None);
+        let (since, until) = build_date_filter(false, false, false, false, None, None);
         assert_eq!(since, None);
         assert_eq!(until, None);
     }
@@ -6617,15 +6670,26 @@ mod tests {
     #[test]
     fn test_build_date_filter_today_uses_provided_local_date() {
         let today = chrono::NaiveDate::from_ymd_opt(2026, 3, 8).unwrap();
-        let (since, until) = build_date_filter_for_date(true, false, false, None, None, today);
+        let (since, until) =
+            build_date_filter_for_date(true, false, false, false, None, None, today);
         assert_eq!(since, Some("2026-03-08".to_string()));
         assert_eq!(until, Some("2026-03-08".to_string()));
     }
 
     #[test]
+    fn test_build_date_filter_yesterday_uses_provided_local_date() {
+        let today = chrono::NaiveDate::from_ymd_opt(2026, 3, 8).unwrap();
+        let (since, until) =
+            build_date_filter_for_date(false, true, false, false, None, None, today);
+        assert_eq!(since, Some("2026-03-07".to_string()));
+        assert_eq!(until, Some("2026-03-07".to_string()));
+    }
+
+    #[test]
     fn test_build_date_filter_week_uses_provided_local_date() {
         let today = chrono::NaiveDate::from_ymd_opt(2026, 3, 8).unwrap();
-        let (since, until) = build_date_filter_for_date(false, true, false, None, None, today);
+        let (since, until) =
+            build_date_filter_for_date(false, false, true, false, None, None, today);
         assert_eq!(since, Some("2026-03-02".to_string()));
         assert_eq!(until, Some("2026-03-08".to_string()));
     }
@@ -6633,38 +6697,45 @@ mod tests {
     #[test]
     fn test_build_date_filter_month_uses_provided_local_date() {
         let today = chrono::NaiveDate::from_ymd_opt(2026, 3, 8).unwrap();
-        let (since, until) = build_date_filter_for_date(false, false, true, None, None, today);
+        let (since, until) =
+            build_date_filter_for_date(false, false, false, true, None, None, today);
         assert_eq!(since, Some("2026-03-01".to_string()));
         assert_eq!(until, Some("2026-03-08".to_string()));
     }
 
     #[test]
     fn test_normalize_year_filter_with_year() {
-        let year = normalize_year_filter(false, false, false, Some("2024".to_string()));
+        let year = normalize_year_filter(false, false, false, false, Some("2024".to_string()));
         assert_eq!(year, Some("2024".to_string()));
     }
 
     #[test]
     fn test_normalize_year_filter_with_today() {
-        let year = normalize_year_filter(true, false, false, Some("2024".to_string()));
+        let year = normalize_year_filter(true, false, false, false, Some("2024".to_string()));
+        assert_eq!(year, None);
+    }
+
+    #[test]
+    fn test_normalize_year_filter_with_yesterday() {
+        let year = normalize_year_filter(false, true, false, false, Some("2024".to_string()));
         assert_eq!(year, None);
     }
 
     #[test]
     fn test_normalize_year_filter_with_week() {
-        let year = normalize_year_filter(false, true, false, Some("2024".to_string()));
+        let year = normalize_year_filter(false, false, true, false, Some("2024".to_string()));
         assert_eq!(year, None);
     }
 
     #[test]
     fn test_normalize_year_filter_with_month() {
-        let year = normalize_year_filter(false, false, true, Some("2024".to_string()));
+        let year = normalize_year_filter(false, false, false, true, Some("2024".to_string()));
         assert_eq!(year, None);
     }
 
     #[test]
     fn test_normalize_year_filter_no_year() {
-        let year = normalize_year_filter(false, false, false, None);
+        let year = normalize_year_filter(false, false, false, false, None);
         assert_eq!(year, None);
     }
 
@@ -6786,33 +6857,48 @@ mod tests {
 
     #[test]
     fn test_get_date_range_label_today() {
-        let label = get_date_range_label(true, false, false, &None, &None, &None);
+        let label = get_date_range_label(true, false, false, false, &None, &None, &None);
         assert_eq!(label, Some("Today".to_string()));
     }
 
     #[test]
+    fn test_get_date_range_label_yesterday() {
+        let label = get_date_range_label(false, true, false, false, &None, &None, &None);
+        assert_eq!(label, Some("Yesterday".to_string()));
+    }
+
+    #[test]
     fn test_get_date_range_label_week() {
-        let label = get_date_range_label(false, true, false, &None, &None, &None);
+        let label = get_date_range_label(false, false, true, false, &None, &None, &None);
         assert_eq!(label, Some("Last 7 days".to_string()));
     }
 
     #[test]
     fn test_get_date_range_label_month_uses_provided_local_date() {
         let today = chrono::NaiveDate::from_ymd_opt(2026, 3, 1).unwrap();
-        let label = get_date_range_label_for_date(false, false, true, &None, &None, &None, today);
+        let label =
+            get_date_range_label_for_date(false, false, false, true, &None, &None, &None, today);
         assert_eq!(label, Some("March 2026".to_string()));
     }
 
     #[test]
     fn test_get_date_range_label_year() {
-        let label =
-            get_date_range_label(false, false, false, &None, &None, &Some("2024".to_string()));
+        let label = get_date_range_label(
+            false,
+            false,
+            false,
+            false,
+            &None,
+            &None,
+            &Some("2024".to_string()),
+        );
         assert_eq!(label, Some("2024".to_string()));
     }
 
     #[test]
     fn test_get_date_range_label_custom_since() {
         let label = get_date_range_label(
+            false,
             false,
             false,
             false,
@@ -6829,6 +6915,7 @@ mod tests {
             false,
             false,
             false,
+            false,
             &None,
             &Some("2024-12-31".to_string()),
             &None,
@@ -6842,6 +6929,7 @@ mod tests {
             false,
             false,
             false,
+            false,
             &Some("2024-01-01".to_string()),
             &Some("2024-12-31".to_string()),
             &None,
@@ -6851,7 +6939,7 @@ mod tests {
 
     #[test]
     fn test_get_date_range_label_none() {
-        let label = get_date_range_label(false, false, false, &None, &None, &None);
+        let label = get_date_range_label(false, false, false, false, &None, &None, &None);
         assert_eq!(label, None);
     }
 
