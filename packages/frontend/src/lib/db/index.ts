@@ -22,7 +22,7 @@ function createDb() {
   return drizzle({
     connection: {
       url: getConnectionString(),
-      ssl: process.env.NODE_ENV === "production" ? "require" : false,
+      ssl: process.env.DATABASE_SSL === "true" ? "require" : false,
 
       // Serverless-optimized pool settings:
       // Each Vercel function instance gets its own pool. With dozens of
