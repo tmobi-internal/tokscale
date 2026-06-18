@@ -68,7 +68,7 @@
 <body>
 
 <h1>🏆 Tokscale AI 활용 리포트</h1>
-<p class="subtitle">실시간 API 데이터 기반 | 가중치 조절로 다양한 관점에서 비교</p>
+<p class="subtitle" id="reportSubtitle">실시간 API 데이터 기반 | 가중치 조절로 다양한 관점에서 비교</p>
 
 <div id="loading" class="loading">데이터 로딩 중...</div>
 <div id="app" style="display:none">
@@ -127,7 +127,7 @@
 </div>
 
 <script>
-const API_URL = '/api/leaderboard?period=month&limit=300&sortBy=tokens';
+const API_BASE = '/api/leaderboard?period=month&limit=100&sortBy=tokens';
 
 const TEAM_COLORS = {
   "Client Core": "#f472b6", "Client Service": "#a78bfa", "DevOps": "#4ade80",
@@ -439,11 +439,21 @@ function initTeamFilter(users) {
 
 async function init() {
   try {
-    const res = await fetch(API_URL);
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const data = await res.json();
+    // Fetch all pages (API caps at 100 per page)
+    let allUsers = [];
+    let page = 1;
+    let stats = null;
+    while (true) {
+      const res = await fetch(`${API_BASE}&page=${page}`);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+      if (!stats) stats = data.stats;
+      allUsers = allUsers.concat(data.users);
+      if (!data.pagination || !data.pagination.hasNext) break;
+      page++;
+    }
 
-    rawUsers = data.users.map(u => ({
+    rawUsers = allUsers.map(u => ({
       ...u,
       totalActiveTimeMs: u.totalActiveTimeMs || 0,
       totalCost: u.totalCost || 0,
@@ -451,11 +461,15 @@ async function init() {
       team: parseTeam(u.displayName),
     }));
 
+    const now = new Date();
+    const monthLabel = `${now.getFullYear()}년 ${now.getMonth() + 1}월`;
+    document.getElementById('reportSubtitle').textContent = `${monthLabel} | 실시간 API 데이터 기반 | 가중치 조절로 다양한 관점에서 비교`;
+
     document.getElementById('statsBar').innerHTML = `
       <div class="stat-card"><div class="val">${rawUsers.length}</div><div class="lbl">Active Users</div></div>
-      <div class="stat-card"><div class="val">${formatNum(data.stats.totalTokens)}</div><div class="lbl">Total Tokens</div></div>
-      <div class="stat-card"><div class="val">${formatCost(data.stats.totalCost)}</div><div class="lbl">Total Cost</div></div>
-      <div class="stat-card"><div class="val">${(data.stats.totalActiveTimeMs/3600000).toFixed(0)}h</div><div class="lbl">Total Hours</div></div>
+      <div class="stat-card"><div class="val">${formatNum(stats.totalTokens)}</div><div class="lbl">Total Tokens</div></div>
+      <div class="stat-card"><div class="val">${formatCost(stats.totalCost)}</div><div class="lbl">Total Cost</div></div>
+      <div class="stat-card"><div class="val">${(stats.totalActiveTimeMs/3600000).toFixed(0)}h</div><div class="lbl">Total Hours</div></div>
     `;
 
     document.getElementById('loading').style.display = 'none';
