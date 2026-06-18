@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Tokscale AI 활용 리포트</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.1.0/dist/chartjs-plugin-annotation.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0f0f13; color: #e0e0e0; padding: 20px; }
+  h1 { text-align: center; margin-bottom: 4px; font-size: 1.5rem; color: #fff; }
+  .subtitle { text-align: center; color: #888; margin-bottom: 20px; font-size: 0.85rem; }
+  .loading { text-align: center; padding: 60px; color: #888; font-size: 1.2rem; }
+
+  .controls { max-width: 1600px; margin: 0 auto 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .control-panel { background: #1a1a24; border-radius: 12px; padding: 16px; border: 1px solid #2a2a3a; }
+  .control-panel h3 { font-size: 0.85rem; color: #aaa; margin-bottom: 12px; }
+  .slider-group { margin-bottom: 10px; }
+  .slider-group label { display: flex; justify-content: space-between; font-size: 0.8rem; color: #ccc; margin-bottom: 4px; }
+  .slider-group input[type=range] { width: 100%; accent-color: #60a5fa; }
+  .preset-btns { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
+  .preset-btns button {
+    background: #2a2a3a; border: 1px solid #3a3a4a; color: #ccc; padding: 4px 10px;
+    border-radius: 6px; font-size: 0.72rem; cursor: pointer; transition: all 0.2s;
+  }
+  .preset-btns button:hover { background: #3a3a4a; color: #fff; }
+  .preset-btns button.active { background: #3b82f6; border-color: #60a5fa; color: #fff; }
+
+  .main-grid { max-width: 1600px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .chart-box { background: #1a1a24; border-radius: 12px; padding: 16px; border: 1px solid #2a2a3a; }
+  .chart-box h2 { font-size: 0.9rem; color: #ccc; margin-bottom: 10px; text-align: center; }
+  .chart-box canvas { width: 100% !important; height: 450px !important; }
+
+  .ranking-section { max-width: 1600px; margin: 16px auto 0; }
+  .ranking-table { width: 100%; border-collapse: collapse; background: #1a1a24; border-radius: 12px; overflow: hidden; border: 1px solid #2a2a3a; }
+  .ranking-table th { background: #22222e; padding: 10px 12px; text-align: left; font-size: 0.75rem; color: #888; font-weight: 500; }
+  .ranking-table td { padding: 8px 12px; border-top: 1px solid #1f1f2e; font-size: 0.8rem; }
+  .ranking-table tr:hover { background: #1f1f2e; }
+  .ranking-table .rank { color: #888; width: 40px; }
+  .ranking-table .name { color: #e0e0e0; }
+  .ranking-table .team { color: #888; font-size: 0.72rem; }
+  .ranking-table .score { color: #4ade80; font-weight: 600; font-size: 0.9rem; }
+  .ranking-table .metric { color: #aaa; font-size: 0.72rem; }
+  .bar-cell { position: relative; }
+  .bar-bg { position: absolute; left: 0; top: 0; bottom: 0; background: rgba(74, 222, 128, 0.1); border-radius: 4px; }
+  .highlight-row { background: #1a2a1a !important; }
+  .highlight-row td { color: #fff; }
+
+  .stats-bar { max-width: 1600px; margin: 0 auto 16px; display: flex; gap: 12px; }
+  .stat-card { flex: 1; background: #1a1a24; border-radius: 8px; padding: 12px; border: 1px solid #2a2a3a; text-align: center; }
+  .stat-card .val { font-size: 1.2rem; color: #fff; font-weight: 600; }
+  .stat-card .lbl { font-size: 0.7rem; color: #888; margin-top: 2px; }
+
+  .filter-row { max-width: 1600px; margin: 0 auto 12px; display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+  .filter-row label { font-size: 0.75rem; color: #888; }
+  .team-chip {
+    display: inline-flex; align-items: center; gap: 3px; font-size: 0.7rem; color: #aaa;
+    padding: 3px 8px; border-radius: 5px; cursor: pointer; border: 1px solid transparent;
+    transition: all 0.2s; user-select: none;
+  }
+  .team-chip:hover { background: #2a2a3a; }
+  .team-chip.active { border-color: #fff; background: #2a2a3a; color: #fff; }
+  .team-chip .dot { width: 8px; height: 8px; border-radius: 50%; }
+
+  @media (max-width: 1000px) { .controls, .main-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<h1>🏆 Tokscale AI 활용 리포트</h1>
+<p class="subtitle">실시간 API 데이터 기반 | 가중치 조절로 다양한 관점에서 비교</p>
+
+<div id="loading" class="loading">데이터 로딩 중...</div>
+<div id="app" style="display:none">
+
+<div class="stats-bar" id="statsBar"></div>
+
+<div class="controls">
+  <div class="control-panel">
+    <h3>⚖️ 스코어 가중치 (합계 100%)</h3>
+    <div class="preset-btns" id="presets"></div>
+    <div class="slider-group">
+      <label><span>💰 비용효율 (Tokens/$)</span><span id="w1val">33%</span></label>
+      <input type="range" id="w1" min="0" max="100" value="33">
+    </div>
+    <div class="slider-group">
+      <label><span>⏱️ 사용시간 (Hours)</span><span id="w2val">33%</span></label>
+      <input type="range" id="w2" min="0" max="100" value="33">
+    </div>
+    <div class="slider-group">
+      <label><span>📊 생산량 (Total Tokens)</span><span id="w3val">34%</span></label>
+      <input type="range" id="w3" min="0" max="100" value="34">
+    </div>
+  </div>
+  <div class="control-panel">
+    <h3>📐 사분면 축 설정</h3>
+    <p style="font-size:0.75rem;color:#888;margin-bottom:8px">X: Tokens/$ (모델 단가) | Y: 총 사용시간 (활용도)</p>
+    <p style="font-size:0.75rem;color:#888">점 크기: 총 토큰 사용량 | 색상: 팀</p>
+    <div style="margin-top:12px">
+      <label style="font-size:0.75rem;color:#aaa">🔍 팀 필터 (클릭하여 하이라이트)</label>
+      <div class="filter-row" id="teamFilter" style="margin-top:6px"></div>
+    </div>
+  </div>
+</div>
+
+<div class="main-grid">
+  <div class="chart-box">
+    <h2>👤 개인별 사분면 (크기 = AI Score)</h2>
+    <canvas id="quadrantChart"></canvas>
+  </div>
+  <div class="chart-box">
+    <h2>👥 팀별 사분면 (크기 = 평균 AI Score)</h2>
+    <canvas id="teamQuadrantChart"></canvas>
+  </div>
+</div>
+
+<div class="ranking-section">
+  <table class="ranking-table">
+    <thead><tr>
+      <th>Rank</th><th>User</th><th>AI Score</th>
+      <th>비용효율</th><th>사용시간</th><th>생산량</th>
+      <th>Cost</th><th>Tokens</th><th>Time</th>
+    </tr></thead>
+    <tbody id="rankingBody"></tbody>
+  </table>
+</div>
+</div>
+
+<script>
+const API_URL = '/api/leaderboard?period=month&limit=300&sortBy=tokens';
+
+const TEAM_COLORS = {
+  "Client Core": "#f472b6", "Client Service": "#a78bfa", "DevOps": "#4ade80",
+  "RP·교통": "#fb923c", "AUTO개발": "#fbbf24", "서비스플랫폼": "#67e8f9",
+  "맵인프라": "#e879f9", "맵컨텐츠": "#c084fc", "AIML": "#f87171",
+  "Analytics": "#60a5fa", "Search": "#34d399", "서비스백엔드": "#fdba74",
+  "온디맨드모빌리티개발": "#a3e635", "로컬서비스": "#22d3ee", "광고개발": "#fca5a5",
+  "MDP": "#86efac", "데이터플랫폼&AX": "#fcd34d", "프론트엔드": "#fb7185",
+  "AI Agent": "#c4b5fd", "로컬인프라": "#5eead4", "정보보호": "#fda4af",
+  "모빌리티서비스": "#d4d4d8", "기타": "#94a3b8",
+};
+
+const PRESETS = [
+  { name: '균등', w: [33, 33, 34] },
+  { name: '가성비', w: [50, 20, 30] },
+  { name: '활용도', w: [20, 40, 40] },
+  { name: '생산량', w: [20, 30, 50] },
+  { name: '시간중심', w: [20, 60, 20] },
+];
+
+let rawUsers = [];
+let selectedTeams = new Set();
+let chart1, chart2;
+
+function parseTeam(displayName) {
+  const m = displayName.match(/\((.+)\)/);
+  if (!m) return '기타';
+  const full = m[1];
+  const parts = full.split('/');
+  return parts[parts.length - 1] || parts[0];
+}
+
+function parseName(displayName) {
+  return displayName.replace(/\s*\(.+\)/, '');
+}
+
+function percentileRank(arr, idx) {
+  const val = arr[idx];
+  let below = 0;
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] < val) below++;
+  }
+  return (below / (arr.length - 1)) * 100;
+}
+
+function computeScores(users, weights) {
+  const [w1, w2, w3] = weights.map(w => w / 100);
+
+  const metrics = users.map(u => ({
+    ...u,
+    tokensPerDollar: u.totalCost > 0 ? u.totalTokens / u.totalCost : 0,
+    hours: u.totalActiveTimeMs / 3600000,
+  }));
+
+  const tpdArr = metrics.map(m => m.tokensPerDollar);
+  const hoursArr = metrics.map(m => m.hours);
+  const tokensArr = metrics.map(m => m.totalTokens);
+
+  return metrics.map((m, i) => {
+    const pctTPD = percentileRank(tpdArr, i);
+    const pctHours = percentileRank(hoursArr, i);
+    const pctTokens = percentileRank(tokensArr, i);
+    const score = pctTPD * w1 + pctHours * w2 + pctTokens * w3;
+    return { ...m, score, pctTPD, pctHours, pctTokens };
+  }).sort((a, b) => b.score - a.score);
+}
+
+function getWeights() {
+  return [+document.getElementById('w1').value, +document.getElementById('w2').value, +document.getElementById('w3').value];
+}
+
+function normalizeWeights() {
+  const ws = getWeights();
+  const sum = ws[0] + ws[1] + ws[2];
+  if (sum === 0) return [33, 33, 34];
+  return ws.map(w => (w / sum) * 100);
+}
+
+function formatNum(n) {
+  if (n >= 1e9) return (n/1e9).toFixed(1) + 'B';
+  if (n >= 1e6) return (n/1e6).toFixed(1) + 'M';
+  if (n >= 1e3) return (n/1e3).toFixed(1) + 'K';
+  return n.toFixed(0);
+}
+
+function formatCost(n) {
+  if (n >= 1000) return '$' + (n/1000).toFixed(2) + 'K';
+  return '$' + n.toFixed(2);
+}
+
+function updateAll() {
+  const weights = normalizeWeights();
+  document.getElementById('w1val').textContent = weights[0].toFixed(0) + '%';
+  document.getElementById('w2val').textContent = weights[1].toFixed(0) + '%';
+  document.getElementById('w3val').textContent = weights[2].toFixed(0) + '%';
+
+  const scored = computeScores(rawUsers, weights);
+  updateRanking(scored);
+  updateCharts(scored);
+}
+
+function updateRanking(scored) {
+  const filtered = selectedTeams.size > 0 ? scored.filter(u => selectedTeams.has(u.team)) : scored;
+  const tbody = document.getElementById('rankingBody');
+  tbody.innerHTML = filtered.map((u, i) => {
+    const isMe = u.username === 't1000040';
+    const barW = (u.score / 100) * 100;
+    return `<tr class="${isMe ? 'highlight-row' : ''}">
+      <td class="rank">#${i+1}</td>
+      <td><span class="name">${parseName(u.displayName)}</span><br><span class="team">${u.team}</span></td>
+      <td class="bar-cell"><div class="bar-bg" style="width:${barW}%"></div><span class="score">${u.score.toFixed(1)}</span></td>
+      <td class="metric">${u.pctTPD.toFixed(0)}p</td>
+      <td class="metric">${u.pctHours.toFixed(0)}p</td>
+      <td class="metric">${u.pctTokens.toFixed(0)}p</td>
+      <td class="metric">${formatCost(u.totalCost)}</td>
+      <td class="metric">${formatNum(u.totalTokens)}</td>
+      <td class="metric">${u.hours.toFixed(1)}h</td>
+    </tr>`;
+  }).join('');
+}
+
+function updateCharts(scored) {
+  const filtered = scored;
+
+  const xVals = filtered.map(u => u.tokensPerDollar / 1e6).sort((a,b) => a-b);
+  const yVals = filtered.map(u => u.hours).sort((a,b) => a-b);
+  const medX = xVals[Math.floor(xVals.length/2)];
+  const medY = yVals[Math.floor(yVals.length/2)];
+
+  const ds1 = chart1.data.datasets[0];
+  ds1.data = filtered.map(u => ({
+    x: u.tokensPerDollar / 1e6,
+    y: u.hours,
+    label: parseName(u.displayName),
+    team: u.team,
+    score: u.score,
+    cost: u.totalCost,
+    tokens: u.totalTokens,
+  }));
+  ds1.backgroundColor = filtered.map(u => {
+    if (selectedTeams.size === 0) return TEAM_COLORS[u.team] || '#888';
+    return selectedTeams.has(u.team) ? (TEAM_COLORS[u.team] || '#888') : 'rgba(80,80,100,0.2)';
+  });
+  ds1.borderColor = filtered.map(u => {
+    if (selectedTeams.size > 0 && selectedTeams.has(u.team)) return '#fff';
+    if (u.username === 't1000040') return '#fff';
+    return 'transparent';
+  });
+  ds1.borderWidth = filtered.map(u => {
+    if (selectedTeams.size > 0 && selectedTeams.has(u.team)) return 2;
+    if (u.username === 't1000040') return 3;
+    return 0;
+  });
+  const tokenVals = filtered.map(u => u.totalTokens);
+  const maxTokens = Math.max(...tokenVals);
+  const minTokens = Math.min(...tokenVals);
+  ds1.pointRadius = filtered.map(u => {
+    const norm = (Math.sqrt(u.totalTokens) - Math.sqrt(minTokens)) / (Math.sqrt(maxTokens) - Math.sqrt(minTokens) || 1);
+    return 4 + norm * 20;
+  });
+
+  chart1.options.plugins.annotation.annotations.vertLine.xMin = medX;
+  chart1.options.plugins.annotation.annotations.vertLine.xMax = medX;
+  chart1.options.plugins.annotation.annotations.horizLine.yMin = medY;
+  chart1.options.plugins.annotation.annotations.horizLine.yMax = medY;
+  chart1.update();
+
+  // Team chart
+  const teamMap = {};
+  filtered.forEach(u => {
+    if (!teamMap[u.team]) teamMap[u.team] = { tokens: 0, cost: 0, hours: 0, scoreSum: 0, count: 0, members: [] };
+    teamMap[u.team].tokens += u.totalTokens;
+    teamMap[u.team].cost += u.totalCost;
+    teamMap[u.team].hours += u.hours;
+    teamMap[u.team].scoreSum += u.score;
+    teamMap[u.team].count++;
+    teamMap[u.team].members.push(parseName(u.displayName));
+  });
+  const teams = Object.entries(teamMap).map(([name, d]) => ({
+    name, ...d,
+    avgScore: d.scoreSum / d.count,
+    tokensPerDollar: d.tokens / d.cost / 1e6,
+    avgHours: d.hours / d.count,
+  }));
+
+  const ds2 = chart2.data.datasets[0];
+  ds2.data = teams.map(t => ({
+    x: t.tokensPerDollar,
+    y: t.avgHours,
+    label: t.name,
+    count: t.count,
+    avgScore: t.avgScore,
+    members: t.members,
+  }));
+  ds2.backgroundColor = teams.map(t => {
+    if (selectedTeams.size === 0) return TEAM_COLORS[t.name] || '#888';
+    return selectedTeams.has(t.name) ? (TEAM_COLORS[t.name] || '#888') : 'rgba(80,80,100,0.15)';
+  });
+  ds2.borderColor = teams.map(t => {
+    if (selectedTeams.size > 0 && selectedTeams.has(t.name)) return '#fff';
+    if (selectedTeams.size > 0) return 'rgba(80,80,100,0.1)';
+    return TEAM_COLORS[t.name] || '#888';
+  });
+  ds2.borderWidth = teams.map(t => selectedTeams.size > 0 && selectedTeams.has(t.name) ? 3 : 1);
+  const teamTokenVals = teams.map(t => t.tokens);
+  const maxTeamTokens = Math.max(...teamTokenVals);
+  const minTeamTokens = Math.min(...teamTokenVals);
+  ds2.pointRadius = teams.map(t => {
+    const norm = (Math.sqrt(t.tokens) - Math.sqrt(minTeamTokens)) / (Math.sqrt(maxTeamTokens) - Math.sqrt(minTeamTokens) || 1);
+    return 8 + norm * 24;
+  });
+
+  const txVals = teams.map(t => t.tokensPerDollar).sort((a,b) => a-b);
+  const tyVals = teams.map(t => t.avgHours).sort((a,b) => a-b);
+  const tMedX = txVals[Math.floor(txVals.length/2)];
+  const tMedY = tyVals[Math.floor(tyVals.length/2)];
+  chart2.options.plugins.annotation.annotations.vertLine.xMin = tMedX;
+  chart2.options.plugins.annotation.annotations.vertLine.xMax = tMedX;
+  chart2.options.plugins.annotation.annotations.horizLine.yMin = tMedY;
+  chart2.options.plugins.annotation.annotations.horizLine.yMax = tMedY;
+  chart2.update();
+}
+
+function initCharts() {
+  const commonOpts = (yLabel) => ({
+    responsive: true, maintainAspectRatio: false, animation: { duration: 300 },
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: ctx => {
+        const d = ctx.raw;
+        return [
+          `${d.label}${d.count ? ' ('+d.count+'명)' : ''}`,
+          `Score: ${(d.score || d.avgScore || 0).toFixed(1)}`,
+          `Tokens/$: ${d.x.toFixed(2)}M`,
+          `${yLabel}: ${d.y.toFixed(1)}h`,
+          d.cost ? `Cost: ${formatCost(d.cost)}` : '',
+          d.tokens ? `Tokens: ${formatNum(d.tokens)}` : '',
+        ].filter(Boolean);
+      }}},
+      annotation: { annotations: {
+        vertLine: { type: 'line', xMin: 0, xMax: 0, borderColor: '#444', borderWidth: 1, borderDash: [4,4] },
+        horizLine: { type: 'line', yMin: 0, yMax: 0, borderColor: '#444', borderWidth: 1, borderDash: [4,4] },
+      }}
+    },
+    scales: {
+      x: { title: { display: true, text: 'Tokens/$ (M) → 가성비', color: '#888' }, grid: { color: '#1f1f2e' }, ticks: { color: '#666' } },
+      y: { title: { display: true, text: `↑ ${yLabel}`, color: '#888' }, grid: { color: '#1f1f2e' }, ticks: { color: '#666' } },
+    }
+  });
+
+  chart1 = new Chart(document.getElementById('quadrantChart'), {
+    type: 'scatter', data: { datasets: [{ data: [] }] }, options: commonOpts('사용시간 (Hours)')
+  });
+  chart2 = new Chart(document.getElementById('teamQuadrantChart'), {
+    type: 'scatter', data: { datasets: [{ data: [] }] }, options: commonOpts('평균 사용시간 (Hours/인)')
+  });
+}
+
+function initControls() {
+  const presetDiv = document.getElementById('presets');
+  PRESETS.forEach((p, i) => {
+    const btn = document.createElement('button');
+    btn.textContent = p.name;
+    btn.addEventListener('click', () => {
+      document.getElementById('w1').value = p.w[0];
+      document.getElementById('w2').value = p.w[1];
+      document.getElementById('w3').value = p.w[2];
+      document.querySelectorAll('.preset-btns button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      updateAll();
+    });
+    if (i === 0) btn.classList.add('active');
+    presetDiv.appendChild(btn);
+  });
+
+  ['w1','w2','w3'].forEach(id => {
+    document.getElementById(id).addEventListener('input', () => {
+      document.querySelectorAll('.preset-btns button').forEach(b => b.classList.remove('active'));
+      updateAll();
+    });
+  });
+}
+
+function initTeamFilter(users) {
+  const teamSet = new Set(users.map(u => u.team));
+  const container = document.getElementById('teamFilter');
+  const clearBtn = document.createElement('button');
+  clearBtn.textContent = '전체';
+  clearBtn.style.cssText = 'background:#2a2a3a;border:1px solid #3a3a4a;color:#ccc;padding:3px 8px;border-radius:5px;font-size:0.7rem;cursor:pointer';
+  clearBtn.addEventListener('click', () => {
+    selectedTeams.clear();
+    container.querySelectorAll('.team-chip').forEach(c => c.classList.remove('active'));
+    updateAll();
+  });
+  container.appendChild(clearBtn);
+
+  [...teamSet].sort().forEach(team => {
+    const chip = document.createElement('span');
+    chip.className = 'team-chip';
+    chip.innerHTML = `<span class="dot" style="background:${TEAM_COLORS[team]||'#888'}"></span>${team}`;
+    chip.addEventListener('click', () => {
+      if (selectedTeams.has(team)) { selectedTeams.delete(team); chip.classList.remove('active'); }
+      else { selectedTeams.add(team); chip.classList.add('active'); }
+      updateAll();
+    });
+    container.appendChild(chip);
+  });
+}
+
+async function init() {
+  try {
+    const res = await fetch(API_URL);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+
+    rawUsers = data.users.map(u => ({
+      ...u,
+      totalActiveTimeMs: u.totalActiveTimeMs || 0,
+      totalCost: u.totalCost || 0,
+      totalTokens: u.totalTokens || 0,
+      team: parseTeam(u.displayName),
+    }));
+
+    document.getElementById('statsBar').innerHTML = `
+      <div class="stat-card"><div class="val">${rawUsers.length}</div><div class="lbl">Active Users</div></div>
+      <div class="stat-card"><div class="val">${formatNum(data.stats.totalTokens)}</div><div class="lbl">Total Tokens</div></div>
+      <div class="stat-card"><div class="val">${formatCost(data.stats.totalCost)}</div><div class="lbl">Total Cost</div></div>
+      <div class="stat-card"><div class="val">${(data.stats.totalActiveTimeMs/3600000).toFixed(0)}h</div><div class="lbl">Total Hours</div></div>
+    `;
+
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+
+    initCharts();
+    initControls();
+    initTeamFilter(rawUsers);
+    updateAll();
+  } catch (err) {
+    document.getElementById('loading').textContent = '❌ 데이터 로딩 실패: ' + err.message;
+  }
+}
+
+init();
+</script>
+</body>
+</html>
