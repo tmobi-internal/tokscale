@@ -4,6 +4,7 @@ use colored::Colorize;
 use std::collections::HashMap;
 use std::io::Write;
 use std::process::{Command, Output, Stdio};
+use unicode_normalization::UnicodeNormalization;
 
 use super::apple_fm;
 use std::time::Duration;
@@ -485,16 +486,37 @@ const CLUSTER_STOPWORDS: &[&str] = &[
 /// punctuation/ellipsis, collapse whitespace, drop generic verbs/stopwords.
 /// The returned tokens are deduplicated and sorted so two titles with the same
 /// significant words (in any order) produce equal sets.
+fn is_combining_mark(c: char) -> bool {
+    matches!(
+        c as u32,
+        0x0300..=0x036f | 0x1ab0..=0x1aff | 0x1dc0..=0x1dff | 0x20d0..=0x20ff | 0xfe20..=0xfe2f
+    )
+}
+
 fn significant_tokens(title: &str) -> Vec<String> {
     let mut tokens: Vec<String> = title
+        // Normalize to NFC FIRST so canonically-equivalent inputs (precomposed
+        // "é" vs base "e" + combining acute) collapse to the same code points
+        // before lowercasing and combining-mark stripping. Without this, an NFC
+        // title kept the precomposed letter while an NFD one had its combining
+        // mark stripped, tokenizing identical titles differently and splitting
+        // them across clusters.
+        .nfc()
+        .collect::<String>()
+        .to_lowercase()
         .chars()
-        // Map punctuation/ellipsis to spaces; keep alphanumerics. This also
-        // strips a trailing "…" or "..." that the on-device model often emits.
-        .map(|c| {
+        // Lowercase before filtering: Unicode lowercase can expand a character
+        // into a base letter plus combining mark (e.g. "İ" -> "i" + dot).
+        // Dropping combining marks here keeps case-only variants token-equal.
+        // Other punctuation/ellipsis maps to spaces, stripping trailing "…" or
+        // "..." that the on-device model often emits.
+        .filter_map(|c| {
             if c.is_alphanumeric() {
-                c.to_ascii_lowercase()
+                Some(c)
+            } else if is_combining_mark(c) {
+                None
             } else {
-                ' '
+                Some(' ')
             }
         })
         .collect::<String>()
@@ -507,21 +529,54 @@ fn significant_tokens(title: &str) -> Vec<String> {
     tokens
 }
 
-/// Two token sets are considered the same task when they overlap strongly:
-/// Jaccard similarity ≥ 0.6, OR they share at least two significant tokens.
-/// The two-shared-tokens rule lets a long title ("Enhance API security with JWT
-/// auth middleware") merge with a short one ("Enhance API Security") even though
-/// the length gap drags Jaccard below 0.6.
+/// Normalize a title for exact-equality grouping of token-empty titles:
+/// full Unicode lowercase with whitespace collapsed. Used only to keep
+/// identical all-stopword titles together while keeping distinct ones apart.
+fn normalized_title(title: &str) -> String {
+    title
+        // Match significant_tokens: normalize to NFC before lowercasing so
+        // canonically-equivalent all-stopword titles share an exact key.
+        .nfc()
+        .collect::<String>()
+        .to_lowercase()
+        .split_whitespace()
+        .collect::<Vec<_>>()
+        .join(" ")
+}
+
+/// Similarity threshold for treating two titles as the same task. Applied to
+/// the overlap coefficient (shared / size-of-smaller-set), which — unlike a raw
+/// shared-token count — scales with how much of the smaller title is covered.
+const CLUSTER_SIMILARITY_THRESHOLD: f64 = 0.6;
+
+/// Two token sets are considered the same task when they overlap strongly,
+/// measured by the OVERLAP COEFFICIENT: `shared / min(|a|, |b|)`.
+///
+/// This deliberately replaces the old "share ≥ 2 tokens" rule, which fired on
+/// any two long-but-unrelated titles that happened to share two common words
+/// (e.g. "add" + "service") and — combined with union-growing cluster
+/// signatures — let a single cluster transitively swallow everything.
+///
+/// The overlap coefficient stays high (1.0) when a short title is fully
+/// contained in a longer one ("Enhance API Security" ⊂ "Enhance API security
+/// with JWT auth middleware"), so genuine near-duplicates still merge, while two
+/// large sets that share only a couple of incidental tokens score low and stay
+/// apart.
 fn tokens_overlap(a: &[String], b: &[String]) -> bool {
     if a.is_empty() || b.is_empty() {
         return false;
     }
     let shared = a.iter().filter(|t| b.contains(t)).count();
-    if shared >= 2 {
-        return true;
+    let smaller = a.len().min(b.len());
+    // A single-token set scores a perfect 1.0 against any longer title that
+    // merely contains that token, so a generic summary like "API" / "Fix API"
+    // would cluster with every unrelated "Add API auth", "Update API billing",
+    // etc. Require at least TWO shared tokens whenever the smaller set has only
+    // one token, so singletons need real signal before merging.
+    if smaller <= 1 {
+        return shared >= 2;
     }
-    let union = a.len() + b.len() - shared;
-    union > 0 && (shared as f64 / union as f64) >= 0.6
+    (shared as f64 / smaller as f64) >= CLUSTER_SIMILARITY_THRESHOLD
 }
 
 /// Deterministically cluster summarized entries by title similarity and return
@@ -531,77 +586,96 @@ fn tokens_overlap(a: &[String], b: &[String]) -> bool {
 /// human-readable title rather than a synthetic key.
 fn cluster_titles(entries: &[&WikiEntry]) -> Vec<(String, String)> {
     struct Cluster {
-        tokens: Vec<String>,
+        // Token sets of EVERY member, kept separately rather than unioned into a
+        // single signature. A candidate joins if it overlaps ANY member, which
+        // preserves transitive grouping of genuine near-duplicates WITHOUT the
+        // union ballooning into a catch-all that absorbs unrelated titles.
+        member_tokens: Vec<Vec<String>>,
+        // Exact normalized title shared by a token-empty cluster (all-stopword
+        // titles). `None` for tokened clusters.
+        empty_key: Option<String>,
         members: Vec<usize>,
     }
 
-    // Precompute significant tokens once per entry.
-    let prepared: Vec<(usize, Vec<String>)> = entries
+    // Precompute significant tokens + normalized title once per entry.
+    let prepared: Vec<(usize, Vec<String>, String)> = entries
         .iter()
         .enumerate()
-        .map(|(i, e)| (i, significant_tokens(e.title.as_deref().unwrap_or(""))))
+        .map(|(i, e)| {
+            let raw = e.title.as_deref().unwrap_or("");
+            (i, significant_tokens(raw), normalized_title(raw))
+        })
         .collect();
 
     let mut clusters: Vec<Cluster> = Vec::new();
-    for (idx, tokens) in &prepared {
+    for (idx, tokens, norm) in &prepared {
         // Find the first existing cluster this entry overlaps strongly with.
-        // An entry with no significant tokens (all stopwords) only matches a
-        // cluster that is itself token-empty, so generic titles still group.
         let mut placed = false;
         for cluster in clusters.iter_mut() {
             let matches = if tokens.is_empty() {
-                cluster.tokens.is_empty()
+                // Token-empty titles (all stopwords) carry no signal to cluster
+                // on, so they only merge with an identical normalized title.
+                // This stops every generic/stopword-only title from collapsing
+                // into one arbitrary blob.
+                cluster.empty_key.as_deref() == Some(norm.as_str())
             } else {
-                tokens_overlap(tokens, &cluster.tokens)
+                // Tokened entries never join an empty cluster; they match if they
+                // overlap ANY existing member of the cluster.
+                cluster.empty_key.is_none()
+                    && cluster
+                        .member_tokens
+                        .iter()
+                        .any(|m| tokens_overlap(tokens, m))
             };
             if matches {
                 cluster.members.push(*idx);
-                // Grow the cluster signature with this entry's tokens so later
-                // entries can match on the union of what's been seen.
-                for t in tokens {
-                    if !cluster.tokens.contains(t) {
-                        cluster.tokens.push(t.clone());
-                    }
-                }
-                cluster.tokens.sort();
+                cluster.member_tokens.push(tokens.clone());
                 placed = true;
                 break;
             }
         }
         if !placed {
             clusters.push(Cluster {
-                tokens: tokens.clone(),
+                member_tokens: vec![tokens.clone()],
+                empty_key: if tokens.is_empty() {
+                    Some(norm.clone())
+                } else {
+                    None
+                },
                 members: vec![*idx],
             });
         }
     }
 
     // Consolidation pass: the single greedy pass above is order-dependent — an
-    // entry compared before a cluster grew its signature can land in its own
-    // cluster even though it overlaps the grown signature. Repeatedly merge any
-    // two clusters whose signatures overlap until a fixpoint, making the final
-    // grouping independent of input order. n is small, so the O(n²)-per-round
-    // loop is cheap.
+    // entry compared before its eventual neighbor was seen can land in its own
+    // cluster even though it overlaps a member of another cluster. Repeatedly
+    // merge any two clusters that have a pair of overlapping members (or, for
+    // token-empty clusters, an identical normalized title) until a fixpoint,
+    // making the final grouping independent of input order. n is small, so the
+    // O(n²)-per-round loop is cheap. Crucially, merging only happens on a real
+    // member-to-member overlap, so it cannot chain unrelated clusters together.
     loop {
         let mut merged_any = false;
         'outer: for i in 0..clusters.len() {
             for j in (i + 1)..clusters.len() {
-                let overlap = if clusters[i].tokens.is_empty() || clusters[j].tokens.is_empty() {
-                    // Token-empty clusters (all-stopword titles) only merge with
-                    // each other, never with a tokened cluster.
-                    clusters[i].tokens.is_empty() && clusters[j].tokens.is_empty()
-                } else {
-                    tokens_overlap(&clusters[i].tokens, &clusters[j].tokens)
+                let overlap = match (&clusters[i].empty_key, &clusters[j].empty_key) {
+                    // Token-empty clusters merge only with an identical title.
+                    (Some(ki), Some(kj)) => ki == kj,
+                    // A token-empty cluster never merges with a tokened one.
+                    (Some(_), None) | (None, Some(_)) => false,
+                    // Tokened clusters merge if any member pair overlaps.
+                    (None, None) => clusters[i].member_tokens.iter().any(|mi| {
+                        clusters[j]
+                            .member_tokens
+                            .iter()
+                            .any(|mj| tokens_overlap(mi, mj))
+                    }),
                 };
                 if overlap {
                     let other = clusters.remove(j);
                     clusters[i].members.extend(other.members);
-                    for t in other.tokens {
-                        if !clusters[i].tokens.contains(&t) {
-                            clusters[i].tokens.push(t);
-                        }
-                    }
-                    clusters[i].tokens.sort();
+                    clusters[i].member_tokens.extend(other.member_tokens);
                     merged_any = true;
                     break 'outer;
                 }
@@ -1632,6 +1706,191 @@ mod tests {
         let assignments = cluster_titles(&refs);
         let label = &assignments[0].1;
         assert_eq!(label, "Add JWT auth middleware");
+    }
+
+    #[test]
+    fn tokens_overlap_uses_ratio_not_absolute_count() {
+        // Two long, unrelated titles that incidentally share TWO tokens
+        // ("add" is a stopword, so the shared pair here is "service" + "api").
+        // Under the old `shared >= 2` rule these merged; the overlap coefficient
+        // (2 / 5 = 0.4 < 0.6) correctly keeps them apart.
+        let a = significant_tokens("Add pricing service api cache layer");
+        let b = significant_tokens("Add billing service api webhook handler");
+        let shared: Vec<_> = a.iter().filter(|t| b.contains(t)).collect();
+        assert_eq!(
+            shared.len(),
+            2,
+            "fixture must share exactly two tokens to exercise the old rule"
+        );
+        assert!(
+            !tokens_overlap(&a, &b),
+            "two shared tokens out of five must NOT merge under the ratio rule"
+        );
+
+        // A short title fully contained in a long one still merges (coeff 1.0).
+        let short = significant_tokens("pricing service");
+        assert!(tokens_overlap(&short, &a));
+    }
+
+    #[test]
+    fn tokens_overlap_singleton_does_not_overcluster() {
+        // A title reducing to a SINGLE significant token must not merge with
+        // every unrelated longer title that happens to contain that token —
+        // the overlap coefficient alone would score 1.0 here.
+        let single = significant_tokens("Fix API"); // -> ["api"]
+        assert_eq!(single, vec!["api".to_string()]);
+        let auth = significant_tokens("Add API auth"); // -> ["api", "auth"]
+        let billing = significant_tokens("Update API billing"); // -> ["api", "billing"]
+        assert!(
+            !tokens_overlap(&single, &auth),
+            "single shared token must not merge a singleton title"
+        );
+        assert!(
+            !tokens_overlap(&single, &billing),
+            "single shared token must not merge a singleton title"
+        );
+        // Two unrelated singletons that share their one token must also stay apart.
+        let other_single = significant_tokens("API"); // -> ["api"]
+        assert!(!tokens_overlap(&single, &other_single));
+        // Genuinely related multi-token titles still cluster.
+        let related_long = significant_tokens("Add API security with JWT auth middleware");
+        let related_short = significant_tokens("Enhance API auth"); // -> ["api", "auth"]
+        assert!(
+            tokens_overlap(&related_short, &related_long),
+            "two shared tokens out of two must still merge"
+        );
+    }
+
+    #[test]
+    fn cluster_titles_does_not_overcluster_singletons() {
+        // "Fix API" (singleton "api") must NOT swallow unrelated API titles.
+        let entries = [
+            titled_entry("a", "Fix API"),
+            titled_entry("b", "Add API auth"),
+            titled_entry("c", "Update API billing"),
+        ];
+        let refs: Vec<&WikiEntry> = entries.iter().collect();
+        let assignments = cluster_titles(&refs);
+        let distinct: std::collections::HashSet<_> =
+            assignments.iter().map(|(_, l)| l.clone()).collect();
+        assert_eq!(
+            distinct.len(),
+            3,
+            "a singleton-token title must not cluster with unrelated longer titles"
+        );
+    }
+
+    #[test]
+    fn significant_tokens_normalizes_nfc_nfd_equivalents() {
+        // Precomposed "café" (NFC, U+00E9) and decomposed "café" (NFD,
+        // "e" + U+0301 combining acute) are canonically equivalent and must
+        // tokenize identically once normalized to NFC before stripping marks.
+        let nfc = "Caf\u{00e9} module"; // café
+        let nfd = "Cafe\u{0301} module"; // cafe + combining acute
+        assert_ne!(nfc, nfd, "fixture must use distinct byte sequences");
+        assert_eq!(significant_tokens(nfc), significant_tokens(nfd));
+        assert!(significant_tokens(nfc).contains(&"café".to_string()));
+    }
+
+    #[test]
+    fn cluster_titles_merges_nfc_nfd_equivalents() {
+        let entries = [
+            titled_entry("a", "Refactor Caf\u{00e9} Strat\u{00e9}gie"), // NFC
+            titled_entry("b", "Refactor Cafe\u{0301} Strate\u{0301}gie"), // NFD
+        ];
+        let refs: Vec<&WikiEntry> = entries.iter().collect();
+        let assignments = cluster_titles(&refs);
+        let distinct: std::collections::HashSet<_> =
+            assignments.iter().map(|(_, l)| l.clone()).collect();
+        assert_eq!(
+            distinct.len(),
+            1,
+            "canonically-equivalent titles must merge regardless of NFC/NFD form"
+        );
+    }
+
+    #[test]
+    fn cluster_titles_does_not_transitively_absorb_unrelated() {
+        // Chain of titles where each adjacent pair shares two incidental tokens
+        // but the ends are unrelated. The old union-growing signature plus the
+        // `shared >= 2` rule made all of these collapse into one blob. With the
+        // ratio rule and member-based matching they stay apart.
+        let entries = [
+            titled_entry("a", "Add pricing service api cache"),
+            titled_entry("b", "Add billing service api webhook"),
+            titled_entry("c", "Add billing report export csv"),
+        ];
+        let refs: Vec<&WikiEntry> = entries.iter().collect();
+        let assignments = cluster_titles(&refs);
+        let distinct: std::collections::HashSet<_> =
+            assignments.iter().map(|(_, l)| l.clone()).collect();
+        assert_eq!(
+            distinct.len(),
+            3,
+            "incidental two-token overlaps must not chain unrelated titles into one cluster"
+        );
+    }
+
+    #[test]
+    fn cluster_titles_separates_distinct_stopword_only_titles() {
+        // Titles made entirely of stopwords/generic verbs reduce to no
+        // significant tokens. The old code lumped ALL of them into one arbitrary
+        // group; now each distinct normalized title is its own singleton while
+        // identical ones still collapse.
+        let entries = [
+            titled_entry("a", "Fix and update"),
+            titled_entry("b", "Refactor and improve"),
+            titled_entry("c", "Fix and update"),
+        ];
+        // Sanity: these really are token-empty so we exercise the empty path.
+        assert!(significant_tokens("Fix and update").is_empty());
+        assert!(significant_tokens("Refactor and improve").is_empty());
+
+        let refs: Vec<&WikiEntry> = entries.iter().collect();
+        let assignments = cluster_titles(&refs);
+        let label_of = |sid: &str| {
+            assignments
+                .iter()
+                .find(|(s, _)| s == sid)
+                .map(|(_, l)| l.clone())
+                .unwrap()
+        };
+        // Identical stopword-only titles merge; distinct ones do not.
+        assert_eq!(label_of("a"), label_of("c"));
+        assert_ne!(label_of("a"), label_of("b"));
+        let distinct: std::collections::HashSet<_> =
+            assignments.iter().map(|(_, l)| l.clone()).collect();
+        assert_eq!(distinct.len(), 2);
+    }
+
+    #[test]
+    fn significant_tokens_folds_non_ascii_case() {
+        // Full Unicode lowercasing: "Café" and "café" must produce the same
+        // token. to_ascii_lowercase left the accented capital untouched, so the
+        // two titles would have clustered apart.
+        assert_eq!(
+            significant_tokens("Café Münchën Stratégie"),
+            significant_tokens("café münchën stratégie")
+        );
+        assert!(significant_tokens("Café").contains(&"café".to_string()));
+        assert_eq!(
+            significant_tokens("İstanbul API"),
+            significant_tokens("i\u{307}stanbul api")
+        );
+        assert!(significant_tokens("İstanbul").contains(&"istanbul".to_string()));
+    }
+
+    #[test]
+    fn cluster_titles_merges_non_ascii_case_variants() {
+        let entries = [
+            titled_entry("a", "Refactor Café Stratégie module"),
+            titled_entry("b", "Refactor café stratégie module"),
+        ];
+        let refs: Vec<&WikiEntry> = entries.iter().collect();
+        let assignments = cluster_titles(&refs);
+        let distinct: std::collections::HashSet<_> =
+            assignments.iter().map(|(_, l)| l.clone()).collect();
+        assert_eq!(distinct.len(), 1, "case-only differences must merge");
     }
 
     #[test]
