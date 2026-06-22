@@ -7,7 +7,8 @@ use std::process::{Command, Output, Stdio};
 
 use super::apple_fm;
 use std::time::Duration;
-use tokscale_core::content_extractor::metadata_only_content;
+use std::path::PathBuf;
+use tokscale_core::content_extractor::{extract_session_content, metadata_only_content};
 use tokscale_core::content_extractor::SessionContent;
 use tokscale_core::pricing::PricingService;
 use tokscale_core::wiki::{WikiDb, WikiEntry};
@@ -53,7 +54,8 @@ pub fn run_report(opts: ReportOptions) -> Result<()> {
     };
 
     if !unsummarized.is_empty() {
-        run_summarizer(&db, &unsummarized, &opts.summarizer)?;
+        let session_paths = build_session_path_index(&opts);
+        run_summarizer(&db, &unsummarized, &opts.summarizer, &session_paths)?;
     }
 
     let entries = db
@@ -191,11 +193,16 @@ fn populate_wiki_from_sessions(db: &WikiDb, opts: &ReportOptions) -> Result<()> 
     Ok(())
 }
 
-fn run_summarizer(db: &WikiDb, session_ids: &[String], backend: &str) -> Result<()> {
+fn run_summarizer(
+    db: &WikiDb,
+    session_ids: &[String],
+    backend: &str,
+    session_paths: &SessionPathIndex,
+) -> Result<()> {
     let mut payloads: Vec<serde_json::Value> = Vec::new();
     for sid in session_ids {
         if let Ok(Some(entry)) = db.get_entry(sid) {
-            let content = extract_content_for_session(&entry);
+            let content = extract_content_for_session(&entry, session_paths);
             payloads.push(serde_json::json!({
                 "session_id": entry.session_id,
                 "client": entry.client,
@@ -1127,8 +1134,107 @@ fn print_session_list(entries: &[WikiEntry]) {
     }
 }
 
-fn extract_content_for_session(entry: &WikiEntry) -> SessionContent {
-    metadata_only_content(&entry.session_id, &entry.client)
+/// Maps every locally-discovered session to the on-disk file(s) its content can
+/// be extracted from, so the summarizer payload carries the real first user
+/// message instead of metadata only.
+///
+/// File-keyed clients (claude, codex, gemini) live as one transcript file per
+/// session, indexed here by `(client, session_id)`. The client is part of the
+/// key so cross-client `session_id` collisions can't feed one client's file to
+/// another client's extractor. OpenCode sessions live as rows inside a shared
+/// SQLite database, so every opencode database is kept as a candidate and the
+/// extractor selects the matching session internally.
+#[derive(Default)]
+struct SessionPathIndex {
+    by_client_session: HashMap<(String, String), Vec<PathBuf>>,
+    opencode_dbs: Vec<PathBuf>,
+}
+
+impl SessionPathIndex {
+    /// Candidate file(s) to feed the dispatcher for `(client, session_id)`.
+    fn candidates_for(&self, client: &str, session_id: &str) -> Vec<PathBuf> {
+        if client == "opencode" {
+            return self.opencode_dbs.clone();
+        }
+        self.by_client_session
+            .get(&(client.to_string(), session_id.to_string()))
+            .cloned()
+            .unwrap_or_default()
+    }
+}
+
+/// Scan local client data once and index every session file by
+/// `(client, session_id)` plus the OpenCode databases, so per-session content
+/// extraction never has to re-walk the filesystem. Scanning is best-effort: any
+/// client the summarizer can't extract simply yields no candidates and falls
+/// back to metadata-only.
+///
+/// The `session_id` used as the key must match how the wiki populates its
+/// entries. For most clients that is the file stem, but Gemini transcripts derive
+/// the id from the in-file `sessionId`/`session_id` field, so they are keyed by
+/// the parsed id (with the stem kept as a fallback alias).
+fn build_session_path_index(opts: &ReportOptions) -> SessionPathIndex {
+    let home_dir = opts
+        .home_dir
+        .clone()
+        .or_else(|| std::env::var("HOME").ok())
+        .unwrap_or_default();
+    let use_env_roots = opts.home_dir.is_none();
+
+    let scan = tokscale_core::scanner::scan_all_clients_with_scanner_settings(
+        &home_dir,
+        &[],
+        use_env_roots,
+        &opts.scanner_settings,
+    );
+
+    let mut by_client_session: HashMap<(String, String), Vec<PathBuf>> = HashMap::new();
+    for (client, path) in scan.all_files() {
+        let client_str = client.as_str().to_string();
+        let mut session_ids: Vec<String> = Vec::new();
+
+        if client == tokscale_core::ClientId::Gemini {
+            // Gemini's wiki session_id comes from inside the file, not the stem.
+            if let Some(id) =
+                tokscale_core::sessions::gemini::gemini_session_id_for_file(&path)
+            {
+                session_ids.push(id);
+            }
+        }
+        // Always keep the file stem as a key/alias so stem-keyed clients work and
+        // Gemini lookups still resolve if the wiki used the stem.
+        if let Some(stem) = path.file_stem().and_then(|s| s.to_str()) {
+            session_ids.push(stem.to_string());
+        }
+
+        session_ids.sort();
+        session_ids.dedup();
+        for session_id in session_ids {
+            by_client_session
+                .entry((client_str.clone(), session_id))
+                .or_default()
+                .push(path.clone());
+        }
+    }
+
+    SessionPathIndex {
+        by_client_session,
+        opencode_dbs: scan.opencode_dbs.clone(),
+    }
+}
+
+/// Resolve a session's real content by dispatching to the correct per-client
+/// extractor over its on-disk file(s). Falls back to metadata-only when the
+/// client is unsupported or no candidate file yields a first user message.
+fn extract_content_for_session(
+    entry: &WikiEntry,
+    session_paths: &SessionPathIndex,
+) -> SessionContent {
+    let candidates = session_paths.candidates_for(&entry.client, &entry.session_id);
+    if candidates.is_empty() {
+        return metadata_only_content(&entry.session_id, &entry.client);
+    }
+    extract_session_content(&entry.client, &entry.session_id, &candidates)
 }
 
 fn parse_date_range(since: &Option<String>, until: &Option<String>) -> (Option<i64>, Option<i64>) {
@@ -1401,5 +1507,158 @@ mod tests {
             assignments.iter().map(|(_, l)| l.clone()).collect();
         assert_eq!(distinct.len(), 1);
         assert_eq!(assignments.len(), 51);
+    }
+
+    fn entry_for(session_id: &str, client: &str) -> WikiEntry {
+        let mut e = titled_entry(session_id, "ignored");
+        e.client = client.to_string();
+        e.title = None;
+        e
+    }
+
+    #[test]
+    fn extract_content_for_session_reads_real_claude_first_message() {
+        // A claudecode transcript on disk, keyed by file stem == session_id.
+        let dir = tempfile::tempdir().unwrap();
+        let session_id = "sess-claude-1";
+        let path = dir.path().join(format!("{session_id}.jsonl"));
+        std::fs::write(
+            &path,
+            r#"{"type":"user","message":{"role":"user","content":[{"type":"text","text":"Fix the login bug"}]}}
+"#,
+        )
+        .unwrap();
+
+        let mut by_client_session: HashMap<(String, String), Vec<PathBuf>> = HashMap::new();
+        by_client_session.insert(("claude".to_string(), session_id.to_string()), vec![path]);
+        let index = SessionPathIndex {
+            by_client_session,
+            opencode_dbs: Vec::new(),
+        };
+
+        let entry = entry_for(session_id, "claude");
+        let content = extract_content_for_session(&entry, &index);
+
+        // The dispatcher must have reached the real claudecode extractor and
+        // surfaced the actual first user message — not metadata-only.
+        assert_eq!(
+            content.first_user_message.as_deref(),
+            Some("Fix the login bug")
+        );
+        assert_eq!(content.client, "claude");
+    }
+
+    #[test]
+    fn extract_content_for_session_unknown_client_falls_back_to_metadata_only() {
+        // An unsupported client has no dedicated extractor: must degrade to
+        // metadata-only (None) without error or panic, even if a stray file
+        // happens to share the session id.
+        let dir = tempfile::tempdir().unwrap();
+        let session_id = "sess-unknown-1";
+        let path = dir.path().join(format!("{session_id}.jsonl"));
+        std::fs::write(&path, "garbage\n").unwrap();
+
+        let mut by_client_session: HashMap<(String, String), Vec<PathBuf>> = HashMap::new();
+        by_client_session.insert(
+            ("some-unsupported-client".to_string(), session_id.to_string()),
+            vec![path],
+        );
+        let index = SessionPathIndex {
+            by_client_session,
+            opencode_dbs: Vec::new(),
+        };
+
+        let entry = entry_for(session_id, "some-unsupported-client");
+        let content = extract_content_for_session(&entry, &index);
+
+        assert!(content.first_user_message.is_none());
+        assert_eq!(content.client, "some-unsupported-client");
+    }
+
+    #[test]
+    fn extract_content_for_session_missing_file_falls_back_to_metadata_only() {
+        // Supported client but no candidate file on disk: never panic, return
+        // metadata-only.
+        let index = SessionPathIndex::default();
+        let entry = entry_for("does-not-exist", "claude");
+        let content = extract_content_for_session(&entry, &index);
+        assert!(content.first_user_message.is_none());
+        assert_eq!(content.client, "claude");
+    }
+
+    #[test]
+    fn session_path_index_isolates_clients_with_same_session_id() {
+        // Two different clients share a session_id. Keying by (client, id) must
+        // route each lookup to that client's own file, never the other's.
+        let dir = tempfile::tempdir().unwrap();
+        let claude_path = dir.path().join("claude.jsonl");
+        let codex_path = dir.path().join("codex.jsonl");
+        std::fs::write(&claude_path, "claude-bytes").unwrap();
+        std::fs::write(&codex_path, "codex-bytes").unwrap();
+
+        let mut by_client_session: HashMap<(String, String), Vec<PathBuf>> = HashMap::new();
+        by_client_session.insert(("claude".to_string(), "shared".to_string()), vec![claude_path.clone()]);
+        by_client_session.insert(("codex".to_string(), "shared".to_string()), vec![codex_path.clone()]);
+        let index = SessionPathIndex {
+            by_client_session,
+            opencode_dbs: Vec::new(),
+        };
+
+        assert_eq!(index.candidates_for("claude", "shared"), vec![claude_path]);
+        assert_eq!(index.candidates_for("codex", "shared"), vec![codex_path]);
+        // Lookup for a client without a matching key returns nothing.
+        assert!(index.candidates_for("gemini", "shared").is_empty());
+    }
+
+    #[test]
+    fn build_session_path_index_keys_gemini_by_inner_session_id() {
+        // A Gemini chat recording's wiki session_id is the in-file `sessionId`,
+        // not the filename stem. The index must key by that inner id so the
+        // summarizer lookup resolves and surfaces the real first prompt.
+        let home = tempfile::tempdir().unwrap();
+        let chats = home
+            .path()
+            .join(".gemini")
+            .join("tmp")
+            .join("projhash")
+            .join("chats");
+        std::fs::create_dir_all(&chats).unwrap();
+        let inner_id = "b8d9ab56-e7da-4dca-abc1-eb61158bed4f";
+        let file = chats.join("session-2026-06-08T19-53-b8d9ab56.json");
+        std::fs::write(
+            &file,
+            format!(
+                r#"{{"sessionId":"{inner_id}","messages":[{{"type":"user","content":"Hello Gemini"}}]}}"#
+            ),
+        )
+        .unwrap();
+
+        let opts = ReportOptions {
+            json: false,
+            since: None,
+            until: None,
+            workspace: None,
+            client: None,
+            no_summarize: false,
+            summarizer: String::new(),
+            rebuild: false,
+            home_dir: Some(home.path().to_string_lossy().into_owned()),
+            scanner_settings: Default::default(),
+            today: false,
+            week: false,
+            month: false,
+        };
+        let index = build_session_path_index(&opts);
+
+        // Lookup by the wiki session_id (inner id) must find the file.
+        let candidates = index.candidates_for("gemini", inner_id);
+        assert!(
+            candidates.iter().any(|p| p == &file),
+            "expected gemini index keyed by inner sessionId, candidates={candidates:?}"
+        );
+
+        let entry = entry_for(inner_id, "gemini");
+        let content = extract_content_for_session(&entry, &index);
+        assert_eq!(content.first_user_message.as_deref(), Some("Hello Gemini"));
     }
 }
