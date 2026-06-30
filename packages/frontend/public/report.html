@@ -31,6 +31,12 @@
   .chart-box h2 { font-size: 0.9rem; color: #ccc; margin-bottom: 10px; text-align: center; }
   .chart-box canvas { width: 100% !important; height: 450px !important; }
 
+  .trend-section { max-width: 1600px; margin: 16px auto 0; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .trend-box { background: #1a1a24; border-radius: 12px; padding: 16px; border: 1px solid #2a2a3a; }
+  .trend-box h2 { font-size: 0.9rem; color: #ccc; margin-bottom: 10px; text-align: center; }
+  .trend-box canvas { width: 100% !important; height: 360px !important; }
+  .trend-loading { text-align: center; color: #666; font-size: 0.8rem; padding: 20px; }
+
   .ranking-section { max-width: 1600px; margin: 16px auto 0; }
   .ranking-table { width: 100%; border-collapse: collapse; background: #1a1a24; border-radius: 12px; overflow: hidden; border: 1px solid #2a2a3a; }
   .ranking-table th { background: #22222e; padding: 10px 12px; text-align: left; font-size: 0.75rem; color: #888; font-weight: 500; }
@@ -123,6 +129,19 @@
     </tr></thead>
     <tbody id="rankingBody"></tbody>
   </table>
+</div>
+
+<div class="trend-section">
+  <div class="trend-box">
+    <h2>⏱️ 월별 사용시간 추이 (Hours)</h2>
+    <div class="trend-loading" id="trendLoadingHours">월별 데이터 로딩 중...</div>
+    <canvas id="trendHoursChart" style="display:none"></canvas>
+  </div>
+  <div class="trend-box">
+    <h2>💰 월별 가성비 추이 (M Tokens/$)</h2>
+    <div class="trend-loading" id="trendLoadingTPD">월별 데이터 로딩 중...</div>
+    <canvas id="trendTPDChart" style="display:none"></canvas>
+  </div>
 </div>
 </div>
 
@@ -227,6 +246,7 @@ function updateAll() {
   const scored = computeScores(rawUsers, weights);
   updateRanking(scored);
   updateCharts(scored);
+  updateTrendCharts();
 }
 
 function updateRanking(scored) {
@@ -437,6 +457,118 @@ function initTeamFilter(users) {
   });
 }
 
+// ── Monthly trend charts ──────────────────────────────────────────
+let trendChartHours = null;
+let trendChartTPD   = null;
+let monthlyData     = {};
+
+function getMonthsUpToNow() {
+  const now   = new Date();
+  const year  = now.getFullYear();
+  const month = now.getMonth() + 1;
+  return Array.from({ length: month }, (_, i) => {
+    const m = String(i + 1).padStart(2, '0');
+    return `${year}-${m}`;
+  });
+}
+
+async function fetchMonthData(yearMonth) {
+  const [year, month] = yearMonth.split('-');
+  const lastDay = new Date(parseInt(year), parseInt(month), 0).getDate();
+  const from    = `${year}-${month}-01`;
+  const to      = `${year}-${month}-${String(lastDay).padStart(2, '0')}`;
+  let allUsers  = [];
+  let page      = 1;
+  while (true) {
+    const res  = await fetch(`/api/leaderboard?period=custom&from=${from}&to=${to}&limit=100&sortBy=tokens&page=${page}`);
+    if (!res.ok) break;
+    const data = await res.json();
+    allUsers   = allUsers.concat(data.users);
+    if (!data.pagination || !data.pagination.hasNext) break;
+    page++;
+  }
+  const result = {};
+  allUsers.forEach(u => {
+    result[u.username] = {
+      hours: u.totalActiveTimeMs ? u.totalActiveTimeMs / 3600000 : 0,
+      tpd:   u.totalCost > 0    ? u.totalTokens / u.totalCost / 1e6 : 0,
+      displayName: u.displayName,
+      team:  parseTeam(u.displayName),
+    };
+  });
+  return result;
+}
+
+async function loadTrendData() {
+  const months  = getMonthsUpToNow();
+  const results = await Promise.all(months.map(m => fetchMonthData(m).then(d => ({ month: m, data: d }))));
+  results.forEach(({ month, data }) => { monthlyData[month] = data; });
+  renderTrendCharts(months);
+}
+
+function buildTrendDatasets(months, metric) {
+  const userSet = new Set();
+  months.forEach(m => Object.keys(monthlyData[m] || {}).forEach(u => userSet.add(u)));
+
+  let users = [...userSet].map(username => {
+    const info = Object.values(monthlyData).map(md => md[username]).find(Boolean);
+    return { username, displayName: info?.displayName || username, team: info?.team || '기타' };
+  });
+
+  if (selectedTeams.size > 0) users = users.filter(u => selectedTeams.has(u.team));
+
+  return users.map(u => {
+    const color = TEAM_COLORS[u.team] || '#888';
+    const isMe  = u.username === 't1000040';
+    return {
+      label:           parseName(u.displayName),
+      data:            months.map(m => { const v = monthlyData[m]?.[u.username]?.[metric]; return (v && v > 0) ? v : null; }),
+      borderColor:     isMe ? '#fff' : color,
+      backgroundColor: isMe ? 'rgba(255,255,255,0.08)' : color + '18',
+      borderWidth:     isMe ? 2.5 : 1.2,
+      pointRadius:     isMe ? 4 : 2,
+      tension:         0.3,
+      spanGaps:        true,
+    };
+  });
+}
+
+function renderTrendCharts(months) {
+  const labels = months.map(m => `${m.split('-')[1]}월`);
+
+  const commonOpts = yLabel => ({
+    responsive: true, maintainAspectRatio: false, animation: { duration: 300 },
+    interaction: { mode: 'index', intersect: false },
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: ctx => `${ctx.dataset.label}: ${ctx.parsed.y != null ? ctx.parsed.y.toFixed(1) : '-'}` } },
+    },
+    scales: {
+      x: { grid: { color: '#1f1f2e' }, ticks: { color: '#666' } },
+      y: { title: { display: true, text: yLabel, color: '#888' }, grid: { color: '#1f1f2e' }, ticks: { color: '#666' } },
+    },
+  });
+
+  document.getElementById('trendLoadingHours').style.display = 'none';
+  const hoursCanvas = document.getElementById('trendHoursChart');
+  hoursCanvas.style.display = 'block';
+  if (trendChartHours) trendChartHours.destroy();
+  trendChartHours = new Chart(hoursCanvas, { type: 'line', data: { labels, datasets: buildTrendDatasets(months, 'hours') }, options: commonOpts('사용시간 (h)') });
+
+  document.getElementById('trendLoadingTPD').style.display = 'none';
+  const tpdCanvas = document.getElementById('trendTPDChart');
+  tpdCanvas.style.display = 'block';
+  if (trendChartTPD) trendChartTPD.destroy();
+  trendChartTPD = new Chart(tpdCanvas, { type: 'line', data: { labels, datasets: buildTrendDatasets(months, 'tpd') }, options: commonOpts('M Tokens/$') });
+}
+
+function updateTrendCharts() {
+  const months = getMonthsUpToNow();
+  if (Object.keys(monthlyData).length === 0) return;
+  renderTrendCharts(months);
+}
+// ─────────────────────────────────────────────────────────────────
+
 async function init() {
   try {
     // Fetch all pages (API caps at 100 per page)
@@ -479,6 +611,11 @@ async function init() {
     initControls();
     initTeamFilter(rawUsers);
     updateAll();
+    // Load monthly trend in background — non-blocking
+    loadTrendData().catch(() => {
+      document.getElementById('trendLoadingHours').textContent = '월별 데이터 로딩 실패';
+      document.getElementById('trendLoadingTPD').textContent   = '월별 데이터 로딩 실패';
+    });
   } catch (err) {
     document.getElementById('loading').textContent = '❌ 데이터 로딩 실패: ' + err.message;
   }
