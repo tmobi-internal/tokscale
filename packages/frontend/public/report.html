@@ -31,7 +31,16 @@
   .chart-box h2 { font-size: 0.9rem; color: #ccc; margin-bottom: 10px; text-align: center; }
   .chart-box canvas { width: 100% !important; height: 450px !important; }
 
-  .trend-section { max-width: 1600px; margin: 16px auto 0; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .trend-section { max-width: 1600px; margin: 16px auto 0; }
+  .trend-nav { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 12px; }
+  .trend-nav button {
+    background: #2a2a3a; border: 1px solid #3a3a4a; color: #ccc; padding: 4px 14px;
+    border-radius: 6px; font-size: 0.8rem; cursor: pointer; transition: all 0.2s;
+  }
+  .trend-nav button:hover:not(:disabled) { background: #3a3a4a; color: #fff; }
+  .trend-nav button:disabled { opacity: 0.3; cursor: default; }
+  .trend-nav .trend-year-label { font-size: 0.9rem; color: #ccc; font-weight: 600; min-width: 60px; text-align: center; }
+  .trend-charts { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   .trend-box { background: #1a1a24; border-radius: 12px; padding: 16px; border: 1px solid #2a2a3a; }
   .trend-box h2 { font-size: 0.9rem; color: #ccc; margin-bottom: 10px; text-align: center; }
   .trend-box canvas { width: 100% !important; height: 360px !important; }
@@ -120,6 +129,26 @@
   </div>
 </div>
 
+<div class="trend-section">
+  <div class="trend-nav">
+    <button id="trendPrevBtn">← Prev</button>
+    <span class="trend-year-label" id="trendYearLabel"></span>
+    <button id="trendNextBtn">Next →</button>
+  </div>
+  <div class="trend-charts">
+    <div class="trend-box">
+      <h2>⏱️ 월별 사용시간 추이 (Hours)</h2>
+      <div class="trend-loading" id="trendLoadingHours">월별 데이터 로딩 중...</div>
+      <canvas id="trendHoursChart" style="display:none"></canvas>
+    </div>
+    <div class="trend-box">
+      <h2>💰 월별 가성비 추이 (M Tokens/$)</h2>
+      <div class="trend-loading" id="trendLoadingTPD">월별 데이터 로딩 중...</div>
+      <canvas id="trendTPDChart" style="display:none"></canvas>
+    </div>
+  </div>
+</div>
+
 <div class="ranking-section">
   <table class="ranking-table">
     <thead><tr>
@@ -129,19 +158,6 @@
     </tr></thead>
     <tbody id="rankingBody"></tbody>
   </table>
-</div>
-
-<div class="trend-section">
-  <div class="trend-box">
-    <h2>⏱️ 월별 사용시간 추이 (Hours)</h2>
-    <div class="trend-loading" id="trendLoadingHours">월별 데이터 로딩 중...</div>
-    <canvas id="trendHoursChart" style="display:none"></canvas>
-  </div>
-  <div class="trend-box">
-    <h2>💰 월별 가성비 추이 (M Tokens/$)</h2>
-    <div class="trend-loading" id="trendLoadingTPD">월별 데이터 로딩 중...</div>
-    <canvas id="trendTPDChart" style="display:none"></canvas>
-  </div>
 </div>
 </div>
 
@@ -461,15 +477,26 @@ function initTeamFilter(users) {
 let trendChartHours = null;
 let trendChartTPD   = null;
 let monthlyData     = {};
+let trendYear       = new Date().getFullYear();
 
-function getMonthsUpToNow() {
+function getMonthsForYear(year) {
   const now   = new Date();
-  const year  = now.getFullYear();
-  const month = now.getMonth() + 1;
-  return Array.from({ length: month }, (_, i) => {
+  const maxMonth = (year === now.getFullYear()) ? now.getMonth() + 1 : 12;
+  return Array.from({ length: maxMonth }, (_, i) => {
     const m = String(i + 1).padStart(2, '0');
     return `${year}-${m}`;
   });
+}
+
+function getMonthsUpToNow() {
+  return getMonthsForYear(trendYear);
+}
+
+function updateTrendNav() {
+  const now = new Date();
+  document.getElementById('trendYearLabel').textContent = String(trendYear);
+  document.getElementById('trendPrevBtn').disabled = trendYear <= 2026;
+  document.getElementById('trendNextBtn').disabled = trendYear >= now.getFullYear();
 }
 
 async function fetchMonthData(yearMonth) {
@@ -503,6 +530,22 @@ async function loadTrendData() {
   const months  = getMonthsUpToNow();
   const results = await Promise.all(months.map(m => fetchMonthData(m).then(d => ({ month: m, data: d }))));
   results.forEach(({ month, data }) => { monthlyData[month] = data; });
+  renderTrendCharts(months);
+}
+
+async function loadTrendYear(year) {
+  const months = getMonthsForYear(year);
+  // show loading
+  document.getElementById('trendLoadingHours').style.display = 'block';
+  document.getElementById('trendLoadingTPD').style.display   = 'block';
+  document.getElementById('trendHoursChart').style.display   = 'none';
+  document.getElementById('trendTPDChart').style.display     = 'none';
+
+  const toFetch = months.filter(m => !monthlyData[m]);
+  if (toFetch.length > 0) {
+    const results = await Promise.all(toFetch.map(m => fetchMonthData(m).then(d => ({ month: m, data: d }))));
+    results.forEach(({ month, data }) => { monthlyData[month] = data; });
+  }
   renderTrendCharts(months);
 }
 
@@ -611,6 +654,26 @@ async function init() {
     initControls();
     initTeamFilter(rawUsers);
     updateAll();
+
+    // Init trend nav buttons
+    updateTrendNav();
+    document.getElementById('trendPrevBtn').addEventListener('click', () => {
+      trendYear--;
+      updateTrendNav();
+      loadTrendYear(trendYear).catch(() => {
+        document.getElementById('trendLoadingHours').textContent = '월별 데이터 로딩 실패';
+        document.getElementById('trendLoadingTPD').textContent   = '월별 데이터 로딩 실패';
+      });
+    });
+    document.getElementById('trendNextBtn').addEventListener('click', () => {
+      trendYear++;
+      updateTrendNav();
+      loadTrendYear(trendYear).catch(() => {
+        document.getElementById('trendLoadingHours').textContent = '월별 데이터 로딩 실패';
+        document.getElementById('trendLoadingTPD').textContent   = '월별 데이터 로딩 실패';
+      });
+    });
+
     // Load monthly trend in background — non-blocking
     loadTrendData().catch(() => {
       document.getElementById('trendLoadingHours').textContent = '월별 데이터 로딩 실패';
