@@ -8,23 +8,27 @@
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0f0f13; color: #e0e0e0; padding: 20px; }
-  h1 { text-align: center; margin-bottom: 4px; font-size: 1.5rem; color: #fff; }
-  .subtitle { text-align: center; color: #888; margin-bottom: 20px; font-size: 0.85rem; }
+  h1 { text-align: center; margin-bottom: 8px; font-size: 1.5rem; color: #fff; }
   .loading { text-align: center; padding: 60px; color: #888; font-size: 1.2rem; }
+
+  .month-nav { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 20px; }
+  .month-nav button {
+    background: #2a2a3a; border: 1px solid #3a3a4a; color: #ccc; padding: 4px 14px;
+    border-radius: 6px; font-size: 0.85rem; cursor: pointer; transition: all 0.2s;
+  }
+  .month-nav button:hover:not(:disabled) { background: #3a3a4a; color: #fff; }
+  .month-nav button:disabled { opacity: 0.3; cursor: default; }
+  #monthLabel { font-size: 1rem; color: #ccc; font-weight: 600; min-width: 120px; text-align: center; }
 
   .controls { max-width: 1600px; margin: 0 auto 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   .control-panel { background: #1a1a24; border-radius: 12px; padding: 16px; border: 1px solid #2a2a3a; }
   .control-panel h3 { font-size: 0.85rem; color: #aaa; margin-bottom: 12px; }
-  .slider-group { margin-bottom: 10px; }
-  .slider-group label { display: flex; justify-content: space-between; font-size: 0.8rem; color: #ccc; margin-bottom: 4px; }
-  .slider-group input[type=range] { width: 100%; accent-color: #60a5fa; }
-  .preset-btns { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
-  .preset-btns button {
-    background: #2a2a3a; border: 1px solid #3a3a4a; color: #ccc; padding: 4px 10px;
-    border-radius: 6px; font-size: 0.72rem; cursor: pointer; transition: all 0.2s;
-  }
-  .preset-btns button:hover { background: #3a3a4a; color: #fff; }
-  .preset-btns button.active { background: #3b82f6; border-color: #60a5fa; color: #fff; }
+
+  .grade-table { font-size: 0.75rem; }
+  .grade-header { display: grid; grid-template-columns: 40px 1fr 1fr; gap: 6px; padding: 4px 6px; color: #666; font-weight: 600; margin-bottom: 4px; }
+  .grade-row { display: grid; grid-template-columns: 40px 1fr 1fr; gap: 6px; padding: 5px 6px; border-radius: 5px; margin-bottom: 3px; }
+  .grade-row span { color: #ccc; }
+  .grade-row .grade-letter { font-weight: 700; }
 
   .main-grid { max-width: 1600px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   .chart-box { background: #1a1a24; border-radius: 12px; padding: 16px; border: 1px solid #2a2a3a; }
@@ -32,14 +36,6 @@
   .chart-box canvas { width: 100% !important; height: 450px !important; }
 
   .trend-section { max-width: 1600px; margin: 16px auto 0; }
-  .trend-nav { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 12px; }
-  .trend-nav button {
-    background: #2a2a3a; border: 1px solid #3a3a4a; color: #ccc; padding: 4px 14px;
-    border-radius: 6px; font-size: 0.8rem; cursor: pointer; transition: all 0.2s;
-  }
-  .trend-nav button:hover:not(:disabled) { background: #3a3a4a; color: #fff; }
-  .trend-nav button:disabled { opacity: 0.3; cursor: default; }
-  .trend-nav .trend-year-label { font-size: 0.9rem; color: #ccc; font-weight: 600; min-width: 60px; text-align: center; }
   .trend-charts { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   .trend-box { background: #1a1a24; border-radius: 12px; padding: 16px; border: 1px solid #2a2a3a; }
   .trend-box h2 { font-size: 0.9rem; color: #ccc; margin-bottom: 10px; text-align: center; }
@@ -54,12 +50,17 @@
   .ranking-table .rank { color: #888; width: 40px; }
   .ranking-table .name { color: #e0e0e0; }
   .ranking-table .team { color: #888; font-size: 0.72rem; }
-  .ranking-table .score { color: #4ade80; font-weight: 600; font-size: 0.9rem; }
   .ranking-table .metric { color: #aaa; font-size: 0.72rem; }
-  .bar-cell { position: relative; }
-  .bar-bg { position: absolute; left: 0; top: 0; bottom: 0; background: rgba(74, 222, 128, 0.1); border-radius: 4px; }
   .highlight-row { background: #1a2a1a !important; }
   .highlight-row td { color: #fff; }
+
+  .badge {
+    display: inline-block; font-weight: 700; font-size: 0.78rem;
+    padding: 2px 7px; border-radius: 5px; border: 1px solid;
+    min-width: 24px; text-align: center;
+  }
+  .badge-cell { white-space: nowrap; }
+  .badge-val { font-size: 0.72rem; color: #aaa; margin-left: 4px; }
 
   .stats-bar { max-width: 1600px; margin: 0 auto 16px; display: flex; gap: 12px; }
   .stat-card { flex: 1; background: #1a1a24; border-radius: 8px; padding: 12px; border: 1px solid #2a2a3a; text-align: center; }
@@ -83,7 +84,11 @@
 <body>
 
 <h1>🏆 Tokscale AI 활용 리포트</h1>
-<p class="subtitle" id="reportSubtitle">실시간 API 데이터 기반 | 가중치 조절로 다양한 관점에서 비교</p>
+<div class="month-nav">
+  <button id="monthPrevBtn">←</button>
+  <span id="monthLabel">2026년 6월</span>
+  <button id="monthNextBtn">→</button>
+</div>
 
 <div id="loading" class="loading">데이터 로딩 중...</div>
 <div id="app" style="display:none">
@@ -92,19 +97,16 @@
 
 <div class="controls">
   <div class="control-panel">
-    <h3>⚖️ 스코어 가중치 (합계 100%)</h3>
-    <div class="preset-btns" id="presets"></div>
-    <div class="slider-group">
-      <label><span>💰 비용효율 (Tokens/$)</span><span id="w1val">33%</span></label>
-      <input type="range" id="w1" min="0" max="100" value="33">
-    </div>
-    <div class="slider-group">
-      <label><span>⏱️ 사용시간 (Hours)</span><span id="w2val">33%</span></label>
-      <input type="range" id="w2" min="0" max="100" value="33">
-    </div>
-    <div class="slider-group">
-      <label><span>📊 생산량 (Total Tokens)</span><span id="w3val">34%</span></label>
-      <input type="range" id="w3" min="0" max="100" value="34">
+    <h3>🏅 등급 기준</h3>
+    <div class="grade-table">
+      <div class="grade-header"><span>등급</span><span>비용효율 (M/$)</span><span>사용시간 (h)</span></div>
+      <div class="grade-row" id="gradeRow_S"></div>
+      <div class="grade-row" id="gradeRow_E"></div>
+      <div class="grade-row" id="gradeRow_A"></div>
+      <div class="grade-row" id="gradeRow_B"></div>
+      <div class="grade-row" id="gradeRow_C"></div>
+      <div class="grade-row" id="gradeRow_D"></div>
+      <div class="grade-row" id="gradeRow_F"></div>
     </div>
   </div>
   <div class="control-panel">
@@ -120,21 +122,16 @@
 
 <div class="main-grid">
   <div class="chart-box">
-    <h2>👤 개인별 사분면 (크기 = AI Score)</h2>
+    <h2>👤 개인별 사분면 (크기 = 총 토큰)</h2>
     <canvas id="quadrantChart"></canvas>
   </div>
   <div class="chart-box">
-    <h2>👥 팀별 사분면 (크기 = 평균 AI Score)</h2>
+    <h2>👥 팀별 사분면 (크기 = 팀 총 토큰)</h2>
     <canvas id="teamQuadrantChart"></canvas>
   </div>
 </div>
 
 <div class="trend-section">
-  <div class="trend-nav">
-    <button id="trendPrevBtn">← Prev</button>
-    <span class="trend-year-label" id="trendYearLabel"></span>
-    <button id="trendNextBtn">Next →</button>
-  </div>
   <div class="trend-charts">
     <div class="trend-box">
       <h2>⏱️ 월별 사용시간 추이 (Hours)</h2>
@@ -152,8 +149,8 @@
 <div class="ranking-section">
   <table class="ranking-table">
     <thead><tr>
-      <th>Rank</th><th>User</th><th>AI Score</th>
-      <th>비용효율</th><th>사용시간</th><th>생산량</th>
+      <th>Rank</th><th>User</th><th>종합</th>
+      <th>비용효율</th><th>사용시간</th>
       <th>Cost</th><th>Tokens</th><th>Time</th>
     </tr></thead>
     <tbody id="rankingBody"></tbody>
@@ -162,8 +159,6 @@
 </div>
 
 <script>
-const API_BASE = '/api/leaderboard?period=month&limit=100&sortBy=tokens';
-
 const TEAM_COLORS = {
   "Client Core": "#f472b6", "Client Service": "#a78bfa", "DevOps": "#4ade80",
   "RP·교통": "#fb923c", "AUTO개발": "#fbbf24", "서비스플랫폼": "#67e8f9",
@@ -175,70 +170,87 @@ const TEAM_COLORS = {
   "모빌리티서비스": "#d4d4d8", "기타": "#94a3b8",
 };
 
-const PRESETS = [
-  { name: '균등', w: [33, 33, 34] },
-  { name: '가성비', w: [50, 20, 30] },
-  { name: '활용도', w: [20, 40, 40] },
-  { name: '생산량', w: [20, 30, 50] },
-  { name: '시간중심', w: [20, 60, 20] },
+const GRADE_COLORS = { S:'#fbbf24', E:'#a78bfa', A:'#4ade80', B:'#60a5fa', C:'#fb923c', D:'#f87171', F:'#6b7280', '-':'#4b5563' };
+const GRADE_ORDER  = ['S','E','A','B','C','D','F','-'];
+
+const GRADE_CRITERIA = [
+  { g:'S', tpd:'≥ 3.0', hrs:'≥ 150h' },
+  { g:'E', tpd:'≥ 1.5', hrs:'≥ 80h' },
+  { g:'A', tpd:'≥ 0.8', hrs:'≥ 40h' },
+  { g:'B', tpd:'≥ 0.4', hrs:'≥ 15h' },
+  { g:'C', tpd:'≥ 0.15', hrs:'≥ 5h' },
+  { g:'D', tpd:'≥ 0.05', hrs:'≥ 1h' },
+  { g:'F', tpd:'< 0.05', hrs:'< 1h' },
 ];
 
+// ── State ────────────────────────────────────────────────────────
 let rawUsers = [];
 let selectedTeams = new Set();
 let chart1, chart2;
+const now0 = new Date();
+let currentYear  = now0.getFullYear();
+let currentMonth = now0.getMonth() + 1;
 
+// ── Grade functions ───────────────────────────────────────────────
+function gradeTPD(tpd) {
+  if (tpd >= 3.0)  return 'S';
+  if (tpd >= 1.5)  return 'E';
+  if (tpd >= 0.8)  return 'A';
+  if (tpd >= 0.4)  return 'B';
+  if (tpd >= 0.15) return 'C';
+  if (tpd >= 0.05) return 'D';
+  return 'F';
+}
+
+function gradeHours(h) {
+  if (h >= 150) return 'S';
+  if (h >= 80)  return 'E';
+  if (h >= 40)  return 'A';
+  if (h >= 15)  return 'B';
+  if (h >= 5)   return 'C';
+  if (h >= 1)   return 'D';
+  return 'F';
+}
+
+function gradeOverall(g1, g2) {
+  if (g1 === '-' || g2 === '-') return '-';
+  const i1 = GRADE_ORDER.indexOf(g1);
+  const i2 = GRADE_ORDER.indexOf(g2);
+  return GRADE_ORDER[Math.max(i1, i2)];
+}
+
+function assignGrades(users) {
+  return users.map(u => {
+    const tpd   = u.totalCost > 0 ? u.totalTokens / u.totalCost / 1e6 : 0;
+    const hours = u.totalActiveTimeMs / 3600000;
+    const gTPD  = u.totalCost === 0 ? '-' : gradeTPD(tpd);
+    const gHrs  = u.totalActiveTimeMs === 0 ? '-' : gradeHours(hours);
+    const gAll  = gradeOverall(gTPD, gHrs);
+    return { ...u, tpd, hours, gTPD, gHrs, gAll };
+  }).sort((a, b) => {
+    const gi = GRADE_ORDER.indexOf(a.gAll) - GRADE_ORDER.indexOf(b.gAll);
+    if (gi !== 0) return gi;
+    return b.hours - a.hours;
+  });
+}
+
+// ── Badge helper ─────────────────────────────────────────────────
+function makeBadge(grade) {
+  const color = GRADE_COLORS[grade] || '#6b7280';
+  const bg    = color + '22';
+  return `<span class="badge" style="background:${bg};border-color:${color};color:${color}">${grade}</span>`;
+}
+
+// ── Utility ──────────────────────────────────────────────────────
 function parseTeam(displayName) {
   const m = displayName.match(/\((.+)\)/);
   if (!m) return '기타';
-  const full = m[1];
-  const parts = full.split('/');
+  const parts = m[1].split('/');
   return parts[parts.length - 1] || parts[0];
 }
 
 function parseName(displayName) {
   return displayName.replace(/\s*\(.+\)/, '');
-}
-
-function percentileRank(arr, idx) {
-  const val = arr[idx];
-  let below = 0;
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i] < val) below++;
-  }
-  return (below / (arr.length - 1)) * 100;
-}
-
-function computeScores(users, weights) {
-  const [w1, w2, w3] = weights.map(w => w / 100);
-
-  const metrics = users.map(u => ({
-    ...u,
-    tokensPerDollar: u.totalCost > 0 ? u.totalTokens / u.totalCost : 0,
-    hours: u.totalActiveTimeMs / 3600000,
-  }));
-
-  const tpdArr = metrics.map(m => m.tokensPerDollar);
-  const hoursArr = metrics.map(m => m.hours);
-  const tokensArr = metrics.map(m => m.totalTokens);
-
-  return metrics.map((m, i) => {
-    const pctTPD = percentileRank(tpdArr, i);
-    const pctHours = percentileRank(hoursArr, i);
-    const pctTokens = percentileRank(tokensArr, i);
-    const score = pctTPD * w1 + pctHours * w2 + pctTokens * w3;
-    return { ...m, score, pctTPD, pctHours, pctTokens };
-  }).sort((a, b) => b.score - a.score);
-}
-
-function getWeights() {
-  return [+document.getElementById('w1').value, +document.getElementById('w2').value, +document.getElementById('w3').value];
-}
-
-function normalizeWeights() {
-  const ws = getWeights();
-  const sum = ws[0] + ws[1] + ws[2];
-  if (sum === 0) return [33, 33, 34];
-  return ws.map(w => (w / sum) * 100);
 }
 
 function formatNum(n) {
@@ -253,31 +265,81 @@ function formatCost(n) {
   return '$' + n.toFixed(2);
 }
 
-function updateAll() {
-  const weights = normalizeWeights();
-  document.getElementById('w1val').textContent = weights[0].toFixed(0) + '%';
-  document.getElementById('w2val').textContent = weights[1].toFixed(0) + '%';
-  document.getElementById('w3val').textContent = weights[2].toFixed(0) + '%';
-
-  const scored = computeScores(rawUsers, weights);
-  updateRanking(scored);
-  updateCharts(scored);
-  updateTrendCharts();
+// ── Month API URL ─────────────────────────────────────────────────
+function getMonthApiUrl(year, month) {
+  const lastDay = new Date(year, month, 0).getDate();
+  const from = `${year}-${String(month).padStart(2,'0')}-01`;
+  const to   = `${year}-${String(month).padStart(2,'0')}-${String(lastDay).padStart(2,'0')}`;
+  return `/api/leaderboard?period=custom&from=${from}&to=${to}&limit=100&sortBy=tokens`;
 }
 
-function updateRanking(scored) {
-  const filtered = selectedTeams.size > 0 ? scored.filter(u => selectedTeams.has(u.team)) : scored;
+// ── Month nav ────────────────────────────────────────────────────
+function updateMonthNav() {
+  const n = new Date();
+  document.getElementById('monthLabel').textContent = `${currentYear}년 ${currentMonth}월`;
+  const atMin = currentYear < 2026 || (currentYear === 2026 && currentMonth <= 5);
+  const atMax = currentYear === n.getFullYear() && currentMonth === n.getMonth() + 1;
+  document.getElementById('monthPrevBtn').disabled = atMin;
+  document.getElementById('monthNextBtn').disabled = atMax;
+}
+
+// ── Main data fetch ───────────────────────────────────────────────
+async function fetchMainData() {
+  document.getElementById('loading').style.display = 'block';
+  document.getElementById('app').style.display = 'none';
+  try {
+    const baseUrl = getMonthApiUrl(currentYear, currentMonth);
+    let allUsers = [], page = 1, stats = null;
+    while (true) {
+      const res = await fetch(baseUrl + '&page=' + page);
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const data = await res.json();
+      if (!stats) stats = data.stats;
+      allUsers = allUsers.concat(data.users);
+      if (!data.pagination || !data.pagination.hasNext) break;
+      page++;
+    }
+
+    rawUsers = allUsers.map(u => ({
+      ...u,
+      totalActiveTimeMs: u.totalActiveTimeMs || 0,
+      totalCost: u.totalCost || 0,
+      totalTokens: u.totalTokens || 0,
+      team: parseTeam(u.displayName),
+    }));
+
+    document.getElementById('statsBar').innerHTML = `
+      <div class="stat-card"><div class="val">${rawUsers.length}</div><div class="lbl">Active Users</div></div>
+      <div class="stat-card"><div class="val">${formatNum(stats.totalTokens)}</div><div class="lbl">Total Tokens</div></div>
+      <div class="stat-card"><div class="val">${formatCost(stats.totalCost)}</div><div class="lbl">Total Cost</div></div>
+      <div class="stat-card"><div class="val">${(stats.totalActiveTimeMs/3600000).toFixed(0)}h</div><div class="lbl">Total Hours</div></div>
+    `;
+
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+
+    const graded = assignGrades(rawUsers);
+    updateRanking(graded);
+    updateCharts(graded);
+    // Re-render trend with selected month highlight (data stays cached)
+    updateTrendCharts();
+  } catch (err) {
+    document.getElementById('loading').textContent = '❌ 데이터 로딩 실패: ' + err.message;
+  }
+}
+
+// ── Ranking ──────────────────────────────────────────────────────
+function updateRanking(graded) {
+  const filtered = selectedTeams.size > 0 ? graded.filter(u => selectedTeams.has(u.team)) : graded;
   const tbody = document.getElementById('rankingBody');
   tbody.innerHTML = filtered.map((u, i) => {
     const isMe = u.username === 't1000040';
-    const barW = (u.score / 100) * 100;
     return `<tr class="${isMe ? 'highlight-row' : ''}">
       <td class="rank">#${i+1}</td>
       <td><span class="name">${parseName(u.displayName)}</span><br><span class="team">${u.team}</span></td>
-      <td class="bar-cell"><div class="bar-bg" style="width:${barW}%"></div><span class="score">${u.score.toFixed(1)}</span></td>
-      <td class="metric">${u.pctTPD.toFixed(0)}p</td>
-      <td class="metric">${u.pctHours.toFixed(0)}p</td>
-      <td class="metric">${u.pctTokens.toFixed(0)}p</td>
+      <td class="badge-cell">${makeBadge(u.gAll)}</td>
+      <td class="badge-cell">${makeBadge(u.gTPD)}<span class="badge-val">${u.tpd.toFixed(2)}M/$</span></td>
+      <td class="badge-cell">${makeBadge(u.gHrs)}<span class="badge-val">${u.hours.toFixed(1)}h</span></td>
       <td class="metric">${formatCost(u.totalCost)}</td>
       <td class="metric">${formatNum(u.totalTokens)}</td>
       <td class="metric">${u.hours.toFixed(1)}h</td>
@@ -285,23 +347,19 @@ function updateRanking(scored) {
   }).join('');
 }
 
-function updateCharts(scored) {
-  const filtered = scored;
-
-  const xVals = filtered.map(u => u.tokensPerDollar / 1e6).sort((a,b) => a-b);
+// ── Charts ───────────────────────────────────────────────────────
+function updateCharts(graded) {
+  const filtered = graded;
+  const xVals = filtered.map(u => u.tpd).sort((a,b) => a-b);
   const yVals = filtered.map(u => u.hours).sort((a,b) => a-b);
-  const medX = xVals[Math.floor(xVals.length/2)];
-  const medY = yVals[Math.floor(yVals.length/2)];
+  const medX  = xVals[Math.floor(xVals.length/2)];
+  const medY  = yVals[Math.floor(yVals.length/2)];
 
   const ds1 = chart1.data.datasets[0];
   ds1.data = filtered.map(u => ({
-    x: u.tokensPerDollar / 1e6,
-    y: u.hours,
-    label: parseName(u.displayName),
-    team: u.team,
-    score: u.score,
-    cost: u.totalCost,
-    tokens: u.totalTokens,
+    x: u.tpd, y: u.hours,
+    label: parseName(u.displayName), team: u.team,
+    cost: u.totalCost, tokens: u.totalTokens,
   }));
   ds1.backgroundColor = filtered.map(u => {
     if (selectedTeams.size === 0) return TEAM_COLORS[u.team] || '#888';
@@ -317,16 +375,15 @@ function updateCharts(scored) {
     if (u.username === 't1000040') return 3;
     return 0;
   });
-  const tokenVals = filtered.map(u => u.totalTokens);
-  const maxTokens = Math.max(...tokenVals);
-  const minTokens = Math.min(...tokenVals);
+  const tVals   = filtered.map(u => u.totalTokens);
+  const maxTok  = Math.max(...tVals);
+  const minTok  = Math.min(...tVals);
   ds1.pointRadius = filtered.map(u => {
-    const norm = (Math.sqrt(u.totalTokens) - Math.sqrt(minTokens)) / (Math.sqrt(maxTokens) - Math.sqrt(minTokens) || 1);
+    const norm = (Math.sqrt(u.totalTokens) - Math.sqrt(minTok)) / (Math.sqrt(maxTok) - Math.sqrt(minTok) || 1);
     return 4 + norm * 20;
   });
-
-  chart1.options.plugins.annotation.annotations.vertLine.xMin = medX;
-  chart1.options.plugins.annotation.annotations.vertLine.xMax = medX;
+  chart1.options.plugins.annotation.annotations.vertLine.xMin  = medX;
+  chart1.options.plugins.annotation.annotations.vertLine.xMax  = medX;
   chart1.options.plugins.annotation.annotations.horizLine.yMin = medY;
   chart1.options.plugins.annotation.annotations.horizLine.yMax = medY;
   chart1.update();
@@ -334,29 +391,23 @@ function updateCharts(scored) {
   // Team chart
   const teamMap = {};
   filtered.forEach(u => {
-    if (!teamMap[u.team]) teamMap[u.team] = { tokens: 0, cost: 0, hours: 0, scoreSum: 0, count: 0, members: [] };
+    if (!teamMap[u.team]) teamMap[u.team] = { tokens: 0, cost: 0, hours: 0, count: 0, members: [] };
     teamMap[u.team].tokens += u.totalTokens;
-    teamMap[u.team].cost += u.totalCost;
-    teamMap[u.team].hours += u.hours;
-    teamMap[u.team].scoreSum += u.score;
+    teamMap[u.team].cost   += u.totalCost;
+    teamMap[u.team].hours  += u.hours;
     teamMap[u.team].count++;
     teamMap[u.team].members.push(parseName(u.displayName));
   });
   const teams = Object.entries(teamMap).map(([name, d]) => ({
     name, ...d,
-    avgScore: d.scoreSum / d.count,
-    tokensPerDollar: d.tokens / d.cost / 1e6,
+    tokensPerDollar: d.cost > 0 ? d.tokens / d.cost / 1e6 : 0,
     avgHours: d.hours / d.count,
   }));
 
   const ds2 = chart2.data.datasets[0];
   ds2.data = teams.map(t => ({
-    x: t.tokensPerDollar,
-    y: t.avgHours,
-    label: t.name,
-    count: t.count,
-    avgScore: t.avgScore,
-    members: t.members,
+    x: t.tokensPerDollar, y: t.avgHours,
+    label: t.name, count: t.count, members: t.members,
   }));
   ds2.backgroundColor = teams.map(t => {
     if (selectedTeams.size === 0) return TEAM_COLORS[t.name] || '#888';
@@ -368,22 +419,19 @@ function updateCharts(scored) {
     return TEAM_COLORS[t.name] || '#888';
   });
   ds2.borderWidth = teams.map(t => selectedTeams.size > 0 && selectedTeams.has(t.name) ? 3 : 1);
-  const teamTokenVals = teams.map(t => t.tokens);
-  const maxTeamTokens = Math.max(...teamTokenVals);
-  const minTeamTokens = Math.min(...teamTokenVals);
+  const ttVals = teams.map(t => t.tokens);
+  const maxTT  = Math.max(...ttVals);
+  const minTT  = Math.min(...ttVals);
   ds2.pointRadius = teams.map(t => {
-    const norm = (Math.sqrt(t.tokens) - Math.sqrt(minTeamTokens)) / (Math.sqrt(maxTeamTokens) - Math.sqrt(minTeamTokens) || 1);
+    const norm = (Math.sqrt(t.tokens) - Math.sqrt(minTT)) / (Math.sqrt(maxTT) - Math.sqrt(minTT) || 1);
     return 8 + norm * 24;
   });
-
   const txVals = teams.map(t => t.tokensPerDollar).sort((a,b) => a-b);
   const tyVals = teams.map(t => t.avgHours).sort((a,b) => a-b);
-  const tMedX = txVals[Math.floor(txVals.length/2)];
-  const tMedY = tyVals[Math.floor(tyVals.length/2)];
-  chart2.options.plugins.annotation.annotations.vertLine.xMin = tMedX;
-  chart2.options.plugins.annotation.annotations.vertLine.xMax = tMedX;
-  chart2.options.plugins.annotation.annotations.horizLine.yMin = tMedY;
-  chart2.options.plugins.annotation.annotations.horizLine.yMax = tMedY;
+  chart2.options.plugins.annotation.annotations.vertLine.xMin  = txVals[Math.floor(txVals.length/2)];
+  chart2.options.plugins.annotation.annotations.vertLine.xMax  = txVals[Math.floor(txVals.length/2)];
+  chart2.options.plugins.annotation.annotations.horizLine.yMin = tyVals[Math.floor(tyVals.length/2)];
+  chart2.options.plugins.annotation.annotations.horizLine.yMax = tyVals[Math.floor(tyVals.length/2)];
   chart2.update();
 }
 
@@ -396,15 +444,14 @@ function initCharts() {
         const d = ctx.raw;
         return [
           `${d.label}${d.count ? ' ('+d.count+'명)' : ''}`,
-          `Score: ${(d.score || d.avgScore || 0).toFixed(1)}`,
           `Tokens/$: ${d.x.toFixed(2)}M`,
           `${yLabel}: ${d.y.toFixed(1)}h`,
-          d.cost ? `Cost: ${formatCost(d.cost)}` : '',
+          d.cost   ? `Cost: ${formatCost(d.cost)}`   : '',
           d.tokens ? `Tokens: ${formatNum(d.tokens)}` : '',
         ].filter(Boolean);
       }}},
       annotation: { annotations: {
-        vertLine: { type: 'line', xMin: 0, xMax: 0, borderColor: '#444', borderWidth: 1, borderDash: [4,4] },
+        vertLine:  { type: 'line', xMin: 0, xMax: 0, borderColor: '#444', borderWidth: 1, borderDash: [4,4] },
         horizLine: { type: 'line', yMin: 0, yMax: 0, borderColor: '#444', borderWidth: 1, borderDash: [4,4] },
       }}
     },
@@ -413,53 +460,38 @@ function initCharts() {
       y: { title: { display: true, text: `↑ ${yLabel}`, color: '#888' }, grid: { color: '#1f1f2e' }, ticks: { color: '#666' } },
     }
   });
+  chart1 = new Chart(document.getElementById('quadrantChart'),     { type: 'scatter', data: { datasets: [{ data: [] }] }, options: commonOpts('사용시간 (Hours)') });
+  chart2 = new Chart(document.getElementById('teamQuadrantChart'), { type: 'scatter', data: { datasets: [{ data: [] }] }, options: commonOpts('평균 사용시간 (Hours/인)') });
+}
 
-  chart1 = new Chart(document.getElementById('quadrantChart'), {
-    type: 'scatter', data: { datasets: [{ data: [] }] }, options: commonOpts('사용시간 (Hours)')
-  });
-  chart2 = new Chart(document.getElementById('teamQuadrantChart'), {
-    type: 'scatter', data: { datasets: [{ data: [] }] }, options: commonOpts('평균 사용시간 (Hours/인)')
+// ── Grade criteria table ──────────────────────────────────────────
+function initGradeTable() {
+  GRADE_CRITERIA.forEach(row => {
+    const el = document.getElementById('gradeRow_' + row.g);
+    if (!el) return;
+    const color = GRADE_COLORS[row.g];
+    el.style.background = color + '18';
+    el.innerHTML = `<span class="grade-letter" style="color:${color}">${row.g}</span><span>${row.tpd}</span><span>${row.hrs}</span>`;
   });
 }
 
-function initControls() {
-  const presetDiv = document.getElementById('presets');
-  PRESETS.forEach((p, i) => {
-    const btn = document.createElement('button');
-    btn.textContent = p.name;
-    btn.addEventListener('click', () => {
-      document.getElementById('w1').value = p.w[0];
-      document.getElementById('w2').value = p.w[1];
-      document.getElementById('w3').value = p.w[2];
-      document.querySelectorAll('.preset-btns button').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      updateAll();
-    });
-    if (i === 0) btn.classList.add('active');
-    presetDiv.appendChild(btn);
-  });
-
-  ['w1','w2','w3'].forEach(id => {
-    document.getElementById(id).addEventListener('input', () => {
-      document.querySelectorAll('.preset-btns button').forEach(b => b.classList.remove('active'));
-      updateAll();
-    });
-  });
-}
-
+// ── Team filter ───────────────────────────────────────────────────
 function initTeamFilter(users) {
-  const teamSet = new Set(users.map(u => u.team));
+  const teamSet   = new Set(users.map(u => u.team));
   const container = document.getElementById('teamFilter');
-  const clearBtn = document.createElement('button');
+  container.innerHTML = '';
+  const clearBtn  = document.createElement('button');
   clearBtn.textContent = '전체';
   clearBtn.style.cssText = 'background:#2a2a3a;border:1px solid #3a3a4a;color:#ccc;padding:3px 8px;border-radius:5px;font-size:0.7rem;cursor:pointer';
   clearBtn.addEventListener('click', () => {
     selectedTeams.clear();
     container.querySelectorAll('.team-chip').forEach(c => c.classList.remove('active'));
-    updateAll();
+    const graded = assignGrades(rawUsers);
+    updateRanking(graded);
+    updateCharts(graded);
+    updateTrendCharts();
   });
   container.appendChild(clearBtn);
-
   [...teamSet].sort().forEach(team => {
     const chip = document.createElement('span');
     chip.className = 'team-chip';
@@ -467,7 +499,10 @@ function initTeamFilter(users) {
     chip.addEventListener('click', () => {
       if (selectedTeams.has(team)) { selectedTeams.delete(team); chip.classList.remove('active'); }
       else { selectedTeams.add(team); chip.classList.add('active'); }
-      updateAll();
+      const graded = assignGrades(rawUsers);
+      updateRanking(graded);
+      updateCharts(graded);
+      updateTrendCharts();
     });
     container.appendChild(chip);
   });
@@ -477,26 +512,14 @@ function initTeamFilter(users) {
 let trendChartHours = null;
 let trendChartTPD   = null;
 let monthlyData     = {};
-let trendYear       = new Date().getFullYear();
 
-function getMonthsForYear(year) {
-  const now   = new Date();
-  const maxMonth = (year === now.getFullYear()) ? now.getMonth() + 1 : 12;
+function getMonthsForSelectedYear() {
+  const now     = new Date();
+  const maxMonth = (currentYear === now.getFullYear()) ? now.getMonth() + 1 : 12;
   return Array.from({ length: maxMonth }, (_, i) => {
     const m = String(i + 1).padStart(2, '0');
-    return `${year}-${m}`;
+    return `${currentYear}-${m}`;
   });
-}
-
-function getMonthsUpToNow() {
-  return getMonthsForYear(trendYear);
-}
-
-function updateTrendNav() {
-  const now = new Date();
-  document.getElementById('trendYearLabel').textContent = String(trendYear);
-  document.getElementById('trendPrevBtn').disabled = trendYear <= 2026;
-  document.getElementById('trendNextBtn').disabled = trendYear >= now.getFullYear();
 }
 
 async function fetchMonthData(yearMonth) {
@@ -504,8 +527,7 @@ async function fetchMonthData(yearMonth) {
   const lastDay = new Date(parseInt(year), parseInt(month), 0).getDate();
   const from    = `${year}-${month}-01`;
   const to      = `${year}-${month}-${String(lastDay).padStart(2, '0')}`;
-  let allUsers  = [];
-  let page      = 1;
+  let allUsers  = [], page = 1;
   while (true) {
     const res  = await fetch(`/api/leaderboard?period=custom&from=${from}&to=${to}&limit=100&sortBy=tokens&page=${page}`);
     if (!res.ok) break;
@@ -527,20 +549,7 @@ async function fetchMonthData(yearMonth) {
 }
 
 async function loadTrendData() {
-  const months  = getMonthsUpToNow();
-  const results = await Promise.all(months.map(m => fetchMonthData(m).then(d => ({ month: m, data: d }))));
-  results.forEach(({ month, data }) => { monthlyData[month] = data; });
-  renderTrendCharts(months);
-}
-
-async function loadTrendYear(year) {
-  const months = getMonthsForYear(year);
-  // show loading
-  document.getElementById('trendLoadingHours').style.display = 'block';
-  document.getElementById('trendLoadingTPD').style.display   = 'block';
-  document.getElementById('trendHoursChart').style.display   = 'none';
-  document.getElementById('trendTPDChart').style.display     = 'none';
-
+  const months  = getMonthsForSelectedYear();
   const toFetch = months.filter(m => !monthlyData[m]);
   if (toFetch.length > 0) {
     const results = await Promise.all(toFetch.map(m => fetchMonthData(m).then(d => ({ month: m, data: d }))));
@@ -557,7 +566,6 @@ function buildTrendDatasets(months, metric) {
     const info = Object.values(monthlyData).map(md => md[username]).find(Boolean);
     return { username, displayName: info?.displayName || username, team: info?.team || '기타' };
   });
-
   if (selectedTeams.size > 0) users = users.filter(u => selectedTeams.has(u.team));
 
   return users.map(u => {
@@ -569,7 +577,7 @@ function buildTrendDatasets(months, metric) {
       borderColor:     isMe ? '#fff' : color,
       backgroundColor: isMe ? 'rgba(255,255,255,0.08)' : color + '18',
       borderWidth:     isMe ? 2.5 : 1.2,
-      pointRadius:     isMe ? 4 : 2,
+      pointRadius:     isMe ? 4   : 2,
       tension:         0.3,
       spanGaps:        true,
     };
@@ -579,12 +587,26 @@ function buildTrendDatasets(months, metric) {
 function renderTrendCharts(months) {
   const labels = months.map(m => `${m.split('-')[1]}월`);
 
+  // Annotation for selected month
+  const selLabel = `${String(currentMonth).padStart(2,'0')}월`;
+  const selIdx   = labels.indexOf(selLabel);
+  const selAnnotation = selIdx >= 0 ? {
+    selectedMonthLine: {
+      type: 'line',
+      xMin: selIdx, xMax: selIdx,
+      borderColor: 'rgba(255,255,255,0.4)',
+      borderWidth: 2,
+      borderDash: [4,4],
+    }
+  } : {};
+
   const commonOpts = yLabel => ({
     responsive: true, maintainAspectRatio: false, animation: { duration: 300 },
     interaction: { mode: 'index', intersect: false },
     plugins: {
       legend: { display: false },
       tooltip: { callbacks: { label: ctx => `${ctx.dataset.label}: ${ctx.parsed.y != null ? ctx.parsed.y.toFixed(1) : '-'}` } },
+      annotation: { annotations: selAnnotation },
     },
     scales: {
       x: { grid: { color: '#1f1f2e' }, ticks: { color: '#666' } },
@@ -606,82 +628,60 @@ function renderTrendCharts(months) {
 }
 
 function updateTrendCharts() {
-  const months = getMonthsUpToNow();
+  const months = getMonthsForSelectedYear();
   if (Object.keys(monthlyData).length === 0) return;
   renderTrendCharts(months);
 }
-// ─────────────────────────────────────────────────────────────────
 
+// ── Init ─────────────────────────────────────────────────────────
 async function init() {
-  try {
-    // Fetch all pages (API caps at 100 per page)
-    let allUsers = [];
-    let page = 1;
-    let stats = null;
-    while (true) {
-      const res = await fetch(`${API_BASE}&page=${page}`);
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const data = await res.json();
-      if (!stats) stats = data.stats;
-      allUsers = allUsers.concat(data.users);
-      if (!data.pagination || !data.pagination.hasNext) break;
-      page++;
-    }
+  updateMonthNav();
 
-    rawUsers = allUsers.map(u => ({
-      ...u,
-      totalActiveTimeMs: u.totalActiveTimeMs || 0,
-      totalCost: u.totalCost || 0,
-      totalTokens: u.totalTokens || 0,
-      team: parseTeam(u.displayName),
-    }));
-
-    const now = new Date();
-    const monthLabel = `${now.getFullYear()}년 ${now.getMonth() + 1}월`;
-    document.getElementById('reportSubtitle').textContent = `${monthLabel} | 실시간 API 데이터 기반 | 가중치 조절로 다양한 관점에서 비교`;
-
-    document.getElementById('statsBar').innerHTML = `
-      <div class="stat-card"><div class="val">${rawUsers.length}</div><div class="lbl">Active Users</div></div>
-      <div class="stat-card"><div class="val">${formatNum(stats.totalTokens)}</div><div class="lbl">Total Tokens</div></div>
-      <div class="stat-card"><div class="val">${formatCost(stats.totalCost)}</div><div class="lbl">Total Cost</div></div>
-      <div class="stat-card"><div class="val">${(stats.totalActiveTimeMs/3600000).toFixed(0)}h</div><div class="lbl">Total Hours</div></div>
-    `;
-
-    document.getElementById('loading').style.display = 'none';
-    document.getElementById('app').style.display = 'block';
-
-    initCharts();
-    initControls();
-    initTeamFilter(rawUsers);
-    updateAll();
-
-    // Init trend nav buttons
-    updateTrendNav();
-    document.getElementById('trendPrevBtn').addEventListener('click', () => {
-      trendYear--;
-      updateTrendNav();
-      loadTrendYear(trendYear).catch(() => {
-        document.getElementById('trendLoadingHours').textContent = '월별 데이터 로딩 실패';
-        document.getElementById('trendLoadingTPD').textContent   = '월별 데이터 로딩 실패';
-      });
-    });
-    document.getElementById('trendNextBtn').addEventListener('click', () => {
-      trendYear++;
-      updateTrendNav();
-      loadTrendYear(trendYear).catch(() => {
-        document.getElementById('trendLoadingHours').textContent = '월별 데이터 로딩 실패';
-        document.getElementById('trendLoadingTPD').textContent   = '월별 데이터 로딩 실패';
-      });
-    });
-
-    // Load monthly trend in background — non-blocking
+  document.getElementById('monthPrevBtn').addEventListener('click', () => {
+    if (currentMonth === 1) { currentYear--; currentMonth = 12; }
+    else { currentMonth--; }
+    updateMonthNav();
+    fetchMainData();
+    // Reload trend for possibly different year
+    monthlyData = {};
+    document.getElementById('trendLoadingHours').style.display = 'block';
+    document.getElementById('trendLoadingTPD').style.display   = 'block';
+    document.getElementById('trendHoursChart').style.display   = 'none';
+    document.getElementById('trendTPDChart').style.display     = 'none';
     loadTrendData().catch(() => {
       document.getElementById('trendLoadingHours').textContent = '월별 데이터 로딩 실패';
       document.getElementById('trendLoadingTPD').textContent   = '월별 데이터 로딩 실패';
     });
-  } catch (err) {
-    document.getElementById('loading').textContent = '❌ 데이터 로딩 실패: ' + err.message;
-  }
+  });
+
+  document.getElementById('monthNextBtn').addEventListener('click', () => {
+    const n = new Date();
+    if (currentYear === n.getFullYear() && currentMonth === n.getMonth() + 1) return;
+    if (currentMonth === 12) { currentYear++; currentMonth = 1; }
+    else { currentMonth++; }
+    updateMonthNav();
+    fetchMainData();
+    monthlyData = {};
+    document.getElementById('trendLoadingHours').style.display = 'block';
+    document.getElementById('trendLoadingTPD').style.display   = 'block';
+    document.getElementById('trendHoursChart').style.display   = 'none';
+    document.getElementById('trendTPDChart').style.display     = 'none';
+    loadTrendData().catch(() => {
+      document.getElementById('trendLoadingHours').textContent = '월별 데이터 로딩 실패';
+      document.getElementById('trendLoadingTPD').textContent   = '월별 데이터 로딩 실패';
+    });
+  });
+
+  initCharts();
+  initGradeTable();
+  await fetchMainData();
+  initTeamFilter(rawUsers);
+
+  // Load monthly trend in background — non-blocking
+  loadTrendData().catch(() => {
+    document.getElementById('trendLoadingHours').textContent = '월별 데이터 로딩 실패';
+    document.getElementById('trendLoadingTPD').textContent   = '월별 데이터 로딩 실패';
+  });
 }
 
 init();
