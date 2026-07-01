@@ -331,6 +331,7 @@ async function fetchMainData() {
     document.getElementById('loading').style.display = 'none';
     document.getElementById('app').style.display = 'block';
 
+    initTeamFilter(rawUsers);
     const graded = assignGrades(rawUsers);
     updateRanking(graded);
     updateCharts(graded);
