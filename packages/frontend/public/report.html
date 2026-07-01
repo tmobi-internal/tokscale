@@ -99,7 +99,7 @@
   <div class="control-panel">
     <h3>🏅 등급 기준</h3>
     <div class="grade-table">
-      <div class="grade-header"><span>등급</span><span>비용효율 (M/$)</span><span>사용시간 (h)</span></div>
+      <div class="grade-header"><span>등급</span><span>사용시간 (h)</span><span>비용효율 (M/$)</span></div>
       <div class="grade-row" id="gradeRow_S"></div>
       <div class="grade-row" id="gradeRow_E"></div>
       <div class="grade-row" id="gradeRow_A"></div>
@@ -149,8 +149,8 @@
 <div class="ranking-section">
   <table class="ranking-table">
     <thead><tr>
-      <th>Rank</th><th>User</th><th>종합</th>
-      <th>비용효율</th><th>사용시간</th>
+      <th>Rank</th><th>User</th>
+      <th>사용시간</th><th>비용효율</th>
       <th>Cost</th><th>Tokens</th><th>Time</th>
     </tr></thead>
     <tbody id="rankingBody"></tbody>
@@ -228,7 +228,8 @@ function assignGrades(users) {
     const gAll  = gradeOverall(gTPD, gHrs);
     return { ...u, tpd, hours, gTPD, gHrs, gAll };
   }).sort((a, b) => {
-    const gi = GRADE_ORDER.indexOf(a.gAll) - GRADE_ORDER.indexOf(b.gAll);
+    // Sort by hours grade first, then hours desc
+    const gi = GRADE_ORDER.indexOf(a.gHrs) - GRADE_ORDER.indexOf(b.gHrs);
     if (gi !== 0) return gi;
     return b.hours - a.hours;
   });
@@ -337,9 +338,8 @@ function updateRanking(graded) {
     return `<tr class="${isMe ? 'highlight-row' : ''}">
       <td class="rank">#${i+1}</td>
       <td><span class="name">${parseName(u.displayName)}</span><br><span class="team">${u.team}</span></td>
-      <td class="badge-cell">${makeBadge(u.gAll)}</td>
-      <td class="badge-cell">${makeBadge(u.gTPD)}<span class="badge-val">${u.tpd.toFixed(2)}M/$</span></td>
       <td class="badge-cell">${makeBadge(u.gHrs)}<span class="badge-val">${u.hours.toFixed(1)}h</span></td>
+      <td class="badge-cell">${makeBadge(u.gTPD)}<span class="badge-val">${u.tpd.toFixed(2)}M/$</span></td>
       <td class="metric">${formatCost(u.totalCost)}</td>
       <td class="metric">${formatNum(u.totalTokens)}</td>
       <td class="metric">${u.hours.toFixed(1)}h</td>
@@ -471,7 +471,7 @@ function initGradeTable() {
     if (!el) return;
     const color = GRADE_COLORS[row.g];
     el.style.background = color + '18';
-    el.innerHTML = `<span class="grade-letter" style="color:${color}">${row.g}</span><span>${row.tpd}</span><span>${row.hrs}</span>`;
+    el.innerHTML = `<span class="grade-letter" style="color:${color}">${row.g}</span><span>${row.hrs}</span><span>${row.tpd}</span>`;
   });
 }
 
@@ -600,13 +600,27 @@ function renderTrendCharts(months) {
     }
   } : {};
 
-  const commonOpts = yLabel => ({
+  // Grade threshold annotations for hours chart
+  const hoursGradeLines = {
+    gradeA: { type: 'line', yMin: 40, yMax: 40, borderColor: GRADE_COLORS.A + '88', borderWidth: 1, borderDash: [6,3], label: { display: true, content: 'A (40h)', position: 'start', color: GRADE_COLORS.A, font: { size: 10 } } },
+    gradeE: { type: 'line', yMin: 80, yMax: 80, borderColor: GRADE_COLORS.E + '88', borderWidth: 1, borderDash: [6,3], label: { display: true, content: 'E (80h)', position: 'start', color: GRADE_COLORS.E, font: { size: 10 } } },
+    gradeS: { type: 'line', yMin: 150, yMax: 150, borderColor: GRADE_COLORS.S + '88', borderWidth: 1, borderDash: [6,3], label: { display: true, content: 'S (150h)', position: 'start', color: GRADE_COLORS.S, font: { size: 10 } } },
+  };
+
+  // Grade threshold annotations for TPD chart
+  const tpdGradeLines = {
+    gradeA: { type: 'line', yMin: 0.8, yMax: 0.8, borderColor: GRADE_COLORS.A + '88', borderWidth: 1, borderDash: [6,3], label: { display: true, content: 'A (0.8)', position: 'start', color: GRADE_COLORS.A, font: { size: 10 } } },
+    gradeE: { type: 'line', yMin: 1.5, yMax: 1.5, borderColor: GRADE_COLORS.E + '88', borderWidth: 1, borderDash: [6,3], label: { display: true, content: 'E (1.5)', position: 'start', color: GRADE_COLORS.E, font: { size: 10 } } },
+    gradeS: { type: 'line', yMin: 3.0, yMax: 3.0, borderColor: GRADE_COLORS.S + '88', borderWidth: 1, borderDash: [6,3], label: { display: true, content: 'S (3.0)', position: 'start', color: GRADE_COLORS.S, font: { size: 10 } } },
+  };
+
+  const commonOpts = (yLabel, gradeLines) => ({
     responsive: true, maintainAspectRatio: false, animation: { duration: 300 },
     interaction: { mode: 'index', intersect: false },
     plugins: {
       legend: { display: false },
       tooltip: { callbacks: { label: ctx => `${ctx.dataset.label}: ${ctx.parsed.y != null ? ctx.parsed.y.toFixed(1) : '-'}` } },
-      annotation: { annotations: selAnnotation },
+      annotation: { annotations: { ...selAnnotation, ...gradeLines } },
     },
     scales: {
       x: { grid: { color: '#1f1f2e' }, ticks: { color: '#666' } },
@@ -618,13 +632,13 @@ function renderTrendCharts(months) {
   const hoursCanvas = document.getElementById('trendHoursChart');
   hoursCanvas.style.display = 'block';
   if (trendChartHours) trendChartHours.destroy();
-  trendChartHours = new Chart(hoursCanvas, { type: 'line', data: { labels, datasets: buildTrendDatasets(months, 'hours') }, options: commonOpts('사용시간 (h)') });
+  trendChartHours = new Chart(hoursCanvas, { type: 'line', data: { labels, datasets: buildTrendDatasets(months, 'hours') }, options: commonOpts('사용시간 (h)', hoursGradeLines) });
 
   document.getElementById('trendLoadingTPD').style.display = 'none';
   const tpdCanvas = document.getElementById('trendTPDChart');
   tpdCanvas.style.display = 'block';
   if (trendChartTPD) trendChartTPD.destroy();
-  trendChartTPD = new Chart(tpdCanvas, { type: 'line', data: { labels, datasets: buildTrendDatasets(months, 'tpd') }, options: commonOpts('M Tokens/$') });
+  trendChartTPD = new Chart(tpdCanvas, { type: 'line', data: { labels, datasets: buildTrendDatasets(months, 'tpd') }, options: commonOpts('M Tokens/$', tpdGradeLines) });
 }
 
 function updateTrendCharts() {
