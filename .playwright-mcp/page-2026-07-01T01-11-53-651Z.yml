@@ -1,0 +1,21 @@
+- generic [ref=f1e8]:
+  - generic:
+    - generic [ref=f1e14]:
+      - generic [ref=f1e15]: Sign in with your corporate ID
+      - button "AzureAD" [ref=f1e16] [cursor=pointer]
+    - generic [ref=f1e17]:
+      - generic [ref=f1e18]: or
+      - generic [ref=f1e20]:
+        - generic [ref=f1e21]: Sign in with your username and password
+        - generic [ref=f1e22]:
+          - generic [ref=f1e23]: Username
+          - textbox "Username" [ref=f1e25]
+          - generic [ref=f1e26]: Password
+          - textbox "Password" [ref=f1e28]
+          - link "Forgot your password?" [ref=f1e30] [cursor=pointer]:
+            - /url: /forgotPassword?client_id=57ueb8rfvetmt7qasb812cfg7h&redirect_uri=https://jenkins.tmapadmin.com/securityRealm/finishLogin&response_type=code&scope=openid%20email%20profile&state=YWI0Y2EyZWItMzdmNi00
+          - button "submit" [ref=f1e31] [cursor=pointer]: Sign in
+          - paragraph [ref=f1e33]:
+            - text: Need an account?
+            - link "Sign up" [ref=f1e34] [cursor=pointer]:
+              - /url: /signup?client_id=57ueb8rfvetmt7qasb812cfg7h&redirect_uri=https://jenkins.tmapadmin.com/securityRealm/finishLogin&response_type=code&scope=openid%20email%20profile&state=YWI0Y2EyZWItMzdmNi00

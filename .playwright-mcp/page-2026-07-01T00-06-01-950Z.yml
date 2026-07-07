@@ -1,0 +1,492 @@
+- generic [ref=f1e4]:
+  - generic [ref=f1e5]:
+    - generic [ref=f1e6]:
+      - generic [ref=f1e7]:
+        - generic [ref=f1e9] [cursor=pointer]: 
+        - generic [ref=f1e10]:
+          - img "Argo" [ref=f1e11] [cursor=pointer]
+          - generic [ref=f1e12] [cursor=pointer]: v3.1.5+cfeed49
+        - img "Argo" [ref=f1e13] [cursor=pointer]
+      - generic [ref=f1e15] [cursor=pointer]:
+        - generic [ref=f1e16]: 
+        - text: Applications
+      - generic [ref=f1e18] [cursor=pointer]:
+        - generic [ref=f1e19]: 
+        - text: Settings
+      - generic [ref=f1e21] [cursor=pointer]:
+        - generic [ref=f1e22]: 
+        - text: User Info
+      - generic [ref=f1e24] [cursor=pointer]:
+        - generic [ref=f1e25]: 
+        - text: Documentation
+    - generic [ref=f1e28]:
+      - generic [ref=f1e29]: Resource filters
+      - generic [ref=f1e30]:
+        - generic [ref=f1e31]:
+          - text: NAME
+          - generic [ref=f1e32] [cursor=pointer]: 
+        - textbox "NAME" [ref=f1e35]
+      - generic [ref=f1e847]:
+        - generic [ref=f1e848]:
+          - text: KINDS
+          - generic [ref=f1e849] [cursor=pointer]: 
+        - textbox "KINDS" [ref=f1e852]
+      - generic [ref=f1e42]:
+        - generic [ref=f1e43]:
+          - text: SYNC STATUS
+          - generic [ref=f1e44] [cursor=pointer]: 
+        - generic [ref=f1e45] [cursor=pointer]:
+          - generic [ref=f1e47]: 
+          - generic "Synced" [ref=f1e49]: 
+          - generic [ref=f1e50]: Synced
+          - generic [ref=f1e51]: "8"
+        - generic [ref=f1e52] [cursor=pointer]:
+          - generic [ref=f1e54]: 
+          - generic "OutOfSync" [ref=f1e56]: 
+          - generic [ref=f1e57]: OutOfSync
+          - generic [ref=f1e58]: "0"
+      - generic [ref=f1e853]:
+        - generic [ref=f1e854]:
+          - text: HEALTH STATUS
+          - generic [ref=f1e855] [cursor=pointer]: 
+        - generic [ref=f1e856] [cursor=pointer]:
+          - generic [ref=f1e858]: 
+          - generic "Progressing" [ref=f1e860]: 
+          - generic [ref=f1e861]: Progressing
+          - generic [ref=f1e862]: "2"
+        - generic [ref=f1e863] [cursor=pointer]:
+          - generic [ref=f1e865]: 
+          - generic "Suspended" [ref=f1e867]: 
+          - generic [ref=f1e868]: Suspended
+          - generic [ref=f1e869]: "0"
+        - generic [ref=f1e870] [cursor=pointer]:
+          - generic [ref=f1e872]: 
+          - generic "Healthy" [ref=f1e874]: 
+          - generic [ref=f1e875]: Healthy
+          - generic [ref=f1e876]: "8"
+        - generic [ref=f1e877] [cursor=pointer]:
+          - generic [ref=f1e879]: 
+          - generic "Degraded" [ref=f1e881]: 
+          - generic [ref=f1e882]: Degraded
+          - generic [ref=f1e883]: "0"
+        - generic [ref=f1e884] [cursor=pointer]:
+          - generic [ref=f1e886]: 
+          - generic "Missing" [ref=f1e888]: 
+          - generic [ref=f1e889]: Missing
+          - generic [ref=f1e890]: "0"
+        - generic [ref=f1e891] [cursor=pointer]:
+          - generic [ref=f1e893]: 
+          - generic "Unknown" [ref=f1e895]: 
+          - generic [ref=f1e896]: Unknown
+          - generic [ref=f1e897]: "0"
+  - generic [ref=f1e107]:
+    - generic [ref=f1e109]:
+      - generic [ref=f1e111]:
+        - generic [ref=f1e113]:
+          - link "Applications" [ref=f1e114] [cursor=pointer]:
+            - /url: /applications
+          - generic [ref=f1e118] [cursor=pointer]:
+            - generic [ref=f1e898]: 
+            - text: tokscale-prd
+        - generic [ref=f1e120]: Application Details Tree
+      - generic [ref=f1e121]:
+        - generic [ref=f1e123]:
+          - button " Details" [ref=f1e124] [cursor=pointer]:
+            - generic [ref=f1e125]: 
+            - text: Details
+          - button " Diff" [disabled] [ref=f1e126]:
+            - generic [ref=f1e127]: 
+            - text: Diff
+          - button " Sync" [ref=f1e128] [cursor=pointer]:
+            - generic [ref=f1e129]: 
+            - text: Sync
+          - button " Sync Status" [ref=f1e130] [cursor=pointer]:
+            - generic [ref=f1e131]: 
+            - text: Sync Status
+          - button " History and rollback" [ref=f1e132] [cursor=pointer]:
+            - generic [ref=f1e133]: 
+            - text: History and rollback
+          - button " Delete" [ref=f1e134] [cursor=pointer]:
+            - generic [ref=f1e135]: 
+            - text: Delete
+          - button " Refresh " [ref=f1e136] [cursor=pointer]:
+            - generic [ref=f1e137]: 
+            - text: Refresh
+            - generic [ref=f1e899]: 
+        - generic [ref=f1e141]:
+          - generic [ref=f1e142]:
+            - generic "Tree" [ref=f1e143]: 
+            - generic "Pods" [ref=f1e144] [cursor=pointer]: 
+            - generic "Network" [ref=f1e145] [cursor=pointer]: 
+            - generic "List" [ref=f1e146] [cursor=pointer]: 
+          - button "Log out" [ref=f1e147] [cursor=pointer]
+    - generic [ref=f1e149]:
+      - generic [ref=f1e151]:
+        - generic [ref=f1e152]:
+          - generic [ref=f1e154]:
+            - text: APP HEALTH
+            - generic [ref=f1e156]: 
+          - generic [ref=f1e157]:
+            - img [ref=f1e900]
+            - text: Progressing
+        - generic [ref=f1e159]:
+          - generic [ref=f1e160]:
+            - generic [ref=f1e161]:
+              - text: SYNC STATUS
+              - generic [ref=f1e163]: 
+            - button "" [ref=f1e164] [cursor=pointer]:
+              - generic [ref=f1e165]: 
+          - generic [ref=f1e166]:
+            - generic [ref=f1e167]:
+              - generic "Synced" [ref=f1e902]: 
+              - text: Synced
+            - generic [ref=f1e170]:
+              - text: to
+              - link "master (48ff83d) " [ref=f1e903] [cursor=pointer]:
+                - /url: https://github.com/tmobi-internal/devops-deploy-it/commit/48ff83df148915fc03370621bfddbfcdbbbfbd01
+                - text: master (48ff83d)
+                - generic [ref=f1e172]: 
+          - generic [ref=f1e173]: Auto sync is not enabled.
+          - generic [ref=f1e904]:
+            - generic [ref=f1e905]:
+              - generic [ref=f1e906]: "Author:"
+              - generic [ref=f1e907]: Jenkins CICD <tmap-devops@tmapmobility.com> -
+            - generic [ref=f1e908]:
+              - generic [ref=f1e909]: "Comment:"
+              - generic [ref=f1e910]: "[prd][it/tokscale] updated tag: prd-3.1.15-260701085919"
+        - generic [ref=f1e182]:
+          - generic [ref=f1e183]:
+            - generic [ref=f1e184]:
+              - text: LAST SYNC
+              - generic [ref=f1e186]: 
+            - button "" [ref=f1e187] [cursor=pointer]:
+              - generic [ref=f1e188]: 
+          - generic [ref=f1e189]:
+            - generic [ref=f1e190] [cursor=pointer]:
+              - generic "Sync OK" [ref=f1e911]: 
+              - text: Sync OK
+            - generic [ref=f1e912]:
+              - text: to
+              - link "48ff83d " [ref=f1e913] [cursor=pointer]:
+                - /url: https://github.com/tmobi-internal/devops-deploy-it/commit/48ff83df148915fc03370621bfddbfcdbbbfbd01
+                - text: 48ff83d
+                - generic [ref=f1e914]: 
+          - generic [ref=f1e195]:
+            - text: Succeeded
+            - generic [ref=f1e196]:
+              - time [ref=f1e197]: a few seconds ago
+              - generic [ref=f1e198]:
+                - text: (
+                - time [ref=f1e199]: Wed Jul 01 2026 09:05:56 GMT+0900
+                - text: )
+          - generic [ref=f1e915]:
+            - generic [ref=f1e916]:
+              - generic [ref=f1e917]: "Author:"
+              - generic [ref=f1e918]: Jenkins CICD <tmap-devops@tmapmobility.com> -
+            - generic [ref=f1e919]:
+              - generic [ref=f1e920]: "Comment:"
+              - generic [ref=f1e921]: "[prd][it/tokscale] updated tag: prd-3.1.15-260701085919"
+      - generic [ref=f1e207]:
+        - generic [ref=f1e208]:
+          - generic "Truncate resource name left" [ref=f1e209] [cursor=pointer]:
+            - generic [ref=f1e210]: 
+          - generic "Show full resource name" [ref=f1e211] [cursor=pointer]:
+            - generic [ref=f1e212]: 
+          - generic "Group Nodes" [ref=f1e213] [cursor=pointer]:
+            - generic [ref=f1e214]: 
+          - generic "Expand all child nodes of all parent nodes" [ref=f1e216] [cursor=pointer]:
+            - generic [ref=f1e217]: +
+          - generic "Collapse all child nodes of all parent nodes" [ref=f1e218] [cursor=pointer]:
+            - generic [ref=f1e219]: 
+          - generic [ref=f1e221]:
+            - generic "Zoom in" [ref=f1e222] [cursor=pointer]:
+              - generic [ref=f1e223]: 
+            - generic "Zoom out" [ref=f1e224] [cursor=pointer]:
+              - generic [ref=f1e225]: 
+            - generic [ref=f1e226]: 100%
+        - generic [ref=f1e227]:
+          - 'generic "Kind: PersistentVolumeClaim Namespace: pc Name: tokscale-data" [ref=f1e228] [cursor=pointer]':
+            - generic [ref=f1e229]:
+              - img "PersistentVolumeClaim" [ref=f1e230]
+              - generic [ref=f1e231]: pvc
+            - generic [ref=f1e232]:
+              - generic [ref=f1e233]: tokscale-data
+              - generic [ref=f1e234]:
+                - generic "Healthy" [ref=f1e235]: 
+                - generic "Synced" [ref=f1e236]: 
+            - generic "PersistentVolumeClaim was created a month ago" [ref=f1e238]:
+              - time [ref=f1e239]: a month
+            - button "" [ref=f1e922]:
+              - generic [ref=f1e923]: 
+          - 'generic "Kind: Application Namespace: argocd Name: tokscale-prd" [ref=f1e245] [cursor=pointer]':
+            - generic "Application" [ref=f1e247]: 
+            - generic [ref=f1e248]:
+              - generic [ref=f1e249]: tokscale-prd
+              - generic [ref=f1e250]:
+                - img [ref=f1e924]
+                - generic "Synced" [ref=f1e252]: 
+              - generic [ref=f1e254]: 
+            - generic "Application was created a few seconds ago" [ref=f1e256]:
+              - time [ref=f1e257]: a month
+            - button "" [ref=f1e926]:
+              - generic [ref=f1e927]: 
+          - 'generic "Kind: Service Namespace: pc Name: tokscale-postgres-prd-svc" [ref=f1e263] [cursor=pointer]':
+            - generic [ref=f1e264]:
+              - img "Service" [ref=f1e265]
+              - generic [ref=f1e266]: svc
+            - generic [ref=f1e267]:
+              - generic [ref=f1e268]: tokscale-postgres-prd-svc
+              - generic [ref=f1e269]:
+                - generic "Healthy" [ref=f1e270]: 
+                - generic "Synced" [ref=f1e271]: 
+            - generic "Service was created a month ago" [ref=f1e273]:
+              - time [ref=f1e274]: a month
+            - button "" [ref=f1e928]:
+              - generic [ref=f1e929]: 
+          - 'generic "Kind: Service Namespace: pc Name: tokscale-prd-svc" [ref=f1e280] [cursor=pointer]':
+            - generic [ref=f1e281]:
+              - img "Service" [ref=f1e282]
+              - generic [ref=f1e283]: svc
+            - generic [ref=f1e284]:
+              - generic [ref=f1e285]: tokscale-prd-svc
+              - generic [ref=f1e286]:
+                - generic "Healthy" [ref=f1e287]: 
+                - generic "Synced" [ref=f1e288]: 
+            - generic "Service was created a month ago" [ref=f1e290]:
+              - time [ref=f1e291]: a month
+            - button "" [ref=f1e931]:
+              - generic [ref=f1e932]: 
+          - 'generic "Kind: StatefulSet Namespace: pc Name: tokscale-postgres-prd-sts" [ref=f1e297] [cursor=pointer]':
+            - generic [ref=f1e298]:
+              - img "StatefulSet" [ref=f1e299]
+              - generic [ref=f1e300]: sts
+            - generic [ref=f1e301]:
+              - generic [ref=f1e302]: tokscale-postgres-prd-sts
+              - generic [ref=f1e303]:
+                - 'generic "Healthy: partitioned roll out complete: 1 new pods have been updated..." [ref=f1e304]': 
+                - generic "Synced" [ref=f1e305]: 
+              - generic [ref=f1e307]: 
+            - generic "StatefulSet was created a month ago" [ref=f1e309]:
+              - time [ref=f1e310]: a month
+            - button "" [ref=f1e933]:
+              - generic [ref=f1e934]: 
+          - 'generic "Kind: Pod Namespace: pc Name: tokscale-postgres-prd-sts-0 Images: - harbor.tmapadmin.com/docker/postgres:16-alpine" [ref=f1e316] [cursor=pointer]':
+            - generic [ref=f1e317]:
+              - img "Pod" [ref=f1e318]
+              - generic [ref=f1e319]: pod
+            - generic [ref=f1e320]:
+              - generic [ref=f1e321]: tokscale-postgres-prd-sts-0
+              - generic "Healthy" [ref=f1e323]: 
+            - generic [ref=f1e324]:
+              - generic "Pod was created a month ago" [ref=f1e325]:
+                - time [ref=f1e326]: a month
+              - text: Running1/1
+            - button "" [ref=f1e935]:
+              - generic [ref=f1e936]: 
+          - 'generic "Kind: ControllerRevision Namespace: pc Name: tokscale-postgres-prd-sts-64b7dbcc47" [ref=f1e332] [cursor=pointer]':
+            - generic [ref=f1e333]:
+              - generic [ref=f1e334]: CR
+              - generic [ref=f1e335]: controllerrevision
+            - generic [ref=f1e337]: tokscale-postgres-prd-sts-64b7dbcc47
+            - generic [ref=f1e338]:
+              - generic "ControllerRevision was created a month ago" [ref=f1e339]:
+                - time [ref=f1e340]: a month
+              - text: Rev:2
+            - button "" [ref=f1e937]:
+              - generic [ref=f1e938]: 
+          - 'generic "Kind: ControllerRevision Namespace: pc Name: tokscale-postgres-prd-sts-65688567f5" [ref=f1e346] [cursor=pointer]':
+            - generic [ref=f1e347]:
+              - generic [ref=f1e348]: CR
+              - generic [ref=f1e349]: controllerrevision
+            - generic [ref=f1e351]: tokscale-postgres-prd-sts-65688567f5
+            - generic [ref=f1e352]:
+              - generic "ControllerRevision was created a month ago" [ref=f1e353]:
+                - time [ref=f1e354]: a month
+              - text: Rev:3
+            - button "" [ref=f1e939]:
+              - generic [ref=f1e940]: 
+          - 'generic "Kind: StatefulSet Namespace: pc Name: tokscale-prd-sts" [ref=f1e360] [cursor=pointer]':
+            - generic [ref=f1e361]:
+              - img "StatefulSet" [ref=f1e362]
+              - generic [ref=f1e363]: sts
+            - generic [ref=f1e364]:
+              - generic [ref=f1e365]: tokscale-prd-sts
+              - generic [ref=f1e366]:
+                - img [ref=f1e942]
+                - generic "Synced" [ref=f1e368]: 
+              - generic [ref=f1e370]: 
+            - generic "StatefulSet was created a month ago" [ref=f1e372]:
+              - time [ref=f1e373]: a month
+            - button "" [ref=f1e944]:
+              - generic [ref=f1e945]: 
+          - 'generic "Kind: Pod Namespace: pc Name: tokscale-prd-sts-0 Images: - harbor.tmapadmin.com/prd/tokscale:prd-3.1.14-260629152042" [ref=f1e379] [cursor=pointer]':
+            - generic [ref=f1e380]:
+              - img "Pod" [ref=f1e381]
+              - generic [ref=f1e382]: pod
+            - generic [ref=f1e383]:
+              - generic [ref=f1e384]: tokscale-prd-sts-0
+              - generic "Healthy" [ref=f1e386]: 
+            - generic [ref=f1e387]:
+              - generic "Pod was created 2 days ago" [ref=f1e388]:
+                - time [ref=f1e389]: 2 days
+              - text: Running1/1
+            - button "" [ref=f1e946]:
+              - generic [ref=f1e947]: 
+          - 'generic "Kind: Pod Namespace: pc Name: tokscale-prd-sts-1 Images: - harbor.tmapadmin.com/prd/tokscale:prd-3.1.15-260701085919" [ref=f1e948] [cursor=pointer]':
+            - generic [ref=f1e950]:
+              - img "Pod" [ref=f1e951]
+              - generic [ref=f1e952]: pod
+            - generic [ref=f1e953]:
+              - generic [ref=f1e954]: tokscale-prd-sts-1
+              - img [ref=f1e956]
+            - generic [ref=f1e958]:
+              - generic "Pod was created a few seconds ago" [ref=f1e959]:
+                - time [ref=f1e960]: a few seconds
+              - text: ContainerCreating0/1
+            - button "" [ref=f1e964]:
+              - generic [ref=f1e965]: 
+          - 'generic "Kind: ControllerRevision Namespace: pc Name: tokscale-prd-sts-548575d697" [ref=f1e966] [cursor=pointer]':
+            - generic [ref=f1e967]:
+              - generic [ref=f1e968]: CR
+              - generic [ref=f1e969]: controllerrevision
+            - generic [ref=f1e971]: tokscale-prd-sts-548575d697
+            - generic [ref=f1e972]:
+              - generic "ControllerRevision was created a few seconds ago" [ref=f1e973]:
+                - time [ref=f1e974]: a few seconds
+              - text: Rev:22
+            - button "" [ref=f1e978]:
+              - generic [ref=f1e979]: 
+          - 'generic "Kind: ControllerRevision Namespace: pc Name: tokscale-prd-sts-6657d68c5f" [ref=f1e411] [cursor=pointer]':
+            - generic [ref=f1e412]:
+              - generic [ref=f1e413]: CR
+              - generic [ref=f1e414]: controllerrevision
+            - generic [ref=f1e416]: tokscale-prd-sts-6657d68c5f
+            - generic [ref=f1e417]:
+              - generic "ControllerRevision was created 13 days ago" [ref=f1e418]:
+                - time [ref=f1e419]: 13 days
+              - text: Rev:19
+            - button "" [ref=f1e980]:
+              - generic [ref=f1e981]: 
+          - 'generic "Kind: ControllerRevision Namespace: pc Name: tokscale-prd-sts-6797f59fc" [ref=f1e425] [cursor=pointer]':
+            - generic [ref=f1e426]:
+              - generic [ref=f1e427]: CR
+              - generic [ref=f1e428]: controllerrevision
+            - generic [ref=f1e430]: tokscale-prd-sts-6797f59fc
+            - generic [ref=f1e431]:
+              - generic "ControllerRevision was created 22 days ago" [ref=f1e432]:
+                - time [ref=f1e433]: 22 days
+              - text: Rev:17
+            - button "" [ref=f1e982]:
+              - generic [ref=f1e983]: 
+          - 'generic "Kind: ControllerRevision Namespace: pc Name: tokscale-prd-sts-6f4975fc8f" [ref=f1e439] [cursor=pointer]':
+            - generic [ref=f1e440]:
+              - generic [ref=f1e441]: CR
+              - generic [ref=f1e442]: controllerrevision
+            - generic [ref=f1e444]: tokscale-prd-sts-6f4975fc8f
+            - generic [ref=f1e445]:
+              - generic "ControllerRevision was created 13 days ago" [ref=f1e446]:
+                - time [ref=f1e447]: 13 days
+              - text: Rev:20
+            - button "" [ref=f1e984]:
+              - generic [ref=f1e985]: 
+          - 'generic "Kind: ControllerRevision Namespace: pc Name: tokscale-prd-sts-7899974569" [ref=f1e453] [cursor=pointer]':
+            - generic [ref=f1e454]:
+              - generic [ref=f1e455]: CR
+              - generic [ref=f1e456]: controllerrevision
+            - generic [ref=f1e458]: tokscale-prd-sts-7899974569
+            - generic [ref=f1e459]:
+              - generic "ControllerRevision was created 22 days ago" [ref=f1e460]:
+                - time [ref=f1e461]: 22 days
+              - text: Rev:18
+            - button "" [ref=f1e986]:
+              - generic [ref=f1e987]: 
+          - 'generic "Kind: ControllerRevision Namespace: pc Name: tokscale-prd-sts-b795fd79c" [ref=f1e467] [cursor=pointer]':
+            - generic [ref=f1e468]:
+              - generic [ref=f1e469]: CR
+              - generic [ref=f1e470]: controllerrevision
+            - generic [ref=f1e472]: tokscale-prd-sts-b795fd79c
+            - generic [ref=f1e473]:
+              - generic "ControllerRevision was created 22 days ago" [ref=f1e474]:
+                - time [ref=f1e475]: 22 days
+              - text: Rev:16
+            - button "" [ref=f1e988]:
+              - generic [ref=f1e989]: 
+          - 'generic "Kind: ControllerRevision Namespace: pc Name: tokscale-prd-sts-fcc856585" [ref=f1e481] [cursor=pointer]':
+            - generic [ref=f1e482]:
+              - generic [ref=f1e483]: CR
+              - generic [ref=f1e484]: controllerrevision
+            - generic [ref=f1e486]: tokscale-prd-sts-fcc856585
+            - generic [ref=f1e487]:
+              - generic "ControllerRevision was created 2 days ago" [ref=f1e488]:
+                - time [ref=f1e489]: 2 days
+              - text: Rev:21
+            - button "" [ref=f1e990]:
+              - generic [ref=f1e991]: 
+          - 'generic "Kind: HorizontalPodAutoscaler Namespace: pc Name: tokscale-prd-hpa" [ref=f1e495] [cursor=pointer]':
+            - generic [ref=f1e496]:
+              - img "HorizontalPodAutoscaler" [ref=f1e497]
+              - generic [ref=f1e498]: hpa
+            - generic [ref=f1e499]:
+              - generic [ref=f1e500]: tokscale-prd-hpa
+              - generic [ref=f1e501]:
+                - 'generic "Healthy: recent recommendations were higher than current one, applying the highest recent recommendation" [ref=f1e502]': 
+                - generic "Synced" [ref=f1e503]: 
+            - generic "HorizontalPodAutoscaler was created a month ago" [ref=f1e505]:
+              - time [ref=f1e506]: a month
+            - button "" [ref=f1e993]:
+              - generic [ref=f1e994]: 
+          - 'generic "Kind: ExternalSecret Namespace: pc Name: tokscale" [ref=f1e512] [cursor=pointer]':
+            - generic [ref=f1e513]:
+              - generic [ref=f1e514]: ES
+              - generic [ref=f1e515]: externalsecret
+            - generic [ref=f1e516]:
+              - generic [ref=f1e517]: tokscale
+              - generic [ref=f1e518]:
+                - 'generic "Healthy: Secret was synced" [ref=f1e519]': 
+                - generic "Synced" [ref=f1e520]: 
+              - generic [ref=f1e522]: 
+            - generic "ExternalSecret was created a month ago" [ref=f1e524]:
+              - time [ref=f1e525]: a month
+            - button "" [ref=f1e996]:
+              - generic [ref=f1e997]: 
+          - 'generic "Kind: Secret Namespace: pc Name: tokscale" [ref=f1e531] [cursor=pointer]':
+            - generic [ref=f1e532]:
+              - img "Secret" [ref=f1e533]
+              - generic [ref=f1e534]: secret
+            - generic [ref=f1e536]: tokscale
+            - generic "Secret was created a month ago" [ref=f1e538]:
+              - time [ref=f1e539]: a month
+            - button "" [ref=f1e998]:
+              - generic [ref=f1e999]: 
+          - 'generic "Kind: VirtualService Namespace: pc Name: tokscale-prd-istio-ing-priv-https-vs" [ref=f1e545] [cursor=pointer]':
+            - generic [ref=f1e546]:
+              - generic [ref=f1e547]: VS
+              - generic [ref=f1e548]: virtualservice
+            - generic [ref=f1e549]:
+              - generic [ref=f1e550]: tokscale-prd-istio-ing-priv-https-vs
+              - generic "Synced" [ref=f1e552]: 
+            - generic "VirtualService was created a month ago" [ref=f1e554]:
+              - time [ref=f1e555]: a month
+            - button "" [ref=f1e1000]:
+              - generic [ref=f1e1001]: 
+          - generic [ref=f1e563]: ►
+          - generic [ref=f1e566]: ►
+          - generic [ref=f1e569]: ►
+          - generic [ref=f1e572]: ►
+          - generic [ref=f1e574]: ►
+          - generic [ref=f1e577]: ►
+          - generic [ref=f1e580]: ►
+          - generic [ref=f1e583]: ►
+          - generic [ref=f1e1004]: ►
+          - generic [ref=f1e1007]: ►
+          - generic [ref=f1e589]: ►
+          - generic [ref=f1e591]: ►
+          - generic [ref=f1e595]: ►
+          - generic [ref=f1e598]: ►
+          - generic [ref=f1e601]: ►
+          - generic [ref=f1e604]: ►
+          - generic [ref=f1e607]: ►
+          - generic [ref=f1e610]: ►
+          - generic [ref=f1e612]: ►
+          - generic [ref=f1e615]: ►
+          - generic [ref=f1e618]: ►

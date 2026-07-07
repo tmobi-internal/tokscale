@@ -1,0 +1,156 @@
+- generic [active] [ref=f1e1]:
+  - link "Skip to content":
+    - /url: "#skip2content"
+  - banner [ref=f1e2]:
+    - generic [ref=f1e4]:
+      - link "Jenkins" [ref=f1e5] [cursor=pointer]:
+        - /url: /
+        - img [ref=f1e6]
+        - generic [ref=f1e7]: Jenkins
+      - generic "breadcrumb" [ref=f1e8]:
+        - list [ref=f1e9]:
+          - listitem [ref=f1e10]:
+            - link "common.docker_build_arm64_github_prd" [ref=f1e11] [cursor=pointer]:
+              - /url: /job/common.docker_build_arm64_github_prd/
+          - listitem [ref=f1e12]:
+            - link "#1980" [ref=f1e13] [cursor=pointer]:
+              - /url: /job/common.docker_build_arm64_github_prd/1980/
+    - generic [ref=f1e14]:
+      - button "Search" [ref=f1e15] [cursor=pointer]:
+        - img [ref=f1e16]
+        - generic [ref=f1e19]: Search
+      - link "이충우/데이터플랫폼&AX" [ref=f1e20] [cursor=pointer]:
+        - /url: /user/c.lee@tmapmobility.com
+        - img [ref=f1e21]
+        - generic [ref=f1e24]: 이충우/데이터플랫폼&AX
+  - generic [ref=f1e25]:
+    - generic [ref=f1e27]:
+      - link "Status" [ref=f1e30] [cursor=pointer]:
+        - /url: /job/common.docker_build_arm64_github_prd/1980/
+        - img [ref=f1e32]
+        - text: Status
+      - link "Changes" [ref=f1e37] [cursor=pointer]:
+        - /url: /job/common.docker_build_arm64_github_prd/1980/changes
+        - img [ref=f1e39]
+        - text: Changes
+      - link "Console Output" [ref=f1e43]:
+        - /url: /job/common.docker_build_arm64_github_prd/1980/console
+        - img [ref=f1e45]
+        - text: Console Output
+      - link "View Build Information" [ref=f1e50] [cursor=pointer]:
+        - /url: /job/common.docker_build_arm64_github_prd/1980/configure
+        - img [ref=f1e52]
+        - text: View Build Information
+      - link "Parameters" [ref=f1e57] [cursor=pointer]:
+        - /url: /job/common.docker_build_arm64_github_prd/1980/parameters
+        - img [ref=f1e59]
+        - text: Parameters
+      - link "Timings" [ref=f1e66] [cursor=pointer]:
+        - /url: /job/common.docker_build_arm64_github_prd/1980/timings
+        - img [ref=f1e68]
+        - text: Timings
+      - link "Rebuild" [ref=f1e74] [cursor=pointer]:
+        - /url: /job/common.docker_build_arm64_github_prd/1980/rebuild/parameterized
+        - img [ref=f1e76]
+        - text: Rebuild
+      - link "Pipeline Overview" [ref=f1e80] [cursor=pointer]:
+        - /url: /job/common.docker_build_arm64_github_prd/1980/pipeline-overview
+        - img [ref=f1e82]
+        - text: Pipeline Overview
+      - link "Restart from Stage" [ref=f1e89] [cursor=pointer]:
+        - /url: /job/common.docker_build_arm64_github_prd/1980/restart
+        - img [ref=f1e91]
+        - text: Restart from Stage
+      - link "Rebuild" [ref=f1e96] [cursor=pointer]:
+        - /url: /job/common.docker_build_arm64_github_prd/1980/replay
+        - img [ref=f1e98]
+        - text: Rebuild
+      - link "Pipeline Steps" [ref=f1e102] [cursor=pointer]:
+        - /url: /job/common.docker_build_arm64_github_prd/1980/flowGraphTable
+        - img [ref=f1e104]
+        - text: Pipeline Steps
+      - link "Previous Build" [ref=f1e114] [cursor=pointer]:
+        - /url: /job/common.docker_build_arm64_github_prd/1979/console
+        - img [ref=f1e116]
+        - text: Previous Build
+    - generic [ref=f1e118]:
+      - generic [ref=f1e119]:
+        - generic [ref=f1e120]:
+          - generic [ref=f1e121]: Failed
+          - img [ref=f1e122]
+          - heading "콘솔 출력" [level=1] [ref=f1e125]
+        - generic [ref=f1e126]:
+          - link "Download" [ref=f1e127] [cursor=pointer]:
+            - /url: consoleText
+            - img [ref=f1e128]
+            - text: Download
+          - button "Copy" [ref=f1e132] [cursor=pointer]:
+            - img [ref=f1e134]
+            - text: Copy
+          - link "View as plain text" [ref=f1e136] [cursor=pointer]:
+            - /url: consoleText
+      - generic [ref=f1e137]:
+        - text: Started by upstream project "
+        - link "pc.tokscale_prd" [ref=f1e138] [cursor=pointer]:
+          - /url: /job/pc.tokscale_prd/
+          - text: pc.tokscale_prd
+          - button
+        - text: "\" build number"
+        - link "39" [ref=f1e139] [cursor=pointer]:
+          - /url: /job/pc.tokscale_prd/39
+          - text: "39"
+          - button
+        - text: "originally caused by: Started by user"
+        - link "이충우/데이터플랫폼&AX" [ref=f1e140] [cursor=pointer]:
+          - /url: /user/c.lee@tmapmobility.com
+          - text: 이충우/데이터플랫폼&AX
+          - button
+        - generic [ref=f1e141]: "[Pipeline] Start of Pipeline"
+        - generic [ref=f1e142]: "[Pipeline] podTemplate"
+        - generic [ref=f1e143]: "[Pipeline] {"
+        - generic [ref=f1e144]: "[Pipeline] node"
+        - text: "Created Pod: kubernetes jenkins/common-docker-build-arm64-github-prd-1980-t8ddl-skthb-pw91p [PodInfo] jenkins/common-docker-build-arm64-github-prd-1980-t8ddl-skthb-pw91p Container [jnlp] waiting [ContainerCreating] No message Container [kaniko] waiting [ContainerCreating] No message Pod [Pending][ContainersNotReady] containers with unready status: [kaniko jnlp] [PodInfo] jenkins/common-docker-build-arm64-github-prd-1980-t8ddl-skthb-pw91p Container [jnlp] waiting [ContainerCreating] No message Container [kaniko] waiting [ContainerCreating] No message Pod [Pending][ContainersNotReady] containers with unready status: [kaniko jnlp] [PodInfo] jenkins/common-docker-build-arm64-github-prd-1980-t8ddl-skthb-pw91p Container [jnlp] waiting [ContainerCreating] No message Container [kaniko] waiting [ContainerCreating] No message Pod [Pending][ContainersNotReady] containers with unready status: [kaniko jnlp] [PodInfo] jenkins/common-docker-build-arm64-github-prd-1980-t8ddl-skthb-pw91p Container [jnlp] waiting [ContainerCreating] No message Container [kaniko] waiting [ContainerCreating] No message Pod [Pending][ContainersNotReady] containers with unready status: [kaniko jnlp]"
+        - generic [ref=f1e145]:
+          - text: Agent
+          - link "common-docker-build-arm64-github-prd-1980-t8ddl-skthb-pw91p" [ref=f1e146] [cursor=pointer]:
+            - /url: /computer/common-docker-build-arm64-github-prd-1980-t8ddl-skthb-pw91p
+            - text: common-docker-build-arm64-github-prd-1980-t8ddl-skthb-pw91p
+            - button
+          - text: "is provisioned from template common_docker_build_arm64_github_prd_1980-t8ddl-skthb --- apiVersion: \"v1\" kind: \"Pod\" metadata: annotations: kubernetes.jenkins.io/last-refresh: \"1783384306560\" buildUrl: \""
+          - link "https://jenkins.tmapadmin.com/job/common.docker_build_arm64_github_prd/1980/" [ref=f1e147] [cursor=pointer]:
+            - /url: https://jenkins.tmapadmin.com/job/common.docker_build_arm64_github_prd/1980/
+          - text: "\" runUrl: \"job/common.docker_build_arm64_github_prd/1980/\" labels: jenkins/label-digest: \"f2c8b49ed2dc365b4e6593df3ae2c4f08166ebab\" jenkins/devops-jenkins-jenkins-agent: \"true\" jenkins/label: \"common_docker_build_arm64_github_prd_1980-t8ddl\" kubernetes.jenkins.io/controller: \"https___jenkins_tmapadmin_comx\" name: \"common-docker-build-arm64-github-prd-1980-t8ddl-skthb-pw91p\" namespace: \"jenkins\" spec: affinity: nodeAffinity: requiredDuringSchedulingIgnoredDuringExecution: nodeSelectorTerms: - matchExpressions: - key: \"dedicated\" operator: \"In\" values: - \"jenkins\" - key: \"arch\" operator: \"In\" values: - \"arm64\" containers: - command: - \"/busybox/cat\" env: - name: \"GITHUB_TOKEN\" valueFrom: secretKeyRef: key: \"githubtoken\" name: \"git-auth\" - name: \"DATADOG_API_KEY\" valueFrom: secretKeyRef: key: \"datadog-api-key-rum\" name: \"datadog-api-key\" image: \"harbor.tmapadmin.com/common/kaniko-project-executor:v1.23.2-debug-arm64\" imagePullPolicy: \"IfNotPresent\" name: \"kaniko\" resources: limits: cpu: \"8\" requests: cpu: \"5\" tty: true volumeMounts: - mountPath: \"/workspace\" name: \"docker-volume\" - mountPath: \"/kaniko/.docker/\" name: \"config-json\" - mountPath: \"/home/jenkins/agent\" name: \"workspace-volume\" readOnly: false - env: - name: \"JENKINS_SECRET\" value: \"********\" - name: \"JENKINS_TUNNEL\" value: \"devops-jenkins-agent.jenkins.svc.cluster.local:50000\" - name: \"JENKINS_AGENT_NAME\" value: \"common-docker-build-arm64-github-prd-1980-t8ddl-skthb-pw91p\" - name: \"REMOTING_OPTS\" value: \"-noReconnectAfter 1d\" - name: \"JENKINS_NAME\" value: \"common-docker-build-arm64-github-prd-1980-t8ddl-skthb-pw91p\" - name: \"JENKINS_AGENT_WORKDIR\" value: \"/home/jenkins/agent\" - name: \"JENKINS_URL\" value: \""
+          - link "https://jenkins.tmapadmin.com/" [ref=f1e148] [cursor=pointer]:
+            - /url: https://jenkins.tmapadmin.com/
+          - text: "\" image: \"harbor.tmapadmin.com/common/jenkins/inbound-agent:3283.v92c105e0f819-9-jdk17-arm64\" imagePullPolicy: \"IfNotPresent\" name: \"jnlp\" resources: {} tty: true volumeMounts: - mountPath: \"/etc/localtime\" name: \"volume-0\" readOnly: false - mountPath: \"/home/jenkins/agent\" name: \"workspace-volume\" readOnly: false restartPolicy: \"Never\" serviceAccount: \"devops-jenkins-role\" tolerations: - effect: \"NoSchedule\" key: \"dedicated\" operator: \"Equal\" value: \"jenkins\" volumes: - hostPath: path: \"/usr/share/zoneinfo/Asia/Seoul\" name: \"volume-0\" - name: \"config-json\" secret: secretName: \"harbor-auths\" - emptyDir: {} name: \"docker-volume\" - emptyDir: medium: \"\" name: \"workspace-volume\" Running on"
+          - link "common-docker-build-arm64-github-prd-1980-t8ddl-skthb-pw91p" [ref=f1e149] [cursor=pointer]:
+            - /url: /computer/common%2Ddocker%2Dbuild%2Darm64%2Dgithub%2Dprd%2D1980%2Dt8ddl%2Dskthb%2Dpw91p/
+            - text: common-docker-build-arm64-github-prd-1980-t8ddl-skthb-pw91p
+            - button
+          - text: in /home/jenkins/agent/workspace/common.docker_build_arm64_github_prd
+        - generic [ref=f1e150]: "[Pipeline] {"
+        - generic [ref=f1e151]: "[Pipeline] stage"
+        - generic [ref=f1e152]: "[Pipeline] { (Build with Kaniko)"
+        - generic [ref=f1e153]: "[Pipeline] container"
+        - generic [ref=f1e154]: "[Pipeline] {"
+        - generic [ref=f1e155]: "[Pipeline] sh"
+        - generic [ref=f1e156]:
+          - text: "Resolved IP: 10.1.152.252 # Kubernetes-managed hosts file. 127.0.0.1 localhost ::1 localhost ip6-localhost ip6-loopback fe00::0 ip6-localnet fe00::0 ip6-mcastprefix fe00::1 ip6-allnodes fe00::2 ip6-allrouters 10.1.154.38 common-docker-build-arm64-github-prd-1980-t8ddl-skthb-pw91p 10.1.152.252 nexus.tmapadmin.com Enumerating objects: 16732, done. Counting objects: 0% (1/731) Counting objects: 1% (8/731) Counting objects: 2% (15/731) Counting objects: 3% (22/731) Counting objects: 4% (30/731) Counting objects: 5% (37/731) Counting objects: 6% (44/731) Counting objects: 7% (52/731) Counting objects: 8% (59/731) Counting objects: 9% (66/731) Counting objects: 10% (74/731) Counting objects: 11% (81/731) Counting objects: 12% (88/731) Counting objects: 13% (96/731) Counting objects: 14% (103/731) Counting objects: 15% (110/731) Counting objects: 16% (117/731) Counting objects: 17% (125/731) Counting objects: 18% (132/731) Counting objects: 19% (139/731) Counting objects: 20% (147/731) Counting objects: 21% (154/731) Counting objects: 22% (161/731) Counting objects: 23% (169/731) Counting objects: 24% (176/731) Counting objects: 25% (183/731) Counting objects: 26% (191/731) Counting objects: 27% (198/731) Counting objects: 28% (205/731) Counting objects: 29% (212/731) Counting objects: 30% (220/731) Counting objects: 31% (227/731) Counting objects: 32% (234/731) Counting objects: 33% (242/731) Counting objects: 34% (249/731) Counting objects: 35% (256/731) Counting objects: 36% (264/731) Counting objects: 37% (271/731) Counting objects: 38% (278/731) Counting objects: 39% (286/731) Counting objects: 40% (293/731) Counting objects: 41% (300/731) Counting objects: 42% (308/731) Counting objects: 43% (315/731) Counting objects: 44% (322/731) Counting objects: 45% (329/731) Counting objects: 46% (337/731) Counting objects: 47% (344/731) Counting objects: 48% (351/731) Counting objects: 49% (359/731) Counting objects: 50% (366/731) Counting objects: 51% (373/731) Counting objects: 52% (381/731) Counting objects: 53% (388/731) Counting objects: 54% (395/731) Counting objects: 55% (403/731) Counting objects: 56% (410/731) Counting objects: 57% (417/731) Counting objects: 58% (424/731) Counting objects: 59% (432/731) Counting objects: 60% (439/731) Counting objects: 61% (446/731) Counting objects: 62% (454/731) Counting objects: 63% (461/731) Counting objects: 64% (468/731) Counting objects: 65% (476/731) Counting objects: 66% (483/731) Counting objects: 67% (490/731) Counting objects: 68% (498/731) Counting objects: 69% (505/731) Counting objects: 70% (512/731) Counting objects: 71% (520/731) Counting objects: 72% (527/731) Counting objects: 73% (534/731) Counting objects: 74% (541/731) Counting objects: 75% (549/731) Counting objects: 76% (556/731) Counting objects: 77% (563/731) Counting objects: 78% (571/731) Counting objects: 79% (578/731) Counting objects: 80% (585/731) Counting objects: 81% (593/731) Counting objects: 82% (600/731) Counting objects: 83% (607/731) Counting objects: 84% (615/731) Counting objects: 85% (622/731) Counting objects: 86% (629/731) Counting objects: 87% (636/731) Counting objects: 88% (644/731) Counting objects: 89% (651/731) Counting objects: 90% (658/731) Counting objects: 91% (666/731) Counting objects: 92% (673/731) Counting objects: 93% (680/731) Counting objects: 94% (688/731) Counting objects: 95% (695/731) Counting objects: 96% (702/731) Counting objects: 97% (710/731) Counting objects: 98% (717/731) Counting objects: 99% (724/731) Counting objects: 100% (731/731) Counting objects: 100% (731/731), done. Compressing objects: 0% (1/204) Compressing objects: 1% (3/204) Compressing objects: 2% (5/204) Compressing objects: 3% (7/204) Compressing objects: 4% (9/204) Compressing objects: 5% (11/204) Compressing objects: 6% (13/204) Compressing objects: 7% (15/204) Compressing objects: 8% (17/204) Compressing objects: 9% (19/204) Compressing objects: 10% (21/204) Compressing objects: 11% (23/204) Compressing objects: 12% (25/204) Compressing objects: 13% (27/204) Compressing objects: 14% (29/204) Compressing objects: 15% (31/204) Compressing objects: 16% (33/204) Compressing objects: 17% (35/204) Compressing objects: 18% (37/204) Compressing objects: 19% (39/204) Compressing objects: 20% (41/204) Compressing objects: 21% (43/204) Compressing objects: 22% (45/204) Compressing objects: 23% (47/204) Compressing objects: 24% (49/204) Compressing objects: 25% (51/204) Compressing objects: 26% (54/204) Compressing objects: 27% (56/204) Compressing objects: 28% (58/204) Compressing objects: 29% (60/204) Compressing objects: 30% (62/204) Compressing objects: 31% (64/204) Compressing objects: 32% (66/204) Compressing objects: 33% (68/204) Compressing objects: 34% (70/204) Compressing objects: 35% (72/204) Compressing objects: 36% (74/204) Compressing objects: 37% (76/204) Compressing objects: 38% (78/204) Compressing objects: 39% (80/204) Compressing objects: 40% (82/204) Compressing objects: 41% (84/204) Compressing objects: 42% (86/204) Compressing objects: 43% (88/204) Compressing objects: 44% (90/204) Compressing objects: 45% (92/204) Compressing objects: 46% (94/204) Compressing objects: 47% (96/204) Compressing objects: 48% (98/204) Compressing objects: 49% (100/204) Compressing objects: 50% (102/204) Compressing objects: 51% (105/204) Compressing objects: 52% (107/204) Compressing objects: 53% (109/204) Compressing objects: 54% (111/204) Compressing objects: 55% (113/204) Compressing objects: 56% (115/204) Compressing objects: 57% (117/204) Compressing objects: 58% (119/204) Compressing objects: 59% (121/204) Compressing objects: 60% (123/204) Compressing objects: 61% (125/204) Compressing objects: 62% (127/204) Compressing objects: 63% (129/204) Compressing objects: 64% (131/204) Compressing objects: 65% (133/204) Compressing objects: 66% (135/204) Compressing objects: 67% (137/204) Compressing objects: 68% (139/204) Compressing objects: 69% (141/204) Compressing objects: 70% (143/204) Compressing objects: 71% (145/204) Compressing objects: 72% (147/204) Compressing objects: 73% (149/204) Compressing objects: 74% (151/204) Compressing objects: 75% (153/204) Compressing objects: 76% (156/204) Compressing objects: 77% (158/204) Compressing objects: 78% (160/204) Compressing objects: 79% (162/204) Compressing objects: 80% (164/204) Compressing objects: 81% (166/204) Compressing objects: 82% (168/204) Compressing objects: 83% (170/204) Compressing objects: 84% (172/204) Compressing objects: 85% (174/204) Compressing objects: 86% (176/204) Compressing objects: 87% (178/204) Compressing objects: 88% (180/204) Compressing objects: 89% (182/204) Compressing objects: 90% (184/204) Compressing objects: 91% (186/204) Compressing objects: 92% (188/204) Compressing objects: 93% (190/204) Compressing objects: 94% (192/204) Compressing objects: 95% (194/204) Compressing objects: 96% (196/204) Compressing objects: 97% (198/204) Compressing objects: 98% (200/204) Compressing objects: 99% (202/204) Compressing objects: 100% (204/204) Compressing objects: 100% (204/204), done. Total 16732 (delta 555), reused 528 (delta 527), pack-reused 16001 (from 4) \x1b[36mINFO\x1b[0m[0009] Resolved base name harbor.tmapadmin.com/docker/node:22-alpine to builder \x1b[36mINFO\x1b[0m[0009] Resolved base name harbor.tmapadmin.com/docker/node:22-alpine to runner \x1b[36mINFO\x1b[0m[0009] Retrieving image manifest harbor.tmapadmin.com/docker/node:22-alpine \x1b[36mINFO\x1b[0m[0009] Retrieving image harbor.tmapadmin.com/docker/node:22-alpine from registry harbor.tmapadmin.com \x1b[36mINFO\x1b[0m[0012] Retrieving image manifest harbor.tmapadmin.com/docker/node:22-alpine \x1b[36mINFO\x1b[0m[0012] Returning cached image manifest \x1b[36mINFO\x1b[0m[0012] Built cross stage deps: map[0:[/app/node_modules /app/.next /app/public /app/package.json /app/next.config.ts /app/src /app/drizzle.config.ts]] \x1b[36mINFO\x1b[0m[0012] Retrieving image manifest harbor.tmapadmin.com/docker/node:22-alpine \x1b[36mINFO\x1b[0m[0012] Returning cached image manifest \x1b[36mINFO\x1b[0m[0012] Executing 0 build triggers \x1b[36mINFO\x1b[0m[0012] Building stage 'harbor.tmapadmin.com/docker/node:22-alpine' [idx: '0', base-idx: '-1'] \x1b[36mINFO\x1b[0m[0012] Unpacking rootfs as cmd COPY packages/frontend/package.json packages/frontend/yarn.lock* ./ requires it. \x1b[36mINFO\x1b[0m[0015] WORKDIR /app \x1b[36mINFO\x1b[0m[0015] Cmd: workdir \x1b[36mINFO\x1b[0m[0015] Changed working directory to /app \x1b[36mINFO\x1b[0m[0015] Creating directory /app with uid -1 and gid -1 \x1b[36mINFO\x1b[0m[0015] Taking snapshot of files... \x1b[36mINFO\x1b[0m[0015] Resolving srcs [packages/frontend/package.json packages/frontend/yarn.lock*]... \x1b[36mINFO\x1b[0m[0015] COPY packages/frontend/package.json packages/frontend/yarn.lock* ./ \x1b[36mINFO\x1b[0m[0015] Resolving srcs [packages/frontend/package.json packages/frontend/yarn.lock*]... \x1b[36mINFO\x1b[0m[0015] Taking snapshot of files... \x1b[36mINFO\x1b[0m[0015] RUN yarn install --frozen-lockfile || yarn install \x1b[36mINFO\x1b[0m[0015] Initializing snapshotter ... \x1b[36mINFO\x1b[0m[0015] Taking snapshot of full filesystem... \x1b[36mINFO\x1b[0m[0017] Cmd: /bin/sh \x1b[36mINFO\x1b[0m[0017] Args: [-c yarn install --frozen-lockfile || yarn install] \x1b[36mINFO\x1b[0m[0017] Running: [/bin/sh -c yarn install --frozen-lockfile || yarn install] yarn install v1.22.22 info No lockfile found. [1/4] Resolving packages... warning drizzle-kit > @esbuild-kit/esm-loader@2.6.5: Merged into tsx:"
+          - link "https://tsx.is" [ref=f1e157] [cursor=pointer]:
+            - /url: https://tsx.is
+          - text: "warning drizzle-kit > @esbuild-kit/esm-loader > @esbuild-kit/core-utils@3.3.2: Merged into tsx:"
+          - link "https://tsx.is" [ref=f1e158] [cursor=pointer]:
+            - /url: https://tsx.is
+          - text: "[2/4] Fetching packages... [3/4] Linking dependencies... warning \" > @vitest/coverage-v8@4.0.16\" has incorrect peer dependency \"vitest@4.0.16\". warning \" > vitest@4.1.10\" has unmet peer dependency \"vite@^6.0.0 || ^7.0.0 || ^8.0.0\". [4/4] Building fresh packages... Done in 54.03s. \x1b[36mINFO\x1b[0m[0071] Taking snapshot of full filesystem... \x1b[36mINFO\x1b[0m[0166] COPY packages/frontend/ ./ \x1b[36mINFO\x1b[0m[0166] Taking snapshot of files... \x1b[36mINFO\x1b[0m[0168] RUN yarn build \x1b[36mINFO\x1b[0m[0168] Cmd: /bin/sh \x1b[36mINFO\x1b[0m[0168] Args: [-c yarn build] \x1b[36mINFO\x1b[0m[0168] Running: [/bin/sh -c yarn build] yarn run v1.22.22 $ next build [baseline-browser-mapping] The data in this module is over two months old. To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D` Attention: Next.js now collects completely anonymous telemetry regarding usage. This information is used to shape Next.js' roadmap and prioritize features. You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:"
+          - link "https://nextjs.org/telemetry" [ref=f1e159] [cursor=pointer]:
+            - /url: https://nextjs.org/telemetry
+          - text: "▲ Next.js 16.0.10 (Turbopack) - Experiments (use with caution): · serverActions Creating an optimized production build ... [baseline-browser-mapping] The data in this module is over two months old. To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D` ✓ Compiled successfully in 21.4s Running TypeScript ... Failed to compile. ./src/app/api/admin/users/route.ts:12:17 Type error: Property 'isAdmin' does not exist on type 'SessionUser'. \x1b[0m \x1b[90m 10 |\x1b[39m (\x1b[36mawait\x1b[39m getSessionFromHeader(request)) \x1b[33m?\x1b[39m\x1b[33m?\x1b[39m (\x1b[36mawait\x1b[39m getSession())\x1b[33m;\x1b[39m \x1b[90m 11 |\x1b[39m \x1b[31m\x1b[1m>\x1b[22m\x1b[39m\x1b[90m 12 |\x1b[39m \x1b[36mif\x1b[39m (\x1b[33m!\x1b[39msession\x1b[33m?\x1b[39m\x1b[33m.\x1b[39misAdmin) { \x1b[90m |\x1b[39m \x1b[31m\x1b[1m^\x1b[22m\x1b[39m \x1b[90m 13 |\x1b[39m \x1b[36mreturn\x1b[39m \x1b[33mNextResponse\x1b[39m\x1b[33m.\x1b[39mjson({ error\x1b[33m:\x1b[39m \x1b[32m\"Forbidden\"\x1b[39m }\x1b[33m,\x1b[39m { status\x1b[33m:\x1b[39m \x1b[35m403\x1b[39m })\x1b[33m;\x1b[39m \x1b[90m 14 |\x1b[39m } \x1b[90m 15 |\x1b[39m\x1b[0m Next.js build worker exited with code: 1 and signal: null error Command failed with exit code 1. info Visit"
+          - link "https://yarnpkg.com/en/docs/cli/run" [ref=f1e160] [cursor=pointer]:
+            - /url: https://yarnpkg.com/en/docs/cli/run
+          - text: "for documentation about this command. error building image: error building stage: failed to execute command: waiting for process to exit: exit status 1"
+        - text: "[Pipeline] } [Pipeline] // container [Pipeline] } [Pipeline] // stage [Pipeline] } [Pipeline] // node [Pipeline] } [Pipeline] // podTemplate [Pipeline] End of Pipeline ERROR: script returned exit code 1 Finished: FAILURE"
+  - contentinfo [ref=f1e161]:
+    - generic [ref=f1e164]:
+      - link "REST API" [ref=f1e165] [cursor=pointer]:
+        - /url: api/
+      - button "Jenkins 2.516.1" [ref=f1e166] [cursor=pointer]

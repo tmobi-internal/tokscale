@@ -1,0 +1,224 @@
+- generic [active] [ref=e1]:
+  - link "Skip to content":
+    - /url: "#skip2content"
+  - banner [ref=e2]:
+    - generic [ref=e4]:
+      - link "Jenkins" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - img [ref=e6]
+        - generic [ref=e7]: Jenkins
+      - generic "breadcrumb" [ref=e8]:
+        - list [ref=e9]:
+          - listitem [ref=e10]:
+            - link "pc.tokscale_prd" [ref=e11] [cursor=pointer]:
+              - /url: /job/pc.tokscale_prd/
+          - listitem [ref=e12]:
+            - link "#39" [ref=e13] [cursor=pointer]:
+              - /url: /job/pc.tokscale_prd/39/
+    - generic [ref=e14]:
+      - button "Search" [ref=e15] [cursor=pointer]:
+        - img [ref=e16]
+        - generic [ref=e19]: Search
+      - link "이충우/데이터플랫폼&AX" [ref=e20] [cursor=pointer]:
+        - /url: /user/c.lee@tmapmobility.com
+        - img [ref=e21]
+        - generic [ref=e24]: 이충우/데이터플랫폼&AX
+  - generic [ref=e25]:
+    - generic [ref=e27]:
+      - link "Status" [ref=e30] [cursor=pointer]:
+        - /url: /job/pc.tokscale_prd/39/
+        - img [ref=e32]
+        - text: Status
+      - link "Changes" [ref=e37] [cursor=pointer]:
+        - /url: /job/pc.tokscale_prd/39/changes
+        - img [ref=e39]
+        - text: Changes
+      - link "Console Output" [ref=e43]:
+        - /url: /job/pc.tokscale_prd/39/console
+        - img [ref=e45]
+        - text: Console Output
+      - link "Edit Build Information" [ref=e50] [cursor=pointer]:
+        - /url: /job/pc.tokscale_prd/39/configure
+        - img [ref=e52]
+        - text: Edit Build Information
+      - link "Delete build ‘#39’" [ref=e57] [cursor=pointer]:
+        - /url: /job/pc.tokscale_prd/39/confirmDelete
+        - img [ref=e59]
+        - text: Delete build ‘#39’
+      - link "Parameters" [ref=e64] [cursor=pointer]:
+        - /url: /job/pc.tokscale_prd/39/parameters
+        - img [ref=e66]
+        - text: Parameters
+      - link "Timings" [ref=e73] [cursor=pointer]:
+        - /url: /job/pc.tokscale_prd/39/timings
+        - img [ref=e75]
+        - text: Timings
+      - link "Rebuild" [ref=e81] [cursor=pointer]:
+        - /url: /job/pc.tokscale_prd/39/rebuild/parameterized
+        - img [ref=e83]
+        - text: Rebuild
+      - link "Pipeline Overview" [ref=e87] [cursor=pointer]:
+        - /url: /job/pc.tokscale_prd/39/pipeline-overview
+        - img [ref=e89]
+        - text: Pipeline Overview
+      - link "Restart from Stage" [ref=e96] [cursor=pointer]:
+        - /url: /job/pc.tokscale_prd/39/restart
+        - img [ref=e98]
+        - text: Restart from Stage
+      - link "Replay" [ref=e103] [cursor=pointer]:
+        - /url: /job/pc.tokscale_prd/39/replay
+        - img [ref=e105]
+        - text: Replay
+      - link "Pipeline Steps" [ref=e109] [cursor=pointer]:
+        - /url: /job/pc.tokscale_prd/39/flowGraphTable
+        - img [ref=e111]
+        - text: Pipeline Steps
+      - link "Workspaces" [ref=e121] [cursor=pointer]:
+        - /url: /job/pc.tokscale_prd/39/ws
+        - img [ref=e123]
+        - text: Workspaces
+      - link "Previous Build" [ref=e127] [cursor=pointer]:
+        - /url: /job/pc.tokscale_prd/38/console
+        - img [ref=e129]
+        - text: Previous Build
+    - generic [ref=e131]:
+      - generic [ref=e132]:
+        - generic [ref=e133]:
+          - generic [ref=e134]: Failed
+          - img [ref=e135]
+          - heading "콘솔 출력" [level=1] [ref=e138]
+        - generic [ref=e139]:
+          - link "Download" [ref=e140] [cursor=pointer]:
+            - /url: consoleText
+            - img [ref=e141]
+            - text: Download
+          - button "Copy" [ref=e145] [cursor=pointer]:
+            - img [ref=e147]
+            - text: Copy
+          - link "View as plain text" [ref=e149] [cursor=pointer]:
+            - /url: consoleText
+      - generic [ref=e150]:
+        - text: Started by user
+        - link "이충우/데이터플랫폼&AX" [ref=e151] [cursor=pointer]:
+          - /url: /user/c.lee@tmapmobility.com
+          - text: 이충우/데이터플랫폼&AX
+          - button
+        - generic [ref=e152]: "[Pipeline] Start of Pipeline"
+        - generic [ref=e153]: "[Pipeline] podTemplate"
+        - generic [ref=e154]: "[Pipeline] {"
+        - generic [ref=e155]: "[Pipeline] node"
+        - text: "Created Pod: kubernetes jenkins/pc-tokscale-prd-39-zmxrk-4fhw1-16lm3 [PodInfo] jenkins/pc-tokscale-prd-39-zmxrk-4fhw1-16lm3 Container [jnlp] waiting [ContainerCreating] No message Pod [Pending][ContainersNotReady] containers with unready status: [jnlp] [PodInfo] jenkins/pc-tokscale-prd-39-zmxrk-4fhw1-16lm3 Container [jnlp] waiting [ContainerCreating] No message Pod [Pending][ContainersNotReady] containers with unready status: [jnlp] [PodInfo] jenkins/pc-tokscale-prd-39-zmxrk-4fhw1-16lm3 Container [jnlp] waiting [ContainerCreating] No message Pod [Pending][ContainersNotReady] containers with unready status: [jnlp] [PodInfo] jenkins/pc-tokscale-prd-39-zmxrk-4fhw1-16lm3 Container [jnlp] waiting [ContainerCreating] No message Pod [Pending][ContainersNotReady] containers with unready status: [jnlp]"
+        - generic [ref=e156]:
+          - text: Agent
+          - link "pc-tokscale-prd-39-zmxrk-4fhw1-16lm3" [ref=e157] [cursor=pointer]:
+            - /url: /computer/pc-tokscale-prd-39-zmxrk-4fhw1-16lm3
+            - text: pc-tokscale-prd-39-zmxrk-4fhw1-16lm3
+            - button
+          - text: "is provisioned from template pc_tokscale_prd_39-zmxrk-4fhw1 --- apiVersion: \"v1\" kind: \"Pod\" metadata: annotations: kubernetes.jenkins.io/last-refresh: \"1783384285711\" buildUrl: \""
+          - link "https://jenkins.tmapadmin.com/job/pc.tokscale_prd/39/" [ref=e158] [cursor=pointer]:
+            - /url: https://jenkins.tmapadmin.com/job/pc.tokscale_prd/39/
+          - text: "\" runUrl: \"job/pc.tokscale_prd/39/\" labels: jenkins/label-digest: \"27d97d065ed076b5c2d4bd65679b4bc40d2355b7\" jenkins/devops-jenkins-jenkins-agent: \"true\" jenkins/label: \"pc_tokscale_prd_39-zmxrk\" kubernetes.jenkins.io/controller: \"https___jenkins_tmapadmin_comx\" name: \"pc-tokscale-prd-39-zmxrk-4fhw1-16lm3\" namespace: \"jenkins\" spec: containers: - env: - name: \"JENKINS_SECRET\" value: \"********\" - name: \"JENKINS_TUNNEL\" value: \"devops-jenkins-agent.jenkins.svc.cluster.local:50000\" - name: \"JENKINS_AGENT_NAME\" value: \"pc-tokscale-prd-39-zmxrk-4fhw1-16lm3\" - name: \"REMOTING_OPTS\" value: \"-noReconnectAfter 1d\" - name: \"JENKINS_NAME\" value: \"pc-tokscale-prd-39-zmxrk-4fhw1-16lm3\" - name: \"JENKINS_AGENT_WORKDIR\" value: \"/home/jenkins/agent\" - name: \"JENKINS_URL\" value: \""
+          - link "https://jenkins.tmapadmin.com/" [ref=e159] [cursor=pointer]:
+            - /url: https://jenkins.tmapadmin.com/
+          - text: "\" image: \"harbor.tmapadmin.com/common/jenkins/inbound-agent:3283.v92c105e0f819-9-jdk17\" imagePullPolicy: \"IfNotPresent\" name: \"jnlp\" resources: {} tty: true volumeMounts: - mountPath: \"/etc/localtime\" name: \"volume-0\" readOnly: false - mountPath: \"/home/jenkins/agent\" name: \"workspace-volume\" readOnly: false nodeSelector: kubernetes.io/os: \"linux\" restartPolicy: \"Never\" volumes: - hostPath: path: \"/usr/share/zoneinfo/Asia/Seoul\" name: \"volume-0\" - emptyDir: medium: \"\" name: \"workspace-volume\" Running on"
+          - link "pc-tokscale-prd-39-zmxrk-4fhw1-16lm3" [ref=e160] [cursor=pointer]:
+            - /url: /computer/pc%2Dtokscale%2Dprd%2D39%2Dzmxrk%2D4fhw1%2D16lm3/
+            - text: pc-tokscale-prd-39-zmxrk-4fhw1-16lm3
+            - button
+          - text: in /home/jenkins/agent/workspace/pc.tokscale_prd
+        - generic [ref=e161]: "[Pipeline] {"
+        - generic [ref=e162]: "[Pipeline] withEnv"
+        - generic [ref=e163]: "[Pipeline] {"
+        - generic [ref=e164]: "[Pipeline] stage"
+        - generic [ref=e165]: "[Pipeline] { (Define ImageTag)"
+        - generic [ref=e166]: "[Pipeline] script"
+        - generic [ref=e167]: "[Pipeline] {"
+        - generic [ref=e168]: "[Pipeline] sh"
+        - text: "+ date +%y%m%d%H%M%S + echo prd-0.0.0-260707093128 Did you forget the `def` keyword? WorkflowScript seems to be setting a field named versionTag (to a value of type String) which could lead to memory leaks or other issues. [Pipeline] } [Pipeline] // script [Pipeline] } [Pipeline] // stage"
+        - generic [ref=e169]: "[Pipeline] stage"
+        - generic [ref=e170]: "[Pipeline] { (Start Push)"
+        - generic [ref=e171]: "[Pipeline] script"
+        - generic [ref=e172]: "[Pipeline] {"
+        - generic [ref=e173]: "[Pipeline] catchError"
+        - generic [ref=e174]: "[Pipeline] {"
+        - generic [ref=e175]: "[Pipeline] timeout"
+        - text: Timeout set to expire in 30 sec
+        - generic [ref=e176]: "[Pipeline] {"
+        - generic [ref=e177]: "[Pipeline] build (Building common.start_push)"
+        - generic [ref=e178]:
+          - text: "Scheduling project:"
+          - link "common.start_push" [ref=e179] [cursor=pointer]:
+            - /url: /job/common.start_push/
+            - text: common.start_push
+            - button
+          - text: "Starting building:"
+          - 'link "common.start_push #71322" [ref=e180] [cursor=pointer]':
+            - /url: /job/common.start_push/71322/
+            - text: "common.start_push #71322"
+            - button
+          - text: Build
+          - 'link "common.start_push #71322" [ref=e181] [cursor=pointer]':
+            - /url: /job/common.start_push/71322/
+            - text: "common.start_push #71322"
+            - button
+          - text: "completed: SUCCESS"
+        - text: "[Pipeline] } [Pipeline] // timeout [Pipeline] } [Pipeline] // catchError [Pipeline] } [Pipeline] // script [Pipeline] } [Pipeline] // stage"
+        - generic [ref=e182]: "[Pipeline] stage"
+        - generic [ref=e183]: "[Pipeline] { (Build)"
+        - generic [ref=e184]: "[Pipeline] build (Building common.docker_build_arm64_github_prd)"
+        - generic [ref=e185]:
+          - text: "Scheduling project:"
+          - link "common.docker_build_arm64_github_prd" [ref=e186] [cursor=pointer]:
+            - /url: /job/common.docker_build_arm64_github_prd/
+            - text: common.docker_build_arm64_github_prd
+            - button
+          - text: "Starting building:"
+          - 'link "common.docker_build_arm64_github_prd #1980" [ref=e187] [cursor=pointer]':
+            - /url: /job/common.docker_build_arm64_github_prd/1980/
+            - text: "common.docker_build_arm64_github_prd #1980"
+            - button
+          - text: Build
+          - 'link "common.docker_build_arm64_github_prd #1980" [ref=e188] [cursor=pointer]':
+            - /url: /job/common.docker_build_arm64_github_prd/1980/
+            - text: "common.docker_build_arm64_github_prd #1980"
+            - button
+          - text: "completed: FAILURE"
+        - text: "[Pipeline] } [Pipeline] // stage"
+        - generic [ref=e189]: "[Pipeline] stage"
+        - generic [ref=e190]: "[Pipeline] { (Deploy to Argo)"
+        - text: Stage "Deploy to Argo" skipped due to earlier failure(s)
+        - generic [ref=e191]: "[Pipeline] getContext"
+        - text: "[Pipeline] } [Pipeline] // stage"
+        - generic [ref=e192]: "[Pipeline] stage"
+        - generic [ref=e193]: "[Pipeline] { (Declarative: Post Actions)"
+        - generic [ref=e194]: "[Pipeline] script"
+        - generic [ref=e195]: "[Pipeline] {"
+        - generic [ref=e196]: "[Pipeline] build (Building common.end_push)"
+        - generic [ref=e197]:
+          - text: "Scheduling project:"
+          - link "common.end_push" [ref=e198] [cursor=pointer]:
+            - /url: /job/common.end_push/
+            - text: common.end_push
+            - button
+          - text: "Starting building:"
+          - 'link "common.end_push #72413" [ref=e199] [cursor=pointer]':
+            - /url: /job/common.end_push/72413/
+            - text: "common.end_push #72413"
+            - button
+          - text: Build
+          - 'link "common.end_push #72413" [ref=e200] [cursor=pointer]':
+            - /url: /job/common.end_push/72413/
+            - text: "common.end_push #72413"
+            - button
+          - text: "completed: SUCCESS"
+        - text: "[Pipeline] } [Pipeline] // script [Pipeline] } [Pipeline] // stage [Pipeline] } [Pipeline] // withEnv [Pipeline] } [Pipeline] // node [Pipeline] } [Pipeline] // podTemplate [Pipeline] End of Pipeline"
+        - 'link "common.docker_build_arm64_github_prd #1980" [ref=e201] [cursor=pointer]':
+          - /url: /job/common.docker_build_arm64_github_prd/1980/
+          - text: "common.docker_build_arm64_github_prd #1980"
+          - button
+        - text: "completed with status FAILURE (propagate: false to ignore) org.jenkinsci.plugins.workflow.actions.ErrorAction$ErrorId: f4ce9abd-be49-4ba6-aba5-f273e4f1423a Finished: FAILURE"
+  - contentinfo [ref=e202]:
+    - generic [ref=e205]:
+      - link "REST API" [ref=e206] [cursor=pointer]:
+        - /url: api/
+      - button "Jenkins 2.516.1" [ref=e207] [cursor=pointer]

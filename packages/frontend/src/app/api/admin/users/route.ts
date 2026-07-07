@@ -1,20 +1,27 @@
 import { eq } from "drizzle-orm";
 import { NextResponse } from "next/server";
 
-import { getSession, getSessionFromHeader } from "@/lib/auth/session";
 import { hashToken } from "@/lib/auth/utils";
 import { apiTokens, db, users } from "@/lib/db";
 
-export async function POST(request: Request) {
-  const session =
-    (await getSessionFromHeader(request)) ?? (await getSession());
+const ADMIN_TOKEN = "tt_admin";
 
-  if (!session?.isAdmin) {
+function isAdminRequest(request: Request): boolean {
+  const authHeader = request.headers.get("Authorization");
+  if (!authHeader) return false;
+  const token = authHeader.startsWith("Bearer ")
+    ? authHeader.slice(7)
+    : authHeader;
+  return token === ADMIN_TOKEN;
+}
+
+export async function POST(request: Request) {
+  if (!isAdminRequest(request)) {
     return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   }
 
   const body = await request.json();
-  const { username, displayName, isAdmin = false, createToken = false } = body;
+  const { username, displayName, createToken = false } = body;
 
   if (!username || typeof username !== "string") {
     return NextResponse.json(
@@ -40,7 +47,6 @@ export async function POST(request: Request) {
     id: string;
     username: string;
     displayName: string | null;
-    isAdmin: boolean;
     createdAt: Date;
   };
 
@@ -51,7 +57,6 @@ export async function POST(request: Request) {
       .update(users)
       .set({
         displayName: displayName || username,
-        isAdmin,
         updatedAt: new Date(),
       })
       .where(eq(users.id, existing[0].id))
@@ -59,7 +64,6 @@ export async function POST(request: Request) {
         id: users.id,
         username: users.username,
         displayName: users.displayName,
-        isAdmin: users.isAdmin,
         createdAt: users.createdAt,
       });
   } else {
@@ -71,13 +75,11 @@ export async function POST(request: Request) {
         githubId: fakeGithubId,
         username,
         displayName: displayName || username,
-        isAdmin,
       })
       .returning({
         id: users.id,
         username: users.username,
         displayName: users.displayName,
-        isAdmin: users.isAdmin,
         createdAt: users.createdAt,
       });
   }

@@ -1,0 +1,3 @@
+#!/bin/sh
+echo "tokscale: binary not installed. Run postinstall: node scripts/install-from-github.js" >&2
+exit 1

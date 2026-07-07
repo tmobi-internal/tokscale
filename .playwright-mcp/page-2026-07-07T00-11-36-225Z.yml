@@ -1,0 +1,18 @@
+- generic [ref=e5]:
+  - img "조직 배경 이미지" [ref=e6]
+  - generic [ref=e7]:
+    - generic [ref=e13]:
+      - img "Microsoft" [ref=e16]
+      - main [ref=e17]:
+        - generic [ref=e20]:
+          - heading "로그인 시도 중" [level=1] [ref=e21]
+          - progressbar "잠시 기다려 주세요." [ref=e22]
+          - link "취소" [active] [ref=e28] [cursor=pointer]:
+            - /url: "#"
+    - contentinfo [ref=e29]:
+      - generic [ref=e30]:
+        - link "사용 약관" [ref=e31] [cursor=pointer]:
+          - /url: https://www.microsoft.com/ko-KR/servicesagreement/
+        - link "개인정보처리방침 및 위치정보이용약관" [ref=e32] [cursor=pointer]:
+          - /url: https://privacy.microsoft.com/ko-KR/privacystatement
+        - button "문제 해결 정보를 보려면 여기를 클릭하세요." [ref=e33] [cursor=pointer]: ...

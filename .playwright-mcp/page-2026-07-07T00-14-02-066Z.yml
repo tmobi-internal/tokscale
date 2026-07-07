@@ -1,0 +1,200 @@
+- generic [ref=f5e3]:
+  - article [ref=f5e4]:
+    - heading "Yellow Page" [level=3] [ref=f5e5]
+    - list [ref=f5e6]:
+      - listitem [ref=f5e7]:
+        - textbox "검색어 입력" [ref=f5e8]
+        - button "검색" [ref=f5e9] [cursor=pointer]
+  - generic [ref=f5e10]:
+    - article [ref=f5e11]:
+      - tree [ref=f5e42]:
+        - group [ref=f5e43]:
+          - treeitem "대표이사" [expanded] [level=1] [ref=f5e44] [cursor=pointer]
+          - group [ref=f5e45]:
+            - treeitem "RMO" [level=2] [ref=f5e46] [cursor=pointer]
+            - treeitem "GVO" [level=2] [ref=f5e47] [cursor=pointer]
+            - treeitem "Tech" [level=2] [ref=f5e48] [cursor=pointer]
+            - treeitem "데이터플랫폼&AX" [level=2] [selected] [ref=f5e49] [cursor=pointer]
+            - treeitem "Business" [expanded] [level=2] [ref=f5e50] [cursor=pointer]
+            - group [ref=f5e148]:
+              - treeitem "Future Mobility" [level=3] [ref=f5e149] [cursor=pointer]
+              - treeitem "Data Biz" [level=3] [ref=f5e150] [cursor=pointer]
+              - treeitem "광고/로컬 Biz" [level=3] [selected] [ref=f5e151] [cursor=pointer]
+              - treeitem "카라이프" [level=3] [ref=f5e152] [cursor=pointer]
+              - treeitem "온디맨드모빌리티" [level=3] [ref=f5e153] [cursor=pointer]
+              - treeitem "AI agent TF" [level=3] [ref=f5e154] [cursor=pointer]
+            - treeitem "Product" [level=2] [ref=f5e51] [cursor=pointer]
+            - treeitem "경영관리" [level=2] [ref=f5e52] [cursor=pointer]
+            - treeitem "경영지원" [expanded] [level=2] [ref=f5e53] [cursor=pointer]
+            - group [ref=f5e80]:
+              - treeitem "법무" [level=3] [ref=f5e81] [cursor=pointer]
+              - treeitem "대외정책" [level=3] [selected] [ref=f5e82] [cursor=pointer]
+              - treeitem "People&Culture" [level=3] [ref=f5e83] [cursor=pointer]
+            - treeitem "포트폴리오 효율화 TF" [level=2] [ref=f5e54] [cursor=pointer]
+    - article [ref=f5e13]:
+      - heading "광고/로컬 Biz 11명" [level=4] [ref=f5e155]:
+        - text: 광고/로컬 Biz
+        - generic [ref=f5e15]:
+          - emphasis [ref=f5e16]: "11"
+          - text: 명
+      - generic [ref=f5e56]:
+        - generic [ref=f5e57]:
+          - img [ref=f5e156]
+          - list [ref=f5e61] [cursor=pointer]:
+            - listitem [ref=f5e62]: 김태훈/PL
+            - listitem
+            - listitem [ref=f5e63]: Business
+            - listitem
+            - listitem [ref=f5e78]: 광고/로컬 Biz
+            - listitem
+            - listitem [ref=f5e79]: 광고
+            - listitem
+            - listitem [ref=f5e64]: 010-9036-5043
+            - listitem
+        - generic [ref=f5e157]:
+          - img [ref=f5e159]
+          - list [ref=f5e161] [cursor=pointer]:
+            - listitem [ref=f5e162]: 김재윤
+            - listitem
+            - listitem [ref=f5e163]: Business
+            - listitem
+            - listitem [ref=f5e164]: 광고/로컬 Biz
+            - listitem
+            - listitem [ref=f5e165]: 사업기획/개발
+            - listitem
+            - listitem [ref=f5e166]: 010-3388-2893
+            - listitem
+        - generic [ref=f5e167]:
+          - img [ref=f5e169]
+          - list [ref=f5e171] [cursor=pointer]:
+            - listitem [ref=f5e172]: 안정원
+            - listitem
+            - listitem [ref=f5e173]: Business
+            - listitem
+            - listitem [ref=f5e174]: 광고/로컬 Biz
+            - listitem
+            - listitem [ref=f5e175]: 사업기획/개발
+            - listitem
+            - listitem [ref=f5e176]: 010-3123-1642
+            - listitem
+        - generic [ref=f5e177]:
+          - img [ref=f5e179]
+          - list [ref=f5e181] [cursor=pointer]:
+            - listitem [ref=f5e182]: 김용진
+            - listitem
+            - listitem [ref=f5e183]: Business
+            - listitem
+            - listitem [ref=f5e184]: 광고/로컬 Biz
+            - listitem
+            - listitem [ref=f5e185]: 사업개발
+            - listitem
+            - listitem [ref=f5e186]: 010-9283-8318
+            - listitem
+        - list [ref=f5e190] [cursor=pointer]:
+          - listitem [ref=f5e191]: 이세진
+          - listitem
+          - listitem [ref=f5e192]: Business
+          - listitem
+          - listitem [ref=f5e193]: 광고/로컬 Biz
+          - listitem
+          - listitem [ref=f5e194]: 사업개발
+          - listitem
+          - listitem [ref=f5e195]: 010-5537-5947
+          - listitem
+        - generic [ref=f5e196]:
+          - img [ref=f5e198]
+          - list [ref=f5e200] [cursor=pointer]:
+            - listitem [ref=f5e201]: 정재우
+            - listitem
+            - listitem [ref=f5e202]: Business
+            - listitem
+            - listitem [ref=f5e203]: 광고/로컬 Biz
+            - listitem
+            - listitem [ref=f5e204]: 광고
+            - listitem
+            - listitem [ref=f5e205]: 010-5378-8255
+            - listitem
+        - generic [ref=f5e206]:
+          - img [ref=f5e208]
+          - list [ref=f5e210] [cursor=pointer]:
+            - listitem [ref=f5e211]: 백혜원
+            - listitem
+            - listitem [ref=f5e212]: Business
+            - listitem
+            - listitem [ref=f5e213]: 광고/로컬 Biz
+            - listitem
+            - listitem [ref=f5e214]: 광고
+            - listitem
+            - listitem [ref=f5e215]: "01099697210"
+            - listitem
+        - generic [ref=f5e216]:
+          - img [ref=f5e218]
+          - list [ref=f5e220] [cursor=pointer]:
+            - listitem [ref=f5e221]: 김민호
+            - listitem
+            - listitem [ref=f5e222]: Business
+            - listitem
+            - listitem [ref=f5e223]: 광고/로컬 Biz
+            - listitem
+            - listitem [ref=f5e224]: 광고
+            - listitem
+            - listitem [ref=f5e225]: 010-9000-4876
+            - listitem
+        - generic [ref=f5e226]:
+          - img [ref=f5e228]
+          - list [ref=f5e230] [cursor=pointer]:
+            - listitem [ref=f5e231]: 곽대정
+            - listitem
+            - listitem [ref=f5e232]: Business
+            - listitem
+            - listitem [ref=f5e233]: 광고/로컬 Biz
+            - listitem
+            - listitem [ref=f5e234]: 광고
+            - listitem
+            - listitem [ref=f5e235]: 010-3387-7422
+            - listitem
+        - generic [ref=f5e236]:
+          - img [ref=f5e238]
+          - list [ref=f5e240] [cursor=pointer]:
+            - listitem [ref=f5e241]: 김현철
+            - listitem
+            - listitem [ref=f5e242]: Business
+            - listitem
+            - listitem [ref=f5e243]: 광고/로컬 Biz
+            - listitem
+            - listitem
+            - listitem
+            - listitem [ref=f5e244]: 010-3442-8233
+            - listitem
+        - list [ref=f5e248] [cursor=pointer]:
+          - listitem [ref=f5e249]: 박승현
+          - listitem
+          - listitem [ref=f5e250]: Business
+          - listitem
+          - listitem [ref=f5e251]: 광고/로컬 Biz
+          - listitem
+          - listitem
+          - listitem
+          - listitem [ref=f5e252]: 010-4512-9516
+          - listitem
+      - generic [ref=f5e18]:
+        - img [ref=f5e65]
+        - paragraph [ref=f5e66]: T1500109
+        - paragraph [ref=f5e67]: 박승현
+        - table [ref=f5e20]:
+          - rowgroup [ref=f5e24]:
+            - row "부서 광고/로컬 Biz" [ref=f5e253]:
+              - rowheader "부서" [ref=f5e136]
+              - cell "광고/로컬 Biz" [ref=f5e254]
+            - row "휴대전화 010-4512-9516" [ref=f5e255]:
+              - rowheader "휴대전화" [ref=f5e69]
+              - cell "010-4512-9516" [ref=f5e256]
+            - row "메일주소 sweethyunn@sk.com" [ref=f5e257]:
+              - rowheader "메일주소" [ref=f5e72]
+              - cell "sweethyunn@sk.com" [ref=f5e258]
+            - row "직무" [ref=f5e259]:
+              - columnheader "직무" [ref=f5e260]
+              - cell [ref=f5e261]
+            - row "담당업무" [ref=f5e262]:
+              - columnheader "담당업무" [ref=f5e263]
+              - cell [ref=f5e264]

@@ -1,0 +1,81 @@
+- generic [ref=e2]:
+  - region "Notifications alt+T"
+  - generic [ref=e3]:
+    - complementary [ref=e4]:
+      - generic [ref=e6]:
+        - img [ref=e7]
+        - generic [ref=e9]: TMAPMOBILITY
+      - navigation "사이드바" [ref=e12]:
+        - button "분석" [expanded] [ref=e13] [cursor=pointer]:
+          - img [ref=e14]
+          - generic [ref=e16]: 분석
+          - img [ref=e17]
+        - generic [ref=e20]:
+          - link "개요" [ref=e21] [cursor=pointer]:
+            - /url: /analytics
+            - generic [ref=e22]: 개요
+          - link "리더보드" [ref=e23] [cursor=pointer]:
+            - /url: /analytics/leaderboards?source=sidebar
+            - generic [ref=e24]: 리더보드
+          - link "크레딧" [ref=e25] [cursor=pointer]:
+            - /url: /analytics/credits
+            - generic [ref=e26]: 크레딧
+          - link "ChatGPT" [ref=e27] [cursor=pointer]:
+            - /url: /analytics/chatgpt
+            - generic [ref=e28]: ChatGPT
+          - link "Codex" [ref=e29] [cursor=pointer]:
+            - /url: /analytics/codex
+            - generic [ref=e30]: Codex
+        - button "ID 및 액세스" [ref=e31] [cursor=pointer]:
+          - img [ref=e32]
+          - generic [ref=e34]: ID 및 액세스
+          - img [ref=e35]
+        - generic:
+          - generic:
+            - link "개요":
+              - /url: /overview
+              - generic: 개요
+            - link "외부 액세스":
+              - /url: /apps
+              - generic: 외부 액세스
+      - button "충 충우 이" [ref=e39] [cursor=pointer]:
+        - generic [ref=e40]:
+          - generic [ref=e41]: 충
+          - generic [ref=e42]: 충우 이
+    - main [ref=e45]:
+      - generic [ref=e46]:
+        - generic [ref=e48]:
+          - heading "크레딧" [level=1] [ref=e50]
+          - generic [ref=e51]:
+            - button "지난 30일" [ref=e52] [cursor=pointer]:
+              - img [ref=e53]
+              - generic [ref=e56]: 지난 30일
+              - img [ref=e58]
+            - button "크레딧 필터 열기" [ref=e60] [cursor=pointer]:
+              - generic [ref=e61]:
+                - img [ref=e62]
+                - generic [ref=e64]: 필터
+                - img [ref=e65]
+            - button "데이터 내보내기" [ref=e67] [cursor=pointer]:
+              - img [ref=e68]
+            - button "도움말" [ref=e70] [cursor=pointer]:
+              - img [ref=e71]
+        - generic [ref=e73]:
+          - generic [ref=e74]:
+            - generic [ref=e75]: 대시보드 데이터를 불러오는 중…
+            - generic [ref=e78]:
+              - text: 제품별 크레딧
+              - generic "제품별 크레딧에 대한 자세한 정보" [ref=e79] [cursor=pointer]:
+                - img [ref=e80]
+          - generic [ref=e86]:
+            - generic [ref=e87]: 대시보드 데이터를 불러오는 중…
+            - generic [ref=e90]:
+              - text: 종량제 항목별 크레딧
+              - generic "종량제 항목별 크레딧에 대한 자세한 정보" [ref=e91] [cursor=pointer]:
+                - img [ref=e92]
+          - generic [ref=e97]:
+            - generic [ref=e98]: 대시보드 데이터를 불러오는 중…
+            - generic [ref=e101]:
+              - text: 모델별 크레딧
+              - generic "모델별 크레딧에 대한 자세한 정보" [ref=e102] [cursor=pointer]:
+                - img [ref=e103]

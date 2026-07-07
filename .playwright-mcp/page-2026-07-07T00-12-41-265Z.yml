@@ -1,0 +1,38 @@
+- generic [active] [ref=f5e1]:
+  - generic [ref=f5e3]:
+    - article [ref=f5e4]:
+      - heading "Yellow Page" [level=3] [ref=f5e5]
+      - list [ref=f5e6]:
+        - listitem [ref=f5e7]:
+          - textbox "검색어 입력" [ref=f5e8]
+          - button "검색" [ref=f5e9] [cursor=pointer]
+    - generic [ref=f5e10]:
+      - article [ref=f5e11]
+      - article [ref=f5e13]:
+        - heading "0명" [level=4] [ref=f5e14]:
+          - generic [ref=f5e15]:
+            - emphasis [ref=f5e16]: "0"
+            - text: 명
+        - generic [ref=f5e18]:
+          - generic [ref=f5e19]:
+            - img
+          - paragraph
+          - paragraph
+          - table [ref=f5e20]:
+            - rowgroup [ref=f5e24]:
+              - row "부서" [ref=f5e25]:
+                - columnheader "부서" [ref=f5e26]
+                - cell [ref=f5e27]
+              - row "휴대전화" [ref=f5e28]:
+                - columnheader "휴대전화" [ref=f5e29]
+                - cell [ref=f5e30]
+              - row "메일주소" [ref=f5e31]:
+                - columnheader "메일주소" [ref=f5e32]
+                - cell [ref=f5e33]
+              - row "직무" [ref=f5e34]:
+                - columnheader "직무" [ref=f5e35]
+                - cell [ref=f5e36]
+              - row "담당업무" [ref=f5e37]:
+                - columnheader "담당업무" [ref=f5e38]
+                - cell [ref=f5e39]
+  - paragraph [ref=f5e41]

@@ -1,0 +1,171 @@
+- generic [active] [ref=f6e1]:
+  - link "Skip to content":
+    - /url: "#skip2content"
+  - banner [ref=f6e2]:
+    - generic [ref=f6e4]:
+      - link "Jenkins" [ref=f6e5] [cursor=pointer]:
+        - /url: /
+        - img [ref=f6e6]
+        - generic [ref=f6e7]: Jenkins
+      - generic "breadcrumb" [ref=f6e8]:
+        - list [ref=f6e9]:
+          - listitem [ref=f6e10]:
+            - link "pc.tokscale_prd" [ref=f6e11] [cursor=pointer]:
+              - /url: /job/pc.tokscale_prd/
+    - generic [ref=f6e12]:
+      - button "Search" [ref=f6e13] [cursor=pointer]:
+        - img [ref=f6e14]
+        - generic [ref=f6e17]: Search
+      - link "이충우/데이터플랫폼&AX" [ref=f6e18] [cursor=pointer]:
+        - /url: /user/c.lee@tmapmobility.com
+        - img [ref=f6e19]
+        - generic [ref=f6e22]: 이충우/데이터플랫폼&AX
+  - generic [ref=f6e23]:
+    - generic [ref=f6e24]:
+      - generic [ref=f6e25]:
+        - link "Status" [ref=f6e28] [cursor=pointer]:
+          - /url: /job/pc.tokscale_prd/
+          - img [ref=f6e30]
+          - text: Status
+        - link "Changes" [ref=f6e35] [cursor=pointer]:
+          - /url: /job/pc.tokscale_prd/changes
+          - img [ref=f6e37]
+          - text: Changes
+        - link "파라미터와 함께 빌드" [ref=f6e41] [cursor=pointer]:
+          - /url: /job/pc.tokscale_prd/build?delay=0sec
+          - img [ref=f6e43]
+          - text: 파라미터와 함께 빌드
+        - link "구성" [ref=f6e47] [cursor=pointer]:
+          - /url: /job/pc.tokscale_prd/configure
+          - img [ref=f6e49]
+          - text: 구성
+        - link "Pipeline 삭제" [ref=f6e55] [cursor=pointer]:
+          - /url: "#"
+          - img [ref=f6e57]
+          - generic [ref=f6e60]: Pipeline 삭제
+        - link "Full Stage View" [ref=f6e63] [cursor=pointer]:
+          - /url: /job/pc.tokscale_prd/workflow-stage
+          - img [ref=f6e65]
+          - text: Full Stage View
+        - link "Stages" [ref=f6e70] [cursor=pointer]:
+          - /url: /job/pc.tokscale_prd/multi-pipeline-graph
+          - img [ref=f6e72]
+          - text: Stages
+        - link "Rename" [ref=f6e77] [cursor=pointer]:
+          - /url: /job/pc.tokscale_prd/confirm-rename
+          - img [ref=f6e79]
+          - text: Rename
+        - link "Pipeline Configuration History" [ref=f6e85] [cursor=pointer]:
+          - /url: /job/pc.tokscale_prd/pipeline-config-history
+          - img [ref=f6e87]
+          - text: Pipeline Configuration History
+        - link "Pipeline Syntax" [ref=f6e90] [cursor=pointer]:
+          - /url: /job/pc.tokscale_prd/pipeline-syntax
+          - img [ref=f6e92]
+          - text: Pipeline Syntax
+      - generic [ref=f6e97]:
+        - generic [ref=f6e98]:
+          - text: Builds
+          - generic [ref=f6e99]:
+            - button "More actions" [ref=f6e100] [cursor=pointer]:
+              - img [ref=f6e101]
+            - link "Expand" [ref=f6e105] [cursor=pointer]:
+              - /url: /job/pc.tokscale_prd/buildTimeTrend
+              - img [ref=f6e106]
+        - generic [ref=f6e108]:
+          - generic [ref=f6e110]:
+            - generic:
+              - img
+            - searchbox "Filter" [ref=f6e111]
+            - img [ref=f6e113]
+          - generic [ref=f6e118]:
+            - generic [ref=f6e119]: 2026년 7월 1일
+            - generic [ref=f6e120] [cursor=pointer]:
+              - link "Success" [ref=f6e121]:
+                - /url: /job/pc.tokscale_prd/38/console
+                - img [ref=f6e122]
+              - link "#38 오후 2:16" [ref=f6e126]:
+                - /url: /job/pc.tokscale_prd/38/
+                - text: "#38"
+                - generic "Took 5 min 37 sec" [ref=f6e128]: 오후 2:16
+              - button [ref=f6e129]:
+                - img [ref=f6e130]
+            - generic [ref=f6e132] [cursor=pointer]:
+              - link "Success" [ref=f6e133]:
+                - /url: /job/pc.tokscale_prd/37/console
+                - img [ref=f6e134]
+              - link "#37 오후 1:58" [ref=f6e138]:
+                - /url: /job/pc.tokscale_prd/37/
+                - text: "#37"
+                - generic "Took 5 min 40 sec" [ref=f6e140]: 오후 1:58
+              - button [ref=f6e141]:
+                - img [ref=f6e142]
+            - generic [ref=f6e144] [cursor=pointer]:
+              - link "Success" [ref=f6e145]:
+                - /url: /job/pc.tokscale_prd/36/console
+                - img [ref=f6e146]
+              - link "#36 오후 1:44" [ref=f6e150]:
+                - /url: /job/pc.tokscale_prd/36/
+                - text: "#36"
+                - generic "Took 5 min 32 sec" [ref=f6e152]: 오후 1:44
+              - button [ref=f6e153]:
+                - img [ref=f6e154]
+            - generic [ref=f6e156] [cursor=pointer]:
+              - link "Success" [ref=f6e157]:
+                - /url: /job/pc.tokscale_prd/35/console
+                - img [ref=f6e158]
+              - link "#35 오전 10:56" [ref=f6e162]:
+                - /url: /job/pc.tokscale_prd/35/
+                - text: "#35"
+                - generic "Took 5 min 37 sec" [ref=f6e164]: 오전 10:56
+              - button [ref=f6e165]:
+                - img [ref=f6e166]
+            - generic [ref=f6e168] [cursor=pointer]:
+              - link "Success" [ref=f6e169]:
+                - /url: /job/pc.tokscale_prd/34/console
+                - img [ref=f6e170]
+              - link "#34 오전 10:12" [ref=f6e174]:
+                - /url: /job/pc.tokscale_prd/34/
+                - text: "#34"
+                - generic "Took 5 min 37 sec" [ref=f6e176]: 오전 10:12
+              - button [ref=f6e177]:
+                - img [ref=f6e178]
+    - generic [ref=f6e180]:
+      - heading "Pipeline pc.tokscale_prd" [level=1] [ref=f6e181]
+      - paragraph [ref=f6e182]: 매개변수가 필요한 빌드입니다.
+      - generic [ref=f6e184]:
+        - generic [ref=f6e185]:
+          - generic [ref=f6e186]: BRANCH
+          - textbox [ref=f6e189]: main
+        - generic [ref=f6e190]:
+          - generic [ref=f6e191]: BUILD_VERSION
+          - textbox [ref=f6e194]: 0.0.0
+        - generic [ref=f6e195]:
+          - generic [ref=f6e196]: APP_NAME
+          - textbox [ref=f6e199]: tokscale
+        - generic [ref=f6e200]:
+          - generic [ref=f6e201]: NAMESPACE
+          - textbox [ref=f6e204]: it
+        - generic [ref=f6e205]:
+          - generic [ref=f6e206]: GIT_NAME
+          - textbox [ref=f6e209]: tokscale
+        - generic [ref=f6e210]:
+          - generic [ref=f6e211]: DEPLOY_GIT
+          - textbox [ref=f6e214]: devops-deploy-it
+        - generic [ref=f6e215]:
+          - generic [ref=f6e216]: ENV
+          - textbox [ref=f6e219]: prd
+        - generic [ref=f6e220]:
+          - generic [ref=f6e221]: DOCKERFILE
+          - textbox [ref=f6e224]: self-host/Dockerfile
+        - generic [ref=f6e225]:
+          - generic [ref=f6e226]: DEPLOY_PATH
+          - textbox [ref=f6e229]: it
+        - generic [ref=f6e231]:
+          - button "매개변수가 필요한 빌드입니다." [ref=f6e232] [cursor=pointer]:
+            - img [ref=f6e233]
+            - text: 매개변수가 필요한 빌드입니다.
+          - link "Cancel" [ref=f6e235] [cursor=pointer]:
+            - /url: ./
+  - contentinfo [ref=f6e236]:
+    - button "Jenkins 2.516.1" [ref=f6e240] [cursor=pointer]

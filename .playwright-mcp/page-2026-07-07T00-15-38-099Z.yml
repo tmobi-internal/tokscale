@@ -1,0 +1,74 @@
+- generic [ref=f5e3]:
+  - article [ref=f5e4]:
+    - heading "Yellow Page" [level=3] [ref=f5e5]
+    - list [ref=f5e6]:
+      - listitem [ref=f5e7]:
+        - textbox "검색어 입력" [active] [ref=f5e8]: 배솔봄
+        - button "검색" [ref=f5e9] [cursor=pointer]
+  - generic [ref=f5e10]:
+    - article [ref=f5e11]:
+      - tree [ref=f5e42]:
+        - group [ref=f5e43]:
+          - treeitem "대표이사" [expanded] [level=1] [ref=f5e44] [cursor=pointer]
+          - group [ref=f5e45]:
+            - treeitem "RMO" [level=2] [ref=f5e46] [cursor=pointer]
+            - treeitem "GVO" [level=2] [ref=f5e47] [cursor=pointer]
+            - treeitem "Tech" [level=2] [ref=f5e48] [cursor=pointer]
+            - treeitem "데이터플랫폼&AX" [level=2] [selected] [ref=f5e49] [cursor=pointer]
+            - treeitem "Business" [expanded] [level=2] [ref=f5e50] [cursor=pointer]
+            - group [ref=f5e148]:
+              - treeitem "Future Mobility" [level=3] [ref=f5e149] [cursor=pointer]
+              - treeitem "Data Biz" [level=3] [ref=f5e150] [cursor=pointer]
+              - treeitem "광고/로컬 Biz" [level=3] [selected] [ref=f5e151] [cursor=pointer]
+              - treeitem "카라이프" [level=3] [ref=f5e152] [cursor=pointer]
+              - treeitem "온디맨드모빌리티" [level=3] [ref=f5e153] [cursor=pointer]
+              - treeitem "AI agent TF" [level=3] [ref=f5e154] [cursor=pointer]
+            - treeitem "Product" [level=2] [ref=f5e51] [cursor=pointer]
+            - treeitem "경영관리" [level=2] [ref=f5e52] [cursor=pointer]
+            - treeitem "경영지원" [expanded] [level=2] [ref=f5e53] [cursor=pointer]
+            - group [ref=f5e80]:
+              - treeitem "법무" [level=3] [ref=f5e81] [cursor=pointer]
+              - treeitem "대외정책" [level=3] [selected] [ref=f5e82] [cursor=pointer]
+              - treeitem "People&Culture" [expanded] [level=3] [ref=f5e83] [cursor=pointer]
+              - group [ref=f5e266]:
+                - treeitem "Health Care" [level=4] [selected] [ref=f5e267] [cursor=pointer]
+                - treeitem "성장지원 TF" [level=4] [ref=f5e268] [cursor=pointer]
+            - treeitem "포트폴리오 효율화 TF" [level=2] [ref=f5e54] [cursor=pointer]
+    - article [ref=f5e13]:
+      - heading "검색 결과 1명" [level=4] [ref=f5e300]:
+        - text: 검색 결과
+        - generic [ref=f5e15]:
+          - emphasis [ref=f5e16]: "1"
+          - text: 명
+      - list [ref=f5e61] [cursor=pointer]:
+        - listitem [ref=f5e62]: 배솔봄
+        - listitem
+        - listitem [ref=f5e63]: 경영관리
+        - listitem
+        - listitem [ref=f5e78]: 재무
+        - listitem
+        - listitem
+        - listitem
+        - listitem [ref=f5e64]: 010-4473-0032
+        - listitem
+      - generic [ref=f5e18]:
+        - img [ref=f5e65]
+        - paragraph [ref=f5e66]: T1500110
+        - paragraph [ref=f5e67]: 윤선희
+        - table [ref=f5e20]:
+          - rowgroup [ref=f5e24]:
+            - row "부서 Health Care" [ref=f5e294]:
+              - rowheader "부서" [ref=f5e136]
+              - cell "Health Care" [ref=f5e295]
+            - row "휴대전화 010-3831-7623" [ref=f5e296]:
+              - rowheader "휴대전화" [ref=f5e69]
+              - cell "010-3831-7623" [ref=f5e297]
+            - row "메일주소 t1500110@sk.com" [ref=f5e298]:
+              - rowheader "메일주소" [ref=f5e72]
+              - cell "t1500110@sk.com" [ref=f5e299]
+            - row "직무" [ref=f5e259]:
+              - columnheader "직무" [ref=f5e260]
+              - cell [ref=f5e261]
+            - row "담당업무" [ref=f5e262]:
+              - columnheader "담당업무" [ref=f5e263]
+              - cell [ref=f5e264]

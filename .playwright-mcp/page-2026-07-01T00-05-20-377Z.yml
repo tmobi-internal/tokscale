@@ -1,0 +1,21 @@
+- generic [ref=e4]:
+  - generic [ref=e6]: Let's get stuff deployed!
+  - generic [ref=e8]:
+    - img "argo" [ref=e10]
+    - generic [ref=e11]:
+      - link "Log in via SSO" [ref=e12] [cursor=pointer]:
+        - /url: auth/login?return_url=https%3A%2F%2Fargocd.tmapadmin.com%2Fapplications%2Fargocd%2Ftokscale-prd
+        - button "Log in via SSO" [ref=e13]:
+          - generic [ref=e14]: Log in via SSO
+      - generic [ref=e16]: or
+    - form [ref=e17]:
+      - generic [ref=e19]:
+        - textbox "Username" [ref=e20]
+        - generic [ref=e21]: Username
+      - generic [ref=e23]:
+        - textbox "Password" [ref=e24]
+        - generic [ref=e25]: Password
+      - button "Sign In" [ref=e27] [cursor=pointer]
+    - link "argo" [ref=e29] [cursor=pointer]:
+      - /url: https://argoproj.io
+      - img "argo" [ref=e30]

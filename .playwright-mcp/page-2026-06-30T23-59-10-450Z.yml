@@ -1,0 +1,128 @@
+- generic [active] [ref=f10e1]:
+  - link "Skip to content":
+    - /url: "#skip2content"
+  - banner [ref=f10e2]:
+    - generic [ref=f10e4]:
+      - link "Jenkins" [ref=f10e5] [cursor=pointer]:
+        - /url: /
+        - img [ref=f10e6]
+        - generic [ref=f10e7]: Jenkins
+      - generic "breadcrumb" [ref=f10e8]:
+        - list [ref=f10e9]:
+          - listitem [ref=f10e10]:
+            - link "pc.tokscale_prd" [ref=f10e11] [cursor=pointer]:
+              - /url: /job/pc.tokscale_prd/
+    - generic [ref=f10e12]:
+      - button "Search" [ref=f10e13] [cursor=pointer]:
+        - img [ref=f10e14]
+        - generic [ref=f10e17]: Search
+      - link "이충우/데이터플랫폼&AX" [ref=f10e18] [cursor=pointer]:
+        - /url: /user/c.lee@tmapmobility.com
+        - img [ref=f10e19]
+        - generic [ref=f10e22]: 이충우/데이터플랫폼&AX
+  - generic [ref=f10e23]:
+    - generic [ref=f10e24]:
+      - generic [ref=f10e25]:
+        - link "Status" [ref=f10e28]:
+          - /url: /job/pc.tokscale_prd/
+          - img [ref=f10e30]
+          - text: Status
+        - link "Changes" [ref=f10e35] [cursor=pointer]:
+          - /url: /job/pc.tokscale_prd/changes
+          - img [ref=f10e37]
+          - text: Changes
+        - link "파라미터와 함께 빌드" [ref=f10e41] [cursor=pointer]:
+          - /url: /job/pc.tokscale_prd/build?delay=0sec
+          - img [ref=f10e43]
+          - text: 파라미터와 함께 빌드
+        - link "구성" [ref=f10e47] [cursor=pointer]:
+          - /url: /job/pc.tokscale_prd/configure
+          - img [ref=f10e49]
+          - text: 구성
+        - link "Pipeline 삭제" [ref=f10e55] [cursor=pointer]:
+          - /url: "#"
+          - img [ref=f10e57]
+          - generic [ref=f10e60]: Pipeline 삭제
+        - link "Full Stage View" [ref=f10e63] [cursor=pointer]:
+          - /url: /job/pc.tokscale_prd/workflow-stage
+          - img [ref=f10e65]
+          - text: Full Stage View
+        - link "Stages" [ref=f10e70] [cursor=pointer]:
+          - /url: /job/pc.tokscale_prd/multi-pipeline-graph
+          - img [ref=f10e72]
+          - text: Stages
+        - link "Rename" [ref=f10e77] [cursor=pointer]:
+          - /url: /job/pc.tokscale_prd/confirm-rename
+          - img [ref=f10e79]
+          - text: Rename
+        - link "Pipeline Configuration History" [ref=f10e85] [cursor=pointer]:
+          - /url: /job/pc.tokscale_prd/pipeline-config-history
+          - img [ref=f10e87]
+          - text: Pipeline Configuration History
+        - link "Pipeline Syntax" [ref=f10e90] [cursor=pointer]:
+          - /url: /job/pc.tokscale_prd/pipeline-syntax
+          - img [ref=f10e92]
+          - text: Pipeline Syntax
+      - generic [ref=f10e97]:
+        - generic [ref=f10e98]:
+          - text: Builds
+          - generic [ref=f10e99]:
+            - button "More actions" [ref=f10e100] [cursor=pointer]:
+              - img [ref=f10e101]
+            - link "Expand" [ref=f10e105] [cursor=pointer]:
+              - /url: /job/pc.tokscale_prd/buildTimeTrend
+              - img [ref=f10e106]
+        - generic [ref=f10e108]:
+          - generic [ref=f10e110]:
+            - generic:
+              - img
+            - searchbox "Filter" [ref=f10e111]
+            - img [ref=f10e113]
+          - paragraph [ref=f10e118]: Loading builds...
+    - generic [ref=f10e119]:
+      - generic [ref=f10e120]:
+        - generic [ref=f10e121]:
+          - link [ref=f10e122] [cursor=pointer]:
+            - /url: /job/pc.tokscale_prd/31/
+            - img [ref=f10e123]
+          - heading "pc.tokscale_prd" [level=1] [ref=f10e126]:
+            - text: pc
+            - text: .tokscale
+            - text: _prd
+        - link "상세 내용 입력" [ref=f10e128] [cursor=pointer]:
+          - /url: editDescription
+          - img [ref=f10e129]
+          - text: 상세 내용 입력
+      - table
+      - heading "고정링크" [level=2] [ref=f10e133]
+      - list [ref=f10e134]:
+        - listitem [ref=f10e135]:
+          - link "Last build, (#31),1 day 17 hr 전" [ref=f10e136] [cursor=pointer]:
+            - /url: lastBuild/
+            - text: Last build, (#31),1 day 17 hr 전
+            - button
+        - listitem [ref=f10e137]:
+          - link "Last stable build, (#31),1 day 17 hr 전" [ref=f10e138] [cursor=pointer]:
+            - /url: lastStableBuild/
+            - text: Last stable build, (#31),1 day 17 hr 전
+            - button
+        - listitem [ref=f10e139]:
+          - link "Last successful build, (#31),1 day 17 hr 전" [ref=f10e140] [cursor=pointer]:
+            - /url: lastSuccessfulBuild/
+            - text: Last successful build, (#31),1 day 17 hr 전
+            - button
+        - listitem [ref=f10e141]:
+          - link "Last unsuccessful build, (#28),12 days 전" [ref=f10e142] [cursor=pointer]:
+            - /url: lastUnsuccessfulBuild/
+            - text: Last unsuccessful build, (#28),12 days 전
+            - button
+        - listitem [ref=f10e143]:
+          - link "Last completed build, (#31),1 day 17 hr 전" [ref=f10e144] [cursor=pointer]:
+            - /url: lastCompletedBuild/
+            - text: Last completed build, (#31),1 day 17 hr 전
+            - button
+  - contentinfo [ref=f10e145]:
+    - generic [ref=f10e148]:
+      - link "REST API" [ref=f10e149] [cursor=pointer]:
+        - /url: api/
+      - button "Jenkins 2.516.1" [ref=f10e150] [cursor=pointer]

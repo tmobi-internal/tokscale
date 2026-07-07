@@ -1,0 +1,340 @@
+- generic [active] [ref=f7e1]:
+  - link "Skip to content":
+    - /url: "#skip2content"
+  - banner [ref=f7e2]:
+    - generic [ref=f7e4]:
+      - link "Jenkins" [ref=f7e5] [cursor=pointer]:
+        - /url: /
+        - img [ref=f7e6]
+        - generic [ref=f7e7]: Jenkins
+      - generic "breadcrumb" [ref=f7e8]:
+        - list [ref=f7e9]:
+          - listitem [ref=f7e10]:
+            - link "pc.tokscale_prd" [ref=f7e11] [cursor=pointer]:
+              - /url: /job/pc.tokscale_prd/
+    - generic [ref=f7e12]:
+      - button "Search" [ref=f7e13] [cursor=pointer]:
+        - img [ref=f7e14]
+        - generic [ref=f7e17]: Search
+      - link "이충우/데이터플랫폼&AX" [ref=f7e18] [cursor=pointer]:
+        - /url: /user/c.lee@tmapmobility.com
+        - img [ref=f7e19]
+        - generic [ref=f7e22]: 이충우/데이터플랫폼&AX
+  - generic [ref=f7e23]:
+    - generic [ref=f7e24]:
+      - generic [ref=f7e25]:
+        - link "Status" [ref=f7e28]:
+          - /url: /job/pc.tokscale_prd/
+          - img [ref=f7e30]
+          - text: Status
+        - link "Changes" [ref=f7e35] [cursor=pointer]:
+          - /url: /job/pc.tokscale_prd/changes
+          - img [ref=f7e37]
+          - text: Changes
+        - link "파라미터와 함께 빌드" [ref=f7e41] [cursor=pointer]:
+          - /url: /job/pc.tokscale_prd/build?delay=0sec
+          - img [ref=f7e43]
+          - text: 파라미터와 함께 빌드
+        - link "구성" [ref=f7e47] [cursor=pointer]:
+          - /url: /job/pc.tokscale_prd/configure
+          - img [ref=f7e49]
+          - text: 구성
+        - link "Pipeline 삭제" [ref=f7e55] [cursor=pointer]:
+          - /url: "#"
+          - img [ref=f7e57]
+          - generic [ref=f7e60]: Pipeline 삭제
+        - link "Full Stage View" [ref=f7e63] [cursor=pointer]:
+          - /url: /job/pc.tokscale_prd/workflow-stage
+          - img [ref=f7e65]
+          - text: Full Stage View
+        - link "Stages" [ref=f7e70] [cursor=pointer]:
+          - /url: /job/pc.tokscale_prd/multi-pipeline-graph
+          - img [ref=f7e72]
+          - text: Stages
+        - link "Rename" [ref=f7e77] [cursor=pointer]:
+          - /url: /job/pc.tokscale_prd/confirm-rename
+          - img [ref=f7e79]
+          - text: Rename
+        - link "Pipeline Configuration History" [ref=f7e85] [cursor=pointer]:
+          - /url: /job/pc.tokscale_prd/pipeline-config-history
+          - img [ref=f7e87]
+          - text: Pipeline Configuration History
+        - link "Pipeline Syntax" [ref=f7e90] [cursor=pointer]:
+          - /url: /job/pc.tokscale_prd/pipeline-syntax
+          - img [ref=f7e92]
+          - text: Pipeline Syntax
+      - generic [ref=f7e97]:
+        - generic [ref=f7e98]:
+          - text: Builds
+          - generic [ref=f7e99]:
+            - button "More actions" [ref=f7e100] [cursor=pointer]:
+              - img [ref=f7e101]
+            - link "Expand" [ref=f7e105] [cursor=pointer]:
+              - /url: /job/pc.tokscale_prd/buildTimeTrend
+              - img [ref=f7e106]
+        - generic [ref=f7e108]:
+          - generic [ref=f7e110]:
+            - generic:
+              - img
+            - searchbox "Filter" [ref=f7e111]
+            - img [ref=f7e113]
+          - generic [ref=f7e118]:
+            - generic [ref=f7e119]: Today
+            - generic [ref=f7e120] [cursor=pointer]:
+              - link "In progress" [ref=f7e121]:
+                - /url: /job/pc.tokscale_prd/39/console
+                - img [ref=f7e122]
+              - generic [ref=f7e126]:
+                - link "#39 오전 9:31" [ref=f7e127]:
+                  - /url: /job/pc.tokscale_prd/39/
+                  - text: "#39"
+                  - generic [ref=f7e129]: 오전 9:31
+                - generic [ref=f7e130]:
+                  - 'link "\"0.11 sec 전에 시작 예상 잔여 시간: 5 min 36 sec\"" [ref=f7e131]':
+                    - /url: /job/pc.tokscale_prd/39/console
+                  - link "Cancel" [ref=f7e133]:
+                    - /url: /job/pc.tokscale_prd/39/stop
+                    - generic [ref=f7e134]: Cancel
+                    - img [ref=f7e135]
+              - button [ref=f7e137]:
+                - img [ref=f7e138]
+            - generic [ref=f7e140]: 2026년 7월 1일
+            - generic [ref=f7e141] [cursor=pointer]:
+              - link "Success" [ref=f7e142]:
+                - /url: /job/pc.tokscale_prd/38/console
+                - img [ref=f7e143]
+              - link "#38 오후 2:16" [ref=f7e147]:
+                - /url: /job/pc.tokscale_prd/38/
+                - text: "#38"
+                - generic "Took 5 min 37 sec" [ref=f7e149]: 오후 2:16
+              - button [ref=f7e150]:
+                - img [ref=f7e151]
+            - generic [ref=f7e153] [cursor=pointer]:
+              - link "Success" [ref=f7e154]:
+                - /url: /job/pc.tokscale_prd/37/console
+                - img [ref=f7e155]
+              - link "#37 오후 1:58" [ref=f7e159]:
+                - /url: /job/pc.tokscale_prd/37/
+                - text: "#37"
+                - generic "Took 5 min 40 sec" [ref=f7e161]: 오후 1:58
+              - button [ref=f7e162]:
+                - img [ref=f7e163]
+            - generic [ref=f7e165] [cursor=pointer]:
+              - link "Success" [ref=f7e166]:
+                - /url: /job/pc.tokscale_prd/36/console
+                - img [ref=f7e167]
+              - link "#36 오후 1:44" [ref=f7e171]:
+                - /url: /job/pc.tokscale_prd/36/
+                - text: "#36"
+                - generic "Took 5 min 32 sec" [ref=f7e173]: 오후 1:44
+              - button [ref=f7e174]:
+                - img [ref=f7e175]
+            - generic [ref=f7e177] [cursor=pointer]:
+              - link "Success" [ref=f7e178]:
+                - /url: /job/pc.tokscale_prd/35/console
+                - img [ref=f7e179]
+              - link "#35 오전 10:56" [ref=f7e183]:
+                - /url: /job/pc.tokscale_prd/35/
+                - text: "#35"
+                - generic "Took 5 min 37 sec" [ref=f7e185]: 오전 10:56
+              - button [ref=f7e186]:
+                - img [ref=f7e187]
+            - generic [ref=f7e189] [cursor=pointer]:
+              - link "Success" [ref=f7e190]:
+                - /url: /job/pc.tokscale_prd/34/console
+                - img [ref=f7e191]
+              - link "#34 오전 10:12" [ref=f7e195]:
+                - /url: /job/pc.tokscale_prd/34/
+                - text: "#34"
+                - generic "Took 5 min 37 sec" [ref=f7e197]: 오전 10:12
+              - button [ref=f7e198]:
+                - img [ref=f7e199]
+    - generic [ref=f7e201]:
+      - generic [ref=f7e202]:
+        - generic [ref=f7e203]:
+          - link [ref=f7e204] [cursor=pointer]:
+            - /url: /job/pc.tokscale_prd/39/
+            - img [ref=f7e205]
+          - heading "pc.tokscale_prd" [level=1] [ref=f7e209]:
+            - text: pc
+            - text: .tokscale
+            - text: _prd
+        - link "상세 내용 입력" [ref=f7e211] [cursor=pointer]:
+          - /url: editDescription
+          - img [ref=f7e212]
+          - text: 상세 내용 입력
+      - table
+      - generic [ref=f7e219]:
+        - heading "Stage View" [level=2] [ref=f7e220]
+        - table [ref=f7e223]:
+          - rowgroup [ref=f7e230]:
+            - 'row "Define ImageTag Start Push Build Deploy to Argo Declarative: Post Actions" [ref=f7e231]':
+              - columnheader [ref=f7e232]
+              - columnheader "Define ImageTag" [ref=f7e233]
+              - columnheader "Start Push" [ref=f7e234]
+              - columnheader "Build" [ref=f7e235]
+              - columnheader "Deploy to Argo" [ref=f7e236]
+              - 'columnheader "Declarative: Post Actions" [ref=f7e237]'
+          - rowgroup [ref=f7e238]:
+            - 'row "Average stage times: (full run time: ~5min 36s) 909ms 7s 5min 4s 10s 9s" [ref=f7e239]':
+              - 'cell "Average stage times: (full run time: ~5min 36s)" [ref=f7e240]':
+                - generic [ref=f7e241]:
+                  - text: "Average stage times:"
+                  - text: "(full run time: ~5min 36s)"
+              - cell "909ms" [ref=f7e242]:
+                - generic [ref=f7e244]: 909ms
+              - cell "7s" [ref=f7e252]:
+                - generic [ref=f7e254]: 7s
+              - cell "5min 4s" [ref=f7e262]:
+                - generic [ref=f7e264]: 5min 4s
+              - cell "10s" [ref=f7e272]:
+                - generic [ref=f7e274]: 10s
+              - cell "9s" [ref=f7e282]:
+                - generic [ref=f7e284]: 9s
+          - rowgroup [ref=f7e292]:
+            - row "#39 7월 07일 09:31 No Changes" [ref=f7e293]:
+              - cell "#39 7월 07일 09:31 No Changes" [ref=f7e294]:
+                - generic [ref=f7e296]:
+                  - link "#39" [ref=f7e299] [cursor=pointer]:
+                    - /url: 39/
+                  - generic [ref=f7e300]:
+                    - generic [ref=f7e301]:
+                      - generic [ref=f7e302]: 7월 07일
+                      - generic [ref=f7e303]: 09:31
+                    - generic [ref=f7e304]: No Changes
+              - cell [ref=f7e306]
+              - cell [ref=f7e307]
+              - cell [ref=f7e308]
+              - cell [ref=f7e309]
+              - cell [ref=f7e310]
+            - row "45" [ref=f7e311]:
+              - cell [ref=f7e312]
+              - cell "45" [ref=f7e313]:
+                - progressbar [ref=f7e315]
+            - row "#38 7월 01일 14:16 No Changes 1s 6s 5min 7s 9s 8s" [ref=f7e316]:
+              - cell "#38 7월 01일 14:16 No Changes" [ref=f7e317]:
+                - generic [ref=f7e319]:
+                  - link "#38" [ref=f7e322] [cursor=pointer]:
+                    - /url: 38/
+                  - generic [ref=f7e323]:
+                    - generic [ref=f7e324]:
+                      - generic [ref=f7e325]: 7월 01일
+                      - generic [ref=f7e326]: 14:16
+                    - generic [ref=f7e327]: No Changes
+              - cell "1s" [ref=f7e329]:
+                - generic [ref=f7e333]: 1s
+              - cell "6s" [ref=f7e335]:
+                - generic [ref=f7e339]: 6s
+              - cell "5min 7s" [ref=f7e341]:
+                - generic [ref=f7e345]: 5min 7s
+              - cell "9s" [ref=f7e347]:
+                - generic [ref=f7e351]: 9s
+              - cell "8s" [ref=f7e353]:
+                - generic [ref=f7e357]: 8s
+            - row "#37 7월 01일 13:58 No Changes 806ms 10s 5min 3s 9s 11s" [ref=f7e359]:
+              - cell "#37 7월 01일 13:58 No Changes" [ref=f7e360]:
+                - generic [ref=f7e362]:
+                  - link "#37" [ref=f7e365] [cursor=pointer]:
+                    - /url: 37/
+                  - generic [ref=f7e366]:
+                    - generic [ref=f7e367]:
+                      - generic [ref=f7e368]: 7월 01일
+                      - generic [ref=f7e369]: 13:58
+                    - generic [ref=f7e370]: No Changes
+              - cell "806ms" [ref=f7e372]:
+                - generic [ref=f7e376]: 806ms
+              - cell "10s" [ref=f7e378]:
+                - generic [ref=f7e382]: 10s
+              - cell "5min 3s" [ref=f7e384]:
+                - generic [ref=f7e388]: 5min 3s
+              - cell "9s" [ref=f7e390]:
+                - generic [ref=f7e394]: 9s
+              - cell "11s" [ref=f7e396]:
+                - generic [ref=f7e400]: 11s
+            - row "#36 7월 01일 13:44 No Changes 751ms 7s 5min 1s 10s 8s" [ref=f7e402]:
+              - cell "#36 7월 01일 13:44 No Changes" [ref=f7e403]:
+                - generic [ref=f7e405]:
+                  - link "#36" [ref=f7e408] [cursor=pointer]:
+                    - /url: 36/
+                  - generic [ref=f7e409]:
+                    - generic [ref=f7e410]:
+                      - generic [ref=f7e411]: 7월 01일
+                      - generic [ref=f7e412]: 13:44
+                    - generic [ref=f7e413]: No Changes
+              - cell "751ms" [ref=f7e415]:
+                - generic [ref=f7e419]: 751ms
+              - cell "7s" [ref=f7e421]:
+                - generic [ref=f7e425]: 7s
+              - cell "5min 1s" [ref=f7e427]:
+                - generic [ref=f7e431]: 5min 1s
+              - cell "10s" [ref=f7e433]:
+                - generic [ref=f7e437]: 10s
+              - cell "8s" [ref=f7e439]:
+                - generic [ref=f7e443]: 8s
+            - row "#35 7월 01일 10:56 No Changes 806ms 7s 5min 5s 11s 8s" [ref=f7e445]:
+              - cell "#35 7월 01일 10:56 No Changes" [ref=f7e446]:
+                - generic [ref=f7e448]:
+                  - link "#35" [ref=f7e451] [cursor=pointer]:
+                    - /url: 35/
+                  - generic [ref=f7e452]:
+                    - generic [ref=f7e453]:
+                      - generic [ref=f7e454]: 7월 01일
+                      - generic [ref=f7e455]: 10:56
+                    - generic [ref=f7e456]: No Changes
+              - cell "806ms" [ref=f7e458]:
+                - generic [ref=f7e462]: 806ms
+              - cell "7s" [ref=f7e464]:
+                - generic [ref=f7e468]: 7s
+              - cell "5min 5s" [ref=f7e470]:
+                - generic [ref=f7e474]: 5min 5s
+              - cell "11s" [ref=f7e476]:
+                - generic [ref=f7e480]: 11s
+              - cell "8s" [ref=f7e482]:
+                - generic [ref=f7e486]: 8s
+            - row "#34 7월 01일 10:12 No Changes 808ms 7s 5min 6s 10s 8s" [ref=f7e488]:
+              - cell "#34 7월 01일 10:12 No Changes" [ref=f7e489]:
+                - generic [ref=f7e491]:
+                  - link "#34" [ref=f7e494] [cursor=pointer]:
+                    - /url: 34/
+                  - generic [ref=f7e495]:
+                    - generic [ref=f7e496]:
+                      - generic [ref=f7e497]: 7월 01일
+                      - generic [ref=f7e498]: 10:12
+                    - generic [ref=f7e499]: No Changes
+              - cell "808ms" [ref=f7e501]:
+                - generic [ref=f7e505]: 808ms
+              - cell "7s" [ref=f7e507]:
+                - generic [ref=f7e511]: 7s
+              - cell "5min 6s" [ref=f7e513]:
+                - generic [ref=f7e517]: 5min 6s
+              - cell "10s" [ref=f7e519]:
+                - generic [ref=f7e523]: 10s
+              - cell "8s" [ref=f7e525]:
+                - generic [ref=f7e529]: 8s
+      - heading "고정링크" [level=2] [ref=f7e531]
+      - list [ref=f7e532]:
+        - listitem [ref=f7e533]:
+          - link "Last build, (#39),65 ms 전" [ref=f7e534] [cursor=pointer]:
+            - /url: lastBuild/
+            - text: Last build, (#39),65 ms 전
+            - button
+        - listitem [ref=f7e535]:
+          - link "Last stable build, (#38),5 days 19 hr 전" [ref=f7e536] [cursor=pointer]:
+            - /url: lastStableBuild/
+            - text: Last stable build, (#38),5 days 19 hr 전
+            - button
+        - listitem [ref=f7e537]:
+          - link "Last successful build, (#38),5 days 19 hr 전" [ref=f7e538] [cursor=pointer]:
+            - /url: lastSuccessfulBuild/
+            - text: Last successful build, (#38),5 days 19 hr 전
+            - button
+        - listitem [ref=f7e539]:
+          - link "Last completed build, (#38),5 days 19 hr 전" [ref=f7e540] [cursor=pointer]:
+            - /url: lastCompletedBuild/
+            - text: Last completed build, (#38),5 days 19 hr 전
+            - button
+  - contentinfo [ref=f7e541]:
+    - generic [ref=f7e544]:
+      - link "REST API" [ref=f7e545] [cursor=pointer]:
+        - /url: api/
+      - button "Jenkins 2.516.1" [ref=f7e546] [cursor=pointer]

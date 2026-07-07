@@ -1,0 +1,7 @@
+- generic [active] [ref=f2e1]:
+  - heading "🏆 Tokscale AI 활용 리포트" [level=1] [ref=f2e2]
+  - generic [ref=f2e3]:
+    - button "←" [ref=f2e4] [cursor=pointer]
+    - generic [ref=f2e5]: 2026년 7월
+    - button "→" [disabled] [ref=f2e6]
+  - generic [ref=f2e7]: 데이터 로딩 중...

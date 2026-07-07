@@ -1,0 +1,37 @@
+- generic [ref=e3]:
+  - generic [ref=e4]:
+    - img "OpenAI 관리자" [ref=e5]
+    - heading "다시 오신 걸 환영합니다" [level=1] [ref=e17]
+  - group [ref=e18]:
+    - form "로그인 옵션을 선택하세요" [ref=e19]:
+      - generic [ref=e23]:
+        - generic:
+          - generic:
+            - generic: 이메일 주소
+        - textbox "이메일 주소" [active] [ref=e24]
+      - generic [ref=e26]:
+        - button "계속" [ref=e28] [cursor=pointer]
+        - generic [ref=e29]:
+          - text: 계정이 없으신가요?
+          - link "회원 가입" [ref=e30] [cursor=pointer]:
+            - /url: /create-account
+        - generic [ref=e33]: 또는
+        - generic [ref=e35]:
+          - button "Google 로고 Google 계정으로 계속하기" [ref=e37] [cursor=pointer]:
+            - img "Google 로고" [ref=e40]
+            - text: Google 계정으로 계속하기
+          - button "Apple 로고 Apple 계정으로 계속하기" [ref=e47] [cursor=pointer]:
+            - img "Apple 로고" [ref=e50]
+            - text: Apple 계정으로 계속하기
+          - button "Microsoft 로고 Microsoft 계정으로 계속하기" [ref=e55] [cursor=pointer]:
+            - img "Microsoft 로고" [ref=e58]
+            - text: Microsoft 계정으로 계속하기
+          - button "휴대 전화 번호로 계속하기" [ref=e64] [cursor=pointer]:
+            - img [ref=e66]
+            - text: 휴대 전화 번호로 계속하기
+  - generic [ref=e69]:
+    - link "이용약관" [ref=e70] [cursor=pointer]:
+      - /url: https://openai.com/policies/terms-of-use
+    - generic [ref=e71]: "|"
+    - link "개인정보 보호 정책" [ref=e72] [cursor=pointer]:
+      - /url: https://openai.com/policies/privacy-policy

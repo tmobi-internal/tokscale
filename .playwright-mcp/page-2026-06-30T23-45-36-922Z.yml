@@ -1,0 +1,785 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - navigation "Main navigation" [ref=e3]:
+      - generic [ref=e4]:
+        - generic [ref=e5]:
+          - link "About" [ref=e6] [cursor=pointer]:
+            - /url: /
+          - link "Leaderboard" [ref=e7] [cursor=pointer]:
+            - /url: /leaderboard
+          - link "Profile" [ref=e8] [cursor=pointer]:
+            - /url: /profile
+          - link "GitHub" [ref=e9] [cursor=pointer]:
+            - /url: https://github.com/junhoyeo/tokscale
+        - link "Sign in with GitHub" [ref=e11] [cursor=pointer]:
+          - /url: /api/auth/github
+          - img [ref=e13]
+          - generic [ref=e15]: Sign in with GitHub
+    - main [ref=e16]:
+      - generic [ref=e19]:
+        - img "Tokscale Logo" [ref=e21]
+        - heading "The Kardashev Scale for AI Devs" [level=1] [ref=e22]:
+          - text: The Kardashev Scale
+          - text: for AI Devs
+        - generic [ref=e23]:
+          - button "Copy" [ref=e24] [cursor=pointer]:
+            - generic [ref=e25]: Copy
+          - generic [ref=e27]:
+            - generic [ref=e28]: bunx
+            - generic [ref=e29]: tokscale
+        - generic [ref=e31]:
+          - generic [ref=e32]:
+            - img "GitHub Star" [ref=e33]
+            - generic [ref=e34]: Star me on GitHub!
+          - link "junhoyeo/tokscale" [ref=e35] [cursor=pointer]:
+            - /url: https://github.com/junhoyeo/tokscale
+      - navigation "Leaderboard view" [ref=e36]:
+        - heading "Leaderboard" [level=1] [ref=e37]
+        - generic [ref=e38]:
+          - link "Users" [ref=e39] [cursor=pointer]:
+            - /url: /leaderboard?period=month&view=users
+          - link "Groups" [ref=e40] [cursor=pointer]:
+            - /url: /leaderboard?period=month&view=groups
+        - status [ref=e41]
+      - generic [ref=e42]:
+        - paragraph [ref=e43]: See who's using the most tokens
+        - generic [ref=e44]:
+          - generic [ref=e45]:
+            - paragraph [ref=e46]: Users
+            - paragraph [ref=e47]: "203"
+          - generic [ref=e48]:
+            - paragraph [ref=e49]: Total Tokens
+            - paragraph [ref=e50]: 107.2B 107,150,438,866
+          - generic [ref=e51]:
+            - paragraph [ref=e52]: Total Cost
+            - paragraph [ref=e53]: $284.97K $284,973.78
+      - tablist "Content tabs" [ref=e55]:
+        - tab "All Time" [ref=e56] [cursor=pointer]:
+          - generic [ref=e57]: All Time
+        - tab "Last Month" [ref=e58] [cursor=pointer]:
+          - generic [ref=e59]: Last Month
+        - tab "This Month" [selected] [ref=e60] [cursor=pointer]:
+          - generic [ref=e61]: This Month
+        - tab "This Week" [ref=e62] [cursor=pointer]:
+          - generic [ref=e63]: This Week
+        - tab "Custom" [ref=e64] [cursor=pointer]:
+          - generic [ref=e65]: Custom
+      - generic [ref=e66]:
+        - generic [ref=e67]:
+          - generic:
+            - img
+          - textbox "Search users..." [ref=e68]
+        - generic [ref=e69]:
+          - generic [ref=e70]: "Sort by:"
+          - generic [ref=e71]:
+            - button "Tokens" [ref=e72] [cursor=pointer]
+            - button "Cost" [ref=e73] [cursor=pointer]
+            - button "Time" [ref=e74] [cursor=pointer]
+      - generic [ref=e75]:
+        - table [ref=e77]:
+          - rowgroup [ref=e78]:
+            - row "Rank User Cost Tokens Time" [ref=e79]:
+              - columnheader "Rank" [ref=e80]
+              - columnheader "User" [ref=e81]
+              - columnheader "Cost" [ref=e82]
+              - columnheader "Tokens" [ref=e83]
+              - columnheader "Time" [ref=e84]
+          - rowgroup [ref=e85]:
+            - row "#1 t1100556 이상웅 (Tech/모빌리티플랫폼/Client Core) @t1100556 $20.30K 11,070,106,107 498h 33m" [ref=e86] [cursor=pointer]:
+              - cell "#1" [ref=e87]:
+                - generic [ref=e88]: "#1"
+              - cell "t1100556 이상웅 (Tech/모빌리티플랫폼/Client Core) @t1100556" [ref=e89]:
+                - generic [ref=e90]:
+                  - img "t1100556" [ref=e91]
+                  - generic [ref=e92]:
+                    - paragraph [ref=e93]: 이상웅 (Tech/모빌리티플랫폼/Client Core)
+                    - paragraph [ref=e94]: "@t1100556"
+              - cell "$20.30K" [ref=e95]
+              - cell "11,070,106,107" [ref=e96]:
+                - generic "11,070,106,107" [ref=e98]
+              - cell "498h 33m" [ref=e99]
+            - row "#2 t1100590 윤성현 (Tech/모빌리티플랫폼/Client Core) @t1100590 $9.03K 7,459,021,082 220h 14m" [ref=e100] [cursor=pointer]:
+              - cell "#2" [ref=e101]:
+                - generic [ref=e102]: "#2"
+              - cell "t1100590 윤성현 (Tech/모빌리티플랫폼/Client Core) @t1100590" [ref=e103]:
+                - generic [ref=e104]:
+                  - img "t1100590" [ref=e105]
+                  - generic [ref=e106]:
+                    - paragraph [ref=e107]: 윤성현 (Tech/모빌리티플랫폼/Client Core)
+                    - paragraph [ref=e108]: "@t1100590"
+              - cell "$9.03K" [ref=e109]
+              - cell "7,459,021,082" [ref=e110]:
+                - generic "7,459,021,082" [ref=e112]
+              - cell "220h 14m" [ref=e113]
+            - row "#3 t1100649 오진하 (데이터플랫폼&AX/AIML) @t1100649 $17.37K 4,494,575,186 571h 1m" [ref=e114] [cursor=pointer]:
+              - cell "#3" [ref=e115]:
+                - generic [ref=e116]: "#3"
+              - cell "t1100649 오진하 (데이터플랫폼&AX/AIML) @t1100649" [ref=e117]:
+                - generic [ref=e118]:
+                  - img "t1100649" [ref=e119]
+                  - generic [ref=e120]:
+                    - paragraph [ref=e121]: 오진하 (데이터플랫폼&AX/AIML)
+                    - paragraph [ref=e122]: "@t1100649"
+              - cell "$17.37K" [ref=e123]
+              - cell "4,494,575,186" [ref=e124]:
+                - generic "4,494,575,186" [ref=e126]
+              - cell "571h 1m" [ref=e127]
+            - row "#4 t1100311 이중근 (Tech/모빌리티플랫폼/서비스플랫폼) @t1100311 $6.10K 4,295,787,832 140h 6m" [ref=e128] [cursor=pointer]:
+              - cell "#4" [ref=e129]:
+                - generic [ref=e130]: "#4"
+              - cell "t1100311 이중근 (Tech/모빌리티플랫폼/서비스플랫폼) @t1100311" [ref=e131]:
+                - generic [ref=e132]:
+                  - img "t1100311" [ref=e133]
+                  - generic [ref=e134]:
+                    - paragraph [ref=e135]: 이중근 (Tech/모빌리티플랫폼/서비스플랫폼)
+                    - paragraph [ref=e136]: "@t1100311"
+              - cell "$6.10K" [ref=e137]
+              - cell "4,295,787,832" [ref=e138]:
+                - generic "4,295,787,832" [ref=e140]
+              - cell "140h 6m" [ref=e141]
+            - row "#5 t1100585 이예진 (Tech/맵플랫폼/맵인프라) @t1100585 $15.58K 3,988,226,443 75h 5m" [ref=e142] [cursor=pointer]:
+              - cell "#5" [ref=e143]:
+                - generic [ref=e144]: "#5"
+              - cell "t1100585 이예진 (Tech/맵플랫폼/맵인프라) @t1100585" [ref=e145]:
+                - generic [ref=e146]:
+                  - img "t1100585" [ref=e147]
+                  - generic [ref=e148]:
+                    - paragraph [ref=e149]: 이예진 (Tech/맵플랫폼/맵인프라)
+                    - paragraph [ref=e150]: "@t1100585"
+              - cell "$15.58K" [ref=e151]
+              - cell "3,988,226,443" [ref=e152]:
+                - generic "3,988,226,443" [ref=e154]
+              - cell "75h 5m" [ref=e155]
+            - row "#6 t1100653 이현탁 (데이터플랫폼&AX/Analytics) @t1100653 $18.33K 3,940,329,927 312h 55m" [ref=e156] [cursor=pointer]:
+              - cell "#6" [ref=e157]:
+                - generic [ref=e158]: "#6"
+              - cell "t1100653 이현탁 (데이터플랫폼&AX/Analytics) @t1100653" [ref=e159]:
+                - generic [ref=e160]:
+                  - img "t1100653" [ref=e161]
+                  - generic [ref=e162]:
+                    - paragraph [ref=e163]: 이현탁 (데이터플랫폼&AX/Analytics)
+                    - paragraph [ref=e164]: "@t1100653"
+              - cell "$18.33K" [ref=e165]
+              - cell "3,940,329,927" [ref=e166]:
+                - generic "3,940,329,927" [ref=e168]
+              - cell "312h 55m" [ref=e169]
+            - row "#7 t1100283 권상훈 (Tech/모빌리티플랫폼/DevOps) @t1100283 $3.35K 3,350,117,806 140h 1m" [ref=e170] [cursor=pointer]:
+              - cell "#7" [ref=e171]:
+                - generic [ref=e172]: "#7"
+              - cell "t1100283 권상훈 (Tech/모빌리티플랫폼/DevOps) @t1100283" [ref=e173]:
+                - generic [ref=e174]:
+                  - img "t1100283" [ref=e175]
+                  - generic [ref=e176]:
+                    - paragraph [ref=e177]: 권상훈 (Tech/모빌리티플랫폼/DevOps)
+                    - paragraph [ref=e178]: "@t1100283"
+              - cell "$3.35K" [ref=e179]
+              - cell "3,350,117,806" [ref=e180]:
+                - generic "3,350,117,806" [ref=e182]
+              - cell "140h 1m" [ref=e183]
+            - row "#8 t1100418 신우현 (데이터플랫폼&AX/AIML) @t1100418 $15.48K 3,343,798,262 326h 50m" [ref=e184] [cursor=pointer]:
+              - cell "#8" [ref=e185]:
+                - generic [ref=e186]: "#8"
+              - cell "t1100418 신우현 (데이터플랫폼&AX/AIML) @t1100418" [ref=e187]:
+                - generic [ref=e188]:
+                  - img "t1100418" [ref=e189]
+                  - generic [ref=e190]:
+                    - paragraph [ref=e191]: 신우현 (데이터플랫폼&AX/AIML)
+                    - paragraph [ref=e192]: "@t1100418"
+              - cell "$15.48K" [ref=e193]
+              - cell "3,343,798,262" [ref=e194]:
+                - generic "3,343,798,262" [ref=e196]
+              - cell "326h 50m" [ref=e197]
+            - row "#9 t1100478 이건영 (Tech/맵플랫폼/맵인프라) @t1100478 $16.41K 3,278,603,949 112h 9m" [ref=e198] [cursor=pointer]:
+              - cell "#9" [ref=e199]:
+                - generic [ref=e200]: "#9"
+              - cell "t1100478 이건영 (Tech/맵플랫폼/맵인프라) @t1100478" [ref=e201]:
+                - generic [ref=e202]:
+                  - img "t1100478" [ref=e203]
+                  - generic [ref=e204]:
+                    - paragraph [ref=e205]: 이건영 (Tech/맵플랫폼/맵인프라)
+                    - paragraph [ref=e206]: "@t1100478"
+              - cell "$16.41K" [ref=e207]
+              - cell "3,278,603,949" [ref=e208]:
+                - generic "3,278,603,949" [ref=e210]
+              - cell "112h 9m" [ref=e211]
+            - row "#10 t1100088 강경순 (Tech/맵플랫폼/맵인프라) @t1100088 $3.72K 3,177,069,549 156h 13m" [ref=e212] [cursor=pointer]:
+              - cell "#10" [ref=e213]:
+                - generic [ref=e214]: "#10"
+              - cell "t1100088 강경순 (Tech/맵플랫폼/맵인프라) @t1100088" [ref=e215]:
+                - generic [ref=e216]:
+                  - img "t1100088" [ref=e217]
+                  - generic [ref=e218]:
+                    - paragraph [ref=e219]: 강경순 (Tech/맵플랫폼/맵인프라)
+                    - paragraph [ref=e220]: "@t1100088"
+              - cell "$3.72K" [ref=e221]
+              - cell "3,177,069,549" [ref=e222]:
+                - generic "3,177,069,549" [ref=e224]
+              - cell "156h 13m" [ref=e225]
+            - row "#11 t1100135 석광호 (Tech/모빌리티서비스/프론트엔드) @t1100135 $9.79K 3,012,557,775 160h 42m" [ref=e226] [cursor=pointer]:
+              - cell "#11" [ref=e227]:
+                - generic [ref=e228]: "#11"
+              - cell "t1100135 석광호 (Tech/모빌리티서비스/프론트엔드) @t1100135" [ref=e229]:
+                - generic [ref=e230]:
+                  - img "t1100135" [ref=e231]
+                  - generic [ref=e232]:
+                    - paragraph [ref=e233]: 석광호 (Tech/모빌리티서비스/프론트엔드)
+                    - paragraph [ref=e234]: "@t1100135"
+              - cell "$9.79K" [ref=e235]
+              - cell "3,012,557,775" [ref=e236]:
+                - generic "3,012,557,775" [ref=e238]
+              - cell "160h 42m" [ref=e239]
+            - row "#12 t1100437 김종주 (Tech/모빌리티플랫폼/RP·교통) @t1100437 $2.95K 3,009,902,459 363h 38m" [ref=e240] [cursor=pointer]:
+              - cell "#12" [ref=e241]:
+                - generic [ref=e242]: "#12"
+              - cell "t1100437 김종주 (Tech/모빌리티플랫폼/RP·교통) @t1100437" [ref=e243]:
+                - generic [ref=e244]:
+                  - img "t1100437" [ref=e245]
+                  - generic [ref=e246]:
+                    - paragraph [ref=e247]: 김종주 (Tech/모빌리티플랫폼/RP·교통)
+                    - paragraph [ref=e248]: "@t1100437"
+              - cell "$2.95K" [ref=e249]
+              - cell "3,009,902,459" [ref=e250]:
+                - generic "3,009,902,459" [ref=e252]
+              - cell "363h 38m" [ref=e253]
+            - row "#13 t1100561 허원철 (Tech/모빌리티플랫폼/RP·교통) @t1100561 $9.73K 2,588,445,719 225h 11m" [ref=e254] [cursor=pointer]:
+              - cell "#13" [ref=e255]:
+                - generic [ref=e256]: "#13"
+              - cell "t1100561 허원철 (Tech/모빌리티플랫폼/RP·교통) @t1100561" [ref=e257]:
+                - generic [ref=e258]:
+                  - img "t1100561" [ref=e259]
+                  - generic [ref=e260]:
+                    - paragraph [ref=e261]: 허원철 (Tech/모빌리티플랫폼/RP·교통)
+                    - paragraph [ref=e262]: "@t1100561"
+              - cell "$9.73K" [ref=e263]
+              - cell "2,588,445,719" [ref=e264]:
+                - generic "2,588,445,719" [ref=e266]
+              - cell "225h 11m" [ref=e267]
+            - row "#14 t1100394 이규민 (데이터플랫폼&AX/AIML) @t1100394 $11.79K 2,477,623,652 216h 35m" [ref=e268] [cursor=pointer]:
+              - cell "#14" [ref=e269]:
+                - generic [ref=e270]: "#14"
+              - cell "t1100394 이규민 (데이터플랫폼&AX/AIML) @t1100394" [ref=e271]:
+                - generic [ref=e272]:
+                  - img "t1100394" [ref=e273]
+                  - generic [ref=e274]:
+                    - paragraph [ref=e275]: 이규민 (데이터플랫폼&AX/AIML)
+                    - paragraph [ref=e276]: "@t1100394"
+              - cell "$11.79K" [ref=e277]
+              - cell "2,477,623,652" [ref=e278]:
+                - generic "2,477,623,652" [ref=e280]
+              - cell "216h 35m" [ref=e281]
+            - row "#15 t1100630 편범삼 (데이터플랫폼&AX/AI Agent) @t1100630 $10.37K 2,239,946,449 128h 13m" [ref=e282] [cursor=pointer]:
+              - cell "#15" [ref=e283]:
+                - generic [ref=e284]: "#15"
+              - cell "t1100630 편범삼 (데이터플랫폼&AX/AI Agent) @t1100630" [ref=e285]:
+                - generic [ref=e286]:
+                  - img "t1100630" [ref=e287]
+                  - generic [ref=e288]:
+                    - paragraph [ref=e289]: 편범삼 (데이터플랫폼&AX/AI Agent)
+                    - paragraph [ref=e290]: "@t1100630"
+              - cell "$10.37K" [ref=e291]
+              - cell "2,239,946,449" [ref=e292]:
+                - generic "2,239,946,449" [ref=e294]
+              - cell "128h 13m" [ref=e295]
+            - row "#16 t1100122 박성진 (Tech/모빌리티서비스/프론트엔드) @t1100122 $1.60K 2,229,069,215 31h 58m" [ref=e296] [cursor=pointer]:
+              - cell "#16" [ref=e297]:
+                - generic [ref=e298]: "#16"
+              - cell "t1100122 박성진 (Tech/모빌리티서비스/프론트엔드) @t1100122" [ref=e299]:
+                - generic [ref=e300]:
+                  - img "t1100122" [ref=e301]
+                  - generic [ref=e302]:
+                    - paragraph [ref=e303]: 박성진 (Tech/모빌리티서비스/프론트엔드)
+                    - paragraph [ref=e304]: "@t1100122"
+              - cell "$1.60K" [ref=e305]
+              - cell "2,229,069,215" [ref=e306]:
+                - generic "2,229,069,215" [ref=e308]
+              - cell "31h 58m" [ref=e309]
+            - row "#17 t1100592 이재현 (데이터플랫폼&AX/Analytics) @t1100592 $8.06K 1,985,625,748 100h 8m" [ref=e310] [cursor=pointer]:
+              - cell "#17" [ref=e311]:
+                - generic [ref=e312]: "#17"
+              - cell "t1100592 이재현 (데이터플랫폼&AX/Analytics) @t1100592" [ref=e313]:
+                - generic [ref=e314]:
+                  - img "t1100592" [ref=e315]
+                  - generic [ref=e316]:
+                    - paragraph [ref=e317]: 이재현 (데이터플랫폼&AX/Analytics)
+                    - paragraph [ref=e318]: "@t1100592"
+              - cell "$8.06K" [ref=e319]
+              - cell "1,985,625,748" [ref=e320]:
+                - generic "1,985,625,748" [ref=e322]
+              - cell "100h 8m" [ref=e323]
+            - row "#18 t1100421 김인철 (데이터플랫폼&AX/Analytics) @t1100421 $8.66K 1,756,687,555 411h 23m" [ref=e324] [cursor=pointer]:
+              - cell "#18" [ref=e325]:
+                - generic [ref=e326]: "#18"
+              - cell "t1100421 김인철 (데이터플랫폼&AX/Analytics) @t1100421" [ref=e327]:
+                - generic [ref=e328]:
+                  - img "t1100421" [ref=e329]
+                  - generic [ref=e330]:
+                    - paragraph [ref=e331]: 김인철 (데이터플랫폼&AX/Analytics)
+                    - paragraph [ref=e332]: "@t1100421"
+              - cell "$8.66K" [ref=e333]
+              - cell "1,756,687,555" [ref=e334]:
+                - generic "1,756,687,555" [ref=e336]
+              - cell "411h 23m" [ref=e337]
+            - row "#19 t1100417 임주은 (데이터플랫폼&AX/Analytics) @t1100417 $5.40K 1,690,450,110 77h 11m" [ref=e338] [cursor=pointer]:
+              - cell "#19" [ref=e339]:
+                - generic [ref=e340]: "#19"
+              - cell "t1100417 임주은 (데이터플랫폼&AX/Analytics) @t1100417" [ref=e341]:
+                - generic [ref=e342]:
+                  - img "t1100417" [ref=e343]
+                  - generic [ref=e344]:
+                    - paragraph [ref=e345]: 임주은 (데이터플랫폼&AX/Analytics)
+                    - paragraph [ref=e346]: "@t1100417"
+              - cell "$5.40K" [ref=e347]
+              - cell "1,690,450,110" [ref=e348]:
+                - generic "1,690,450,110" [ref=e350]
+              - cell "77h 11m" [ref=e351]
+            - row "#20 t1100595 정재민 (Tech/맵플랫폼/맵인프라) @t1100595 $6.59K 1,392,772,629 390h 54m" [ref=e352] [cursor=pointer]:
+              - cell "#20" [ref=e353]:
+                - generic [ref=e354]: "#20"
+              - cell "t1100595 정재민 (Tech/맵플랫폼/맵인프라) @t1100595" [ref=e355]:
+                - generic [ref=e356]:
+                  - img "t1100595" [ref=e357]
+                  - generic [ref=e358]:
+                    - paragraph [ref=e359]: 정재민 (Tech/맵플랫폼/맵인프라)
+                    - paragraph [ref=e360]: "@t1100595"
+              - cell "$6.59K" [ref=e361]
+              - cell "1,392,772,629" [ref=e362]:
+                - generic "1,392,772,629" [ref=e364]
+              - cell "390h 54m" [ref=e365]
+            - row "#21 t1100526 엄민석 (Tech/모빌리티플랫폼/Client Service) @t1100526 $5.12K 1,313,270,739 77h 44m" [ref=e366] [cursor=pointer]:
+              - cell "#21" [ref=e367]:
+                - generic [ref=e368]: "#21"
+              - cell "t1100526 엄민석 (Tech/모빌리티플랫폼/Client Service) @t1100526" [ref=e369]:
+                - generic [ref=e370]:
+                  - img "t1100526" [ref=e371]
+                  - generic [ref=e372]:
+                    - paragraph [ref=e373]: 엄민석 (Tech/모빌리티플랫폼/Client Service)
+                    - paragraph [ref=e374]: "@t1100526"
+              - cell "$5.12K" [ref=e375]
+              - cell "1,313,270,739" [ref=e376]:
+                - generic "1,313,270,739" [ref=e378]
+              - cell "77h 44m" [ref=e379]
+            - row "#22 t1100365 김승섭 (Tech/모빌리티서비스/로컬서비스) @t1100365 $1.24K 1,260,154,032 113h 29m" [ref=e380] [cursor=pointer]:
+              - cell "#22" [ref=e381]:
+                - generic [ref=e382]: "#22"
+              - cell "t1100365 김승섭 (Tech/모빌리티서비스/로컬서비스) @t1100365" [ref=e383]:
+                - generic [ref=e384]:
+                  - img "t1100365" [ref=e385]
+                  - generic [ref=e386]:
+                    - paragraph [ref=e387]: 김승섭 (Tech/모빌리티서비스/로컬서비스)
+                    - paragraph [ref=e388]: "@t1100365"
+              - cell "$1.24K" [ref=e389]
+              - cell "1,260,154,032" [ref=e390]:
+                - generic "1,260,154,032" [ref=e392]
+              - cell "113h 29m" [ref=e393]
+            - row "#23 t1100406 김효실 (데이터플랫폼&AX/AIML) @t1100406 $5.26K 1,203,755,520 174h 23m" [ref=e394] [cursor=pointer]:
+              - cell "#23" [ref=e395]:
+                - generic [ref=e396]: "#23"
+              - cell "t1100406 김효실 (데이터플랫폼&AX/AIML) @t1100406" [ref=e397]:
+                - generic [ref=e398]:
+                  - img "t1100406" [ref=e399]
+                  - generic [ref=e400]:
+                    - paragraph [ref=e401]: 김효실 (데이터플랫폼&AX/AIML)
+                    - paragraph [ref=e402]: "@t1100406"
+              - cell "$5.26K" [ref=e403]
+              - cell "1,203,755,520" [ref=e404]:
+                - generic "1,203,755,520" [ref=e406]
+              - cell "174h 23m" [ref=e407]
+            - row "#24 t1100049 허기철 (Tech/모빌리티플랫폼/RP·교통) @t1100049 $5.86K 1,171,332,499 81h 8m" [ref=e408] [cursor=pointer]:
+              - cell "#24" [ref=e409]:
+                - generic [ref=e410]: "#24"
+              - cell "t1100049 허기철 (Tech/모빌리티플랫폼/RP·교통) @t1100049" [ref=e411]:
+                - generic [ref=e412]:
+                  - img "t1100049" [ref=e413]
+                  - generic [ref=e414]:
+                    - paragraph [ref=e415]: 허기철 (Tech/모빌리티플랫폼/RP·교통)
+                    - paragraph [ref=e416]: "@t1100049"
+              - cell "$5.86K" [ref=e417]
+              - cell "1,171,332,499" [ref=e418]:
+                - generic "1,171,332,499" [ref=e420]
+              - cell "81h 8m" [ref=e421]
+            - row "#25 t1100090 박주희 (Tech/맵플랫폼/맵인프라) @t1100090 $2.79K 996,192,310 24h 20m" [ref=e422] [cursor=pointer]:
+              - cell "#25" [ref=e423]:
+                - generic [ref=e424]: "#25"
+              - cell "t1100090 박주희 (Tech/맵플랫폼/맵인프라) @t1100090" [ref=e425]:
+                - generic [ref=e426]:
+                  - img "t1100090" [ref=e427]
+                  - generic [ref=e428]:
+                    - paragraph [ref=e429]: 박주희 (Tech/맵플랫폼/맵인프라)
+                    - paragraph [ref=e430]: "@t1100090"
+              - cell "$2.79K" [ref=e431]
+              - cell "996,192,310" [ref=e432]:
+                - generic "996,192,310" [ref=e434]
+              - cell "24h 20m" [ref=e435]
+            - row "#26 t1100448 홍인석 (Tech/모빌리티서비스/서비스백엔드) @t1100448 $1.08K 971,847,788 125h 56m" [ref=e436] [cursor=pointer]:
+              - cell "#26" [ref=e437]:
+                - generic [ref=e438]: "#26"
+              - cell "t1100448 홍인석 (Tech/모빌리티서비스/서비스백엔드) @t1100448" [ref=e439]:
+                - generic [ref=e440]:
+                  - img "t1100448" [ref=e441]
+                  - generic [ref=e442]:
+                    - paragraph [ref=e443]: 홍인석 (Tech/모빌리티서비스/서비스백엔드)
+                    - paragraph [ref=e444]: "@t1100448"
+              - cell "$1.08K" [ref=e445]
+              - cell "971,847,788" [ref=e446]:
+                - generic "971,847,788" [ref=e448]
+              - cell "125h 56m" [ref=e449]
+            - row "#27 t1100294 오혜린 (Tech/모빌리티서비스/프론트엔드) @t1100294 $4.73K 959,951,455 46h 55m" [ref=e450] [cursor=pointer]:
+              - cell "#27" [ref=e451]:
+                - generic [ref=e452]: "#27"
+              - cell "t1100294 오혜린 (Tech/모빌리티서비스/프론트엔드) @t1100294" [ref=e453]:
+                - generic [ref=e454]:
+                  - img "t1100294" [ref=e455]
+                  - generic [ref=e456]:
+                    - paragraph [ref=e457]: 오혜린 (Tech/모빌리티서비스/프론트엔드)
+                    - paragraph [ref=e458]: "@t1100294"
+              - cell "$4.73K" [ref=e459]
+              - cell "959,951,455" [ref=e460]:
+                - generic "959,951,455" [ref=e462]
+              - cell "46h 55m" [ref=e463]
+            - row "#28 t1100210 박상연 (Tech/맵플랫폼/맵컨텐츠) @t1100210 $963.10 956,354,239 38h 27m" [ref=e464] [cursor=pointer]:
+              - cell "#28" [ref=e465]:
+                - generic [ref=e466]: "#28"
+              - cell "t1100210 박상연 (Tech/맵플랫폼/맵컨텐츠) @t1100210" [ref=e467]:
+                - generic [ref=e468]:
+                  - img "t1100210" [ref=e469]
+                  - generic [ref=e470]:
+                    - paragraph [ref=e471]: 박상연 (Tech/맵플랫폼/맵컨텐츠)
+                    - paragraph [ref=e472]: "@t1100210"
+              - cell "$963.10" [ref=e473]
+              - cell "956,354,239" [ref=e474]:
+                - generic "956,354,239" [ref=e476]
+              - cell "38h 27m" [ref=e477]
+            - row "#29 t1100344 홍진철 (Tech/모빌리티플랫폼/Client Core) @t1100344 $4.73K 951,945,935 43h 2m" [ref=e478] [cursor=pointer]:
+              - cell "#29" [ref=e479]:
+                - generic [ref=e480]: "#29"
+              - cell "t1100344 홍진철 (Tech/모빌리티플랫폼/Client Core) @t1100344" [ref=e481]:
+                - generic [ref=e482]:
+                  - img "t1100344" [ref=e483]
+                  - generic [ref=e484]:
+                    - paragraph [ref=e485]: 홍진철 (Tech/모빌리티플랫폼/Client Core)
+                    - paragraph [ref=e486]: "@t1100344"
+              - cell "$4.73K" [ref=e487]
+              - cell "951,945,935" [ref=e488]:
+                - generic "951,945,935" [ref=e490]
+              - cell "43h 2m" [ref=e491]
+            - row "#30 t1100576 김도형 (Tech/모빌리티플랫폼/Client Service) @t1100576 $1.63K 930,896,141 50h 48m" [ref=e492] [cursor=pointer]:
+              - cell "#30" [ref=e493]:
+                - generic [ref=e494]: "#30"
+              - cell "t1100576 김도형 (Tech/모빌리티플랫폼/Client Service) @t1100576" [ref=e495]:
+                - generic [ref=e496]:
+                  - img "t1100576" [ref=e497]
+                  - generic [ref=e498]:
+                    - paragraph [ref=e499]: 김도형 (Tech/모빌리티플랫폼/Client Service)
+                    - paragraph [ref=e500]: "@t1100576"
+              - cell "$1.63K" [ref=e501]
+              - cell "930,896,141" [ref=e502]:
+                - generic "930,896,141" [ref=e504]
+              - cell "50h 48m" [ref=e505]
+            - row "#31 t1100617 홍창범 (Tech/모빌리티플랫폼/Client Service) @t1100617 $1.83K 925,531,258 32h 47m" [ref=e506] [cursor=pointer]:
+              - cell "#31" [ref=e507]:
+                - generic [ref=e508]: "#31"
+              - cell "t1100617 홍창범 (Tech/모빌리티플랫폼/Client Service) @t1100617" [ref=e509]:
+                - generic [ref=e510]:
+                  - img "t1100617" [ref=e511]
+                  - generic [ref=e512]:
+                    - paragraph [ref=e513]: 홍창범 (Tech/모빌리티플랫폼/Client Service)
+                    - paragraph [ref=e514]: "@t1100617"
+              - cell "$1.83K" [ref=e515]
+              - cell "925,531,258" [ref=e516]:
+                - generic "925,531,258" [ref=e518]
+              - cell "32h 47m" [ref=e519]
+            - row "#32 t1100523 구본재 (Product/S Squad) @t1100523 $3.70K 914,093,910 123h 51m" [ref=e520] [cursor=pointer]:
+              - cell "#32" [ref=e521]:
+                - generic [ref=e522]: "#32"
+              - cell "t1100523 구본재 (Product/S Squad) @t1100523" [ref=e523]:
+                - generic [ref=e524]:
+                  - img "t1100523" [ref=e525]
+                  - generic [ref=e526]:
+                    - paragraph [ref=e527]: 구본재 (Product/S Squad)
+                    - paragraph [ref=e528]: "@t1100523"
+              - cell "$3.70K" [ref=e529]
+              - cell "914,093,910" [ref=e530]:
+                - generic "914,093,910" [ref=e532]
+              - cell "123h 51m" [ref=e533]
+            - row "#33 t1100226 박성용 (Tech/모빌리티플랫폼/RP·교통) @t1100226 $1.54K 907,244,002 280h 13m" [ref=e534] [cursor=pointer]:
+              - cell "#33" [ref=e535]:
+                - generic [ref=e536]: "#33"
+              - cell "t1100226 박성용 (Tech/모빌리티플랫폼/RP·교통) @t1100226" [ref=e537]:
+                - generic [ref=e538]:
+                  - img "t1100226" [ref=e539]
+                  - generic [ref=e540]:
+                    - paragraph [ref=e541]: 박성용 (Tech/모빌리티플랫폼/RP·교통)
+                    - paragraph [ref=e542]: "@t1100226"
+              - cell "$1.54K" [ref=e543]
+              - cell "907,244,002" [ref=e544]:
+                - generic "907,244,002" [ref=e546]
+              - cell "280h 13m" [ref=e547]
+            - row "#34 t1100324 김동인 (Tech/모빌리티플랫폼/서비스플랫폼) @t1100324 $2.24K 802,957,892 112h 59m" [ref=e548] [cursor=pointer]:
+              - cell "#34" [ref=e549]:
+                - generic [ref=e550]: "#34"
+              - cell "t1100324 김동인 (Tech/모빌리티플랫폼/서비스플랫폼) @t1100324" [ref=e551]:
+                - generic [ref=e552]:
+                  - img "t1100324" [ref=e553]
+                  - generic [ref=e554]:
+                    - paragraph [ref=e555]: 김동인 (Tech/모빌리티플랫폼/서비스플랫폼)
+                    - paragraph [ref=e556]: "@t1100324"
+              - cell "$2.24K" [ref=e557]
+              - cell "802,957,892" [ref=e558]:
+                - generic "802,957,892" [ref=e560]
+              - cell "112h 59m" [ref=e561]
+            - row "#35 t1100623 김지웅 (Tech/모빌리티서비스/Search) @t1100623 $3.34K 785,550,020 333h 16m" [ref=e562] [cursor=pointer]:
+              - cell "#35" [ref=e563]:
+                - generic [ref=e564]: "#35"
+              - cell "t1100623 김지웅 (Tech/모빌리티서비스/Search) @t1100623" [ref=e565]:
+                - generic [ref=e566]:
+                  - img "t1100623" [ref=e567]
+                  - generic [ref=e568]:
+                    - paragraph [ref=e569]: 김지웅 (Tech/모빌리티서비스/Search)
+                    - paragraph [ref=e570]: "@t1100623"
+              - cell "$3.34K" [ref=e571]
+              - cell "785,550,020" [ref=e572]:
+                - generic "785,550,020" [ref=e574]
+              - cell "333h 16m" [ref=e575]
+            - row "#36 t1100223 심지현 (Tech/모빌리티플랫폼/서비스플랫폼) @t1100223 $789.25 718,779,369 17h 49m" [ref=e576] [cursor=pointer]:
+              - cell "#36" [ref=e577]:
+                - generic [ref=e578]: "#36"
+              - cell "t1100223 심지현 (Tech/모빌리티플랫폼/서비스플랫폼) @t1100223" [ref=e579]:
+                - generic [ref=e580]:
+                  - img "t1100223" [ref=e581]
+                  - generic [ref=e582]:
+                    - paragraph [ref=e583]: 심지현 (Tech/모빌리티플랫폼/서비스플랫폼)
+                    - paragraph [ref=e584]: "@t1100223"
+              - cell "$789.25" [ref=e585]
+              - cell "718,779,369" [ref=e586]:
+                - generic "718,779,369" [ref=e588]
+              - cell "17h 49m" [ref=e589]
+            - row "#37 t1100553 박경태 (데이터플랫폼&AX/Analytics) @t1100553 $2.32K 664,932,731 68h 27m" [ref=e590] [cursor=pointer]:
+              - cell "#37" [ref=e591]:
+                - generic [ref=e592]: "#37"
+              - cell "t1100553 박경태 (데이터플랫폼&AX/Analytics) @t1100553" [ref=e593]:
+                - generic [ref=e594]:
+                  - img "t1100553" [ref=e595]
+                  - generic [ref=e596]:
+                    - paragraph [ref=e597]: 박경태 (데이터플랫폼&AX/Analytics)
+                    - paragraph [ref=e598]: "@t1100553"
+              - cell "$2.32K" [ref=e599]
+              - cell "664,932,731" [ref=e600]:
+                - generic "664,932,731" [ref=e602]
+              - cell "68h 27m" [ref=e603]
+            - row "#38 t1100609 이병길 (Tech/모빌리티플랫폼/AUTO개발) @t1100609 $505.55 584,877,084 35h 48m" [ref=e604] [cursor=pointer]:
+              - cell "#38" [ref=e605]:
+                - generic [ref=e606]: "#38"
+              - cell "t1100609 이병길 (Tech/모빌리티플랫폼/AUTO개발) @t1100609" [ref=e607]:
+                - generic [ref=e608]:
+                  - img "t1100609" [ref=e609]
+                  - generic [ref=e610]:
+                    - paragraph [ref=e611]: 이병길 (Tech/모빌리티플랫폼/AUTO개발)
+                    - paragraph [ref=e612]: "@t1100609"
+              - cell "$505.55" [ref=e613]
+              - cell "584,877,084" [ref=e614]:
+                - generic "584,877,084" [ref=e616]
+              - cell "35h 48m" [ref=e617]
+            - row "#39 t1100626 김영수 (Tech/모빌리티플랫폼/Client Core) @t1100626 $2.88K 573,112,705 18h 29m" [ref=e618] [cursor=pointer]:
+              - cell "#39" [ref=e619]:
+                - generic [ref=e620]: "#39"
+              - cell "t1100626 김영수 (Tech/모빌리티플랫폼/Client Core) @t1100626" [ref=e621]:
+                - generic [ref=e622]:
+                  - img "t1100626" [ref=e623]
+                  - generic [ref=e624]:
+                    - paragraph [ref=e625]: 김영수 (Tech/모빌리티플랫폼/Client Core)
+                    - paragraph [ref=e626]: "@t1100626"
+              - cell "$2.88K" [ref=e627]
+              - cell "573,112,705" [ref=e628]:
+                - generic "573,112,705" [ref=e630]
+              - cell "18h 29m" [ref=e631]
+            - row "#40 t1100470 김윤건 (Tech/모빌리티서비스/로컬서비스) @t1100470 $373.64 568,768,114 88h 30m" [ref=e632] [cursor=pointer]:
+              - cell "#40" [ref=e633]:
+                - generic [ref=e634]: "#40"
+              - cell "t1100470 김윤건 (Tech/모빌리티서비스/로컬서비스) @t1100470" [ref=e635]:
+                - generic [ref=e636]:
+                  - img "t1100470" [ref=e637]
+                  - generic [ref=e638]:
+                    - paragraph [ref=e639]: 김윤건 (Tech/모빌리티서비스/로컬서비스)
+                    - paragraph [ref=e640]: "@t1100470"
+              - cell "$373.64" [ref=e641]
+              - cell "568,768,114" [ref=e642]:
+                - generic "568,768,114" [ref=e644]
+              - cell "88h 30m" [ref=e645]
+            - row "#41 t1100041 이재한 (Tech/모빌리티플랫폼/서비스플랫폼) @t1100041 $1.72K 553,298,550 108h 1m" [ref=e646] [cursor=pointer]:
+              - cell "#41" [ref=e647]:
+                - generic [ref=e648]: "#41"
+              - cell "t1100041 이재한 (Tech/모빌리티플랫폼/서비스플랫폼) @t1100041" [ref=e649]:
+                - generic [ref=e650]:
+                  - img "t1100041" [ref=e651]
+                  - generic [ref=e652]:
+                    - paragraph [ref=e653]: 이재한 (Tech/모빌리티플랫폼/서비스플랫폼)
+                    - paragraph [ref=e654]: "@t1100041"
+              - cell "$1.72K" [ref=e655]
+              - cell "553,298,550" [ref=e656]:
+                - generic "553,298,550" [ref=e658]
+              - cell "108h 1m" [ref=e659]
+            - row "#42 t1100637 강동민 (데이터플랫폼&AX/MDP) @t1100637 $1.42K 531,558,359 147h 31m" [ref=e660] [cursor=pointer]:
+              - cell "#42" [ref=e661]:
+                - generic [ref=e662]: "#42"
+              - cell "t1100637 강동민 (데이터플랫폼&AX/MDP) @t1100637" [ref=e663]:
+                - generic [ref=e664]:
+                  - img "t1100637" [ref=e665]
+                  - generic [ref=e666]:
+                    - paragraph [ref=e667]: 강동민 (데이터플랫폼&AX/MDP)
+                    - paragraph [ref=e668]: "@t1100637"
+              - cell "$1.42K" [ref=e669]
+              - cell "531,558,359" [ref=e670]:
+                - generic "531,558,359" [ref=e672]
+              - cell "147h 31m" [ref=e673]
+            - row "#43 t1100249 김승철 (Tech/맵플랫폼/맵컨텐츠) @t1100249 $656.58 486,743,933 39h 16m" [ref=e674] [cursor=pointer]:
+              - cell "#43" [ref=e675]:
+                - generic [ref=e676]: "#43"
+              - cell "t1100249 김승철 (Tech/맵플랫폼/맵컨텐츠) @t1100249" [ref=e677]:
+                - generic [ref=e678]:
+                  - img "t1100249" [ref=e679]
+                  - generic [ref=e680]:
+                    - paragraph [ref=e681]: 김승철 (Tech/맵플랫폼/맵컨텐츠)
+                    - paragraph [ref=e682]: "@t1100249"
+              - cell "$656.58" [ref=e683]
+              - cell "486,743,933" [ref=e684]:
+                - generic "486,743,933" [ref=e686]
+              - cell "39h 16m" [ref=e687]
+            - row "#44 t1100495 이태현 (Product/S Squad) @t1100495 $479.98 472,886,859 34h 57m" [ref=e688] [cursor=pointer]:
+              - cell "#44" [ref=e689]:
+                - generic [ref=e690]: "#44"
+              - cell "t1100495 이태현 (Product/S Squad) @t1100495" [ref=e691]:
+                - generic [ref=e692]:
+                  - img "t1100495" [ref=e693]
+                  - generic [ref=e694]:
+                    - paragraph [ref=e695]: 이태현 (Product/S Squad)
+                    - paragraph [ref=e696]: "@t1100495"
+              - cell "$479.98" [ref=e697]
+              - cell "472,886,859" [ref=e698]:
+                - generic "472,886,859" [ref=e700]
+              - cell "34h 57m" [ref=e701]
+            - row "#45 t1100631 김기현 (Tech/모빌리티서비스/서비스백엔드) @t1100631 $1.87K 456,275,000 12h 43m" [ref=e702] [cursor=pointer]:
+              - cell "#45" [ref=e703]:
+                - generic [ref=e704]: "#45"
+              - cell "t1100631 김기현 (Tech/모빌리티서비스/서비스백엔드) @t1100631" [ref=e705]:
+                - generic [ref=e706]:
+                  - img "t1100631" [ref=e707]
+                  - generic [ref=e708]:
+                    - paragraph [ref=e709]: 김기현 (Tech/모빌리티서비스/서비스백엔드)
+                    - paragraph [ref=e710]: "@t1100631"
+              - cell "$1.87K" [ref=e711]
+              - cell "456,275,000" [ref=e712]:
+                - generic "456,275,000" [ref=e714]
+              - cell "12h 43m" [ref=e715]
+            - row "#46 t1100621 이경민 (Tech/모빌리티서비스/로컬서비스) @t1100621 $1.29K 446,777,872 54h 27m" [ref=e716] [cursor=pointer]:
+              - cell "#46" [ref=e717]:
+                - generic [ref=e718]: "#46"
+              - cell "t1100621 이경민 (Tech/모빌리티서비스/로컬서비스) @t1100621" [ref=e719]:
+                - generic [ref=e720]:
+                  - img "t1100621" [ref=e721]
+                  - generic [ref=e722]:
+                    - paragraph [ref=e723]: 이경민 (Tech/모빌리티서비스/로컬서비스)
+                    - paragraph [ref=e724]: "@t1100621"
+              - cell "$1.29K" [ref=e725]
+              - cell "446,777,872" [ref=e726]:
+                - generic "446,777,872" [ref=e728]
+              - cell "54h 27m" [ref=e729]
+            - row "#47 t1100570 이은철 (Tech/모빌리티서비스/온디맨드모빌리티개발) @t1100570 $1.56K 446,537,916 29h 42m" [ref=e730] [cursor=pointer]:
+              - cell "#47" [ref=e731]:
+                - generic [ref=e732]: "#47"
+              - cell "t1100570 이은철 (Tech/모빌리티서비스/온디맨드모빌리티개발) @t1100570" [ref=e733]:
+                - generic [ref=e734]:
+                  - img "t1100570" [ref=e735]
+                  - generic [ref=e736]:
+                    - paragraph [ref=e737]: 이은철 (Tech/모빌리티서비스/온디맨드모빌리티개발)
+                    - paragraph [ref=e738]: "@t1100570"
+              - cell "$1.56K" [ref=e739]
+              - cell "446,537,916" [ref=e740]:
+                - generic "446,537,916" [ref=e742]
+              - cell "29h 42m" [ref=e743]
+            - row "#48 t1100227 이선정 (Tech/모빌리티서비스/로컬서비스) @t1100227 $344.97 424,095,875 24h 34m" [ref=e744] [cursor=pointer]:
+              - cell "#48" [ref=e745]:
+                - generic [ref=e746]: "#48"
+              - cell "t1100227 이선정 (Tech/모빌리티서비스/로컬서비스) @t1100227" [ref=e747]:
+                - generic [ref=e748]:
+                  - img "t1100227" [ref=e749]
+                  - generic [ref=e750]:
+                    - paragraph [ref=e751]: 이선정 (Tech/모빌리티서비스/로컬서비스)
+                    - paragraph [ref=e752]: "@t1100227"
+              - cell "$344.97" [ref=e753]
+              - cell "424,095,875" [ref=e754]:
+                - generic "424,095,875" [ref=e756]
+              - cell "24h 34m" [ref=e757]
+            - row "#49 t1100175 박기성 (Tech/모빌리티플랫폼/AUTO개발) @t1100175 $389.30 416,014,316 39h 47m" [ref=e758] [cursor=pointer]:
+              - cell "#49" [ref=e759]:
+                - generic [ref=e760]: "#49"
+              - cell "t1100175 박기성 (Tech/모빌리티플랫폼/AUTO개발) @t1100175" [ref=e761]:
+                - generic [ref=e762]:
+                  - img "t1100175" [ref=e763]
+                  - generic [ref=e764]:
+                    - paragraph [ref=e765]: 박기성 (Tech/모빌리티플랫폼/AUTO개발)
+                    - paragraph [ref=e766]: "@t1100175"
+              - cell "$389.30" [ref=e767]
+              - cell "416,014,316" [ref=e768]:
+                - generic "416,014,316" [ref=e770]
+              - cell "39h 47m" [ref=e771]
+            - row "#50 t1100557 이주은 (Product/UX1) @t1100557 $196.79 396,893,620 31h 51m" [ref=e772] [cursor=pointer]:
+              - cell "#50" [ref=e773]:
+                - generic [ref=e774]: "#50"
+              - cell "t1100557 이주은 (Product/UX1) @t1100557" [ref=e775]:
+                - generic [ref=e776]:
+                  - img "t1100557" [ref=e777]
+                  - generic [ref=e778]:
+                    - paragraph [ref=e779]: 이주은 (Product/UX1)
+                    - paragraph [ref=e780]: "@t1100557"
+              - cell "$196.79" [ref=e781]
+              - cell "396,893,620" [ref=e782]:
+                - generic "396,893,620" [ref=e784]
+              - cell "31h 51m" [ref=e785]
+        - generic [ref=e786]:
+          - paragraph [ref=e787]: Showing 1-50 of 203
+          - navigation [ref=e788]:
+            - button "Previous page" [disabled] [ref=e789]: ←
+            - generic [ref=e790]:
+              - button "1" [ref=e791] [cursor=pointer]
+              - button "2" [ref=e792] [cursor=pointer]
+              - button "3" [ref=e793] [cursor=pointer]
+              - generic [ref=e794]: …
+              - button "5" [ref=e795] [cursor=pointer]
+            - button "Next page" [ref=e796] [cursor=pointer]: →
+      - generic [ref=e797]:
+        - heading "Join the Leaderboard" [level=2] [ref=e798]
+        - paragraph [ref=e799]: "Install Tokscale CLI and submit your usage data:"
+        - generic [ref=e800]:
+          - generic [ref=e801]:
+            - generic [ref=e802]: $
+            - generic [ref=e803]: export
+            - generic [ref=e804]: TOKSCALE_API_URL
+            - generic [ref=e805]: =https://tokscale.tmobiweb.com
+            - button "Copy command" [ref=e806] [cursor=pointer]:
+              - img [ref=e807]
+          - generic [ref=e810]:
+            - generic [ref=e811]: $
+            - generic [ref=e812]: bunx
+            - generic [ref=e813]: tokscale
+            - generic [ref=e814]: login
+            - button "Copy command" [ref=e815] [cursor=pointer]:
+              - img [ref=e816]
+          - generic [ref=e819]:
+            - generic [ref=e820]: $
+            - generic [ref=e821]: bunx
+            - generic [ref=e822]: tokscale
+            - generic [ref=e823]: submit
+            - button "Copy command" [ref=e824] [cursor=pointer]:
+              - img [ref=e825]
+    - contentinfo [ref=e829]:
+      - generic [ref=e830]:
+        - img "Tokscale Icon" [ref=e832]
+        - link "Tokscale" [ref=e833] [cursor=pointer]:
+          - /url: https://tokscale.ai
+          - img "Tokscale" [ref=e834]
+        - generic [ref=e836]:
+          - paragraph [ref=e837]: © 2025 Tokscale. All rights reserved.
+          - link "github.com/junhoyeo/tokscale" [ref=e838] [cursor=pointer]:
+            - /url: https://github.com/junhoyeo/tokscale
+  - region "Notifications Alt+T"
+  - alert [ref=e839]
