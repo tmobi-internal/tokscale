@@ -1,0 +1,1332 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>Tech Workload - 2026-07-16</title>
+<style>
+body{font-family:-apple-system,sans-serif;max-width:1200px;margin:20px auto;background:#f8f9fa}
+h1{color:#1a1a2e}h2{color:#16213e;border-bottom:2px solid #0f3460;padding-bottom:4px;margin-top:40px}
+h3{color:#0f3460;margin-top:30px;padding:8px;background:#e3f2fd;border-radius:4px}
+table{border-collapse:collapse;width:100%;margin:10px 0;font-size:13px}
+th{background:#0f3460;color:#fff;padding:6px 8px;text-align:right;position:sticky;top:0}
+th:first-child{text-align:left}
+td{padding:5px 8px;border-bottom:1px solid #ddd;text-align:right}
+td:first-child{text-align:left;font-weight:500}
+tr:hover{background:#e8f4fd}
+.card{display:inline-block;background:#fff;border-radius:8px;padding:15px 25px;margin:5px;box-shadow:0 2px 4px rgba(0,0,0,.1)}
+.card .n{font-size:24px;font-weight:bold;color:#0f3460}.card .l{font-size:12px;color:#666}
+.up{color:#27ae60}.down{color:#e74c3c}.neutral{color:#666}
+nav{background:#0f3460;padding:10px 20px;border-radius:8px;margin:15px 0}
+nav a{color:#fff;text-decoration:none;font-size:12px;padding:3px 8px;background:rgba(255,255,255,.1);border-radius:4px;margin:2px}
+nav a:hover{background:rgba(255,255,255,.3)}
+.gl{display:inline-block;color:#ffd700;font-size:11px;font-weight:bold;margin:5px 10px 2px 0}
+.box{background:#fff;border-radius:8px;padding:15px 20px;margin:15px 0;box-shadow:0 1px 4px rgba(0,0,0,.06);border-left:4px solid #3498db}
+</style></head><body>
+<h1>⚡ Tech Jira Workload 분석</h1>
+<p style="color:#666">측정기간: 2025-07~2026-06 | In Progress→Review 프로세스 기반 | 예상 vs 실측 비교 | 제외: TMAPCM(배포관리) | 준수 인정: CLOUDREQ, TMDEVOPS 등 Review 워크플로 없는 프로젝트</p>
+<div>
+<div class="card"><div class="n">25,907</div><div class="l">분석 이슈 (12개월)</div></div>
+<div class="card"><div class="n">67%</div><div class="l">프로세스 준수율</div></div>
+<div class="card"><div class="n">3.7x</div><div class="l">실측/예상 비율</div></div>
+<div class="card"><div class="n">11,298</div><div class="l">비교 가능 건수</div></div>
+</div>
+<div class="box" style="border-left-color:#2c3e50">
+<strong>📋 분석 배경</strong><br>
+이슈 처리건수는 "몇 건 처리했나"를 측정했다면, 이슈의 각 크기를 감안한 <strong>작업의 질과 프로세스 효율</strong>을 측정한다:<br>
+• "예상 작업시간 대비 실제로 얼마나 걸렸는가?" → 비율이 낮을수록 효율적<br>
+• "코드리뷰/검토 프로세스를 밟고 있는가?" → 준수율이 높을수록 건강한 워크플로<br>
+• <strong>AI 도입 효과 측정</strong>: 비율 추이가 월별로 개선(↓)되는지 추적하여, AI가 실제 작업 속도에 미치는 영향을 정량화
+</div>
+<div class="box">
+<strong>📌 핵심 지표:</strong><br>
+① <strong>프로세스 준수율</strong> = In Progress→Review 전환 있는 건 / 전체 완료 이슈 (75%→63%, ↓하락) (↑ 목표)<br>
+<span style="color:#666;font-size:13px">&nbsp;&nbsp;※ Review 인정 상태: 검토, review, 리뷰, resolved, 해결됨, 해결, in test</span><br>
+<span style="color:#666;font-size:13px">&nbsp;&nbsp;※ IP→Done 준수 인정 (Review 워크플로 미존재): CLOUDREQ, TMDEVOPS, TMOBICLOUD, TMCRSM, CLOUDSEC, TMAPRM, ISBP, TMCECR</span><br>
+② <strong>실측/예상 비율</strong> = IP 체류시간 ÷ 예상 작업시간 (4.57x→3.92x, ↓개선) (↓ 목표, 이상치 제외)<br>
+목표: 준수율 ↑, 비율 ↓
+</div>
+<div class="box" style="border-left-color:#8e44ad">
+<strong>🔬 예상시간 산출: LLM 심층 (Jira + Wiki + GitHub PR)</strong><br>
+"AI 없이 시니어(5년차+도메인1년) 개발자가 혼자 처리 시 걸릴 작업시간" 추정.<br>
+• 방법: Jira 상세 + 연결이슈 + Confluence Wiki + GitHub PR 코드변경량 종합 판정 (14,960건 전건)<br>
+• <strong>비율 해석</strong>: ~1.0x=매우 효율적, 1~2x=정상(문의/확인 포함), <strong style="color:#e74c3c">2~4x=프로세스 오버헤드, 4x+=병목/대기 발생</strong><br>
+• <strong>이상치 제외</strong>: IP 체류시간 = 0h (즉시 전환) 또는 > 240h (경과시간 10일 초과) 건 제외<br>
+• <strong>귀속 필터</strong>: IP 구간 내 125명 중 최대 점유자 1명에게만 귀속, 본인 점유 시간 사용 (약 90% 이슈가 단독 작업, 복수 작업 시 비율이 보수적으로 산출될 수 있음)
+</div>
+<h2>월별 추이</h2>
+<table><tr><th>월</th><th>완료</th><th>IP→Rev</th><th>준수율</th><th>비교건</th><th>예상(h)</th><th>실측(h)</th><th>비율</th></tr><tr><td>2025-07</td><td>2,071</td>
+<td>1,549</td><td class="up">75%</td>
+<td>1040</td><td>2940</td><td>13447</td>
+<td class="down">4.6x</td></tr><tr><td>2025-08</td><td>1,845</td>
+<td>1,275</td><td class="up">69%</td>
+<td>848</td><td>2394</td><td>9566</td>
+<td class="down">4.0x</td></tr><tr><td>2025-09</td><td>1,978</td>
+<td>1,307</td><td class="up">66%</td>
+<td>900</td><td>2616</td><td>10301</td>
+<td class="down">3.9x</td></tr><tr><td>2025-10</td><td>1,474</td>
+<td>990</td><td class="up">67%</td>
+<td>686</td><td>2052</td><td>6573</td>
+<td class="down">3.2x</td></tr><tr><td>2025-11</td><td>2,082</td>
+<td>1,344</td><td class="up">65%</td>
+<td>889</td><td>2680</td><td>10682</td>
+<td class="down">4.0x</td></tr><tr><td>2025-12</td><td>1,633</td>
+<td>1,033</td><td class="up">63%</td>
+<td>683</td><td>2010</td><td>8292</td>
+<td class="down">4.1x</td></tr><tr><td>2026-01</td><td>2,161</td>
+<td>1,399</td><td class="up">65%</td>
+<td>887</td><td>2666</td><td>9256</td>
+<td class="down">3.5x</td></tr><tr><td>2026-02</td><td>1,590</td>
+<td>1,051</td><td class="up">66%</td>
+<td>677</td><td>1842</td><td>6601</td>
+<td class="down">3.6x</td></tr><tr><td>2026-03</td><td>2,859</td>
+<td>1,956</td><td class="up">68%</td>
+<td>1323</td><td>3705</td><td>13134</td>
+<td class="down">3.5x</td></tr><tr><td>2026-04</td><td>2,931</td>
+<td>1,959</td><td class="up">67%</td>
+<td>1299</td><td>4062</td><td>12258</td>
+<td class="down">3.0x</td></tr><tr><td>2026-05</td><td>2,215</td>
+<td>1,522</td><td class="up">69%</td>
+<td>907</td><td>2882</td><td>9389</td>
+<td class="down">3.3x</td></tr><tr><td>2026-06</td><td>3,068</td>
+<td>1,935</td><td class="up">63%</td>
+<td>1159</td><td>3512</td><td>13757</td>
+<td class="down">3.9x</td></tr></table><script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation"></script>
+<h2>전체 Tech 월간 추이</h2><div style="display:flex;gap:20px;flex-wrap:wrap;margin:10px 0"><div style="flex:1;min-width:500px;background:#fff;border-radius:8px;padding:15px;box-shadow:0 1px 4px rgba(0,0,0,.08)"><canvas id="chart1" height="200"></canvas></div><div style="flex:1;min-width:500px;background:#fff;border-radius:8px;padding:15px;box-shadow:0 1px 4px rgba(0,0,0,.08)"><canvas id="chart2" height="200"></canvas></div></div><script>
+new Chart(document.getElementById('chart1'), {
+    type: 'line',
+    data: {
+        labels: ['2025-07','2025-08','2025-09','2025-10','2025-11','2025-12','2026-01','2026-02','2026-03','2026-04','2026-05','2026-06'],
+        datasets: [{
+            label: '준수율 (%)',
+            data: [74.8,69.1,66.1,67.2,64.6,63.3,64.7,66.1,68.4,66.8,68.7,63.1],
+            borderColor: '#2a9d8f',
+            backgroundColor: '#2a9d8f22',
+            tension: 0.3,
+            fill: true,
+            pointRadius: 5
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            title: { display: true, text: '전체 Tech - 프로세스 준수율 추이 (↑ 목표)', font: {size: 14} }
+        },
+        scales: {
+            y: { min: 0, max: 100, title: { display: true, text: '준수율 (%)' } }
+        }
+    }
+});
+</script><script>
+new Chart(document.getElementById('chart2'), {
+    type: 'line',
+    data: {
+        labels: ['2025-07','2025-08','2025-09','2025-10','2025-11','2025-12','2026-01','2026-02','2026-03','2026-04','2026-05','2026-06'],
+        datasets: [{
+            label: '실측/예상 비율 (x)',
+            data: [4.57,4.00,3.94,3.20,3.99,4.13,3.47,3.58,3.55,3.02,3.26,3.92],
+            borderColor: '#e63946',
+            backgroundColor: '#e6394622',
+            tension: 0.3,
+            fill: true,
+            pointRadius: 5
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            title: { display: true, text: '전체 Tech - 실측/예상 비율 추이 (↓ 목표)', font: {size: 14} },
+            annotation: {
+                annotations: {
+                    band1: { type: 'box', yMin: 0, yMax: 1.0, backgroundColor: 'rgba(39, 174, 96, 0.15)', borderWidth: 0 },
+                    band2: { type: 'box', yMin: 1.0, yMax: 2.0, backgroundColor: 'rgba(39, 174, 96, 0.06)', borderWidth: 0 }
+                }
+            }
+        },
+        scales: {
+            y: { min: 0, title: { display: true, text: '비율 (x)' } }
+        }
+    }
+});
+</script><h2>그룹별 월간 추이</h2><h3>모빌리티서비스</h3><div style="display:flex;gap:20px;flex-wrap:wrap;margin:10px 0"><div style="flex:1;min-width:500px;background:#fff;border-radius:8px;padding:15px;box-shadow:0 1px 4px rgba(0,0,0,.08)"><canvas id="chart3" height="200"></canvas></div><div style="flex:1;min-width:500px;background:#fff;border-radius:8px;padding:15px;box-shadow:0 1px 4px rgba(0,0,0,.08)"><canvas id="chart4" height="200"></canvas></div></div><script>
+new Chart(document.getElementById('chart3'), {
+    type: 'line',
+    data: {
+        labels: ['07월','08월','09월','10월','11월','12월','01월','02월','03월','04월','05월','06월'],
+        datasets: [{
+                label: '프론트엔드',
+                data: [77,76,75,87,80,79,79,72,78,74,80,84],
+                borderColor: '#e63946',
+                backgroundColor: '#e6394622',
+                tension: 0.3,
+                spanGaps: true,
+                pointRadius: 4
+            },{
+                label: '로컬서비스',
+                data: [72,71,57,84,74,80,75,58,74,71,71,78],
+                borderColor: '#457b9d',
+                backgroundColor: '#457b9d22',
+                tension: 0.3,
+                spanGaps: true,
+                pointRadius: 4
+            },{
+                label: 'Search',
+                data: [32,7,27,47,28,3,10,11,19,15,33,30],
+                borderColor: '#2a9d8f',
+                backgroundColor: '#2a9d8f22',
+                tension: 0.3,
+                spanGaps: true,
+                pointRadius: 4
+            },{
+                label: '서비스백엔드',
+                data: [79,82,88,76,68,84,65,87,80,77,58,75],
+                borderColor: '#e9c46a',
+                backgroundColor: '#e9c46a22',
+                tension: 0.3,
+                spanGaps: true,
+                pointRadius: 4
+            },{
+                label: '온디맨드모빌리티개발',
+                data: [86,85,95,76,75,100,64,74,88,85,61,78],
+                borderColor: '#f4a261',
+                backgroundColor: '#f4a26122',
+                tension: 0.3,
+                spanGaps: true,
+                pointRadius: 4
+            },{
+                label: '광고개발',
+                data: [83,80,93,61,67,81,80,84,80,68,74,86],
+                borderColor: '#264653',
+                backgroundColor: '#26465322',
+                tension: 0.3,
+                spanGaps: true,
+                pointRadius: 4
+            }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            title: { display: true, text: '모빌리티서비스 - 프로세스 준수율 (↑ 목표)', font: {size: 14} },
+            legend: { position: 'bottom', labels: {font: {size: 11}},
+                onClick: function(e, legendItem, legend) {
+                    const chart = legend.chart;
+                    const ci = legendItem.datasetIndex;
+                    const onlyThis = chart.data.datasets.every((d, i) => i === ci ? !d.hidden : d.hidden);
+                    if (onlyThis) {
+                        chart.data.datasets.forEach(d => d.hidden = false);
+                    } else {
+                        chart.data.datasets.forEach((d, i) => { d.hidden = (i !== ci); });
+                    }
+                    chart.update();
+                }
+            }
+        },
+        scales: {
+            y: { min: 0, max: 100, title: { display: true, text: '준수율 (%)' } }
+        }
+    }
+});
+</script><script>
+new Chart(document.getElementById('chart4'), {
+    type: 'line',
+    data: {
+        labels: ['07월','08월','09월','10월','11월','12월','01월','02월','03월','04월','05월','06월'],
+        datasets: [{
+                label: '프론트엔드',
+                data: [2.8,2.7,4.0,4.5,4.1,4.1,3.2,3.3,3.8,3.5,4.0,2.8],
+                borderColor: '#e63946',
+                backgroundColor: '#e6394622',
+                tension: 0.3,
+                spanGaps: true,
+                pointRadius: 4
+            },{
+                label: '로컬서비스',
+                data: [4.4,2.9,4.0,4.6,3.8,5.2,3.1,3.8,5.1,4.3,5.3,6.2],
+                borderColor: '#457b9d',
+                backgroundColor: '#457b9d22',
+                tension: 0.3,
+                spanGaps: true,
+                pointRadius: 4
+            },{
+                label: 'Search',
+                data: [4.3,null,4.6,0.2,1.1,null,3.1,2.7,3.8,7.2,1.6,6.3],
+                borderColor: '#2a9d8f',
+                backgroundColor: '#2a9d8f22',
+                tension: 0.3,
+                spanGaps: true,
+                pointRadius: 4
+            },{
+                label: '서비스백엔드',
+                data: [3.9,2.7,5.3,3.3,4.0,3.7,4.1,5.4,7.0,3.3,4.9,3.5],
+                borderColor: '#e9c46a',
+                backgroundColor: '#e9c46a22',
+                tension: 0.3,
+                spanGaps: true,
+                pointRadius: 4
+            },{
+                label: '온디맨드모빌리티개발',
+                data: [7.6,3.0,1.6,4.2,6.0,5.7,2.9,2.1,1.7,2.6,4.4,4.1],
+                borderColor: '#f4a261',
+                backgroundColor: '#f4a26122',
+                tension: 0.3,
+                spanGaps: true,
+                pointRadius: 4
+            },{
+                label: '광고개발',
+                data: [3.8,2.0,1.8,2.5,4.3,3.7,2.3,2.9,3.9,3.4,1.8,2.9],
+                borderColor: '#264653',
+                backgroundColor: '#26465322',
+                tension: 0.3,
+                spanGaps: true,
+                pointRadius: 4
+            }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            title: { display: true, text: '모빌리티서비스 - 실측/예상 비율 (↓ 목표)', font: {size: 14} },
+            legend: { position: 'bottom', labels: {font: {size: 11}},
+                onClick: function(e, legendItem, legend) {
+                    const chart = legend.chart;
+                    const ci = legendItem.datasetIndex;
+                    const onlyThis = chart.data.datasets.every((d, i) => i === ci ? !d.hidden : d.hidden);
+                    if (onlyThis) {
+                        chart.data.datasets.forEach(d => d.hidden = false);
+                    } else {
+                        chart.data.datasets.forEach((d, i) => { d.hidden = (i !== ci); });
+                    }
+                    chart.update();
+                }
+            },
+            annotation: {
+                annotations: {
+                    band1: { type: 'box', yMin: 0, yMax: 1.0, backgroundColor: 'rgba(39, 174, 96, 0.15)', borderWidth: 0 },
+                    band2: { type: 'box', yMin: 1.0, yMax: 2.0, backgroundColor: 'rgba(39, 174, 96, 0.06)', borderWidth: 0 }
+                }
+            }
+        },
+        scales: {
+            y: { min: 0, max: 6, title: { display: true, text: '비율 (x)' } }
+        }
+    }
+});
+</script><h3>모빌리티플랫폼</h3><div style="display:flex;gap:20px;flex-wrap:wrap;margin:10px 0"><div style="flex:1;min-width:500px;background:#fff;border-radius:8px;padding:15px;box-shadow:0 1px 4px rgba(0,0,0,.08)"><canvas id="chart5" height="200"></canvas></div><div style="flex:1;min-width:500px;background:#fff;border-radius:8px;padding:15px;box-shadow:0 1px 4px rgba(0,0,0,.08)"><canvas id="chart6" height="200"></canvas></div></div><script>
+new Chart(document.getElementById('chart5'), {
+    type: 'line',
+    data: {
+        labels: ['07월','08월','09월','10월','11월','12월','01월','02월','03월','04월','05월','06월'],
+        datasets: [{
+                label: 'Client Core',
+                data: [82,82,66,82,82,61,81,73,80,69,96,82],
+                borderColor: '#e63946',
+                backgroundColor: '#e6394622',
+                tension: 0.3,
+                spanGaps: true,
+                pointRadius: 4
+            },{
+                label: 'Client Service',
+                data: [79,85,82,76,57,74,69,53,61,65,68,61],
+                borderColor: '#457b9d',
+                backgroundColor: '#457b9d22',
+                tension: 0.3,
+                spanGaps: true,
+                pointRadius: 4
+            },{
+                label: 'DevOps',
+                data: [100,100,99,99,100,99,99,100,99,99,96,100],
+                borderColor: '#2a9d8f',
+                backgroundColor: '#2a9d8f22',
+                tension: 0.3,
+                spanGaps: true,
+                pointRadius: 4
+            },{
+                label: '서비스플랫폼',
+                data: [69,51,40,36,48,34,53,41,55,53,46,57],
+                borderColor: '#e9c46a',
+                backgroundColor: '#e9c46a22',
+                tension: 0.3,
+                spanGaps: true,
+                pointRadius: 4
+            },{
+                label: 'RP·교통',
+                data: [48,41,61,35,62,44,48,46,56,59,55,37],
+                borderColor: '#f4a261',
+                backgroundColor: '#f4a26122',
+                tension: 0.3,
+                spanGaps: true,
+                pointRadius: 4
+            },{
+                label: 'AUTO개발',
+                data: [66,49,55,53,47,57,52,70,59,58,57,33],
+                borderColor: '#264653',
+                backgroundColor: '#26465322',
+                tension: 0.3,
+                spanGaps: true,
+                pointRadius: 4
+            }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            title: { display: true, text: '모빌리티플랫폼 - 프로세스 준수율 (↑ 목표)', font: {size: 14} },
+            legend: { position: 'bottom', labels: {font: {size: 11}},
+                onClick: function(e, legendItem, legend) {
+                    const chart = legend.chart;
+                    const ci = legendItem.datasetIndex;
+                    const onlyThis = chart.data.datasets.every((d, i) => i === ci ? !d.hidden : d.hidden);
+                    if (onlyThis) {
+                        chart.data.datasets.forEach(d => d.hidden = false);
+                    } else {
+                        chart.data.datasets.forEach((d, i) => { d.hidden = (i !== ci); });
+                    }
+                    chart.update();
+                }
+            }
+        },
+        scales: {
+            y: { min: 0, max: 100, title: { display: true, text: '준수율 (%)' } }
+        }
+    }
+});
+</script><script>
+new Chart(document.getElementById('chart6'), {
+    type: 'line',
+    data: {
+        labels: ['07월','08월','09월','10월','11월','12월','01월','02월','03월','04월','05월','06월'],
+        datasets: [{
+                label: 'Client Core',
+                data: [5.0,5.6,4.0,2.4,4.4,3.1,2.2,2.4,3.1,1.4,1.5,4.1],
+                borderColor: '#e63946',
+                backgroundColor: '#e6394622',
+                tension: 0.3,
+                spanGaps: true,
+                pointRadius: 4
+            },{
+                label: 'Client Service',
+                data: [6.5,5.5,4.6,3.7,5.1,5.8,4.6,1.7,3.7,3.3,4.2,4.9],
+                borderColor: '#457b9d',
+                backgroundColor: '#457b9d22',
+                tension: 0.3,
+                spanGaps: true,
+                pointRadius: 4
+            },{
+                label: 'DevOps',
+                data: [7.0,6.7,7.8,3.8,5.5,6.6,3.8,3.8,3.0,5.0,3.7,3.4],
+                borderColor: '#2a9d8f',
+                backgroundColor: '#2a9d8f22',
+                tension: 0.3,
+                spanGaps: true,
+                pointRadius: 4
+            },{
+                label: '서비스플랫폼',
+                data: [6.2,7.4,3.2,3.1,3.2,4.3,4.3,3.2,3.7,3.6,2.9,3.6],
+                borderColor: '#e9c46a',
+                backgroundColor: '#e9c46a22',
+                tension: 0.3,
+                spanGaps: true,
+                pointRadius: 4
+            },{
+                label: 'RP·교통',
+                data: [6.5,2.3,1.8,1.6,3.8,3.4,3.2,3.0,1.8,2.4,1.8,2.8],
+                borderColor: '#f4a261',
+                backgroundColor: '#f4a26122',
+                tension: 0.3,
+                spanGaps: true,
+                pointRadius: 4
+            },{
+                label: 'AUTO개발',
+                data: [1.4,1.4,2.0,1.8,1.9,1.8,3.8,4.2,2.2,1.0,3.1,2.7],
+                borderColor: '#264653',
+                backgroundColor: '#26465322',
+                tension: 0.3,
+                spanGaps: true,
+                pointRadius: 4
+            }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            title: { display: true, text: '모빌리티플랫폼 - 실측/예상 비율 (↓ 목표)', font: {size: 14} },
+            legend: { position: 'bottom', labels: {font: {size: 11}},
+                onClick: function(e, legendItem, legend) {
+                    const chart = legend.chart;
+                    const ci = legendItem.datasetIndex;
+                    const onlyThis = chart.data.datasets.every((d, i) => i === ci ? !d.hidden : d.hidden);
+                    if (onlyThis) {
+                        chart.data.datasets.forEach(d => d.hidden = false);
+                    } else {
+                        chart.data.datasets.forEach((d, i) => { d.hidden = (i !== ci); });
+                    }
+                    chart.update();
+                }
+            },
+            annotation: {
+                annotations: {
+                    band1: { type: 'box', yMin: 0, yMax: 1.0, backgroundColor: 'rgba(39, 174, 96, 0.15)', borderWidth: 0 },
+                    band2: { type: 'box', yMin: 1.0, yMax: 2.0, backgroundColor: 'rgba(39, 174, 96, 0.06)', borderWidth: 0 }
+                }
+            }
+        },
+        scales: {
+            y: { min: 0, max: 6, title: { display: true, text: '비율 (x)' } }
+        }
+    }
+});
+</script><h3>맵플랫폼</h3><div style="display:flex;gap:20px;flex-wrap:wrap;margin:10px 0"><div style="flex:1;min-width:500px;background:#fff;border-radius:8px;padding:15px;box-shadow:0 1px 4px rgba(0,0,0,.08)"><canvas id="chart7" height="200"></canvas></div><div style="flex:1;min-width:500px;background:#fff;border-radius:8px;padding:15px;box-shadow:0 1px 4px rgba(0,0,0,.08)"><canvas id="chart8" height="200"></canvas></div></div><script>
+new Chart(document.getElementById('chart7'), {
+    type: 'line',
+    data: {
+        labels: ['07월','08월','09월','10월','11월','12월','01월','02월','03월','04월','05월','06월'],
+        datasets: [{
+                label: '맵인프라',
+                data: [52,47,57,51,53,53,51,59,49,48,47,53],
+                borderColor: '#e63946',
+                backgroundColor: '#e6394622',
+                tension: 0.3,
+                spanGaps: true,
+                pointRadius: 4
+            },{
+                label: '맵컨텐츠',
+                data: [42,50,76,63,44,50,50,40,80,60,23,48],
+                borderColor: '#457b9d',
+                backgroundColor: '#457b9d22',
+                tension: 0.3,
+                spanGaps: true,
+                pointRadius: 4
+            },{
+                label: '로컬인프라',
+                data: [54,54,40,55,56,27,25,36,37,29,36,31],
+                borderColor: '#2a9d8f',
+                backgroundColor: '#2a9d8f22',
+                tension: 0.3,
+                spanGaps: true,
+                pointRadius: 4
+            },{
+                label: '로컬컨텐츠',
+                data: [30,21,46,80,26,33,16,19,55,46,50,33],
+                borderColor: '#e9c46a',
+                backgroundColor: '#e9c46a22',
+                tension: 0.3,
+                spanGaps: true,
+                pointRadius: 4
+            }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            title: { display: true, text: '맵플랫폼 - 프로세스 준수율 (↑ 목표)', font: {size: 14} },
+            legend: { position: 'bottom', labels: {font: {size: 11}},
+                onClick: function(e, legendItem, legend) {
+                    const chart = legend.chart;
+                    const ci = legendItem.datasetIndex;
+                    const onlyThis = chart.data.datasets.every((d, i) => i === ci ? !d.hidden : d.hidden);
+                    if (onlyThis) {
+                        chart.data.datasets.forEach(d => d.hidden = false);
+                    } else {
+                        chart.data.datasets.forEach((d, i) => { d.hidden = (i !== ci); });
+                    }
+                    chart.update();
+                }
+            }
+        },
+        scales: {
+            y: { min: 0, max: 100, title: { display: true, text: '준수율 (%)' } }
+        }
+    }
+});
+</script><script>
+new Chart(document.getElementById('chart8'), {
+    type: 'line',
+    data: {
+        labels: ['07월','08월','09월','10월','11월','12월','01월','02월','03월','04월','05월','06월'],
+        datasets: [{
+                label: '맵인프라',
+                data: [3.5,3.0,3.4,3.0,4.4,3.5,2.3,5.3,3.3,2.8,2.7,4.2],
+                borderColor: '#e63946',
+                backgroundColor: '#e6394622',
+                tension: 0.3,
+                spanGaps: true,
+                pointRadius: 4
+            },{
+                label: '맵컨텐츠',
+                data: [null,null,8.0,9.8,0.0,0.6,1.4,null,3.0,4.3,10.3,3.9],
+                borderColor: '#457b9d',
+                backgroundColor: '#457b9d22',
+                tension: 0.3,
+                spanGaps: true,
+                pointRadius: 4
+            },{
+                label: '로컬인프라',
+                data: [5.3,5.0,4.4,2.1,3.7,4.5,6.1,5.0,5.3,3.9,5.1,7.0],
+                borderColor: '#2a9d8f',
+                backgroundColor: '#2a9d8f22',
+                tension: 0.3,
+                spanGaps: true,
+                pointRadius: 4
+            },{
+                label: '로컬컨텐츠',
+                data: [8.2,8.4,6.0,9.8,0.4,6.2,7.9,null,6.2,9.2,6.7,7.7],
+                borderColor: '#e9c46a',
+                backgroundColor: '#e9c46a22',
+                tension: 0.3,
+                spanGaps: true,
+                pointRadius: 4
+            }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            title: { display: true, text: '맵플랫폼 - 실측/예상 비율 (↓ 목표)', font: {size: 14} },
+            legend: { position: 'bottom', labels: {font: {size: 11}},
+                onClick: function(e, legendItem, legend) {
+                    const chart = legend.chart;
+                    const ci = legendItem.datasetIndex;
+                    const onlyThis = chart.data.datasets.every((d, i) => i === ci ? !d.hidden : d.hidden);
+                    if (onlyThis) {
+                        chart.data.datasets.forEach(d => d.hidden = false);
+                    } else {
+                        chart.data.datasets.forEach((d, i) => { d.hidden = (i !== ci); });
+                    }
+                    chart.update();
+                }
+            },
+            annotation: {
+                annotations: {
+                    band1: { type: 'box', yMin: 0, yMax: 1.0, backgroundColor: 'rgba(39, 174, 96, 0.15)', borderWidth: 0 },
+                    band2: { type: 'box', yMin: 1.0, yMax: 2.0, backgroundColor: 'rgba(39, 174, 96, 0.06)', borderWidth: 0 }
+                }
+            }
+        },
+        scales: {
+            y: { min: 0, max: 6, title: { display: true, text: '비율 (x)' } }
+        }
+    }
+});
+</script><h2>팀별 요약 (12개월 통합)</h2><h3>모빌리티서비스</h3><table><tr><th>팀</th><th>완료</th><th>IP→Rev</th><th>준수율</th><th>비교건</th><th>예상(h)</th><th>실측(h)</th><th>비율</th></tr><tr><td><a href="#프론트엔드">프론트엔드</a></td><td>1,873</td>
+<td>1,467</td><td class="up">78%</td>
+<td>1138</td><td>3528</td><td>12357</td>
+<td class="down">3.5x</td></tr><tr><td><a href="#로컬서비스">로컬서비스</a></td><td>1,970</td>
+<td>1,410</td><td class="up">72%</td>
+<td>1094</td><td>2658</td><td>11968</td>
+<td class="down">4.5x</td></tr><tr><td><a href="#Search">Search</a></td><td>753</td>
+<td>169</td><td class="down">22%</td>
+<td>108</td><td>436</td><td>1178</td>
+<td class="neutral">2.7x</td></tr><tr><td><a href="#서비스백엔드">서비스백엔드</a></td><td>747</td>
+<td>572</td><td class="up">77%</td>
+<td>371</td><td>1444</td><td>6160</td>
+<td class="down">4.3x</td></tr><tr><td><a href="#온디맨드모빌리티개발">온디맨드모빌리티개발</a></td><td>530</td>
+<td>424</td><td class="up">80%</td>
+<td>293</td><td>944</td><td>3168</td>
+<td class="down">3.4x</td></tr><tr><td><a href="#광고개발">광고개발</a></td><td>526</td>
+<td>408</td><td class="up">78%</td>
+<td>311</td><td>806</td><td>2317</td>
+<td class="neutral">2.9x</td></tr></table><h3>모빌리티플랫폼</h3><table><tr><th>팀</th><th>완료</th><th>IP→Rev</th><th>준수율</th><th>비교건</th><th>예상(h)</th><th>실측(h)</th><th>비율</th></tr><tr><td><a href="#Client Core">Client Core</a></td><td>2,616</td>
+<td>2,081</td><td class="up">80%</td>
+<td>1333</td><td>4156</td><td>13459</td>
+<td class="down">3.2x</td></tr><tr><td><a href="#Client Service">Client Service</a></td><td>3,742</td>
+<td>2,561</td><td class="up">68%</td>
+<td>1910</td><td>5362</td><td>24176</td>
+<td class="down">4.5x</td></tr><tr><td><a href="#DevOps">DevOps</a></td><td>3,241</td>
+<td>3,210</td><td class="up">99%</td>
+<td>1688</td><td>2615</td><td>12622</td>
+<td class="down">4.8x</td></tr><tr><td><a href="#서비스플랫폼">서비스플랫폼</a></td><td>1,855</td>
+<td>935</td><td class="up">50%</td>
+<td>453</td><td>1920</td><td>7504</td>
+<td class="down">3.9x</td></tr><tr><td><a href="#RP·교통">RP·교통</a></td><td>1,287</td>
+<td>656</td><td class="up">51%</td>
+<td>412</td><td>1683</td><td>4653</td>
+<td class="neutral">2.8x</td></tr><tr><td><a href="#AUTO개발">AUTO개발</a></td><td>3,902</td>
+<td>2,106</td><td class="up">54%</td>
+<td>1346</td><td>4478</td><td>10541</td>
+<td class="up">2.4x</td></tr></table><h3>맵플랫폼</h3><table><tr><th>팀</th><th>완료</th><th>IP→Rev</th><th>준수율</th><th>비교건</th><th>예상(h)</th><th>실측(h)</th><th>비율</th></tr><tr><td><a href="#맵인프라">맵인프라</a></td><td>1,232</td>
+<td>631</td><td class="up">51%</td>
+<td>408</td><td>1901</td><td>6412</td>
+<td class="down">3.4x</td></tr><tr><td><a href="#맵컨텐츠">맵컨텐츠</a></td><td>259</td>
+<td>146</td><td class="up">56%</td>
+<td>85</td><td>218</td><td>1268</td>
+<td class="down">5.8x</td></tr><tr><td><a href="#로컬인프라">로컬인프라</a></td><td>1,172</td>
+<td>479</td><td class="up">41%</td>
+<td>302</td><td>1088</td><td>4748</td>
+<td class="down">4.4x</td></tr><tr><td><a href="#로컬컨텐츠">로컬컨텐츠</a></td><td>202</td>
+<td>65</td><td class="down">32%</td>
+<td>46</td><td>122</td><td>726</td>
+<td class="down">6.0x</td></tr></table><h2>LLM 심층 Sizing (전건)</h2><div class="box" style="border-left-color:#27ae60">
+<strong>📊 Jira + Wiki + PR 컨텍스트를 활용한 LLM 심층 추정 결과</strong><br>
+14,960건 전건에 대해 Jira 이력, 연결이슈, Wiki 문서, PR 코드 변경량을 종합하여 정밀 추정한 결과입니다.
+</div><p><strong>전체 비율: 3.69x</strong> (n=11,298, 총 실측:123,256h / 총 예상:33,360h)</p><div style="display:flex;gap:20px;flex-wrap:wrap;margin:10px 0"><div style="flex:1;min-width:500px;background:#fff;border-radius:8px;padding:15px;box-shadow:0 1px 4px rgba(0,0,0,.08)"><canvas id="chart9" height="250"></canvas></div><div style="flex:1;min-width:500px;background:#fff;border-radius:8px;padding:15px;box-shadow:0 1px 4px rgba(0,0,0,.08)"><canvas id="chart10" height="250"></canvas></div></div><script>
+new Chart(document.getElementById('chart9'), {
+    type: 'bar',
+    data: {
+        labels: ['AUTO개발','Client Core','Client Service','DevOps','RP·교통','Search','광고개발','로컬서비스','로컬인프라','로컬컨텐츠','맵인프라','맵컨텐츠','서비스백엔드','서비스플랫폼','온디맨드모빌리티개발','프론트엔드'],
+        datasets: [{
+            label: '실측/심층추정 비율 (합산)',
+            data: [2.35,3.24,4.51,4.83,2.76,2.70,2.87,4.50,4.37,5.98,3.37,5.80,4.27,3.91,3.36,3.50],
+            backgroundColor: ['#e6394688','#457b9d88','#2a9d8f88','#e9c46a88','#f4a26188','#26465388','#6a4c9388','#1982c488','#8ac92688','#ff595e88','#ff924c88','#ffca3a88','#e6394688','#457b9d88','#2a9d8f88','#e9c46a88'],
+            borderColor: ['#e63946','#457b9d','#2a9d8f','#e9c46a','#f4a261','#264653','#6a4c93','#1982c4','#8ac926','#ff595e','#ff924c','#ffca3a','#e63946','#457b9d','#2a9d8f','#e9c46a'],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            title: { display: true, text: '팀별 LLM 심층 비율 (실측 IP시간 / 심층추정)', font: {size: 14} },
+            legend: { display: false }
+        },
+        scales: {
+            y: { min: 0, title: { display: true, text: '비율 (x)' },
+                 grid: { color: function(ctx) { return ctx.tick.value === 1 ? '#27ae60' : '#eee'; } } },
+            x: { ticks: { font: { size: 11 } } }
+        }
+    }
+});
+</script><script>
+new Chart(document.getElementById('chart10'), {
+    type: 'bar',
+    data: {
+        labels: ['backend_api','backend_batch','bugfix','data_work','frontend_admin','general_dev','infra_devops','ops_task','qa_verification','security'],
+        datasets: [{
+            label: '실측/심층추정 비율 (합산)',
+            data: [4.38,4.35,4.17,3.79,5.20,4.53,6.82,6.68,7.19,6.37],
+            backgroundColor: ['#e6394688','#457b9d88','#2a9d8f88','#e9c46a88','#f4a26188','#26465388','#6a4c9388','#1982c488','#8ac92688','#ff595e88'],
+            borderColor: ['#e63946','#457b9d','#2a9d8f','#e9c46a','#f4a261','#264653','#6a4c93','#1982c4','#8ac926','#ff595e'],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            title: { display: true, text: '카테고리별 LLM 심층 비율', font: {size: 14} },
+            legend: { display: false }
+        },
+        scales: {
+            y: { min: 0, title: { display: true, text: '비율 (x)' },
+                 grid: { color: function(ctx) { return ctx.tick.value === 1 ? '#27ae60' : '#eee'; } } },
+            x: { ticks: { font: { size: 11 } } }
+        }
+    }
+});
+</script><h2 id="프론트엔드">프론트엔드 <small style="color:#666;font-size:12px">모빌리티서비스</small></h2><table><tr><th>월</th><th>완료</th><th>IP→Rev</th><th>준수율</th><th>비교건</th><th>예상(h)</th><th>실측(h)</th><th>비율</th></tr><tr><td>2025-07</td><td>159</td><td>123</td>
+<td>77%</td><td>96</td><td>426</td><td>1181</td>
+<td class="neutral">2.8x</td></tr><tr><td>2025-08</td><td>147</td><td>112</td>
+<td>76%</td><td>85</td><td>304</td><td>829</td>
+<td class="neutral">2.7x</td></tr><tr><td>2025-09</td><td>182</td><td>137</td>
+<td>75%</td><td>118</td><td>328</td><td>1300</td>
+<td class="down">4.0x</td></tr><tr><td>2025-10</td><td>127</td><td>111</td>
+<td>87%</td><td>97</td><td>250</td><td>1122</td>
+<td class="down">4.5x</td></tr><tr><td>2025-11</td><td>144</td><td>115</td>
+<td>80%</td><td>86</td><td>226</td><td>930</td>
+<td class="down">4.1x</td></tr><tr><td>2025-12</td><td>135</td><td>107</td>
+<td>79%</td><td>75</td><td>262</td><td>1067</td>
+<td class="down">4.1x</td></tr><tr><td>2026-01</td><td>156</td><td>123</td>
+<td>79%</td><td>93</td><td>241</td><td>765</td>
+<td class="down">3.2x</td></tr><tr><td>2026-02</td><td>120</td><td>86</td>
+<td>72%</td><td>70</td><td>172</td><td>568</td>
+<td class="down">3.3x</td></tr><tr><td>2026-03</td><td>186</td><td>145</td>
+<td>78%</td><td>102</td><td>312</td><td>1190</td>
+<td class="down">3.8x</td></tr><tr><td>2026-04</td><td>229</td><td>170</td>
+<td>74%</td><td>136</td><td>470</td><td>1635</td>
+<td class="down">3.5x</td></tr><tr><td>2026-05</td><td>117</td><td>94</td>
+<td>80%</td><td>67</td><td>208</td><td>836</td>
+<td class="down">4.0x</td></tr><tr><td>2026-06</td><td>171</td><td>144</td>
+<td>84%</td><td>113</td><td>330</td><td>935</td>
+<td class="neutral">2.8x</td></tr></table><div style="display:flex;gap:20px;flex-wrap:wrap;margin:10px 0">
+<div style="flex:1;min-width:400px;background:#fff;border-radius:8px;padding:15px;box-shadow:0 1px 4px rgba(0,0,0,.08)"><canvas id="chart11" height="180"></canvas></div>
+<div style="flex:1;min-width:400px;background:#fff;border-radius:8px;padding:15px;box-shadow:0 1px 4px rgba(0,0,0,.08)"><canvas id="chart12" height="180"></canvas></div>
+</div>
+<script>
+new Chart(document.getElementById('chart11'), {
+    type: 'line',
+    data: { labels: ['07','08','09','10','11','12','01','02','03','04','05','06'], datasets: [{ label: '준수율 (%)', data: [77.4,76.2,75.3,87.4,79.9,79.3,78.8,71.7,78.0,74.2,80.3,84.2], borderColor: '#2980b9', backgroundColor: '#2980b988', fill: true, tension: 0.3, pointRadius: 4 }] },
+    options: { responsive: true, plugins: { title: { display: true, text: '프론트엔드 - 준수율 추이', font: {size: 13} }, legend: { display: false } }, scales: { y: { min: 0, max: 100, title: { display: true, text: '준수율 (%)' } } } }
+});
+new Chart(document.getElementById('chart12'), {
+    type: 'line',
+    data: { labels: ['07','08','09','10','11','12','01','02','03','04','05','06'], datasets: [{ label: '비율 (x)', data: [2.77,2.73,3.96,4.48,4.12,4.08,3.17,3.31,3.82,3.48,4.02,2.83], borderColor: '#e67e22', backgroundColor: '#e67e2288', fill: false, tension: 0.3, pointRadius: 4 }] },
+    options: { responsive: true, plugins: { title: { display: true, text: '프론트엔드 - 실측/예상 비율 추이', font: {size: 13} }, legend: { display: false }, annotation: { annotations: { band1: { type: 'box', yMin: 0, yMax: 1.0, backgroundColor: 'rgba(39, 174, 96, 0.15)', borderWidth: 0 }, band2: { type: 'box', yMin: 1.0, yMax: 2.0, backgroundColor: 'rgba(39, 174, 96, 0.06)', borderWidth: 0 } } } }, scales: { y: { min: 0, title: { display: true, text: '비율 (x)' } } } }
+});
+</script><h2 id="로컬서비스">로컬서비스 <small style="color:#666;font-size:12px">모빌리티서비스</small></h2><table><tr><th>월</th><th>완료</th><th>IP→Rev</th><th>준수율</th><th>비교건</th><th>예상(h)</th><th>실측(h)</th><th>비율</th></tr><tr><td>2025-07</td><td>190</td><td>136</td>
+<td>72%</td><td>116</td><td>286</td><td>1245</td>
+<td class="down">4.4x</td></tr><tr><td>2025-08</td><td>139</td><td>98</td>
+<td>71%</td><td>71</td><td>169</td><td>493</td>
+<td class="neutral">2.9x</td></tr><tr><td>2025-09</td><td>218</td><td>124</td>
+<td>57%</td><td>102</td><td>238</td><td>942</td>
+<td class="down">4.0x</td></tr><tr><td>2025-10</td><td>123</td><td>103</td>
+<td>84%</td><td>78</td><td>178</td><td>815</td>
+<td class="down">4.6x</td></tr><tr><td>2025-11</td><td>168</td><td>124</td>
+<td>74%</td><td>104</td><td>254</td><td>979</td>
+<td class="down">3.8x</td></tr><tr><td>2025-12</td><td>88</td><td>70</td>
+<td>80%</td><td>51</td><td>108</td><td>562</td>
+<td class="down">5.2x</td></tr><tr><td>2026-01</td><td>102</td><td>77</td>
+<td>75%</td><td>52</td><td>124</td><td>385</td>
+<td class="down">3.1x</td></tr><tr><td>2026-02</td><td>90</td><td>52</td>
+<td>58%</td><td>40</td><td>104</td><td>392</td>
+<td class="down">3.8x</td></tr><tr><td>2026-03</td><td>229</td><td>170</td>
+<td>74%</td><td>124</td><td>348</td><td>1783</td>
+<td class="down">5.1x</td></tr><tr><td>2026-04</td><td>234</td><td>166</td>
+<td>71%</td><td>142</td><td>343</td><td>1467</td>
+<td class="down">4.3x</td></tr><tr><td>2026-05</td><td>186</td><td>132</td>
+<td>71%</td><td>105</td><td>258</td><td>1375</td>
+<td class="down">5.3x</td></tr><tr><td>2026-06</td><td>203</td><td>158</td>
+<td>78%</td><td>109</td><td>249</td><td>1532</td>
+<td class="down">6.2x</td></tr></table><div style="display:flex;gap:20px;flex-wrap:wrap;margin:10px 0">
+<div style="flex:1;min-width:400px;background:#fff;border-radius:8px;padding:15px;box-shadow:0 1px 4px rgba(0,0,0,.08)"><canvas id="chart13" height="180"></canvas></div>
+<div style="flex:1;min-width:400px;background:#fff;border-radius:8px;padding:15px;box-shadow:0 1px 4px rgba(0,0,0,.08)"><canvas id="chart14" height="180"></canvas></div>
+</div>
+<script>
+new Chart(document.getElementById('chart13'), {
+    type: 'line',
+    data: { labels: ['07','08','09','10','11','12','01','02','03','04','05','06'], datasets: [{ label: '준수율 (%)', data: [71.6,70.5,56.9,83.7,73.8,79.5,75.5,57.8,74.2,70.9,71.0,77.8], borderColor: '#2980b9', backgroundColor: '#2980b988', fill: true, tension: 0.3, pointRadius: 4 }] },
+    options: { responsive: true, plugins: { title: { display: true, text: '로컬서비스 - 준수율 추이', font: {size: 13} }, legend: { display: false } }, scales: { y: { min: 0, max: 100, title: { display: true, text: '준수율 (%)' } } } }
+});
+new Chart(document.getElementById('chart14'), {
+    type: 'line',
+    data: { labels: ['07','08','09','10','11','12','01','02','03','04','05','06'], datasets: [{ label: '비율 (x)', data: [4.35,2.91,3.97,4.58,3.84,5.22,3.10,3.77,5.12,4.28,5.34,6.15], borderColor: '#e67e22', backgroundColor: '#e67e2288', fill: false, tension: 0.3, pointRadius: 4 }] },
+    options: { responsive: true, plugins: { title: { display: true, text: '로컬서비스 - 실측/예상 비율 추이', font: {size: 13} }, legend: { display: false }, annotation: { annotations: { band1: { type: 'box', yMin: 0, yMax: 1.0, backgroundColor: 'rgba(39, 174, 96, 0.15)', borderWidth: 0 }, band2: { type: 'box', yMin: 1.0, yMax: 2.0, backgroundColor: 'rgba(39, 174, 96, 0.06)', borderWidth: 0 } } } }, scales: { y: { min: 0, title: { display: true, text: '비율 (x)' } } } }
+});
+</script><h2 id="Search">Search <small style="color:#666;font-size:12px">모빌리티서비스</small></h2><table><tr><th>월</th><th>완료</th><th>IP→Rev</th><th>준수율</th><th>비교건</th><th>예상(h)</th><th>실측(h)</th><th>비율</th></tr><tr><td>2025-07</td><td>25</td><td>8</td>
+<td>32%</td><td>7</td><td>21</td><td>91</td>
+<td class="down">4.3x</td></tr><tr><td>2025-08</td><td>60</td><td>4</td>
+<td>7%</td><td>2</td><td>2</td><td>46</td>
+<td class="down">23.1x</td></tr><tr><td>2025-09</td><td>48</td><td>13</td>
+<td>27%</td><td>6</td><td>18</td><td>84</td>
+<td class="down">4.6x</td></tr><tr><td>2025-10</td><td>79</td><td>37</td>
+<td>47%</td><td>30</td><td>94</td><td>18</td>
+<td class="up">0.2x</td></tr><tr><td>2025-11</td><td>64</td><td>18</td>
+<td>28%</td><td>10</td><td>25</td><td>27</td>
+<td class="up">1.1x</td></tr><tr><td>2025-12</td><td>58</td><td>2</td>
+<td>3%</td><td>2</td><td>6</td><td>9</td>
+<td class="up">1.5x</td></tr><tr><td>2026-01</td><td>39</td><td>4</td>
+<td>10%</td><td>4</td><td>25</td><td>77</td>
+<td class="down">3.1x</td></tr><tr><td>2026-02</td><td>66</td><td>7</td>
+<td>11%</td><td>3</td><td>20</td><td>53</td>
+<td class="neutral">2.7x</td></tr><tr><td>2026-03</td><td>95</td><td>18</td>
+<td>19%</td><td>8</td><td>25</td><td>96</td>
+<td class="down">3.8x</td></tr><tr><td>2026-04</td><td>71</td><td>11</td>
+<td>15%</td><td>9</td><td>28</td><td>206</td>
+<td class="down">7.2x</td></tr><tr><td>2026-05</td><td>66</td><td>22</td>
+<td>33%</td><td>14</td><td>128</td><td>198</td>
+<td class="up">1.6x</td></tr><tr><td>2026-06</td><td>82</td><td>25</td>
+<td>30%</td><td>13</td><td>44</td><td>273</td>
+<td class="down">6.3x</td></tr></table><div style="display:flex;gap:20px;flex-wrap:wrap;margin:10px 0">
+<div style="flex:1;min-width:400px;background:#fff;border-radius:8px;padding:15px;box-shadow:0 1px 4px rgba(0,0,0,.08)"><canvas id="chart15" height="180"></canvas></div>
+<div style="flex:1;min-width:400px;background:#fff;border-radius:8px;padding:15px;box-shadow:0 1px 4px rgba(0,0,0,.08)"><canvas id="chart16" height="180"></canvas></div>
+</div>
+<script>
+new Chart(document.getElementById('chart15'), {
+    type: 'line',
+    data: { labels: ['07','08','09','10','11','12','01','02','03','04','05','06'], datasets: [{ label: '준수율 (%)', data: [32.0,6.7,27.1,46.8,28.1,3.4,10.3,10.6,18.9,15.5,33.3,30.5], borderColor: '#2980b9', backgroundColor: '#2980b988', fill: true, tension: 0.3, pointRadius: 4 }] },
+    options: { responsive: true, plugins: { title: { display: true, text: 'Search - 준수율 추이', font: {size: 13} }, legend: { display: false } }, scales: { y: { min: 0, max: 100, title: { display: true, text: '준수율 (%)' } } } }
+});
+new Chart(document.getElementById('chart16'), {
+    type: 'line',
+    data: { labels: ['07','08','09','10','11','12','01','02','03','04','05','06'], datasets: [{ label: '비율 (x)', data: [4.31,23.14,4.56,0.19,1.06,1.50,3.10,2.65,3.84,7.21,1.55,6.29], borderColor: '#e67e22', backgroundColor: '#e67e2288', fill: false, tension: 0.3, pointRadius: 4 }] },
+    options: { responsive: true, plugins: { title: { display: true, text: 'Search - 실측/예상 비율 추이', font: {size: 13} }, legend: { display: false }, annotation: { annotations: { band1: { type: 'box', yMin: 0, yMax: 1.0, backgroundColor: 'rgba(39, 174, 96, 0.15)', borderWidth: 0 }, band2: { type: 'box', yMin: 1.0, yMax: 2.0, backgroundColor: 'rgba(39, 174, 96, 0.06)', borderWidth: 0 } } } }, scales: { y: { min: 0, title: { display: true, text: '비율 (x)' } } } }
+});
+</script><h2 id="서비스백엔드">서비스백엔드 <small style="color:#666;font-size:12px">모빌리티서비스</small></h2><table><tr><th>월</th><th>완료</th><th>IP→Rev</th><th>준수율</th><th>비교건</th><th>예상(h)</th><th>실측(h)</th><th>비율</th></tr><tr><td>2025-07</td><td>53</td><td>42</td>
+<td>79%</td><td>32</td><td>119</td><td>466</td>
+<td class="down">3.9x</td></tr><tr><td>2025-08</td><td>87</td><td>71</td>
+<td>82%</td><td>39</td><td>178</td><td>484</td>
+<td class="neutral">2.7x</td></tr><tr><td>2025-09</td><td>57</td><td>50</td>
+<td>88%</td><td>33</td><td>128</td><td>680</td>
+<td class="down">5.3x</td></tr><tr><td>2025-10</td><td>37</td><td>28</td>
+<td>76%</td><td>18</td><td>68</td><td>222</td>
+<td class="down">3.3x</td></tr><tr><td>2025-11</td><td>38</td><td>26</td>
+<td>68%</td><td>16</td><td>56</td><td>226</td>
+<td class="down">4.0x</td></tr><tr><td>2025-12</td><td>49</td><td>41</td>
+<td>84%</td><td>28</td><td>100</td><td>370</td>
+<td class="down">3.7x</td></tr><tr><td>2026-01</td><td>60</td><td>39</td>
+<td>65%</td><td>27</td><td>110</td><td>449</td>
+<td class="down">4.1x</td></tr><tr><td>2026-02</td><td>63</td><td>55</td>
+<td>87%</td><td>36</td><td>113</td><td>615</td>
+<td class="down">5.4x</td></tr><tr><td>2026-03</td><td>81</td><td>65</td>
+<td>80%</td><td>46</td><td>158</td><td>1095</td>
+<td class="down">7.0x</td></tr><tr><td>2026-04</td><td>48</td><td>37</td>
+<td>77%</td><td>22</td><td>91</td><td>304</td>
+<td class="down">3.3x</td></tr><tr><td>2026-05</td><td>72</td><td>42</td>
+<td>58%</td><td>23</td><td>83</td><td>411</td>
+<td class="down">4.9x</td></tr><tr><td>2026-06</td><td>102</td><td>76</td>
+<td>75%</td><td>51</td><td>240</td><td>839</td>
+<td class="down">3.5x</td></tr></table><div style="display:flex;gap:20px;flex-wrap:wrap;margin:10px 0">
+<div style="flex:1;min-width:400px;background:#fff;border-radius:8px;padding:15px;box-shadow:0 1px 4px rgba(0,0,0,.08)"><canvas id="chart17" height="180"></canvas></div>
+<div style="flex:1;min-width:400px;background:#fff;border-radius:8px;padding:15px;box-shadow:0 1px 4px rgba(0,0,0,.08)"><canvas id="chart18" height="180"></canvas></div>
+</div>
+<script>
+new Chart(document.getElementById('chart17'), {
+    type: 'line',
+    data: { labels: ['07','08','09','10','11','12','01','02','03','04','05','06'], datasets: [{ label: '준수율 (%)', data: [79.2,81.6,87.7,75.7,68.4,83.7,65.0,87.3,80.2,77.1,58.3,74.5], borderColor: '#2980b9', backgroundColor: '#2980b988', fill: true, tension: 0.3, pointRadius: 4 }] },
+    options: { responsive: true, plugins: { title: { display: true, text: '서비스백엔드 - 준수율 추이', font: {size: 13} }, legend: { display: false } }, scales: { y: { min: 0, max: 100, title: { display: true, text: '준수율 (%)' } } } }
+});
+new Chart(document.getElementById('chart18'), {
+    type: 'line',
+    data: { labels: ['07','08','09','10','11','12','01','02','03','04','05','06'], datasets: [{ label: '비율 (x)', data: [3.91,2.71,5.34,3.26,4.03,3.71,4.06,5.44,6.95,3.34,4.95,3.50], borderColor: '#e67e22', backgroundColor: '#e67e2288', fill: false, tension: 0.3, pointRadius: 4 }] },
+    options: { responsive: true, plugins: { title: { display: true, text: '서비스백엔드 - 실측/예상 비율 추이', font: {size: 13} }, legend: { display: false }, annotation: { annotations: { band1: { type: 'box', yMin: 0, yMax: 1.0, backgroundColor: 'rgba(39, 174, 96, 0.15)', borderWidth: 0 }, band2: { type: 'box', yMin: 1.0, yMax: 2.0, backgroundColor: 'rgba(39, 174, 96, 0.06)', borderWidth: 0 } } } }, scales: { y: { min: 0, title: { display: true, text: '비율 (x)' } } } }
+});
+</script><h2 id="온디맨드모빌리티개발">온디맨드모빌리티개발 <small style="color:#666;font-size:12px">모빌리티서비스</small></h2><table><tr><th>월</th><th>완료</th><th>IP→Rev</th><th>준수율</th><th>비교건</th><th>예상(h)</th><th>실측(h)</th><th>비율</th></tr><tr><td>2025-07</td><td>29</td><td>25</td>
+<td>86%</td><td>17</td><td>35</td><td>267</td>
+<td class="down">7.6x</td></tr><tr><td>2025-08</td><td>48</td><td>41</td>
+<td>85%</td><td>26</td><td>68</td><td>204</td>
+<td class="down">3.0x</td></tr><tr><td>2025-09</td><td>37</td><td>35</td>
+<td>95%</td><td>27</td><td>89</td><td>142</td>
+<td class="up">1.6x</td></tr><tr><td>2025-10</td><td>38</td><td>29</td>
+<td>76%</td><td>26</td><td>56</td><td>236</td>
+<td class="down">4.2x</td></tr><tr><td>2025-11</td><td>40</td><td>30</td>
+<td>75%</td><td>23</td><td>75</td><td>453</td>
+<td class="down">6.0x</td></tr><tr><td>2025-12</td><td>23</td><td>23</td>
+<td>100%</td><td>13</td><td>23</td><td>132</td>
+<td class="down">5.7x</td></tr><tr><td>2026-01</td><td>45</td><td>29</td>
+<td>64%</td><td>21</td><td>78</td><td>226</td>
+<td class="neutral">2.9x</td></tr><tr><td>2026-02</td><td>23</td><td>17</td>
+<td>74%</td><td>10</td><td>26</td><td>56</td>
+<td class="up">2.1x</td></tr><tr><td>2026-03</td><td>48</td><td>42</td>
+<td>88%</td><td>27</td><td>114</td><td>190</td>
+<td class="up">1.7x</td></tr><tr><td>2026-04</td><td>66</td><td>56</td>
+<td>85%</td><td>40</td><td>206</td><td>541</td>
+<td class="neutral">2.6x</td></tr><tr><td>2026-05</td><td>41</td><td>25</td>
+<td>61%</td><td>15</td><td>52</td><td>230</td>
+<td class="down">4.4x</td></tr><tr><td>2026-06</td><td>92</td><td>72</td>
+<td>78%</td><td>48</td><td>121</td><td>493</td>
+<td class="down">4.1x</td></tr></table><div style="display:flex;gap:20px;flex-wrap:wrap;margin:10px 0">
+<div style="flex:1;min-width:400px;background:#fff;border-radius:8px;padding:15px;box-shadow:0 1px 4px rgba(0,0,0,.08)"><canvas id="chart19" height="180"></canvas></div>
+<div style="flex:1;min-width:400px;background:#fff;border-radius:8px;padding:15px;box-shadow:0 1px 4px rgba(0,0,0,.08)"><canvas id="chart20" height="180"></canvas></div>
+</div>
+<script>
+new Chart(document.getElementById('chart19'), {
+    type: 'line',
+    data: { labels: ['07','08','09','10','11','12','01','02','03','04','05','06'], datasets: [{ label: '준수율 (%)', data: [86.2,85.4,94.6,76.3,75.0,100.0,64.4,73.9,87.5,84.8,61.0,78.3], borderColor: '#2980b9', backgroundColor: '#2980b988', fill: true, tension: 0.3, pointRadius: 4 }] },
+    options: { responsive: true, plugins: { title: { display: true, text: '온디맨드모빌리티개발 - 준수율 추이', font: {size: 13} }, legend: { display: false } }, scales: { y: { min: 0, max: 100, title: { display: true, text: '준수율 (%)' } } } }
+});
+new Chart(document.getElementById('chart20'), {
+    type: 'line',
+    data: { labels: ['07','08','09','10','11','12','01','02','03','04','05','06'], datasets: [{ label: '비율 (x)', data: [7.62,3.02,1.60,4.21,6.04,5.72,2.87,2.14,1.66,2.62,4.42,4.08], borderColor: '#e67e22', backgroundColor: '#e67e2288', fill: false, tension: 0.3, pointRadius: 4 }] },
+    options: { responsive: true, plugins: { title: { display: true, text: '온디맨드모빌리티개발 - 실측/예상 비율 추이', font: {size: 13} }, legend: { display: false }, annotation: { annotations: { band1: { type: 'box', yMin: 0, yMax: 1.0, backgroundColor: 'rgba(39, 174, 96, 0.15)', borderWidth: 0 }, band2: { type: 'box', yMin: 1.0, yMax: 2.0, backgroundColor: 'rgba(39, 174, 96, 0.06)', borderWidth: 0 } } } }, scales: { y: { min: 0, title: { display: true, text: '비율 (x)' } } } }
+});
+</script><h2 id="광고개발">광고개발 <small style="color:#666;font-size:12px">모빌리티서비스</small></h2><table><tr><th>월</th><th>완료</th><th>IP→Rev</th><th>준수율</th><th>비교건</th><th>예상(h)</th><th>실측(h)</th><th>비율</th></tr><tr><td>2025-07</td><td>18</td><td>15</td>
+<td>83%</td><td>11</td><td>43</td><td>162</td>
+<td class="down">3.8x</td></tr><tr><td>2025-08</td><td>25</td><td>20</td>
+<td>80%</td><td>13</td><td>47</td><td>95</td>
+<td class="up">2.0x</td></tr><tr><td>2025-09</td><td>41</td><td>38</td>
+<td>93%</td><td>29</td><td>62</td><td>113</td>
+<td class="up">1.8x</td></tr><tr><td>2025-10</td><td>71</td><td>43</td>
+<td>61%</td><td>33</td><td>81</td><td>206</td>
+<td class="neutral">2.5x</td></tr><tr><td>2025-11</td><td>33</td><td>22</td>
+<td>67%</td><td>17</td><td>42</td><td>185</td>
+<td class="down">4.3x</td></tr><tr><td>2025-12</td><td>16</td><td>13</td>
+<td>81%</td><td>8</td><td>25</td><td>93</td>
+<td class="down">3.7x</td></tr><tr><td>2026-01</td><td>64</td><td>51</td>
+<td>80%</td><td>36</td><td>82</td><td>184</td>
+<td class="up">2.3x</td></tr><tr><td>2026-02</td><td>74</td><td>62</td>
+<td>84%</td><td>49</td><td>102</td><td>298</td>
+<td class="neutral">2.9x</td></tr><tr><td>2026-03</td><td>35</td><td>28</td>
+<td>80%</td><td>18</td><td>58</td><td>226</td>
+<td class="down">3.9x</td></tr><tr><td>2026-04</td><td>47</td><td>32</td>
+<td>68%</td><td>30</td><td>74</td><td>251</td>
+<td class="down">3.4x</td></tr><tr><td>2026-05</td><td>31</td><td>23</td>
+<td>74%</td><td>14</td><td>42</td><td>76</td>
+<td class="up">1.8x</td></tr><tr><td>2026-06</td><td>71</td><td>61</td>
+<td>86%</td><td>53</td><td>149</td><td>429</td>
+<td class="neutral">2.9x</td></tr></table><div style="display:flex;gap:20px;flex-wrap:wrap;margin:10px 0">
+<div style="flex:1;min-width:400px;background:#fff;border-radius:8px;padding:15px;box-shadow:0 1px 4px rgba(0,0,0,.08)"><canvas id="chart21" height="180"></canvas></div>
+<div style="flex:1;min-width:400px;background:#fff;border-radius:8px;padding:15px;box-shadow:0 1px 4px rgba(0,0,0,.08)"><canvas id="chart22" height="180"></canvas></div>
+</div>
+<script>
+new Chart(document.getElementById('chart21'), {
+    type: 'line',
+    data: { labels: ['07','08','09','10','11','12','01','02','03','04','05','06'], datasets: [{ label: '준수율 (%)', data: [83.3,80.0,92.7,60.6,66.7,81.2,79.7,83.8,80.0,68.1,74.2,85.9], borderColor: '#2980b9', backgroundColor: '#2980b988', fill: true, tension: 0.3, pointRadius: 4 }] },
+    options: { responsive: true, plugins: { title: { display: true, text: '광고개발 - 준수율 추이', font: {size: 13} }, legend: { display: false } }, scales: { y: { min: 0, max: 100, title: { display: true, text: '준수율 (%)' } } } }
+});
+new Chart(document.getElementById('chart22'), {
+    type: 'line',
+    data: { labels: ['07','08','09','10','11','12','01','02','03','04','05','06'], datasets: [{ label: '비율 (x)', data: [3.76,2.01,1.83,2.54,4.34,3.71,2.26,2.91,3.93,3.41,1.79,2.88], borderColor: '#e67e22', backgroundColor: '#e67e2288', fill: false, tension: 0.3, pointRadius: 4 }] },
+    options: { responsive: true, plugins: { title: { display: true, text: '광고개발 - 실측/예상 비율 추이', font: {size: 13} }, legend: { display: false }, annotation: { annotations: { band1: { type: 'box', yMin: 0, yMax: 1.0, backgroundColor: 'rgba(39, 174, 96, 0.15)', borderWidth: 0 }, band2: { type: 'box', yMin: 1.0, yMax: 2.0, backgroundColor: 'rgba(39, 174, 96, 0.06)', borderWidth: 0 } } } }, scales: { y: { min: 0, title: { display: true, text: '비율 (x)' } } } }
+});
+</script><h2 id="Client Core">Client Core <small style="color:#666;font-size:12px">모빌리티플랫폼</small></h2><table><tr><th>월</th><th>완료</th><th>IP→Rev</th><th>준수율</th><th>비교건</th><th>예상(h)</th><th>실측(h)</th><th>비율</th></tr><tr><td>2025-07</td><td>282</td><td>232</td>
+<td>82%</td><td>155</td><td>398</td><td>1997</td>
+<td class="down">5.0x</td></tr><tr><td>2025-08</td><td>225</td><td>185</td>
+<td>82%</td><td>151</td><td>384</td><td>2164</td>
+<td class="down">5.6x</td></tr><tr><td>2025-09</td><td>155</td><td>103</td>
+<td>66%</td><td>74</td><td>238</td><td>962</td>
+<td class="down">4.0x</td></tr><tr><td>2025-10</td><td>126</td><td>103</td>
+<td>82%</td><td>81</td><td>288</td><td>697</td>
+<td class="up">2.4x</td></tr><tr><td>2025-11</td><td>170</td><td>140</td>
+<td>82%</td><td>90</td><td>266</td><td>1174</td>
+<td class="down">4.4x</td></tr><tr><td>2025-12</td><td>218</td><td>134</td>
+<td>61%</td><td>88</td><td>284</td><td>894</td>
+<td class="down">3.1x</td></tr><tr><td>2026-01</td><td>274</td><td>222</td>
+<td>81%</td><td>138</td><td>404</td><td>882</td>
+<td class="up">2.2x</td></tr><tr><td>2026-02</td><td>111</td><td>81</td>
+<td>73%</td><td>60</td><td>216</td><td>526</td>
+<td class="up">2.4x</td></tr><tr><td>2026-03</td><td>189</td><td>151</td>
+<td>80%</td><td>104</td><td>356</td><td>1110</td>
+<td class="down">3.1x</td></tr><tr><td>2026-04</td><td>203</td><td>141</td>
+<td>69%</td><td>102</td><td>362</td><td>511</td>
+<td class="up">1.4x</td></tr><tr><td>2026-05</td><td>341</td><td>326</td>
+<td>96%</td><td>151</td><td>534</td><td>796</td>
+<td class="up">1.5x</td></tr><tr><td>2026-06</td><td>322</td><td>263</td>
+<td>82%</td><td>139</td><td>426</td><td>1747</td>
+<td class="down">4.1x</td></tr></table><div style="display:flex;gap:20px;flex-wrap:wrap;margin:10px 0">
+<div style="flex:1;min-width:400px;background:#fff;border-radius:8px;padding:15px;box-shadow:0 1px 4px rgba(0,0,0,.08)"><canvas id="chart23" height="180"></canvas></div>
+<div style="flex:1;min-width:400px;background:#fff;border-radius:8px;padding:15px;box-shadow:0 1px 4px rgba(0,0,0,.08)"><canvas id="chart24" height="180"></canvas></div>
+</div>
+<script>
+new Chart(document.getElementById('chart23'), {
+    type: 'line',
+    data: { labels: ['07','08','09','10','11','12','01','02','03','04','05','06'], datasets: [{ label: '준수율 (%)', data: [82.3,82.2,66.5,81.7,82.4,61.5,81.0,73.0,79.9,69.5,95.6,81.7], borderColor: '#2980b9', backgroundColor: '#2980b988', fill: true, tension: 0.3, pointRadius: 4 }] },
+    options: { responsive: true, plugins: { title: { display: true, text: 'Client Core - 준수율 추이', font: {size: 13} }, legend: { display: false } }, scales: { y: { min: 0, max: 100, title: { display: true, text: '준수율 (%)' } } } }
+});
+new Chart(document.getElementById('chart24'), {
+    type: 'line',
+    data: { labels: ['07','08','09','10','11','12','01','02','03','04','05','06'], datasets: [{ label: '비율 (x)', data: [5.01,5.64,4.04,2.43,4.41,3.14,2.18,2.44,3.12,1.41,1.49,4.10], borderColor: '#e67e22', backgroundColor: '#e67e2288', fill: false, tension: 0.3, pointRadius: 4 }] },
+    options: { responsive: true, plugins: { title: { display: true, text: 'Client Core - 실측/예상 비율 추이', font: {size: 13} }, legend: { display: false }, annotation: { annotations: { band1: { type: 'box', yMin: 0, yMax: 1.0, backgroundColor: 'rgba(39, 174, 96, 0.15)', borderWidth: 0 }, band2: { type: 'box', yMin: 1.0, yMax: 2.0, backgroundColor: 'rgba(39, 174, 96, 0.06)', borderWidth: 0 } } } }, scales: { y: { min: 0, title: { display: true, text: '비율 (x)' } } } }
+});
+</script><h2 id="Client Service">Client Service <small style="color:#666;font-size:12px">모빌리티플랫폼</small></h2><table><tr><th>월</th><th>완료</th><th>IP→Rev</th><th>준수율</th><th>비교건</th><th>예상(h)</th><th>실측(h)</th><th>비율</th></tr><tr><td>2025-07</td><td>435</td><td>344</td>
+<td>79%</td><td>243</td><td>556</td><td>3636</td>
+<td class="down">6.5x</td></tr><tr><td>2025-08</td><td>299</td><td>255</td>
+<td>85%</td><td>187</td><td>414</td><td>2298</td>
+<td class="down">5.5x</td></tr><tr><td>2025-09</td><td>122</td><td>100</td>
+<td>82%</td><td>79</td><td>209</td><td>970</td>
+<td class="down">4.6x</td></tr><tr><td>2025-10</td><td>175</td><td>133</td>
+<td>76%</td><td>92</td><td>308</td><td>1147</td>
+<td class="down">3.7x</td></tr><tr><td>2025-11</td><td>277</td><td>159</td>
+<td>57%</td><td>106</td><td>284</td><td>1460</td>
+<td class="down">5.1x</td></tr><tr><td>2025-12</td><td>250</td><td>185</td>
+<td>74%</td><td>144</td><td>352</td><td>2037</td>
+<td class="down">5.8x</td></tr><tr><td>2026-01</td><td>275</td><td>191</td>
+<td>69%</td><td>114</td><td>390</td><td>1804</td>
+<td class="down">4.6x</td></tr><tr><td>2026-02</td><td>158</td><td>83</td>
+<td>53%</td><td>36</td><td>156</td><td>271</td>
+<td class="up">1.7x</td></tr><tr><td>2026-03</td><td>643</td><td>394</td>
+<td>61%</td><td>329</td><td>845</td><td>3132</td>
+<td class="down">3.7x</td></tr><tr><td>2026-04</td><td>410</td><td>267</td>
+<td>65%</td><td>220</td><td>796</td><td>2629</td>
+<td class="down">3.3x</td></tr><tr><td>2026-05</td><td>333</td><td>227</td>
+<td>68%</td><td>175</td><td>508</td><td>2131</td>
+<td class="down">4.2x</td></tr><tr><td>2026-06</td><td>365</td><td>223</td>
+<td>61%</td><td>185</td><td>545</td><td>2663</td>
+<td class="down">4.9x</td></tr></table><div style="display:flex;gap:20px;flex-wrap:wrap;margin:10px 0">
+<div style="flex:1;min-width:400px;background:#fff;border-radius:8px;padding:15px;box-shadow:0 1px 4px rgba(0,0,0,.08)"><canvas id="chart25" height="180"></canvas></div>
+<div style="flex:1;min-width:400px;background:#fff;border-radius:8px;padding:15px;box-shadow:0 1px 4px rgba(0,0,0,.08)"><canvas id="chart26" height="180"></canvas></div>
+</div>
+<script>
+new Chart(document.getElementById('chart25'), {
+    type: 'line',
+    data: { labels: ['07','08','09','10','11','12','01','02','03','04','05','06'], datasets: [{ label: '준수율 (%)', data: [79.1,85.3,82.0,76.0,57.4,74.0,69.5,52.5,61.3,65.1,68.2,61.1], borderColor: '#2980b9', backgroundColor: '#2980b988', fill: true, tension: 0.3, pointRadius: 4 }] },
+    options: { responsive: true, plugins: { title: { display: true, text: 'Client Service - 준수율 추이', font: {size: 13} }, legend: { display: false } }, scales: { y: { min: 0, max: 100, title: { display: true, text: '준수율 (%)' } } } }
+});
+new Chart(document.getElementById('chart26'), {
+    type: 'line',
+    data: { labels: ['07','08','09','10','11','12','01','02','03','04','05','06'], datasets: [{ label: '비율 (x)', data: [6.54,5.54,4.64,3.73,5.14,5.79,4.63,1.74,3.71,3.30,4.19,4.89], borderColor: '#e67e22', backgroundColor: '#e67e2288', fill: false, tension: 0.3, pointRadius: 4 }] },
+    options: { responsive: true, plugins: { title: { display: true, text: 'Client Service - 실측/예상 비율 추이', font: {size: 13} }, legend: { display: false }, annotation: { annotations: { band1: { type: 'box', yMin: 0, yMax: 1.0, backgroundColor: 'rgba(39, 174, 96, 0.15)', borderWidth: 0 }, band2: { type: 'box', yMin: 1.0, yMax: 2.0, backgroundColor: 'rgba(39, 174, 96, 0.06)', borderWidth: 0 } } } }, scales: { y: { min: 0, title: { display: true, text: '비율 (x)' } } } }
+});
+</script><h2 id="DevOps">DevOps <small style="color:#666;font-size:12px">모빌리티플랫폼</small></h2><table><tr><th>월</th><th>완료</th><th>IP→Rev</th><th>준수율</th><th>비교건</th><th>예상(h)</th><th>실측(h)</th><th>비율</th></tr><tr><td>2025-07</td><td>228</td><td>227</td>
+<td>100%</td><td>119</td><td>193</td><td>1348</td>
+<td class="down">7.0x</td></tr><tr><td>2025-08</td><td>196</td><td>196</td>
+<td>100%</td><td>110</td><td>144</td><td>965</td>
+<td class="down">6.7x</td></tr><tr><td>2025-09</td><td>256</td><td>253</td>
+<td>99%</td><td>139</td><td>234</td><td>1826</td>
+<td class="down">7.8x</td></tr><tr><td>2025-10</td><td>128</td><td>127</td>
+<td>99%</td><td>70</td><td>130</td><td>491</td>
+<td class="down">3.8x</td></tr><tr><td>2025-11</td><td>232</td><td>231</td>
+<td>100%</td><td>145</td><td>204</td><td>1122</td>
+<td class="down">5.5x</td></tr><tr><td>2025-12</td><td>191</td><td>189</td>
+<td>99%</td><td>94</td><td>138</td><td>918</td>
+<td class="down">6.6x</td></tr><tr><td>2026-01</td><td>214</td><td>211</td>
+<td>99%</td><td>114</td><td>224</td><td>860</td>
+<td class="down">3.8x</td></tr><tr><td>2026-02</td><td>258</td><td>258</td>
+<td>100%</td><td>143</td><td>184</td><td>703</td>
+<td class="down">3.8x</td></tr><tr><td>2026-03</td><td>453</td><td>447</td>
+<td>99%</td><td>261</td><td>338</td><td>1012</td>
+<td class="neutral">3.0x</td></tr><tr><td>2026-04</td><td>465</td><td>462</td>
+<td>99%</td><td>242</td><td>322</td><td>1624</td>
+<td class="down">5.0x</td></tr><tr><td>2026-05</td><td>255</td><td>244</td>
+<td>96%</td><td>106</td><td>165</td><td>611</td>
+<td class="down">3.7x</td></tr><tr><td>2026-06</td><td>365</td><td>365</td>
+<td>100%</td><td>145</td><td>340</td><td>1142</td>
+<td class="down">3.4x</td></tr></table><div style="display:flex;gap:20px;flex-wrap:wrap;margin:10px 0">
+<div style="flex:1;min-width:400px;background:#fff;border-radius:8px;padding:15px;box-shadow:0 1px 4px rgba(0,0,0,.08)"><canvas id="chart27" height="180"></canvas></div>
+<div style="flex:1;min-width:400px;background:#fff;border-radius:8px;padding:15px;box-shadow:0 1px 4px rgba(0,0,0,.08)"><canvas id="chart28" height="180"></canvas></div>
+</div>
+<script>
+new Chart(document.getElementById('chart27'), {
+    type: 'line',
+    data: { labels: ['07','08','09','10','11','12','01','02','03','04','05','06'], datasets: [{ label: '준수율 (%)', data: [99.6,100.0,98.8,99.2,99.6,99.0,98.6,100.0,98.7,99.4,95.7,100.0], borderColor: '#2980b9', backgroundColor: '#2980b988', fill: true, tension: 0.3, pointRadius: 4 }] },
+    options: { responsive: true, plugins: { title: { display: true, text: 'DevOps - 준수율 추이', font: {size: 13} }, legend: { display: false } }, scales: { y: { min: 0, max: 100, title: { display: true, text: '준수율 (%)' } } } }
+});
+new Chart(document.getElementById('chart28'), {
+    type: 'line',
+    data: { labels: ['07','08','09','10','11','12','01','02','03','04','05','06'], datasets: [{ label: '비율 (x)', data: [6.98,6.72,7.80,3.79,5.50,6.63,3.85,3.83,3.00,5.04,3.70,3.35], borderColor: '#e67e22', backgroundColor: '#e67e2288', fill: false, tension: 0.3, pointRadius: 4 }] },
+    options: { responsive: true, plugins: { title: { display: true, text: 'DevOps - 실측/예상 비율 추이', font: {size: 13} }, legend: { display: false }, annotation: { annotations: { band1: { type: 'box', yMin: 0, yMax: 1.0, backgroundColor: 'rgba(39, 174, 96, 0.15)', borderWidth: 0 }, band2: { type: 'box', yMin: 1.0, yMax: 2.0, backgroundColor: 'rgba(39, 174, 96, 0.06)', borderWidth: 0 } } } }, scales: { y: { min: 0, title: { display: true, text: '비율 (x)' } } } }
+});
+</script><h2 id="서비스플랫폼">서비스플랫폼 <small style="color:#666;font-size:12px">모빌리티플랫폼</small></h2><table><tr><th>월</th><th>완료</th><th>IP→Rev</th><th>준수율</th><th>비교건</th><th>예상(h)</th><th>실측(h)</th><th>비율</th></tr><tr><td>2025-07</td><td>142</td><td>98</td>
+<td>69%</td><td>56</td><td>172</td><td>1078</td>
+<td class="down">6.2x</td></tr><tr><td>2025-08</td><td>79</td><td>40</td>
+<td>51%</td><td>15</td><td>55</td><td>407</td>
+<td class="down">7.4x</td></tr><tr><td>2025-09</td><td>123</td><td>49</td>
+<td>40%</td><td>20</td><td>82</td><td>260</td>
+<td class="down">3.2x</td></tr><tr><td>2025-10</td><td>91</td><td>33</td>
+<td>36%</td><td>12</td><td>45</td><td>139</td>
+<td class="down">3.1x</td></tr><tr><td>2025-11</td><td>137</td><td>66</td>
+<td>48%</td><td>32</td><td>248</td><td>793</td>
+<td class="down">3.2x</td></tr><tr><td>2025-12</td><td>150</td><td>51</td>
+<td>34%</td><td>35</td><td>112</td><td>483</td>
+<td class="down">4.3x</td></tr><tr><td>2026-01</td><td>181</td><td>96</td>
+<td>53%</td><td>54</td><td>175</td><td>753</td>
+<td class="down">4.3x</td></tr><tr><td>2026-02</td><td>56</td><td>23</td>
+<td>41%</td><td>7</td><td>24</td><td>78</td>
+<td class="down">3.2x</td></tr><tr><td>2026-03</td><td>165</td><td>91</td>
+<td>55%</td><td>36</td><td>170</td><td>634</td>
+<td class="down">3.7x</td></tr><tr><td>2026-04</td><td>192</td><td>102</td>
+<td>53%</td><td>50</td><td>290</td><td>1032</td>
+<td class="down">3.6x</td></tr><tr><td>2026-05</td><td>171</td><td>78</td>
+<td>46%</td><td>34</td><td>167</td><td>485</td>
+<td class="neutral">2.9x</td></tr><tr><td>2026-06</td><td>368</td><td>208</td>
+<td>57%</td><td>102</td><td>378</td><td>1362</td>
+<td class="down">3.6x</td></tr></table><div style="display:flex;gap:20px;flex-wrap:wrap;margin:10px 0">
+<div style="flex:1;min-width:400px;background:#fff;border-radius:8px;padding:15px;box-shadow:0 1px 4px rgba(0,0,0,.08)"><canvas id="chart29" height="180"></canvas></div>
+<div style="flex:1;min-width:400px;background:#fff;border-radius:8px;padding:15px;box-shadow:0 1px 4px rgba(0,0,0,.08)"><canvas id="chart30" height="180"></canvas></div>
+</div>
+<script>
+new Chart(document.getElementById('chart29'), {
+    type: 'line',
+    data: { labels: ['07','08','09','10','11','12','01','02','03','04','05','06'], datasets: [{ label: '준수율 (%)', data: [69.0,50.6,39.8,36.3,48.2,34.0,53.0,41.1,55.2,53.1,45.6,56.5], borderColor: '#2980b9', backgroundColor: '#2980b988', fill: true, tension: 0.3, pointRadius: 4 }] },
+    options: { responsive: true, plugins: { title: { display: true, text: '서비스플랫폼 - 준수율 추이', font: {size: 13} }, legend: { display: false } }, scales: { y: { min: 0, max: 100, title: { display: true, text: '준수율 (%)' } } } }
+});
+new Chart(document.getElementById('chart30'), {
+    type: 'line',
+    data: { labels: ['07','08','09','10','11','12','01','02','03','04','05','06'], datasets: [{ label: '비율 (x)', data: [6.25,7.39,3.18,3.08,3.20,4.29,4.30,3.20,3.72,3.56,2.91,3.60], borderColor: '#e67e22', backgroundColor: '#e67e2288', fill: false, tension: 0.3, pointRadius: 4 }] },
+    options: { responsive: true, plugins: { title: { display: true, text: '서비스플랫폼 - 실측/예상 비율 추이', font: {size: 13} }, legend: { display: false }, annotation: { annotations: { band1: { type: 'box', yMin: 0, yMax: 1.0, backgroundColor: 'rgba(39, 174, 96, 0.15)', borderWidth: 0 }, band2: { type: 'box', yMin: 1.0, yMax: 2.0, backgroundColor: 'rgba(39, 174, 96, 0.06)', borderWidth: 0 } } } }, scales: { y: { min: 0, title: { display: true, text: '비율 (x)' } } } }
+});
+</script><h2 id="RP·교통">RP·교통 <small style="color:#666;font-size:12px">모빌리티플랫폼</small></h2><table><tr><th>월</th><th>완료</th><th>IP→Rev</th><th>준수율</th><th>비교건</th><th>예상(h)</th><th>실측(h)</th><th>비율</th></tr><tr><td>2025-07</td><td>63</td><td>30</td>
+<td>48%</td><td>14</td><td>54</td><td>354</td>
+<td class="down">6.5x</td></tr><tr><td>2025-08</td><td>70</td><td>29</td>
+<td>41%</td><td>14</td><td>70</td><td>160</td>
+<td class="up">2.3x</td></tr><tr><td>2025-09</td><td>145</td><td>89</td>
+<td>61%</td><td>71</td><td>238</td><td>435</td>
+<td class="up">1.8x</td></tr><tr><td>2025-10</td><td>84</td><td>29</td>
+<td>35%</td><td>19</td><td>76</td><td>120</td>
+<td class="up">1.6x</td></tr><tr><td>2025-11</td><td>182</td><td>113</td>
+<td>62%</td><td>75</td><td>329</td><td>1242</td>
+<td class="down">3.8x</td></tr><tr><td>2025-12</td><td>72</td><td>32</td>
+<td>44%</td><td>22</td><td>100</td><td>343</td>
+<td class="down">3.4x</td></tr><tr><td>2026-01</td><td>90</td><td>43</td>
+<td>48%</td><td>23</td><td>102</td><td>324</td>
+<td class="down">3.2x</td></tr><tr><td>2026-02</td><td>80</td><td>37</td>
+<td>46%</td><td>22</td><td>114</td><td>345</td>
+<td class="down">3.0x</td></tr><tr><td>2026-03</td><td>108</td><td>61</td>
+<td>56%</td><td>34</td><td>132</td><td>237</td>
+<td class="up">1.8x</td></tr><tr><td>2026-04</td><td>140</td><td>82</td>
+<td>59%</td><td>55</td><td>227</td><td>554</td>
+<td class="up">2.4x</td></tr><tr><td>2026-05</td><td>92</td><td>51</td>
+<td>55%</td><td>30</td><td>131</td><td>234</td>
+<td class="up">1.8x</td></tr><tr><td>2026-06</td><td>161</td><td>60</td>
+<td>37%</td><td>33</td><td>110</td><td>305</td>
+<td class="neutral">2.8x</td></tr></table><div style="display:flex;gap:20px;flex-wrap:wrap;margin:10px 0">
+<div style="flex:1;min-width:400px;background:#fff;border-radius:8px;padding:15px;box-shadow:0 1px 4px rgba(0,0,0,.08)"><canvas id="chart31" height="180"></canvas></div>
+<div style="flex:1;min-width:400px;background:#fff;border-radius:8px;padding:15px;box-shadow:0 1px 4px rgba(0,0,0,.08)"><canvas id="chart32" height="180"></canvas></div>
+</div>
+<script>
+new Chart(document.getElementById('chart31'), {
+    type: 'line',
+    data: { labels: ['07','08','09','10','11','12','01','02','03','04','05','06'], datasets: [{ label: '준수율 (%)', data: [47.6,41.4,61.4,34.5,62.1,44.4,47.8,46.2,56.5,58.6,55.4,37.3], borderColor: '#2980b9', backgroundColor: '#2980b988', fill: true, tension: 0.3, pointRadius: 4 }] },
+    options: { responsive: true, plugins: { title: { display: true, text: 'RP·교통 - 준수율 추이', font: {size: 13} }, legend: { display: false } }, scales: { y: { min: 0, max: 100, title: { display: true, text: '준수율 (%)' } } } }
+});
+new Chart(document.getElementById('chart32'), {
+    type: 'line',
+    data: { labels: ['07','08','09','10','11','12','01','02','03','04','05','06'], datasets: [{ label: '비율 (x)', data: [6.50,2.27,1.83,1.57,3.77,3.43,3.20,3.02,1.80,2.44,1.79,2.77], borderColor: '#e67e22', backgroundColor: '#e67e2288', fill: false, tension: 0.3, pointRadius: 4 }] },
+    options: { responsive: true, plugins: { title: { display: true, text: 'RP·교통 - 실측/예상 비율 추이', font: {size: 13} }, legend: { display: false }, annotation: { annotations: { band1: { type: 'box', yMin: 0, yMax: 1.0, backgroundColor: 'rgba(39, 174, 96, 0.15)', borderWidth: 0 }, band2: { type: 'box', yMin: 1.0, yMax: 2.0, backgroundColor: 'rgba(39, 174, 96, 0.06)', borderWidth: 0 } } } }, scales: { y: { min: 0, title: { display: true, text: '비율 (x)' } } } }
+});
+</script><h2 id="AUTO개발">AUTO개발 <small style="color:#666;font-size:12px">모빌리티플랫폼</small></h2><table><tr><th>월</th><th>완료</th><th>IP→Rev</th><th>준수율</th><th>비교건</th><th>예상(h)</th><th>실측(h)</th><th>비율</th></tr><tr><td>2025-07</td><td>265</td><td>176</td>
+<td>66%</td><td>110</td><td>394</td><td>563</td>
+<td class="up">1.4x</td></tr><tr><td>2025-08</td><td>240</td><td>118</td>
+<td>49%</td><td>73</td><td>298</td><td>410</td>
+<td class="up">1.4x</td></tr><tr><td>2025-09</td><td>303</td><td>166</td>
+<td>55%</td><td>93</td><td>346</td><td>688</td>
+<td class="up">2.0x</td></tr><tr><td>2025-10</td><td>198</td><td>104</td>
+<td>53%</td><td>65</td><td>229</td><td>418</td>
+<td class="up">1.8x</td></tr><tr><td>2025-11</td><td>274</td><td>130</td>
+<td>47%</td><td>73</td><td>224</td><td>422</td>
+<td class="up">1.9x</td></tr><tr><td>2025-12</td><td>173</td><td>98</td>
+<td>57%</td><td>66</td><td>246</td><td>435</td>
+<td class="up">1.8x</td></tr><tr><td>2026-01</td><td>452</td><td>236</td>
+<td>52%</td><td>165</td><td>516</td><td>1966</td>
+<td class="down">3.8x</td></tr><tr><td>2026-02</td><td>305</td><td>212</td>
+<td>70%</td><td>155</td><td>452</td><td>1894</td>
+<td class="down">4.2x</td></tr><tr><td>2026-03</td><td>368</td><td>216</td>
+<td>59%</td><td>147</td><td>506</td><td>1119</td>
+<td class="up">2.2x</td></tr><tr><td>2026-04</td><td>554</td><td>322</td>
+<td>58%</td><td>187</td><td>568</td><td>593</td>
+<td class="up">1.0x</td></tr><tr><td>2026-05</td><td>317</td><td>180</td>
+<td>57%</td><td>119</td><td>366</td><td>1128</td>
+<td class="down">3.1x</td></tr><tr><td>2026-06</td><td>453</td><td>148</td>
+<td>33%</td><td>93</td><td>336</td><td>905</td>
+<td class="neutral">2.7x</td></tr></table><div style="display:flex;gap:20px;flex-wrap:wrap;margin:10px 0">
+<div style="flex:1;min-width:400px;background:#fff;border-radius:8px;padding:15px;box-shadow:0 1px 4px rgba(0,0,0,.08)"><canvas id="chart33" height="180"></canvas></div>
+<div style="flex:1;min-width:400px;background:#fff;border-radius:8px;padding:15px;box-shadow:0 1px 4px rgba(0,0,0,.08)"><canvas id="chart34" height="180"></canvas></div>
+</div>
+<script>
+new Chart(document.getElementById('chart33'), {
+    type: 'line',
+    data: { labels: ['07','08','09','10','11','12','01','02','03','04','05','06'], datasets: [{ label: '준수율 (%)', data: [66.4,49.2,54.8,52.5,47.4,56.6,52.2,69.5,58.7,58.1,56.8,32.7], borderColor: '#2980b9', backgroundColor: '#2980b988', fill: true, tension: 0.3, pointRadius: 4 }] },
+    options: { responsive: true, plugins: { title: { display: true, text: 'AUTO개발 - 준수율 추이', font: {size: 13} }, legend: { display: false } }, scales: { y: { min: 0, max: 100, title: { display: true, text: '준수율 (%)' } } } }
+});
+new Chart(document.getElementById('chart34'), {
+    type: 'line',
+    data: { labels: ['07','08','09','10','11','12','01','02','03','04','05','06'], datasets: [{ label: '비율 (x)', data: [1.43,1.38,1.99,1.82,1.88,1.77,3.81,4.19,2.21,1.04,3.09,2.70], borderColor: '#e67e22', backgroundColor: '#e67e2288', fill: false, tension: 0.3, pointRadius: 4 }] },
+    options: { responsive: true, plugins: { title: { display: true, text: 'AUTO개발 - 실측/예상 비율 추이', font: {size: 13} }, legend: { display: false }, annotation: { annotations: { band1: { type: 'box', yMin: 0, yMax: 1.0, backgroundColor: 'rgba(39, 174, 96, 0.15)', borderWidth: 0 }, band2: { type: 'box', yMin: 1.0, yMax: 2.0, backgroundColor: 'rgba(39, 174, 96, 0.06)', borderWidth: 0 } } } }, scales: { y: { min: 0, title: { display: true, text: '비율 (x)' } } } }
+});
+</script><h2 id="맵인프라">맵인프라 <small style="color:#666;font-size:12px">맵플랫폼</small></h2><table><tr><th>월</th><th>완료</th><th>IP→Rev</th><th>준수율</th><th>비교건</th><th>예상(h)</th><th>실측(h)</th><th>비율</th></tr><tr><td>2025-07</td><td>92</td><td>48</td>
+<td>52%</td><td>34</td><td>156</td><td>546</td>
+<td class="down">3.5x</td></tr><tr><td>2025-08</td><td>113</td><td>53</td>
+<td>47%</td><td>36</td><td>168</td><td>509</td>
+<td class="down">3.0x</td></tr><tr><td>2025-09</td><td>98</td><td>56</td>
+<td>57%</td><td>35</td><td>176</td><td>589</td>
+<td class="down">3.4x</td></tr><tr><td>2025-10</td><td>74</td><td>38</td>
+<td>51%</td><td>22</td><td>114</td><td>347</td>
+<td class="down">3.0x</td></tr><tr><td>2025-11</td><td>95</td><td>50</td>
+<td>53%</td><td>32</td><td>110</td><td>479</td>
+<td class="down">4.4x</td></tr><tr><td>2025-12</td><td>106</td><td>56</td>
+<td>53%</td><td>39</td><td>193</td><td>674</td>
+<td class="down">3.5x</td></tr><tr><td>2026-01</td><td>89</td><td>45</td>
+<td>51%</td><td>26</td><td>112</td><td>257</td>
+<td class="up">2.3x</td></tr><tr><td>2026-02</td><td>56</td><td>33</td>
+<td>59%</td><td>20</td><td>82</td><td>431</td>
+<td class="down">5.3x</td></tr><tr><td>2026-03</td><td>143</td><td>70</td>
+<td>49%</td><td>46</td><td>241</td><td>797</td>
+<td class="down">3.3x</td></tr><tr><td>2026-04</td><td>130</td><td>63</td>
+<td>48%</td><td>37</td><td>198</td><td>556</td>
+<td class="neutral">2.8x</td></tr><tr><td>2026-05</td><td>94</td><td>44</td>
+<td>47%</td><td>30</td><td>167</td><td>449</td>
+<td class="neutral">2.7x</td></tr><tr><td>2026-06</td><td>142</td><td>75</td>
+<td>53%</td><td>51</td><td>186</td><td>779</td>
+<td class="down">4.2x</td></tr></table><div style="display:flex;gap:20px;flex-wrap:wrap;margin:10px 0">
+<div style="flex:1;min-width:400px;background:#fff;border-radius:8px;padding:15px;box-shadow:0 1px 4px rgba(0,0,0,.08)"><canvas id="chart35" height="180"></canvas></div>
+<div style="flex:1;min-width:400px;background:#fff;border-radius:8px;padding:15px;box-shadow:0 1px 4px rgba(0,0,0,.08)"><canvas id="chart36" height="180"></canvas></div>
+</div>
+<script>
+new Chart(document.getElementById('chart35'), {
+    type: 'line',
+    data: { labels: ['07','08','09','10','11','12','01','02','03','04','05','06'], datasets: [{ label: '준수율 (%)', data: [52.2,46.9,57.1,51.4,52.6,52.8,50.6,58.9,49.0,48.5,46.8,52.8], borderColor: '#2980b9', backgroundColor: '#2980b988', fill: true, tension: 0.3, pointRadius: 4 }] },
+    options: { responsive: true, plugins: { title: { display: true, text: '맵인프라 - 준수율 추이', font: {size: 13} }, legend: { display: false } }, scales: { y: { min: 0, max: 100, title: { display: true, text: '준수율 (%)' } } } }
+});
+new Chart(document.getElementById('chart36'), {
+    type: 'line',
+    data: { labels: ['07','08','09','10','11','12','01','02','03','04','05','06'], datasets: [{ label: '비율 (x)', data: [3.49,3.04,3.35,3.05,4.37,3.49,2.29,5.29,3.31,2.81,2.69,4.19], borderColor: '#e67e22', backgroundColor: '#e67e2288', fill: false, tension: 0.3, pointRadius: 4 }] },
+    options: { responsive: true, plugins: { title: { display: true, text: '맵인프라 - 실측/예상 비율 추이', font: {size: 13} }, legend: { display: false }, annotation: { annotations: { band1: { type: 'box', yMin: 0, yMax: 1.0, backgroundColor: 'rgba(39, 174, 96, 0.15)', borderWidth: 0 }, band2: { type: 'box', yMin: 1.0, yMax: 2.0, backgroundColor: 'rgba(39, 174, 96, 0.06)', borderWidth: 0 } } } }, scales: { y: { min: 0, title: { display: true, text: '비율 (x)' } } } }
+});
+</script><h2 id="맵컨텐츠">맵컨텐츠 <small style="color:#666;font-size:12px">맵플랫폼</small></h2><table><tr><th>월</th><th>완료</th><th>IP→Rev</th><th>준수율</th><th>비교건</th><th>예상(h)</th><th>실측(h)</th><th>비율</th></tr><tr><td>2025-07</td><td>12</td><td>5</td>
+<td>42%</td><td>2</td><td>2</td><td>58</td>
+<td class="down">23.1x</td></tr><tr><td>2025-08</td><td>14</td><td>7</td>
+<td>50%</td><td>0</td><td>0</td><td>0</td>
+<td class="neutral">-</td></tr><tr><td>2025-09</td><td>42</td><td>32</td>
+<td>76%</td><td>25</td><td>64</td><td>515</td>
+<td class="down">8.0x</td></tr><tr><td>2025-10</td><td>38</td><td>24</td>
+<td>63%</td><td>13</td><td>34</td><td>330</td>
+<td class="down">9.8x</td></tr><tr><td>2025-11</td><td>18</td><td>8</td>
+<td>44%</td><td>4</td><td>8</td><td>0</td>
+<td class="up">0.0x</td></tr><tr><td>2025-12</td><td>10</td><td>5</td>
+<td>50%</td><td>3</td><td>6</td><td>4</td>
+<td class="up">0.6x</td></tr><tr><td>2026-01</td><td>18</td><td>9</td>
+<td>50%</td><td>6</td><td>42</td><td>60</td>
+<td class="up">1.4x</td></tr><tr><td>2026-02</td><td>15</td><td>6</td>
+<td>40%</td><td>2</td><td>6</td><td>46</td>
+<td class="down">8.4x</td></tr><tr><td>2026-03</td><td>30</td><td>24</td>
+<td>80%</td><td>19</td><td>20</td><td>62</td>
+<td class="down">3.0x</td></tr><tr><td>2026-04</td><td>15</td><td>9</td>
+<td>60%</td><td>4</td><td>10</td><td>43</td>
+<td class="down">4.3x</td></tr><tr><td>2026-05</td><td>22</td><td>5</td>
+<td>23%</td><td>3</td><td>8</td><td>77</td>
+<td class="down">10.3x</td></tr><tr><td>2026-06</td><td>25</td><td>12</td>
+<td>48%</td><td>4</td><td>18</td><td>72</td>
+<td class="down">3.9x</td></tr></table><div style="display:flex;gap:20px;flex-wrap:wrap;margin:10px 0">
+<div style="flex:1;min-width:400px;background:#fff;border-radius:8px;padding:15px;box-shadow:0 1px 4px rgba(0,0,0,.08)"><canvas id="chart37" height="180"></canvas></div>
+<div style="flex:1;min-width:400px;background:#fff;border-radius:8px;padding:15px;box-shadow:0 1px 4px rgba(0,0,0,.08)"><canvas id="chart38" height="180"></canvas></div>
+</div>
+<script>
+new Chart(document.getElementById('chart37'), {
+    type: 'line',
+    data: { labels: ['07','08','09','10','11','12','01','02','03','04','05','06'], datasets: [{ label: '준수율 (%)', data: [41.7,50.0,76.2,63.2,44.4,50.0,50.0,40.0,80.0,60.0,22.7,48.0], borderColor: '#2980b9', backgroundColor: '#2980b988', fill: true, tension: 0.3, pointRadius: 4 }] },
+    options: { responsive: true, plugins: { title: { display: true, text: '맵컨텐츠 - 준수율 추이', font: {size: 13} }, legend: { display: false } }, scales: { y: { min: 0, max: 100, title: { display: true, text: '준수율 (%)' } } } }
+});
+new Chart(document.getElementById('chart38'), {
+    type: 'line',
+    data: { labels: ['07','08','09','10','11','12','01','02','03','04','05','06'], datasets: [{ label: '비율 (x)', data: [23.13,null,8.04,9.84,0.01,0.61,1.44,8.43,3.05,4.35,10.25,3.90], borderColor: '#e67e22', backgroundColor: '#e67e2288', fill: false, tension: 0.3, pointRadius: 4 }] },
+    options: { responsive: true, plugins: { title: { display: true, text: '맵컨텐츠 - 실측/예상 비율 추이', font: {size: 13} }, legend: { display: false }, annotation: { annotations: { band1: { type: 'box', yMin: 0, yMax: 1.0, backgroundColor: 'rgba(39, 174, 96, 0.15)', borderWidth: 0 }, band2: { type: 'box', yMin: 1.0, yMax: 2.0, backgroundColor: 'rgba(39, 174, 96, 0.06)', borderWidth: 0 } } } }, scales: { y: { min: 0, title: { display: true, text: '비율 (x)' } } } }
+});
+</script><h2 id="로컬인프라">로컬인프라 <small style="color:#666;font-size:12px">맵플랫폼</small></h2><table><tr><th>월</th><th>완료</th><th>IP→Rev</th><th>준수율</th><th>비교건</th><th>예상(h)</th><th>실측(h)</th><th>비율</th></tr><tr><td>2025-07</td><td>68</td><td>37</td>
+<td>54%</td><td>25</td><td>74</td><td>395</td>
+<td class="down">5.3x</td></tr><tr><td>2025-08</td><td>74</td><td>40</td>
+<td>54%</td><td>23</td><td>86</td><td>436</td>
+<td class="down">5.0x</td></tr><tr><td>2025-09</td><td>127</td><td>51</td>
+<td>40%</td><td>39</td><td>132</td><td>582</td>
+<td class="down">4.4x</td></tr><tr><td>2025-10</td><td>80</td><td>44</td>
+<td>55%</td><td>27</td><td>96</td><td>203</td>
+<td class="up">2.1x</td></tr><tr><td>2025-11</td><td>191</td><td>107</td>
+<td>56%</td><td>73</td><td>318</td><td>1187</td>
+<td class="down">3.7x</td></tr><tr><td>2025-12</td><td>73</td><td>20</td>
+<td>27%</td><td>10</td><td>42</td><td>193</td>
+<td class="down">4.5x</td></tr><tr><td>2026-01</td><td>71</td><td>18</td>
+<td>25%</td><td>11</td><td>34</td><td>208</td>
+<td class="down">6.1x</td></tr><tr><td>2026-02</td><td>99</td><td>36</td>
+<td>36%</td><td>22</td><td>65</td><td>323</td>
+<td class="down">5.0x</td></tr><tr><td>2026-03</td><td>75</td><td>28</td>
+<td>37%</td><td>18</td><td>71</td><td>378</td>
+<td class="down">5.3x</td></tr><tr><td>2026-04</td><td>114</td><td>33</td>
+<td>29%</td><td>20</td><td>73</td><td>286</td>
+<td class="down">3.9x</td></tr><tr><td>2026-05</td><td>69</td><td>25</td>
+<td>36%</td><td>17</td><td>58</td><td>296</td>
+<td class="down">5.1x</td></tr><tr><td>2026-06</td><td>131</td><td>40</td>
+<td>31%</td><td>17</td><td>38</td><td>262</td>
+<td class="down">7.0x</td></tr></table><div style="display:flex;gap:20px;flex-wrap:wrap;margin:10px 0">
+<div style="flex:1;min-width:400px;background:#fff;border-radius:8px;padding:15px;box-shadow:0 1px 4px rgba(0,0,0,.08)"><canvas id="chart39" height="180"></canvas></div>
+<div style="flex:1;min-width:400px;background:#fff;border-radius:8px;padding:15px;box-shadow:0 1px 4px rgba(0,0,0,.08)"><canvas id="chart40" height="180"></canvas></div>
+</div>
+<script>
+new Chart(document.getElementById('chart39'), {
+    type: 'line',
+    data: { labels: ['07','08','09','10','11','12','01','02','03','04','05','06'], datasets: [{ label: '준수율 (%)', data: [54.4,54.1,40.2,55.0,56.0,27.4,25.4,36.4,37.3,28.9,36.2,30.5], borderColor: '#2980b9', backgroundColor: '#2980b988', fill: true, tension: 0.3, pointRadius: 4 }] },
+    options: { responsive: true, plugins: { title: { display: true, text: '로컬인프라 - 준수율 추이', font: {size: 13} }, legend: { display: false } }, scales: { y: { min: 0, max: 100, title: { display: true, text: '준수율 (%)' } } } }
+});
+new Chart(document.getElementById('chart40'), {
+    type: 'line',
+    data: { labels: ['07','08','09','10','11','12','01','02','03','04','05','06'], datasets: [{ label: '비율 (x)', data: [5.30,5.04,4.39,2.12,3.73,4.53,6.12,4.96,5.32,3.92,5.14,6.99], borderColor: '#e67e22', backgroundColor: '#e67e2288', fill: false, tension: 0.3, pointRadius: 4 }] },
+    options: { responsive: true, plugins: { title: { display: true, text: '로컬인프라 - 실측/예상 비율 추이', font: {size: 13} }, legend: { display: false }, annotation: { annotations: { band1: { type: 'box', yMin: 0, yMax: 1.0, backgroundColor: 'rgba(39, 174, 96, 0.15)', borderWidth: 0 }, band2: { type: 'box', yMin: 1.0, yMax: 2.0, backgroundColor: 'rgba(39, 174, 96, 0.06)', borderWidth: 0 } } } }, scales: { y: { min: 0, title: { display: true, text: '비율 (x)' } } } }
+});
+</script><h2 id="로컬컨텐츠">로컬컨텐츠 <small style="color:#666;font-size:12px">맵플랫폼</small></h2><table><tr><th>월</th><th>완료</th><th>IP→Rev</th><th>준수율</th><th>비교건</th><th>예상(h)</th><th>실측(h)</th><th>비율</th></tr><tr><td>2025-07</td><td>10</td><td>3</td>
+<td>30%</td><td>3</td><td>8</td><td>62</td>
+<td class="down">8.2x</td></tr><tr><td>2025-08</td><td>29</td><td>6</td>
+<td>21%</td><td>3</td><td>8</td><td>67</td>
+<td class="down">8.4x</td></tr><tr><td>2025-09</td><td>24</td><td>11</td>
+<td>46%</td><td>10</td><td>35</td><td>211</td>
+<td class="down">6.0x</td></tr><tr><td>2025-10</td><td>5</td><td>4</td>
+<td>80%</td><td>3</td><td>6</td><td>63</td>
+<td class="down">9.8x</td></tr><tr><td>2025-11</td><td>19</td><td>5</td>
+<td>26%</td><td>3</td><td>11</td><td>5</td>
+<td class="up">0.4x</td></tr><tr><td>2025-12</td><td>21</td><td>7</td>
+<td>33%</td><td>5</td><td>13</td><td>80</td>
+<td class="down">6.2x</td></tr><tr><td>2026-01</td><td>31</td><td>5</td>
+<td>16%</td><td>3</td><td>8</td><td>59</td>
+<td class="down">7.9x</td></tr><tr><td>2026-02</td><td>16</td><td>3</td>
+<td>19%</td><td>2</td><td>7</td><td>1</td>
+<td class="up">0.1x</td></tr><tr><td>2026-03</td><td>11</td><td>6</td>
+<td>55%</td><td>4</td><td>12</td><td>75</td>
+<td class="down">6.2x</td></tr><tr><td>2026-04</td><td>13</td><td>6</td>
+<td>46%</td><td>3</td><td>3</td><td>28</td>
+<td class="down">9.2x</td></tr><tr><td>2026-05</td><td>8</td><td>4</td>
+<td>50%</td><td>4</td><td>8</td><td>57</td>
+<td class="down">6.7x</td></tr><tr><td>2026-06</td><td>15</td><td>5</td>
+<td>33%</td><td>3</td><td>2</td><td>19</td>
+<td class="down">7.7x</td></tr></table><div style="display:flex;gap:20px;flex-wrap:wrap;margin:10px 0">
+<div style="flex:1;min-width:400px;background:#fff;border-radius:8px;padding:15px;box-shadow:0 1px 4px rgba(0,0,0,.08)"><canvas id="chart41" height="180"></canvas></div>
+<div style="flex:1;min-width:400px;background:#fff;border-radius:8px;padding:15px;box-shadow:0 1px 4px rgba(0,0,0,.08)"><canvas id="chart42" height="180"></canvas></div>
+</div>
+<script>
+new Chart(document.getElementById('chart41'), {
+    type: 'line',
+    data: { labels: ['07','08','09','10','11','12','01','02','03','04','05','06'], datasets: [{ label: '준수율 (%)', data: [30.0,20.7,45.8,80.0,26.3,33.3,16.1,18.8,54.5,46.2,50.0,33.3], borderColor: '#2980b9', backgroundColor: '#2980b988', fill: true, tension: 0.3, pointRadius: 4 }] },
+    options: { responsive: true, plugins: { title: { display: true, text: '로컬컨텐츠 - 준수율 추이', font: {size: 13} }, legend: { display: false } }, scales: { y: { min: 0, max: 100, title: { display: true, text: '준수율 (%)' } } } }
+});
+new Chart(document.getElementById('chart42'), {
+    type: 'line',
+    data: { labels: ['07','08','09','10','11','12','01','02','03','04','05','06'], datasets: [{ label: '비율 (x)', data: [8.22,8.36,6.04,9.75,0.41,6.18,7.86,0.13,6.22,9.17,6.68,7.65], borderColor: '#e67e22', backgroundColor: '#e67e2288', fill: false, tension: 0.3, pointRadius: 4 }] },
+    options: { responsive: true, plugins: { title: { display: true, text: '로컬컨텐츠 - 실측/예상 비율 추이', font: {size: 13} }, legend: { display: false }, annotation: { annotations: { band1: { type: 'box', yMin: 0, yMax: 1.0, backgroundColor: 'rgba(39, 174, 96, 0.15)', borderWidth: 0 }, band2: { type: 'box', yMin: 1.0, yMax: 2.0, backgroundColor: 'rgba(39, 174, 96, 0.06)', borderWidth: 0 } } } }, scales: { y: { min: 0, title: { display: true, text: '비율 (x)' } } } }
+});
+</script><h2>팀별 개인 상세</h2><p style="color:#666;font-size:12px">개인별 준수율, 실측/예상 비율 (비율: sizing有 + 준수 + ip≤240h 건만, 영업시간 환산)</p><h3>모빌리티서비스</h3><h4 style="margin:15px 0 5px;color:#333" id="wl-프론트엔드">프론트엔드 (8명)</h4><table><tr><th>이름</th><th>이슈건수</th><th>준수건수</th><th>준수율</th><th>비교건수</th><th>예상(h)</th><th>실측(h)</th><th>비율</th></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%84%9D%EA%B4%91%ED%98%B8/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">석광호</a></td><td>233</td><td>177</td><td>76%</td><td>126</td><td>354</td><td>1597</td><td class="down">4.5x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9E%A5%ED%98%9C%EC%A7%84/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">장혜진</a></td><td>161</td><td>130</td><td>81%</td><td>97</td><td>340</td><td>1500</td><td class="down">4.4x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EB%AC%B8%ED%95%9C%EB%82%98/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">문한나</a></td><td>266</td><td>214</td><td>80%</td><td>139</td><td>560</td><td>2413</td><td class="down">4.3x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EA%B9%80%ED%83%9C%EA%B2%BD/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">김태경</a></td><td>357</td><td>252</td><td>71%</td><td>231</td><td>476</td><td>1754</td><td class="">3.7x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%98%A4%ED%98%9C%EB%A6%B0/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">오혜린</a></td><td>158</td><td>133</td><td>84%</td><td>92</td><td>320</td><td>1075</td><td class="">3.4x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9E%A5%ED%95%98%EB%8B%88/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">장하니</a></td><td>109</td><td>98</td><td>90%</td><td>69</td><td>293</td><td>941</td><td class="">3.2x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9D%B4%EB%8F%99%EA%B1%B4/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">이동건</a></td><td>292</td><td>232</td><td>79%</td><td>183</td><td>690</td><td>2166</td><td class="">3.1x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EB%B0%95%EC%84%B1%EC%A7%84%28parksungjin%29/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">박성진</a></td><td>297</td><td>231</td><td>78%</td><td>201</td><td>496</td><td>911</td><td class="up">1.8x</td></tr><tr style="font-weight:bold;background:#f5f5f5"><td>합계</td><td>1873</td><td>1467</td><td>78%</td><td>1138</td><td>3528</td><td>12357</td><td>3.5x</td></tr></table><h4 style="margin:15px 0 5px;color:#333" id="wl-로컬서비스">로컬서비스 (10명)</h4><table><tr><th>이름</th><th>이슈건수</th><th>준수건수</th><th>준수율</th><th>비교건수</th><th>예상(h)</th><th>실측(h)</th><th>비율</th></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9E%A5%EC%9D%B8%ED%98%81%28Inhyuk%2C%20Jang%29/%EB%A1%9C%EC%BB%AC%EC%84%9C%EB%B9%84%EC%8A%A4%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">장인혁</a></td><td>217</td><td>153</td><td>71%</td><td>126</td><td>258</td><td>1717</td><td class="down">6.6x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9D%B4%EA%B2%BD%EB%AF%BC/%EB%A1%9C%EC%BB%AC%EC%84%9C%EB%B9%84%EC%8A%A4%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">이경민</a></td><td>92</td><td>88</td><td>96%</td><td>69</td><td>194</td><td>1098</td><td class="down">5.7x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EA%B9%80%EC%9C%A4%EA%B1%B4/%EB%A1%9C%EC%BB%AC%EC%84%9C%EB%B9%84%EC%8A%A4%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">김윤건</a></td><td>342</td><td>293</td><td>86%</td><td>263</td><td>542</td><td>2911</td><td class="down">5.4x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9D%B4%EC%84%A0%EC%A0%95/%EB%A1%9C%EC%BB%AC%EC%84%9C%EB%B9%84%EC%8A%A4%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">이선정</a></td><td>291</td><td>207</td><td>71%</td><td>166</td><td>430</td><td>1932</td><td class="down">4.5x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EA%B0%95%ED%95%84%EA%B7%9C/%EB%A1%9C%EC%BB%AC%EC%84%9C%EB%B9%84%EC%8A%A4%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">강필규</a></td><td>218</td><td>112</td><td>51%</td><td>60</td><td>179</td><td>745</td><td class="down">4.2x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EB%B0%B0%EC%A7%84%EC%9A%B0/%EB%A1%9C%EC%BB%AC%EC%84%9C%EB%B9%84%EC%8A%A4%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">배진우</a></td><td>160</td><td>59</td><td>37%</td><td>41</td><td>102</td><td>426</td><td class="down">4.2x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%B5%9C%EC%A4%80%EC%98%81/%EB%A1%9C%EC%BB%AC%EC%84%9C%EB%B9%84%EC%8A%A4%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">최준영</a></td><td>254</td><td>192</td><td>76%</td><td>135</td><td>367</td><td>1310</td><td class="">3.6x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EA%B9%80%EC%8A%B9%EC%84%AD/%EB%A1%9C%EC%BB%AC%EC%84%9C%EB%B9%84%EC%8A%A4%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">김승섭</a></td><td>107</td><td>96</td><td>90%</td><td>91</td><td>266</td><td>940</td><td class="">3.5x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9D%B4%EC%9E%A5%ED%97%8C/%EB%A1%9C%EC%BB%AC%EC%84%9C%EB%B9%84%EC%8A%A4%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">이장헌</a></td><td>268</td><td>206</td><td>77%</td><td>142</td><td>318</td><td>890</td><td class="">2.8x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EA%B9%80%EC%8A%B9%EA%B7%9C/%EB%A1%9C%EC%BB%AC%EC%84%9C%EB%B9%84%EC%8A%A4%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">김승규</a></td><td>21</td><td>4</td><td>19%</td><td>1</td><td>2</td><td>0</td><td class="up">0.1x</td></tr><tr style="font-weight:bold;background:#f5f5f5"><td>합계</td><td>1970</td><td>1410</td><td>72%</td><td>1094</td><td>2658</td><td>11968</td><td>4.5x</td></tr></table><h4 style="margin:15px 0 5px;color:#333" id="wl-Search">Search (7명)</h4><table><tr><th>이름</th><th>이슈건수</th><th>준수건수</th><th>준수율</th><th>비교건수</th><th>예상(h)</th><th>실측(h)</th><th>비율</th></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EA%B3%A0%EC%86%8C%ED%9D%AC%28Go%20Sohee%29/Search%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">고소희</a></td><td>60</td><td>8</td><td>13%</td><td>4</td><td>6</td><td>86</td><td class="down">13.2x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EA%B9%80%EC%A7%80%EC%9C%A4/Search%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">김지윤</a></td><td>92</td><td>18</td><td>20%</td><td>9</td><td>19</td><td>127</td><td class="down">6.7x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9D%B4%EB%8C%80%ED%9D%AC/Search%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">이대희</a></td><td>162</td><td>2</td><td>1%</td><td>2</td><td>7</td><td>41</td><td class="down">5.8x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9D%B4%EB%AA%85%ED%9C%98/Search%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">이명휘</a></td><td>102</td><td>7</td><td>7%</td><td>5</td><td>28</td><td>96</td><td class="">3.5x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EA%B9%80%EC%9A%A9%EC%9A%B0/Search%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">김용우</a></td><td>160</td><td>43</td><td>27%</td><td>23</td><td>87</td><td>273</td><td class="">3.1x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EA%B9%80%EC%A7%80%EC%9B%85/Search%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">김지웅</a></td><td>89</td><td>41</td><td>46%</td><td>26</td><td>192</td><td>509</td><td class="">2.7x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%96%91%EC%A7%80%ED%9B%88/Search%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">양지훈</a></td><td>88</td><td>50</td><td>57%</td><td>39</td><td>97</td><td>46</td><td class="up">0.5x</td></tr><tr style="font-weight:bold;background:#f5f5f5"><td>합계</td><td>753</td><td>169</td><td>22%</td><td>108</td><td>436</td><td>1178</td><td>2.7x</td></tr></table><h4 style="margin:15px 0 5px;color:#333" id="wl-서비스백엔드">서비스백엔드 (5명)</h4><table><tr><th>이름</th><th>이슈건수</th><th>준수건수</th><th>준수율</th><th>비교건수</th><th>예상(h)</th><th>실측(h)</th><th>비율</th></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EA%B9%80%EA%B8%B0%ED%98%84/%EC%84%9C%EB%B9%84%EC%8A%A4%EB%B0%B1%EC%97%94%EB%93%9C%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">김기현</a></td><td>35</td><td>19</td><td>54%</td><td>10</td><td>35</td><td>272</td><td class="down">7.8x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%8B%AC%EC%84%B1%EC%9B%90/%EC%84%9C%EB%B9%84%EC%8A%A4%EB%B0%B1%EC%97%94%EB%93%9C%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">심성원</a></td><td>222</td><td>176</td><td>79%</td><td>98</td><td>365</td><td>1688</td><td class="down">4.6x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%ED%99%8D%EC%9D%B8%EC%84%9D/%EC%84%9C%EB%B9%84%EC%8A%A4%EB%B0%B1%EC%97%94%EB%93%9C%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">홍인석</a></td><td>195</td><td>169</td><td>87%</td><td>130</td><td>480</td><td>2162</td><td class="down">4.5x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EB%AF%BC%EB%8F%99%ED%98%84/%EC%84%9C%EB%B9%84%EC%8A%A4%EB%B0%B1%EC%97%94%EB%93%9C%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">민동현</a></td><td>155</td><td>102</td><td>66%</td><td>52</td><td>216</td><td>824</td><td class="">3.8x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%A7%80%EB%AA%85%EC%A3%BC/%EC%84%9C%EB%B9%84%EC%8A%A4%EB%B0%B1%EC%97%94%EB%93%9C%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">지명주</a></td><td>140</td><td>106</td><td>76%</td><td>81</td><td>348</td><td>1214</td><td class="">3.5x</td></tr><tr style="font-weight:bold;background:#f5f5f5"><td>합계</td><td>747</td><td>572</td><td>77%</td><td>371</td><td>1444</td><td>6160</td><td>4.3x</td></tr></table><h4 style="margin:15px 0 5px;color:#333" id="wl-온디맨드모빌리티개발">온디맨드모빌리티개발 (4명)</h4><table><tr><th>이름</th><th>이슈건수</th><th>준수건수</th><th>준수율</th><th>비교건수</th><th>예상(h)</th><th>실측(h)</th><th>비율</th></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9D%B4%EC%9D%80%EC%B2%A0/%EC%98%A8%EB%94%94%EB%A7%A8%EB%93%9C%EB%AA%A8%EB%B9%8C%EB%A6%AC%ED%8B%B0%EA%B0%9C%EB%B0%9C%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">이은철</a></td><td>152</td><td>112</td><td>74%</td><td>77</td><td>186</td><td>744</td><td class="down">4.0x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9D%B4%EC%B0%BD%EA%B7%BC/%EC%98%A8%EB%94%94%EB%A7%A8%EB%93%9C%EB%AA%A8%EB%B9%8C%EB%A6%AC%ED%8B%B0%EA%B0%9C%EB%B0%9C%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">이창근</a></td><td>193</td><td>171</td><td>89%</td><td>124</td><td>394</td><td>1530</td><td class="">3.9x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%ED%99%A9%ED%95%98%EA%B7%BC/%EC%98%A8%EB%94%94%EB%A7%A8%EB%93%9C%EB%AA%A8%EB%B9%8C%EB%A6%AC%ED%8B%B0%EA%B0%9C%EB%B0%9C%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">황하근</a></td><td>125</td><td>82</td><td>66%</td><td>45</td><td>182</td><td>511</td><td class="">2.8x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%B5%9C%EC%9D%B8%EC%84%9D/%EC%98%A8%EB%94%94%EB%A7%A8%EB%93%9C%EB%AA%A8%EB%B9%8C%EB%A6%AC%ED%8B%B0%EA%B0%9C%EB%B0%9C%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">최인석</a></td><td>60</td><td>59</td><td>98%</td><td>47</td><td>182</td><td>383</td><td class="">2.1x</td></tr><tr style="font-weight:bold;background:#f5f5f5"><td>합계</td><td>530</td><td>424</td><td>80%</td><td>293</td><td>944</td><td>3168</td><td>3.4x</td></tr></table><h4 style="margin:15px 0 5px;color:#333" id="wl-광고개발">광고개발 (3명)</h4><table><tr><th>이름</th><th>이슈건수</th><th>준수건수</th><th>준수율</th><th>비교건수</th><th>예상(h)</th><th>실측(h)</th><th>비율</th></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%ED%99%8D%EC%8A%B9%ED%9D%AC/%EA%B4%91%EA%B3%A0%EA%B0%9C%EB%B0%9C%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">홍승희</a></td><td>140</td><td>126</td><td>90%</td><td>92</td><td>228</td><td>698</td><td class="">3.1x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9D%B4%ED%98%84%EC%A3%BC%28Hyunjoo%20Lee%29/%EA%B4%91%EA%B3%A0%EA%B0%9C%EB%B0%9C%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">이현주</a></td><td>306</td><td>220</td><td>72%</td><td>173</td><td>440</td><td>1266</td><td class="">2.9x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9E%84%EC%8A%AC%EA%B8%B0%28Seulki%20Lim%20%29/%EA%B4%91%EA%B3%A0%EA%B0%9C%EB%B0%9C%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">임슬기</a></td><td>80</td><td>62</td><td>78%</td><td>46</td><td>138</td><td>352</td><td class="">2.5x</td></tr><tr style="font-weight:bold;background:#f5f5f5"><td>합계</td><td>526</td><td>408</td><td>78%</td><td>311</td><td>806</td><td>2317</td><td>2.9x</td></tr></table><h3>모빌리티플랫폼</h3><h4 style="margin:15px 0 5px;color:#333" id="wl-Client Core">Client Core (8명)</h4><table><tr><th>이름</th><th>이슈건수</th><th>준수건수</th><th>준수율</th><th>비교건수</th><th>예상(h)</th><th>실측(h)</th><th>비율</th></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EA%B9%80%EC%A2%85%EC%9D%BC/Client%20Core%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">김종일</a></td><td>855</td><td>620</td><td>73%</td><td>401</td><td>1170</td><td>6342</td><td class="down">5.4x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EA%B9%80%EC%98%81%EC%88%98/Client%20Core%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">김영수</a></td><td>74</td><td>37</td><td>50%</td><td>32</td><td>137</td><td>642</td><td class="down">4.7x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%B5%9C%ED%98%84%EC%84%9D/Client%20Core%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">최현석</a></td><td>204</td><td>171</td><td>84%</td><td>113</td><td>350</td><td>1531</td><td class="down">4.4x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%ED%99%8D%EC%A7%84%EC%B2%A0/Client%20Core%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">홍진철</a></td><td>423</td><td>324</td><td>77%</td><td>239</td><td>732</td><td>2751</td><td class="">3.8x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9D%B4%ED%9D%AC%EC%9A%A9/Client%20Core%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">이희용</a></td><td>426</td><td>411</td><td>96%</td><td>152</td><td>499</td><td>847</td><td class="up">1.7x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9D%B4%EC%83%81%EC%9B%85/Client%20Core%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">이상웅</a></td><td>240</td><td>178</td><td>74%</td><td>145</td><td>525</td><td>848</td><td class="up">1.6x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9C%A4%EC%84%B1%ED%98%84/Client%20Core%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">윤성현</a></td><td>337</td><td>286</td><td>85%</td><td>201</td><td>600</td><td>498</td><td class="up">0.8x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%A0%95%EC%8B%9C%EC%9B%90/Client%20Core%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">정시원</a></td><td>57</td><td>54</td><td>95%</td><td>50</td><td>145</td><td>1</td><td class="up">0.0x</td></tr><tr style="font-weight:bold;background:#f5f5f5"><td>합계</td><td>2616</td><td>2081</td><td>80%</td><td>1333</td><td>4156</td><td>13459</td><td>3.2x</td></tr></table><h4 style="margin:15px 0 5px;color:#333" id="wl-Client Service">Client Service (10명)</h4><table><tr><th>이름</th><th>이슈건수</th><th>준수건수</th><th>준수율</th><th>비교건수</th><th>예상(h)</th><th>실측(h)</th><th>비율</th></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EA%B9%80%EC%8A%AC%EB%B9%84/Client%20Service%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">김슬비</a></td><td>449</td><td>340</td><td>76%</td><td>302</td><td>724</td><td>4430</td><td class="down">6.1x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%97%84%EB%AF%BC%EC%84%9D/Client%20Service%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">엄민석</a></td><td>403</td><td>354</td><td>88%</td><td>277</td><td>812</td><td>4321</td><td class="down">5.3x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EA%B9%80%EB%8F%84%ED%98%95/Client%20Service%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">김도형</a></td><td>360</td><td>170</td><td>47%</td><td>107</td><td>284</td><td>1498</td><td class="down">5.3x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%B5%9C%EC%A7%80%EC%97%B0%28Choi%20Ji%20Yeon%29/Client%20Service%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">최지연</a></td><td>140</td><td>104</td><td>74%</td><td>66</td><td>166</td><td>861</td><td class="down">5.2x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9C%A0%EB%AF%BC%EC%84%A0/Client%20Service%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">유민선</a></td><td>398</td><td>235</td><td>59%</td><td>192</td><td>510</td><td>2372</td><td class="down">4.7x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EA%B9%80%EA%B2%BD%EB%AF%BC/Client%20Service%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">김경민</a></td><td>842</td><td>609</td><td>72%</td><td>361</td><td>966</td><td>4429</td><td class="down">4.6x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9D%B4%EA%B7%9C%EC%84%9D/Client%20Service%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">이규석</a></td><td>243</td><td>202</td><td>83%</td><td>159</td><td>481</td><td>2118</td><td class="down">4.4x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EB%B0%A9%ED%98%84%EC%84%9C/Client%20Service%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">방현서</a></td><td>358</td><td>203</td><td>57%</td><td>165</td><td>440</td><td>1922</td><td class="down">4.4x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9D%B4%EC%A3%BC%ED%97%8C/Client%20Service%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">이주헌</a></td><td>266</td><td>147</td><td>55%</td><td>108</td><td>356</td><td>922</td><td class="">2.6x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%ED%99%8D%EC%B0%BD%EB%B2%94/Client%20Service%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">홍창범</a></td><td>283</td><td>197</td><td>70%</td><td>173</td><td>624</td><td>1303</td><td class="">2.1x</td></tr><tr style="font-weight:bold;background:#f5f5f5"><td>합계</td><td>3742</td><td>2561</td><td>68%</td><td>1910</td><td>5362</td><td>24176</td><td>4.5x</td></tr></table><h4 style="margin:15px 0 5px;color:#333" id="wl-DevOps">DevOps (8명)</h4><table><tr><th>이름</th><th>이슈건수</th><th>준수건수</th><th>준수율</th><th>비교건수</th><th>예상(h)</th><th>실측(h)</th><th>비율</th></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%B2%9C%EB%8F%99%EB%AF%BC/DevOps%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">천동민</a></td><td>137</td><td>137</td><td>100%</td><td>55</td><td>68</td><td>893</td><td class="down">13.0x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%B1%84%EC%9D%80%EC%84%B1/DevOps%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">채은성</a></td><td>313</td><td>311</td><td>99%</td><td>91</td><td>128</td><td>1188</td><td class="down">9.3x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9D%B4%EB%B2%94%ED%99%95/DevOps%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">이범확</a></td><td>270</td><td>268</td><td>99%</td><td>114</td><td>147</td><td>1299</td><td class="down">8.8x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EA%B6%8C%EC%83%81%ED%9B%88/DevOps%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">권상훈</a></td><td>262</td><td>262</td><td>100%</td><td>76</td><td>111</td><td>971</td><td class="down">8.7x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9D%B4%ED%83%9C%EC%9A%B0/DevOps%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">이태우</a></td><td>587</td><td>581</td><td>99%</td><td>378</td><td>638</td><td>3210</td><td class="down">5.0x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%A1%B0%ED%98%84%EC%98%81/DevOps%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">조현영</a></td><td>535</td><td>522</td><td>98%</td><td>312</td><td>428</td><td>2034</td><td class="down">4.8x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%98%A4%ED%83%9C%EA%B2%BD/DevOps%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">오태경</a></td><td>688</td><td>686</td><td>100%</td><td>362</td><td>678</td><td>1879</td><td class="">2.8x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%96%91%EC%8B%9C%EC%9A%A9/DevOps%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">양시용</a></td><td>449</td><td>443</td><td>99%</td><td>300</td><td>418</td><td>1149</td><td class="">2.7x</td></tr><tr style="font-weight:bold;background:#f5f5f5"><td>합계</td><td>3241</td><td>3210</td><td>99%</td><td>1688</td><td>2615</td><td>12622</td><td>4.8x</td></tr></table><h4 style="margin:15px 0 5px;color:#333" id="wl-서비스플랫폼">서비스플랫폼 (9명)</h4><table><tr><th>이름</th><th>이슈건수</th><th>준수건수</th><th>준수율</th><th>비교건수</th><th>예상(h)</th><th>실측(h)</th><th>비율</th></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EA%B9%80%EC%9D%80%ED%98%9C/%EC%84%9C%EB%B9%84%EC%8A%A4%ED%94%8C%EB%9E%AB%ED%8F%BC%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">김은혜</a></td><td>112</td><td>82</td><td>73%</td><td>43</td><td>136</td><td>848</td><td class="down">6.2x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9D%B4%EB%AF%BC%EC%98%81/%EC%84%9C%EB%B9%84%EC%8A%A4%ED%94%8C%EB%9E%AB%ED%8F%BC%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">이민영</a></td><td>229</td><td>22</td><td>10%</td><td>7</td><td>12</td><td>61</td><td class="down">5.3x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%B5%9C%EC%84%B1%ED%99%98/%EC%84%9C%EB%B9%84%EC%8A%A4%ED%94%8C%EB%9E%AB%ED%8F%BC%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">최성환</a></td><td>153</td><td>58</td><td>38%</td><td>16</td><td>57</td><td>299</td><td class="down">5.3x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9D%B4%EC%9E%AC%ED%95%9C/%EC%84%9C%EB%B9%84%EC%8A%A4%ED%94%8C%EB%9E%AB%ED%8F%BC%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">이재한</a></td><td>379</td><td>136</td><td>36%</td><td>68</td><td>243</td><td>1084</td><td class="down">4.5x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%ED%97%88%EA%B0%80%EA%B2%BD/%EC%84%9C%EB%B9%84%EC%8A%A4%ED%94%8C%EB%9E%AB%ED%8F%BC%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">허가경</a></td><td>151</td><td>35</td><td>23%</td><td>18</td><td>54</td><td>226</td><td class="down">4.2x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9D%B4%EC%9C%A4%ED%98%B8/%EC%84%9C%EB%B9%84%EC%8A%A4%ED%94%8C%EB%9E%AB%ED%8F%BC%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">이윤호</a></td><td>317</td><td>296</td><td>93%</td><td>153</td><td>621</td><td>2532</td><td class="down">4.1x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9D%B4%EC%A4%91%EA%B7%BC/%EC%84%9C%EB%B9%84%EC%8A%A4%ED%94%8C%EB%9E%AB%ED%8F%BC%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">이중근</a></td><td>127</td><td>80</td><td>63%</td><td>31</td><td>130</td><td>486</td><td class="">3.8x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9D%B4%EC%A0%95%EC%A3%BC/%EC%84%9C%EB%B9%84%EC%8A%A4%ED%94%8C%EB%9E%AB%ED%8F%BC%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">이정주</a></td><td>120</td><td>41</td><td>34%</td><td>15</td><td>68</td><td>203</td><td class="">3.0x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%8B%AC%EC%A7%80%ED%98%84/%EC%84%9C%EB%B9%84%EC%8A%A4%ED%94%8C%EB%9E%AB%ED%8F%BC%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">심지현</a></td><td>267</td><td>185</td><td>69%</td><td>102</td><td>600</td><td>1764</td><td class="">2.9x</td></tr><tr style="font-weight:bold;background:#f5f5f5"><td>합계</td><td>1855</td><td>935</td><td>50%</td><td>453</td><td>1920</td><td>7504</td><td>3.9x</td></tr></table><h4 style="margin:15px 0 5px;color:#333" id="wl-RP·교통">RP·교통 (9명)</h4><table><tr><th>이름</th><th>이슈건수</th><th>준수건수</th><th>준수율</th><th>비교건수</th><th>예상(h)</th><th>실측(h)</th><th>비율</th></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%B5%9C%EB%B3%91%EA%B8%B0/RP%C2%B7%EA%B5%90%ED%86%B5%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">최병기</a></td><td>43</td><td>27</td><td>63%</td><td>9</td><td>28</td><td>177</td><td class="down">6.4x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%ED%97%88%EC%9B%90%EC%B2%A0/RP%C2%B7%EA%B5%90%ED%86%B5%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">허원철</a></td><td>146</td><td>94</td><td>64%</td><td>40</td><td>200</td><td>740</td><td class="">3.7x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EA%B9%80%EC%97%B0%EB%AF%BC/RP%C2%B7%EA%B5%90%ED%86%B5%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">김연민</a></td><td>17</td><td>5</td><td>29%</td><td>1</td><td>4</td><td>14</td><td class="">3.5x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%ED%97%88%EA%B8%B0%EC%B2%A0/RP%C2%B7%EA%B5%90%ED%86%B5%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">허기철</a></td><td>341</td><td>167</td><td>49%</td><td>106</td><td>516</td><td>1638</td><td class="">3.2x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EA%B9%80%EC%A2%85%EC%A3%BC/RP%C2%B7%EA%B5%90%ED%86%B5%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">김종주</a></td><td>147</td><td>85</td><td>58%</td><td>55</td><td>307</td><td>970</td><td class="">3.2x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EB%B0%95%EC%84%B1%EC%9A%A9/RP%C2%B7%EA%B5%90%ED%86%B5%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">박성용</a></td><td>149</td><td>91</td><td>61%</td><td>55</td><td>138</td><td>397</td><td class="">2.9x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EA%B0%95%ED%98%95%EA%B5%AC/RP%C2%B7%EA%B5%90%ED%86%B5%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">강형구</a></td><td>155</td><td>64</td><td>41%</td><td>38</td><td>202</td><td>565</td><td class="">2.8x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%ED%99%A9%EC%9E%AC%EC%97%B0/RP%C2%B7%EA%B5%90%ED%86%B5%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">황재연</a></td><td>224</td><td>59</td><td>26%</td><td>47</td><td>94</td><td>98</td><td class="up">1.0x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%A1%B0%ED%98%95%EC%9A%B1/RP%C2%B7%EA%B5%90%ED%86%B5%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">조형욱</a></td><td>65</td><td>64</td><td>98%</td><td>61</td><td>194</td><td>55</td><td class="up">0.3x</td></tr><tr style="font-weight:bold;background:#f5f5f5"><td>합계</td><td>1287</td><td>656</td><td>51%</td><td>412</td><td>1683</td><td>4653</td><td>2.8x</td></tr></table><h4 style="margin:15px 0 5px;color:#333" id="wl-AUTO개발">AUTO개발 (13명)</h4><table><tr><th>이름</th><th>이슈건수</th><th>준수건수</th><th>준수율</th><th>비교건수</th><th>예상(h)</th><th>실측(h)</th><th>비율</th></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EA%B6%8C%EC%A7%84%ED%9D%AC%28jinhee.kwon%29/AUTO%EA%B0%9C%EB%B0%9C%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">권진희</a></td><td>91</td><td>4</td><td>4%</td><td>1</td><td>0</td><td>10</td><td class="down">19.9x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EB%B0%95%EA%B8%B0%EC%84%B1%28Giseong%20Bak%29/AUTO%20%EA%B0%9C%EB%B0%9C%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">박기성</a></td><td>899</td><td>572</td><td>64%</td><td>347</td><td>984</td><td>5433</td><td class="down">5.5x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9E%A5%EC%B0%BD%ED%9B%88%28elijah%29/AUTO%EA%B0%9C%EB%B0%9C%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">장창훈</a></td><td>58</td><td>29</td><td>50%</td><td>16</td><td>62</td><td>198</td><td class="">3.2x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%ED%99%8D%ED%9D%AC%EC%A0%95/AUTO%EA%B0%9C%EB%B0%9C%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">홍희정</a></td><td>122</td><td>92</td><td>75%</td><td>73</td><td>210</td><td>445</td><td class="">2.1x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%A1%B0%EC%B6%A9%ED%9A%8C/AUTO%EA%B0%9C%EB%B0%9C%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">조충회</a></td><td>256</td><td>125</td><td>49%</td><td>76</td><td>245</td><td>487</td><td class="up">2.0x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9D%B4%EC%8A%B9%EC%A0%9C%28Seungje%20Lee%29/AUTO%EA%B0%9C%EB%B0%9C%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">이승제</a></td><td>599</td><td>445</td><td>74%</td><td>321</td><td>1210</td><td>2255</td><td class="up">1.9x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EA%B9%80%EC%9D%98%EC%A7%84%28Eui%20Jin%20Kim%29/AUTO%EA%B0%9C%EB%B0%9C%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">김의진</a></td><td>127</td><td>89</td><td>70%</td><td>39</td><td>159</td><td>268</td><td class="up">1.7x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9D%B4%EB%B3%91%EA%B8%B8/AUTO%EA%B0%9C%EB%B0%9C%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">이병길</a></td><td>299</td><td>82</td><td>27%</td><td>60</td><td>226</td><td>373</td><td class="up">1.6x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EA%B9%80%EC%9E%AC%EC%9B%90/AUTO%EA%B0%9C%EB%B0%9C%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">김재원</a></td><td>688</td><td>381</td><td>55%</td><td>240</td><td>742</td><td>686</td><td class="up">0.9x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9D%B4%EC%8A%B9%EC%A4%80/AUTO%EA%B0%9C%EB%B0%9C%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">이승준</a></td><td>284</td><td>106</td><td>37%</td><td>61</td><td>220</td><td>172</td><td class="up">0.8x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%A0%95%EC%9C%A0%EB%A6%AC/AUTO%EA%B0%9C%EB%B0%9C%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">정유리</a></td><td>285</td><td>106</td><td>37%</td><td>74</td><td>280</td><td>177</td><td class="up">0.6x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9C%A4%EC%84%B1%EB%AF%BC%28Sungmin.Yoon%29/AUTO%EA%B0%9C%EB%B0%9C%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">윤성민</a></td><td>153</td><td>63</td><td>41%</td><td>37</td><td>136</td><td>37</td><td class="up">0.3x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9D%B4%ED%9A%A8%EC%9C%A4/AUTO%EA%B0%9C%EB%B0%9C%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">이효윤</a></td><td>41</td><td>12</td><td>29%</td><td>1</td><td>2</td><td>0</td><td class="up">0.0x</td></tr><tr style="font-weight:bold;background:#f5f5f5"><td>합계</td><td>3902</td><td>2106</td><td>54%</td><td>1346</td><td>4478</td><td>10541</td><td>2.4x</td></tr></table><h3>맵플랫폼</h3><h4 style="margin:15px 0 5px;color:#333" id="wl-맵인프라">맵인프라 (14명)</h4><table><tr><th>이름</th><th>이슈건수</th><th>준수건수</th><th>준수율</th><th>비교건수</th><th>예상(h)</th><th>실측(h)</th><th>비율</th></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EA%B9%80%EC%98%81%EB%B3%B5/%EB%A7%B5%EC%9D%B8%ED%94%84%EB%9D%BC%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">김영복</a></td><td>148</td><td>22</td><td>15%</td><td>13</td><td>40</td><td>203</td><td class="down">5.1x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EA%B9%80%EC%98%88%EB%A6%AC/%EB%A7%B5%EC%9D%B8%ED%94%84%EB%9D%BC%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">김예리</a></td><td>107</td><td>66</td><td>62%</td><td>38</td><td>160</td><td>803</td><td class="down">5.0x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%A0%95%EC%9E%AC%EB%AF%BC/%EB%A7%B5%EC%9D%B8%ED%94%84%EB%9D%BC%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">정재민</a></td><td>22</td><td>13</td><td>59%</td><td>5</td><td>31</td><td>150</td><td class="down">4.8x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9D%B4%EC%B1%84%EA%B2%BD%28chaegyeongYi%29/%EB%A7%B5%EC%9D%B8%ED%94%84%EB%9D%BC%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">이채경</a></td><td>146</td><td>57</td><td>39%</td><td>41</td><td>210</td><td>848</td><td class="down">4.0x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%ED%95%9C%EC%9D%B8%EA%B7%9C/%EB%A7%B5%EC%9D%B8%ED%94%84%EB%9D%BC%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">한인규</a></td><td>108</td><td>95</td><td>88%</td><td>61</td><td>260</td><td>893</td><td class="">3.4x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EA%B9%80%ED%98%84%EC%A4%80/%EB%A7%B5%EC%9D%B8%ED%94%84%EB%9D%BC%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">김현준</a></td><td>132</td><td>51</td><td>39%</td><td>46</td><td>194</td><td>642</td><td class="">3.3x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EB%B0%95%EC%A3%BC%ED%9D%AC/%EB%A7%B5%EC%9D%B8%ED%94%84%EB%9D%BC%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">박주희</a></td><td>25</td><td>13</td><td>52%</td><td>9</td><td>42</td><td>139</td><td class="">3.3x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9E%A5%EC%98%81%EC%97%B0/%EB%A7%B5%EC%9D%B8%ED%94%84%EB%9D%BC%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">장영연</a></td><td>127</td><td>112</td><td>88%</td><td>83</td><td>352</td><td>1140</td><td class="">3.2x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EA%B9%80%ED%9D%AC%EC%B2%A0/%EB%A7%B5%EC%9D%B8%ED%94%84%EB%9D%BC%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">김희철</a></td><td>99</td><td>64</td><td>65%</td><td>43</td><td>254</td><td>765</td><td class="">3.0x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EB%B0%95%ED%83%9C%ED%98%84/%EB%A7%B5%EC%9D%B8%ED%94%84%EB%9D%BC%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">박태현</a></td><td>133</td><td>78</td><td>59%</td><td>41</td><td>224</td><td>637</td><td class="">2.8x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9D%B4%EC%A3%BC%ED%98%84/%EB%A7%B5%EC%9D%B8%ED%94%84%EB%9D%BC%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">이주현</a></td><td>23</td><td>5</td><td>22%</td><td>2</td><td>11</td><td>21</td><td class="up">1.9x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9D%B4%EA%B1%B4%EC%98%81/%EB%A7%B5%EC%9D%B8%ED%94%84%EB%9D%BC%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">이건영</a></td><td>132</td><td>38</td><td>29%</td><td>21</td><td>102</td><td>171</td><td class="up">1.7x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9D%B4%EC%98%88%EC%A7%84/Search%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">이예진</a></td><td>4</td><td>2</td><td>50%</td><td>1</td><td>3</td><td>0</td><td class="up">0.0x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EA%B0%95%EA%B2%BD%EC%88%9C/%EB%A7%B5%EC%9D%B8%ED%94%84%EB%9D%BC%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">강경순</a></td><td>26</td><td>15</td><td>58%</td><td>4</td><td>18</td><td>0</td><td class="up">0.0x</td></tr><tr style="font-weight:bold;background:#f5f5f5"><td>합계</td><td>1232</td><td>631</td><td>51%</td><td>408</td><td>1901</td><td>6412</td><td>3.4x</td></tr></table><h4 style="margin:15px 0 5px;color:#333" id="wl-맵컨텐츠">맵컨텐츠 (7명)</h4><table><tr><th>이름</th><th>이슈건수</th><th>준수건수</th><th>준수율</th><th>비교건수</th><th>예상(h)</th><th>실측(h)</th><th>비율</th></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9C%A0%ED%98%B8%EC%A7%84/%EB%A7%B5%EC%BB%A8%ED%85%90%EC%B8%A0%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">유호진</a></td><td>1</td><td>1</td><td>100%</td><td>1</td><td>2</td><td>43</td><td class="down">21.6x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EA%B9%80%EC%8A%B9%EC%B2%A0/%EB%A7%B5%EC%BB%A8%ED%85%90%EC%B8%A0%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">김승철</a></td><td>24</td><td>6</td><td>25%</td><td>2</td><td>4</td><td>42</td><td class="down">10.6x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EB%B0%95%EC%83%81%EC%97%B0/%EB%A7%B5%EC%BB%A8%ED%85%90%EC%B8%A0%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">박상연</a></td><td>23</td><td>7</td><td>30%</td><td>4</td><td>10</td><td>98</td><td class="down">9.3x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EA%B9%80%EC%A0%95%EC%95%84/%EB%A7%B5%EC%BB%A8%ED%85%90%EC%B8%A0%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">김정아</a></td><td>143</td><td>109</td><td>76%</td><td>70</td><td>160</td><td>1040</td><td class="down">6.5x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9D%B4%ED%83%9C%EC%9A%B1/%EB%A7%B5%EC%BB%A8%ED%85%90%EC%B8%A0%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">이태욱</a></td><td>30</td><td>16</td><td>53%</td><td>6</td><td>34</td><td>44</td><td class="up">1.3x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EA%B0%95%EC%9D%B4%EC%8A%AC/%EB%A7%B5%EC%BB%A8%ED%85%90%EC%B8%A0%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">강이슬</a></td><td>35</td><td>7</td><td>20%</td><td>2</td><td>7</td><td>0</td><td class="up">0.0x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9D%B4%EC%A7%80%EC%9D%80/%EB%A7%B5%EC%BB%A8%ED%85%90%EC%B8%A0%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">이지은</a></td><td>3</td><td>0</td><td>0%</td><td>0</td><td>0</td><td>0</td><td class="">-</td></tr><tr style="font-weight:bold;background:#f5f5f5"><td>합계</td><td>259</td><td>146</td><td>56%</td><td>85</td><td>218</td><td>1268</td><td>5.8x</td></tr></table><h4 style="margin:15px 0 5px;color:#333" id="wl-로컬인프라">로컬인프라 (6명)</h4><table><tr><th>이름</th><th>이슈건수</th><th>준수건수</th><th>준수율</th><th>비교건수</th><th>예상(h)</th><th>실측(h)</th><th>비율</th></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%B5%9C%EC%9B%90%EC%84%AD/%EB%A1%9C%EC%BB%AC%EC%9D%B8%ED%94%84%EB%9D%BC%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">최원섭</a></td><td>329</td><td>15</td><td>5%</td><td>11</td><td>24</td><td>130</td><td class="down">5.4x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EB%B0%95%EC%A2%85%EC%84%9D%28JIM%29/%EB%A1%9C%EC%BB%AC%EC%9D%B8%ED%94%84%EB%9D%BC%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">박종석</a></td><td>156</td><td>57</td><td>37%</td><td>38</td><td>118</td><td>614</td><td class="down">5.2x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9D%B4%EB%8F%88%EC%88%98/%EB%A1%9C%EC%BB%AC%EC%9D%B8%ED%94%84%EB%9D%BC%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">이돈수</a></td><td>227</td><td>111</td><td>49%</td><td>67</td><td>262</td><td>1183</td><td class="down">4.5x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EA%B9%80%EC%98%81%ED%9B%88%28Young-Hoon%2C%20Kim%29/%EB%A1%9C%EC%BB%AC%EC%9D%B8%ED%94%84%EB%9D%BC%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">김영훈</a></td><td>212</td><td>125</td><td>59%</td><td>59</td><td>272</td><td>1191</td><td class="down">4.4x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%A0%95%EC%A7%80%EC%9B%90/%EB%A1%9C%EC%BB%AC%EC%9D%B8%ED%94%84%EB%9D%BC%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">정지원B</a></td><td>30</td><td>7</td><td>23%</td><td>5</td><td>32</td><td>130</td><td class="down">4.0x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EA%B0%95%EB%8F%99%EC%9A%B1/%EB%A1%9C%EC%BB%AC%EC%9D%B8%ED%94%84%EB%9D%BC%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">강동욱</a></td><td>218</td><td>164</td><td>75%</td><td>122</td><td>378</td><td>1499</td><td class="">4.0x</td></tr><tr style="font-weight:bold;background:#f5f5f5"><td>합계</td><td>1172</td><td>479</td><td>41%</td><td>302</td><td>1088</td><td>4748</td><td>4.4x</td></tr></table><h4 style="margin:15px 0 5px;color:#333" id="wl-로컬컨텐츠">로컬컨텐츠 (4명)</h4><table><tr><th>이름</th><th>이슈건수</th><th>준수건수</th><th>준수율</th><th>비교건수</th><th>예상(h)</th><th>실측(h)</th><th>비율</th></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%84%9C%EC%A3%BC%EC%9D%80%28Seo%20Ju%20Eun%29/%EB%A1%9C%EC%BB%AC%EC%BB%A8%ED%85%90%EC%B8%A0%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">서주은</a></td><td>13</td><td>1</td><td>8%</td><td>1</td><td>3</td><td>53</td><td class="down">17.7x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9D%B4%EC%9C%A0%EC%A7%84%28YooJin%20Lee%29/%EB%A1%9C%EC%BB%AC%EC%BB%A8%ED%85%90%EC%B8%A0%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">이유진</a></td><td>69</td><td>19</td><td>28%</td><td>13</td><td>32</td><td>313</td><td class="down">10.0x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%A0%95%EB%8B%A4%EC%A0%95/%EB%A1%9C%EC%BB%AC%EC%BB%A8%ED%85%90%EC%B8%A0%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">정다정</a></td><td>105</td><td>37</td><td>35%</td><td>26</td><td>70</td><td>294</td><td class="down">4.2x</td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9D%B4%EC%98%81%EC%88%98/%EB%A1%9C%EC%BB%AC%EC%BB%A8%ED%85%90%EC%B8%A0%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-07-01%20AND%20resolved%20%3C%202026-07-01" target="_blank" style="color:#1a73e8;text-decoration:none">이영수B</a></td><td>15</td><td>8</td><td>53%</td><td>6</td><td>18</td><td>65</td><td class="">3.7x</td></tr><tr style="font-weight:bold;background:#f5f5f5"><td>합계</td><td>202</td><td>65</td><td>32%</td><td>46</td><td>122</td><td>726</td><td>6.0x</td></tr></table><p style="color:#888;margin-top:40px;font-size:12px">
+생성일: 2026-07-16 | 지표: IP→Review 구간만 측정 (Review 대기/완료 시간 미포함)<br>
+비율 해석: ~1.0x=매우 효율적, 1~2x=정상, <strong style="color:#e74c3c">2~4x=프로세스 오버헤드, 4x+=병목/대기</strong><br>
+준수율 낮은 팀 = Review 워크플로 미사용 (DevOps, 로컬인프라 등) → 이 지표로 측정 불가
+</p></body></html>
