@@ -17,7 +17,7 @@ import {
   SegmentedControl,
 } from "@/components/leaderboard/RankingUI";
 import { getLeaderboardPeriodLabel } from "@/components/leaderboard/presentation";
-import { formatCurrency, formatNumber } from "@/lib/utils";
+import { formatCurrency, formatNumber, formatDuration } from "@/lib/utils";
 import { useSettings } from "@/lib/useSettings";
 import {
   resolveSortByParam,
@@ -893,6 +893,9 @@ const LeaderboardRow = memo(function LeaderboardRow({
           </UserInfo>
         </UserContainer>
       </TableCell>
+      <TableCell className="text-right hidden-mobile">
+        <StatSpan>{formatDuration(user.totalActiveTimeMs)}</StatSpan>
+      </TableCell>
       <TableCell className="text-right hidden-cost-mobile">
         <StatSpan title={formattedCost}>
           {formatCurrency(user.totalCost)}
@@ -922,12 +925,16 @@ function LeaderboardMobileRow({
   isCurrentUser: boolean;
   sortBy: LeaderboardSortBy;
 }) {
-  const primary = sortBy === "cost"
-    ? { label: "Cost", value: formatCurrency(user.totalCost) }
-    : { label: "Tokens", value: formatNumber(user.totalTokens) };
-  const secondary = sortBy === "cost"
+  const primary = sortBy === "time"
+    ? { label: "Time", value: formatDuration(user.totalActiveTimeMs) }
+    : sortBy === "cost"
+      ? { label: "Cost", value: formatCurrency(user.totalCost) }
+      : { label: "Tokens", value: formatNumber(user.totalTokens) };
+  const secondary = sortBy === "time"
     ? `${formatNumber(user.totalTokens)} tokens`
-    : formatCurrency(user.totalCost);
+    : sortBy === "cost"
+      ? `${formatNumber(user.totalTokens)} tokens`
+      : formatCurrency(user.totalCost);
 
   return (
     <MobileRankingRow
@@ -1351,6 +1358,7 @@ export default function LeaderboardClient({ initialData, currentUser, initialSor
             options={[
               { value: "tokens", label: "Tokens" },
               { value: "cost", label: "Cost" },
+              { value: "time", label: "Time" },
             ]}
             onChange={(value) => {
               setUrlSortOverride(null);
@@ -1398,6 +1406,7 @@ export default function LeaderboardClient({ initialData, currentUser, initialSor
                     <tr>
                       <TableHeaderCell className="rank-cell">Rank</TableHeaderCell>
                       <TableHeaderCell>User</TableHeaderCell>
+                      <TableHeaderCell className="text-right hidden-mobile">Time</TableHeaderCell>
                       <TableHeaderCell className="text-right hidden-cost-mobile">Cost</TableHeaderCell>
                       <TableHeaderCell className="text-right">Tokens</TableHeaderCell>
                     </tr>

@@ -17,6 +17,7 @@ interface GroupLeaderboardPeriodRow {
   tokens: number;
   cost: number;
   sourceBreakdown: Record<string, { models: Record<string, unknown> }> | null;
+  activeTimeMs: number | null;
 }
 
 interface GroupLeaderboardDbRow {
@@ -27,6 +28,7 @@ interface GroupLeaderboardDbRow {
   role: string;
   totalTokens: number | string | null;
   totalCost: number | string | null;
+  totalActiveTimeMs: number | string | null;
 }
 
 export interface GroupLeaderboardUser extends LeaderboardUser {
@@ -78,6 +80,16 @@ function compareGroupUsers(
   right: Omit<GroupLeaderboardUser, "rank">,
   sortBy: SortBy
 ): number {
+  if (sortBy === "time") {
+    const leftTime = left.totalActiveTimeMs ?? 0;
+    const rightTime = right.totalActiveTimeMs ?? 0;
+    const primary = rightTime - leftTime;
+    if (primary !== 0) return primary;
+    const secondary = right.totalTokens - left.totalTokens;
+    if (secondary !== 0) return secondary;
+    return left.username.localeCompare(right.username);
+  }
+
   const primary = sortBy === "cost"
     ? right.totalCost - left.totalCost
     : right.totalTokens - left.totalTokens;
@@ -178,6 +190,7 @@ function buildPeriodGroupLeaderboardData(
     if (existing) {
       existing.totalTokens += row.tokens;
       existing.totalCost += row.cost;
+      existing.totalActiveTimeMs = (existing.totalActiveTimeMs ?? 0) + (row.activeTimeMs ?? 0);
       continue;
     }
 
@@ -189,6 +202,7 @@ function buildPeriodGroupLeaderboardData(
       role: row.role,
       totalTokens: row.tokens,
       totalCost: row.cost,
+      totalActiveTimeMs: row.activeTimeMs,
     });
   }
 
@@ -233,6 +247,7 @@ async function fetchPeriodRows(
       tokens: dailyBreakdown.tokens,
       cost: dailyBreakdown.cost,
       sourceBreakdown: dailyBreakdown.sourceBreakdown,
+      activeTimeMs: dailyBreakdown.activeTimeMs,
     })
     .from(dailyBreakdown)
     .innerJoin(submissions, eq(dailyBreakdown.submissionId, submissions.id))
@@ -255,6 +270,7 @@ async function fetchPeriodRows(
     tokens: Number(row.tokens) || 0,
     cost: Number(row.cost) || 0,
     sourceBreakdown: (row.sourceBreakdown as Record<string, { models: Record<string, unknown> }>) ?? null,
+    activeTimeMs: row.activeTimeMs != null ? Number(row.activeTimeMs) : null,
   }));
 }
 
@@ -263,7 +279,9 @@ async function fetchAllTimeRows(groupId: string, sortBy: SortBy, search: string 
 
   const primaryOrderByColumn = sortBy === "cost"
     ? sql`SUM(CAST(${submissions.totalCost} AS DECIMAL(18,4)))`
-    : sql`SUM(${submissions.totalTokens})`;
+    : sortBy === "time"
+      ? sql`SUM(${submissions.totalActiveTimeMs})`
+      : sql`SUM(${submissions.totalTokens})`;
   const secondaryOrderByColumn = sortBy === "cost"
     ? sql`SUM(${submissions.totalTokens})`
     : sql`SUM(CAST(${submissions.totalCost} AS DECIMAL(18,4)))`;
@@ -288,6 +306,7 @@ async function fetchAllTimeRows(groupId: string, sortBy: SortBy, search: string 
       role: groupMembers.role,
       totalTokens: sql<number>`SUM(${submissions.totalTokens})`.as("total_tokens"),
       totalCost: sql<number>`SUM(CAST(${submissions.totalCost} AS DECIMAL(18,4)))`.as("total_cost"),
+      totalActiveTimeMs: sql<number>`SUM(${submissions.totalActiveTimeMs})`.as("total_active_time_ms"),
     })
     .from(submissions)
     .innerJoin(users, eq(submissions.userId, users.id))
@@ -316,6 +335,7 @@ async function fetchAllTimeRows(groupId: string, sortBy: SortBy, search: string 
     role: row.role,
     totalTokens: Number(row.totalTokens) || 0,
     totalCost: Number(row.totalCost) || 0,
+    totalActiveTimeMs: Number(row.totalActiveTimeMs) || null,
   }));
 }
 

@@ -24,6 +24,7 @@ interface LeaderboardPeriodRow {
   tokens: number;
   cost: number;
   sourceBreakdown: Record<string, { models: Record<string, unknown> }> | null;
+  activeTimeMs: number | null;
 }
 
 interface PeriodDateRange {
@@ -39,6 +40,7 @@ interface PeriodLeaderboardDbRow {
   tokens: number | string | null;
   cost: number | string | null;
   sourceBreakdown: Record<string, { models: Record<string, unknown> }> | null;
+  activeTimeMs: number | string | null;
 }
 
 interface AllTimeLeaderboardDbRow {
@@ -48,6 +50,7 @@ interface AllTimeLeaderboardDbRow {
   avatarUrl: string | null;
   totalTokens: number | string | null;
   totalCost: number | string | null;
+  totalActiveTimeMs: number | string | null;
 }
 
 interface RankedLeaderboardDbRow extends AllTimeLeaderboardDbRow {
@@ -109,6 +112,16 @@ function compareLeaderboardUsers(
   right: Omit<LeaderboardUser, "rank">,
   sortBy: SortBy
 ): number {
+  if (sortBy === "time") {
+    const leftTime = left.totalActiveTimeMs ?? 0;
+    const rightTime = right.totalActiveTimeMs ?? 0;
+    const primary = rightTime - leftTime;
+    if (primary !== 0) return primary;
+    const secondary = right.totalTokens - left.totalTokens;
+    if (secondary !== 0) return secondary;
+    return left.username.localeCompare(right.username);
+  }
+
   const primary = sortBy === "cost"
     ? right.totalCost - left.totalCost
     : right.totalTokens - left.totalTokens;
@@ -140,6 +153,7 @@ function aggregatePeriodRows(
     if (existing) {
       existing.totalTokens += row.tokens;
       existing.totalCost += row.cost;
+      existing.totalActiveTimeMs = (existing.totalActiveTimeMs ?? 0) + (row.activeTimeMs ?? 0);
       continue;
     }
 
@@ -150,6 +164,7 @@ function aggregatePeriodRows(
       avatarUrl: row.avatarUrl,
       totalTokens: row.tokens,
       totalCost: row.cost,
+      totalActiveTimeMs: row.activeTimeMs,
     });
   }
 
@@ -238,6 +253,7 @@ function buildPeriodLeaderboardData(
     stats: {
       totalTokens: aggregatedUsers.reduce((sum, user) => sum + user.totalTokens, 0),
       totalCost: aggregatedUsers.reduce((sum, user) => sum + user.totalCost, 0),
+      totalActiveTimeMs: aggregatedUsers.reduce((sum, user) => sum + (user.totalActiveTimeMs ?? 0), 0),
       uniqueUsers: aggregatedUsers.length,
     },
     period,
@@ -287,6 +303,7 @@ async function fetchPeriodLeaderboardRows(
       tokens: dailyBreakdown.tokens,
       cost: dailyBreakdown.cost,
       sourceBreakdown: dailyBreakdown.sourceBreakdown,
+      activeTimeMs: dailyBreakdown.activeTimeMs,
     })
     .from(dailyBreakdown)
     .innerJoin(submissions, eq(dailyBreakdown.submissionId, submissions.id))
@@ -306,6 +323,7 @@ async function fetchPeriodLeaderboardRows(
     tokens: Number(row.tokens) || 0,
     cost: Number(row.cost) || 0,
     sourceBreakdown: row.sourceBreakdown ?? null,
+    activeTimeMs: row.activeTimeMs != null ? Number(row.activeTimeMs) : null,
   }));
 }
 
@@ -328,7 +346,9 @@ async function fetchLeaderboardData(
 
   const orderByColumn = sortBy === "cost"
     ? sql`SUM(CAST(${submissions.totalCost} AS DECIMAL(18,4)))`
-    : sql`SUM(${submissions.totalTokens})`;
+    : sortBy === "time"
+      ? sql`SUM(${submissions.totalActiveTimeMs})`
+      : sql`SUM(${submissions.totalTokens})`;
   const secondaryOrderByColumn = sortBy === "cost"
     ? sql`SUM(${submissions.totalTokens})`
     : sql`SUM(CAST(${submissions.totalCost} AS DECIMAL(18,4)))`;
@@ -357,6 +377,7 @@ async function fetchLeaderboardData(
         avatarUrl: users.avatarUrl,
         totalTokens: sql<number>`SUM(${submissions.totalTokens})`.as("total_tokens"),
         totalCost: sql<number>`SUM(CAST(${submissions.totalCost} AS DECIMAL(18,4)))`.as("total_cost"),
+        totalActiveTimeMs: sql<number>`SUM(${submissions.totalActiveTimeMs})`.as("total_active_time_ms"),
       })
       .from(submissions)
       .innerJoin(users, eq(submissions.userId, users.id))
@@ -398,6 +419,7 @@ async function fetchLeaderboardData(
       .select({
         totalTokens: sql<number>`SUM(${submissions.totalTokens})`,
         totalCost: sql<number>`SUM(CAST(${submissions.totalCost} AS DECIMAL(18,4)))`,
+        totalActiveTimeMs: sql<number>`SUM(${submissions.totalActiveTimeMs})`,
         uniqueUsers: sql<number>`COUNT(DISTINCT ${submissions.userId})`,
       })
       .from(submissions);
@@ -411,6 +433,7 @@ async function fetchLeaderboardData(
         avatarUrl: row.avatarUrl,
         totalTokens: Number(row.totalTokens) || 0,
         totalCost: Number(row.totalCost) || 0,
+        totalActiveTimeMs: Number(row.totalActiveTimeMs) || null,
       })),
       pagination: {
         page,
@@ -423,6 +446,7 @@ async function fetchLeaderboardData(
       stats: {
         totalTokens: Number(globalStats[0]?.totalTokens) || 0,
         totalCost: Number(globalStats[0]?.totalCost) || 0,
+        totalActiveTimeMs: Number(globalStats[0]?.totalActiveTimeMs) || null,
         uniqueUsers: Number(globalStats[0]?.uniqueUsers) || 0,
       },
       period,
@@ -440,6 +464,7 @@ async function fetchLeaderboardData(
       avatarUrl: users.avatarUrl,
       totalTokens: sql<number>`SUM(${submissions.totalTokens})`.as("total_tokens"),
       totalCost: sql<number>`SUM(CAST(${submissions.totalCost} AS DECIMAL(18,4)))`.as("total_cost"),
+      totalActiveTimeMs: sql<number>`SUM(${submissions.totalActiveTimeMs})`.as("total_active_time_ms"),
     })
     .from(submissions)
     .innerJoin(users, eq(submissions.userId, users.id))
@@ -458,6 +483,7 @@ async function fetchLeaderboardData(
       .select({
         totalTokens: sql<number>`SUM(${submissions.totalTokens})`,
         totalCost: sql<number>`SUM(CAST(${submissions.totalCost} AS DECIMAL(18,4)))`,
+        totalActiveTimeMs: sql<number>`SUM(${submissions.totalActiveTimeMs})`,
         uniqueUsers: sql<number>`COUNT(DISTINCT ${submissions.userId})`,
       })
       .from(submissions),
@@ -475,6 +501,7 @@ async function fetchLeaderboardData(
       avatarUrl: row.avatarUrl,
       totalTokens: Number(row.totalTokens) || 0,
       totalCost: Number(row.totalCost) || 0,
+      totalActiveTimeMs: Number(row.totalActiveTimeMs) || null,
     })),
     pagination: {
       page,
@@ -487,6 +514,7 @@ async function fetchLeaderboardData(
     stats: {
       totalTokens: Number(globalStats[0]?.totalTokens) || 0,
       totalCost: Number(globalStats[0]?.totalCost) || 0,
+      totalActiveTimeMs: Number(globalStats[0]?.totalActiveTimeMs) || null,
       uniqueUsers: Number(globalStats[0]?.uniqueUsers) || 0,
     },
     period,
@@ -549,6 +577,7 @@ async function fetchUserRank(
     .select({
       totalTokens: sql<number>`SUM(${submissions.totalTokens})`.as("total_tokens"),
       totalCost: sql<number>`SUM(CAST(${submissions.totalCost} AS DECIMAL(18,4)))`.as("total_cost"),
+      totalActiveTimeMs: sql<number>`SUM(${submissions.totalActiveTimeMs})`.as("total_active_time_ms"),
     })
     .from(submissions)
     .where(eq(submissions.userId, user.id));
@@ -560,13 +589,18 @@ async function fetchUserRank(
   const userStats = userStatsResult[0];
   const userTotalTokens = Number(userStats.totalTokens);
   const userTotalCost = userStats.totalCost != null ? Number(userStats.totalCost) : 0;
+  const userTotalActiveTimeMs = userStats.totalActiveTimeMs != null ? Number(userStats.totalActiveTimeMs) : null;
 
   const userCompareValue = sortBy === "cost"
     ? userTotalCost
-    : userTotalTokens;
+    : sortBy === "time"
+      ? (userTotalActiveTimeMs ?? 0)
+      : userTotalTokens;
   const compareColumn = sortBy === "cost"
     ? sql`SUM(CAST(${submissions.totalCost} AS DECIMAL(18,4)))`
-    : sql`SUM(${submissions.totalTokens})`;
+    : sortBy === "time"
+      ? sql`SUM(${submissions.totalActiveTimeMs})`
+      : sql`SUM(${submissions.totalTokens})`;
 
   const higherRankedResult = await db
     .select({
@@ -594,6 +628,7 @@ async function fetchUserRank(
     avatarUrl: user.avatarUrl,
     totalTokens: userTotalTokens,
     totalCost: userTotalCost,
+    totalActiveTimeMs: userTotalActiveTimeMs,
   };
 }
 
