@@ -1,0 +1,22 @@
+packages/frontend/src/app/(main)/leaderboard/LeaderboardClient.tsx
+  s_7261589f5c9dcc::t_17e42fea31282a 1392
+  s_7261589f5c9dcc::t_d95e3e0dd27ba4 889-891
+  s_7261589f5c9dcc::t_8079be7e20db3d 921-926,928-930
+  s_7261589f5c9dcc::t_cfd6abc48707b1 20
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "89b5dd52d178299d113302ce326a6c1725be649e",
+  "prompts": {},
+  "sessions": {
+    "s_7261589f5c9dcc": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "ses_095bd68fbffelQ6K9cS4AjQVVD",
+        "model": "unknown"
+      },
+      "human_author": "leecoder <leecoder@aol.com>"
+    }
+  }
+}
