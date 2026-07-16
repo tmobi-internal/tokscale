@@ -1,0 +1,60 @@
+packages/frontend/src/app/api/leaderboard/route.ts
+  s_8f85c05f1fb2fa::t_a14867f8cb4ba7 9
+packages/frontend/src/app/api/leaderboard/user/[username]/route.ts
+  s_8f85c05f1fb2fa::t_721d0aac1a9dc9 9
+packages/frontend/src/lib/groups/getGroupLeaderboard.ts
+  s_8f85c05f1fb2fa::t_e44d7f99f5d13c 282-284
+  s_8f85c05f1fb2fa::t_37ecdbaa303c25 273
+  s_8f85c05f1fb2fa::t_25507669afced2 83-92
+  s_8f85c05f1fb2fa::t_fc28c869af68f6 250
+  s_8f85c05f1fb2fa::t_36446b7b7fa546 309
+  s_8f85c05f1fb2fa::t_10e5b888ce5cf2 31
+  s_8f85c05f1fb2fa::t_edd52d1d4644d0 20
+  s_8f85c05f1fb2fa::t_7c54ed1f326eb7 193,205
+  s_8f85c05f1fb2fa::t_1d4c08df744ac5 338
+packages/frontend/src/lib/leaderboard/types.ts
+  s_8f85c05f1fb2fa::t_4432811a67f6d0 2
+  s_8f85c05f1fb2fa::t_9ebff7ab97d873 12
+  s_8f85c05f1fb2fa::t_dd92d4bee81e21 28
+packages/frontend/src/app/(main)/page.tsx
+  s_8f85c05f1fb2fa::t_888553d87fa5c8 20
+packages/frontend/src/app/(main)/leaderboard/LeaderboardClient.tsx
+  s_8f85c05f1fb2fa::t_b08ef8a2139386 1337
+packages/frontend/src/lib/leaderboard/constants.ts
+  s_8f85c05f1fb2fa::t_4ec1fca3f6aa51 4
+  s_8f85c05f1fb2fa::t_e6ead20765b329 1
+packages/frontend/src/lib/leaderboard/getLeaderboard.ts
+  s_8f85c05f1fb2fa::t_86a6e8649ce8af 467
+  s_8f85c05f1fb2fa::t_38019ed1e617cf 43
+  s_8f85c05f1fb2fa::t_7fc07dc504ae87 326
+  s_8f85c05f1fb2fa::t_919a80e860552c 256
+  s_8f85c05f1fb2fa::t_d4f4ba0423f337 486,504,517
+  s_8f85c05f1fb2fa::t_72b46ebdb9e822 53
+  s_8f85c05f1fb2fa::t_dddb44cb65b35b 115-124
+  s_8f85c05f1fb2fa::t_b5dbd21aa3d0d5 349-351
+  s_8f85c05f1fb2fa::t_706dbdf687d602 580,592,596-598,601-603
+  s_8f85c05f1fb2fa::t_3acc6ec81be525 27
+  s_8f85c05f1fb2fa::t_db81d7e5ff11eb 306
+  s_8f85c05f1fb2fa::t_a3b2a82e9e47b5 631
+  s_8f85c05f1fb2fa::t_d5dfe337260315 422,436,449
+  s_8f85c05f1fb2fa::t_ed295872c66e2a 380
+  s_8f85c05f1fb2fa::t_1cd3cc9f2d075f 156,167
+packages/frontend/src/app/(main)/leaderboard/page.tsx
+  s_8f85c05f1fb2fa::t_03497ce7a30f7f 39
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "b350630f3fd329d9a0a44d19306a0004a4f5b604",
+  "prompts": {},
+  "sessions": {
+    "s_8f85c05f1fb2fa": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "ses_0953704b8ffe1WvaGTEuannGmE",
+        "model": "unknown"
+      },
+      "human_author": "leecoder <leecoder@aol.com>"
+    }
+  }
+}
