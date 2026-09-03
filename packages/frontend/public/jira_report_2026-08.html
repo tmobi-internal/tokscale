@@ -1,0 +1,1050 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>Tech Jira - 2026-09-02</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+body{font-family:-apple-system,sans-serif;max-width:1400px;margin:20px auto;background:#f8f9fa}
+h1{color:#1a1a2e}h2{color:#16213e;border-bottom:2px solid #0f3460;padding-bottom:4px;margin-top:40px}
+h3{color:#0f3460;margin-top:30px;padding:8px;background:#e3f2fd;border-radius:4px}
+table{border-collapse:collapse;width:100%;margin:10px 0;font-size:12px}
+th{background:#0f3460;color:#fff;padding:5px 6px;text-align:right;position:sticky;top:0}
+th:first-child{text-align:left}
+td{padding:4px 6px;border-bottom:1px solid #ddd;text-align:right}
+td:first-child{text-align:left;font-weight:500}
+tr:hover{background:#e8f4fd}
+.card{display:inline-block;background:#fff;border-radius:8px;padding:15px 25px;margin:5px;box-shadow:0 2px 4px rgba(0,0,0,.1)}
+.card .n{font-size:24px;font-weight:bold;color:#0f3460}.card .l{font-size:12px;color:#666}
+nav{background:#0f3460;padding:10px 20px;border-radius:8px;margin:15px 0}
+nav a{color:#fff;text-decoration:none;font-size:12px;padding:3px 8px;background:rgba(255,255,255,.1);border-radius:4px;margin:2px}
+nav a:hover{background:rgba(255,255,255,.3)}
+.gl{display:inline-block;color:#ffd700;font-size:11px;font-weight:bold;margin:5px 10px 2px 0}
+.warn{background:#fff3cd;border:1px solid #ffc107;border-radius:6px;padding:10px 15px;margin:10px 0;font-size:12px}
+</style></head><body>
+<h1>📋 Tech Jira 이슈 완료 현황</h1>
+<p style="color:#666">측정기간: 2025-09~2026-08 (12개월) | 전체기간 달력시간 내부인 최대점유자 귀속 + statusCategory=Done</p>
+<div>
+<div class="card"><div class="n">28,296</div><div class="l">12개월 총 완료</div></div>
+<div class="card"><div class="n">226</div><div class="l">인당 12개월 합</div></div>
+<div class="card"><div class="n">18</div><div class="l">인당 월평균</div></div>
+<div class="card"><div class="n">5d</div><div class="l">Lead Time 중앙값</div></div>
+</div><nav><span class="gl">[모빌리티서비스]</span><a href="#로컬서비스">로컬서비스</a><a href="#프론트엔드">프론트엔드</a><a href="#서비스백엔드">서비스백엔드</a><a href="#Search">Search</a><a href="#광고개발">광고개발</a><a href="#온디맨드모빌리티개발">온디맨드모빌리티개발</a><br><span class="gl">[모빌리티플랫폼]</span><a href="#AUTO개발">AUTO개발</a><a href="#Client Service">Client Service</a><a href="#DevOps">DevOps</a><a href="#Client Core">Client Core</a><a href="#서비스플랫폼">서비스플랫폼</a><a href="#RP·교통">RP·교통</a><br><span class="gl">[맵플랫폼]</span><a href="#맵인프라">맵인프라</a><a href="#로컬인프라">로컬인프라</a><a href="#맵컨텐츠">맵컨텐츠</a><a href="#로컬컨텐츠">로컬컨텐츠</a><br></nav><h2>팀 요약 (완료 건수)</h2><table><tr><th>팀</th><th>인원</th><th>09</th><th>10</th><th>11</th><th>12</th><th>01</th><th>02</th><th>03</th><th>04</th><th>05</th><th>06</th><th>07</th><th>08</th><th>합계</th><th>인당월평균</th></tr><tr style="background:#f0f0f0;font-weight:bold"><td>전체 Tech</td><td>125</td><td>2115</td><td>1564</td><td>2101</td><td>1620</td><td>2154</td><td>1579</td><td>2845</td><td>2876</td><td>2117</td><td>2809</td><td>3302</td><td>3214</td><td>28296</td><td>18</td></tr><tr><td><a href="#로컬서비스">로컬서비스</a></td><td>10</td><td>229</td><td>125</td><td>168</td><td>81</td><td>102</td><td>84</td><td>226</td><td>228</td><td>181</td><td>191</td><td>352</td><td>258</td><td><strong>2225</strong></td><td>18</td></tr><tr><td><a href="#프론트엔드">프론트엔드</a></td><td>8</td><td>199</td><td>145</td><td>147</td><td>135</td><td>156</td><td>120</td><td>186</td><td>229</td><td>117</td><td>166</td><td>278</td><td>280</td><td><strong>2158</strong></td><td>22</td></tr><tr><td><a href="#서비스백엔드">서비스백엔드</a></td><td>5</td><td>72</td><td>47</td><td>39</td><td>49</td><td>60</td><td>63</td><td>81</td><td>48</td><td>72</td><td>101</td><td>93</td><td>102</td><td><strong>827</strong></td><td>13</td></tr><tr><td><a href="#Search">Search</a></td><td>7</td><td>51</td><td>58</td><td>58</td><td>54</td><td>39</td><td>62</td><td>84</td><td>64</td><td>56</td><td>76</td><td>77</td><td>97</td><td><strong>776</strong></td><td>9</td></tr><tr><td><a href="#광고개발">광고개발</a></td><td>3</td><td>48</td><td>85</td><td>38</td><td>16</td><td>64</td><td>74</td><td>35</td><td>47</td><td>31</td><td>71</td><td>80</td><td>57</td><td><strong>646</strong></td><td>17</td></tr><tr><td><a href="#온디맨드모빌리티개발">온디맨드모빌리티개발</a></td><td>4</td><td>30</td><td>26</td><td>31</td><td>20</td><td>43</td><td>23</td><td>47</td><td>65</td><td>41</td><td>81</td><td>116</td><td>69</td><td><strong>592</strong></td><td>12</td></tr><tr><td><a href="#AUTO개발">AUTO개발</a></td><td>13</td><td>307</td><td>199</td><td>270</td><td>173</td><td>452</td><td>302</td><td>368</td><td>554</td><td>315</td><td>356</td><td>420</td><td>399</td><td><strong>4115</strong></td><td>26</td></tr><tr><td><a href="#Client Service">Client Service</a></td><td>10</td><td>122</td><td>175</td><td>276</td><td>250</td><td>274</td><td>158</td><td>643</td><td>408</td><td>332</td><td>362</td><td>449</td><td>360</td><td><strong>3809</strong></td><td>31</td></tr><tr><td><a href="#DevOps">DevOps</a></td><td>8</td><td>281</td><td>148</td><td>239</td><td>191</td><td>209</td><td>258</td><td>452</td><td>463</td><td>255</td><td>364</td><td>300</td><td>231</td><td><strong>3391</strong></td><td>35</td></tr><tr><td><a href="#Client Core">Client Core</a></td><td>8</td><td>155</td><td>126</td><td>170</td><td>217</td><td>274</td><td>111</td><td>189</td><td>164</td><td>259</td><td>193</td><td>253</td><td>482</td><td><strong>2593</strong></td><td>27</td></tr><tr><td><a href="#서비스플랫폼">서비스플랫폼</a></td><td>9</td><td>159</td><td>121</td><td>146</td><td>150</td><td>181</td><td>56</td><td>165</td><td>192</td><td>167</td><td>369</td><td>284</td><td>235</td><td><strong>2225</strong></td><td>20</td></tr><tr><td><a href="#RP·교통">RP·교통</a></td><td>9</td><td>163</td><td>103</td><td>191</td><td>75</td><td>91</td><td>83</td><td>111</td><td>143</td><td>98</td><td>168</td><td>235</td><td>199</td><td><strong>1660</strong></td><td>15</td></tr><tr><td><a href="#맵인프라">맵인프라</a></td><td>14</td><td>104</td><td>79</td><td>99</td><td>105</td><td>89</td><td>55</td><td>142</td><td>129</td><td>94</td><td>141</td><td>146</td><td>269</td><td><strong>1452</strong></td><td>8</td></tr><tr><td><a href="#로컬인프라">로컬인프라</a></td><td>6</td><td>129</td><td>84</td><td>192</td><td>73</td><td>71</td><td>99</td><td>75</td><td>114</td><td>69</td><td>131</td><td>153</td><td>93</td><td><strong>1283</strong></td><td>17</td></tr><tr><td><a href="#맵컨텐츠">맵컨텐츠</a></td><td>7</td><td>42</td><td>38</td><td>18</td><td>10</td><td>18</td><td>15</td><td>30</td><td>15</td><td>22</td><td>25</td><td>16</td><td>72</td><td><strong>321</strong></td><td>3</td></tr><tr><td><a href="#로컬컨텐츠">로컬컨텐츠</a></td><td>4</td><td>24</td><td>5</td><td>19</td><td>21</td><td>31</td><td>16</td><td>11</td><td>13</td><td>8</td><td>14</td><td>50</td><td>11</td><td><strong>223</strong></td><td>4</td></tr></table><h2>📊 이슈 완료 건수 월별 추이</h2><p style="color:#666;font-size:12px">전체기간 달력시간 내부인 최대점유자 귀속 + statusCategory=Done</p><div style="background:#fff;border-radius:8px;padding:20px;box-shadow:0 2px 4px rgba(0,0,0,.1);margin:20px 0"><canvas id="volumeChart" height="100"></canvas></div><script>
+new Chart(document.getElementById('volumeChart'), {
+  type: 'line',
+  data: {
+    labels: ['09', '10', '11', '12', '01', '02', '03', '04', '05', '06', '07', '08'],
+    datasets: [
+      {label: '전체 Tech', data: [2130, 1592, 2152, 1621, 2159, 1579, 2846, 2876, 2120, 2812, 3304, 3216], borderColor: '#0f3460', backgroundColor: 'rgba(15,52,96,0.1)', borderWidth: 3, fill: true, tension: 0.3},
+      {label: '모빌리티서비스', data: [629, 486, 481, 355, 464, 426, 659, 681, 498, 686, 996, 863], borderColor: '#e74c3c', borderWidth: 2, tension: 0.3, borderDash: [5,3]},
+      {label: '모빌리티플랫폼', data: [1187, 872, 1292, 1056, 1481, 968, 1928, 1924, 1426, 1812, 1941, 1906], borderColor: '#27ae60', borderWidth: 2, tension: 0.3, borderDash: [5,3]},
+      {label: '맵플랫폼', data: [299, 206, 328, 209, 209, 185, 258, 271, 193, 311, 365, 445], borderColor: '#f39c12', borderWidth: 2, tension: 0.3, borderDash: [5,3]},
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: {legend: {position: 'top'}, tooltip: {callbacks: {label: ctx => ctx.dataset.label + ': ' + ctx.parsed.y + '건'}}},
+    scales: {y: {beginAtZero: true, title: {display: true, text: '완료 건수'}}, x: {title: {display: true, text: '월'}}}
+  }
+});
+</script>
+<h3>📊 모빌리티서비스 - 팀별 이슈 처리건수 추이</h3><p style="color:#888;font-size:11px;margin:2px 0 6px">팀 이름 클릭 → 해당 팀만 표시 / 다시 클릭 → 전체 복귀</p><div style="background:#fff;border-radius:8px;padding:15px;box-shadow:0 2px 4px rgba(0,0,0,.1);margin:10px 0"><canvas id="volumeTeamChart0" height="80"></canvas></div><script>
+(function() {
+  var focusedIdx_0 = -1;
+  var chart_0 = new Chart(document.getElementById('volumeTeamChart0'), {
+    type: 'bar',
+    data: {
+      labels: ['09', '10', '11', '12', '01', '02', '03', '04', '05', '06', '07', '08'],
+      datasets: [
+        {label: '프론트엔드', data: [199, 145, 147, 135, 156, 120, 186, 229, 117, 166, 278, 280], backgroundColor: '#e74c3c', borderColor: '#e74c3c', borderWidth: 0},
+        {label: '로컬서비스', data: [229, 125, 168, 81, 102, 84, 226, 228, 181, 191, 352, 258], backgroundColor: '#3498db', borderColor: '#3498db', borderWidth: 0},
+        {label: 'Search', data: [51, 58, 58, 54, 39, 62, 84, 64, 56, 76, 77, 97], backgroundColor: '#27ae60', borderColor: '#27ae60', borderWidth: 0},
+        {label: '서비스백엔드', data: [72, 47, 39, 49, 60, 63, 81, 48, 72, 101, 93, 102], backgroundColor: '#f39c12', borderColor: '#f39c12', borderWidth: 0},
+        {label: '온디맨드모빌리티개발', data: [30, 26, 31, 20, 43, 23, 47, 65, 41, 81, 116, 69], backgroundColor: '#9b59b6', borderColor: '#9b59b6', borderWidth: 0},
+        {label: '광고개발', data: [48, 85, 38, 16, 64, 74, 35, 47, 31, 71, 80, 57], backgroundColor: '#1abc9c', borderColor: '#1abc9c', borderWidth: 0},
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: {font: {size: 11}, boxWidth: 14},
+          onClick: function(e, legendItem, legend) {
+            var chart = legend.chart;
+            var idx = legendItem.datasetIndex;
+            if (focusedIdx_0 === idx) {
+              // 이미 선택된 팀 → 전체 복귀
+              focusedIdx_0 = -1;
+              chart.data.datasets.forEach(function(ds, i) {
+                chart.setDatasetVisibility(i, true);
+              });
+            } else {
+              // 선택한 팀만 표시
+              focusedIdx_0 = idx;
+              chart.data.datasets.forEach(function(ds, i) {
+                chart.setDatasetVisibility(i, i === idx);
+              });
+            }
+            chart.update();
+          }
+        },
+        tooltip: {callbacks: {label: ctx => ctx.dataset.label + ': ' + ctx.parsed.y + '건'}, mode: 'index', intersect: false}
+      },
+      scales: {x: {stacked: true}, y: {stacked: true, beginAtZero: true, title: {display: true, text: '완료 건수'}}}
+    }
+  });
+})();
+</script>
+<h3>📊 모빌리티플랫폼 - 팀별 이슈 처리건수 추이</h3><p style="color:#888;font-size:11px;margin:2px 0 6px">팀 이름 클릭 → 해당 팀만 표시 / 다시 클릭 → 전체 복귀</p><div style="background:#fff;border-radius:8px;padding:15px;box-shadow:0 2px 4px rgba(0,0,0,.1);margin:10px 0"><canvas id="volumeTeamChart1" height="80"></canvas></div><script>
+(function() {
+  var focusedIdx_1 = -1;
+  var chart_1 = new Chart(document.getElementById('volumeTeamChart1'), {
+    type: 'bar',
+    data: {
+      labels: ['09', '10', '11', '12', '01', '02', '03', '04', '05', '06', '07', '08'],
+      datasets: [
+        {label: 'Client Core', data: [155, 126, 170, 217, 274, 111, 189, 164, 259, 193, 253, 482], backgroundColor: '#e74c3c', borderColor: '#e74c3c', borderWidth: 0},
+        {label: 'Client Service', data: [122, 175, 276, 250, 274, 158, 643, 408, 332, 362, 449, 360], backgroundColor: '#3498db', borderColor: '#3498db', borderWidth: 0},
+        {label: 'DevOps', data: [281, 148, 239, 191, 209, 258, 452, 463, 255, 364, 300, 231], backgroundColor: '#27ae60', borderColor: '#27ae60', borderWidth: 0},
+        {label: '서비스플랫폼', data: [159, 121, 146, 150, 181, 56, 165, 192, 167, 369, 284, 235], backgroundColor: '#f39c12', borderColor: '#f39c12', borderWidth: 0},
+        {label: 'RP·교통', data: [163, 103, 191, 75, 91, 83, 111, 143, 98, 168, 235, 199], backgroundColor: '#9b59b6', borderColor: '#9b59b6', borderWidth: 0},
+        {label: 'AUTO개발', data: [307, 199, 270, 173, 452, 302, 368, 554, 315, 356, 420, 399], backgroundColor: '#1abc9c', borderColor: '#1abc9c', borderWidth: 0},
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: {font: {size: 11}, boxWidth: 14},
+          onClick: function(e, legendItem, legend) {
+            var chart = legend.chart;
+            var idx = legendItem.datasetIndex;
+            if (focusedIdx_1 === idx) {
+              // 이미 선택된 팀 → 전체 복귀
+              focusedIdx_1 = -1;
+              chart.data.datasets.forEach(function(ds, i) {
+                chart.setDatasetVisibility(i, true);
+              });
+            } else {
+              // 선택한 팀만 표시
+              focusedIdx_1 = idx;
+              chart.data.datasets.forEach(function(ds, i) {
+                chart.setDatasetVisibility(i, i === idx);
+              });
+            }
+            chart.update();
+          }
+        },
+        tooltip: {callbacks: {label: ctx => ctx.dataset.label + ': ' + ctx.parsed.y + '건'}, mode: 'index', intersect: false}
+      },
+      scales: {x: {stacked: true}, y: {stacked: true, beginAtZero: true, title: {display: true, text: '완료 건수'}}}
+    }
+  });
+})();
+</script>
+<h3>📊 맵플랫폼 - 팀별 이슈 처리건수 추이</h3><p style="color:#888;font-size:11px;margin:2px 0 6px">팀 이름 클릭 → 해당 팀만 표시 / 다시 클릭 → 전체 복귀</p><div style="background:#fff;border-radius:8px;padding:15px;box-shadow:0 2px 4px rgba(0,0,0,.1);margin:10px 0"><canvas id="volumeTeamChart2" height="80"></canvas></div><script>
+(function() {
+  var focusedIdx_2 = -1;
+  var chart_2 = new Chart(document.getElementById('volumeTeamChart2'), {
+    type: 'bar',
+    data: {
+      labels: ['09', '10', '11', '12', '01', '02', '03', '04', '05', '06', '07', '08'],
+      datasets: [
+        {label: '맵인프라', data: [104, 79, 99, 105, 89, 55, 142, 129, 94, 141, 146, 269], backgroundColor: '#e74c3c', borderColor: '#e74c3c', borderWidth: 0},
+        {label: '맵컨텐츠', data: [42, 38, 18, 10, 18, 15, 30, 15, 22, 25, 16, 72], backgroundColor: '#3498db', borderColor: '#3498db', borderWidth: 0},
+        {label: '로컬인프라', data: [129, 84, 192, 73, 71, 99, 75, 114, 69, 131, 153, 93], backgroundColor: '#27ae60', borderColor: '#27ae60', borderWidth: 0},
+        {label: '로컬컨텐츠', data: [24, 5, 19, 21, 31, 16, 11, 13, 8, 14, 50, 11], backgroundColor: '#f39c12', borderColor: '#f39c12', borderWidth: 0},
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: {font: {size: 11}, boxWidth: 14},
+          onClick: function(e, legendItem, legend) {
+            var chart = legend.chart;
+            var idx = legendItem.datasetIndex;
+            if (focusedIdx_2 === idx) {
+              // 이미 선택된 팀 → 전체 복귀
+              focusedIdx_2 = -1;
+              chart.data.datasets.forEach(function(ds, i) {
+                chart.setDatasetVisibility(i, true);
+              });
+            } else {
+              // 선택한 팀만 표시
+              focusedIdx_2 = idx;
+              chart.data.datasets.forEach(function(ds, i) {
+                chart.setDatasetVisibility(i, i === idx);
+              });
+            }
+            chart.update();
+          }
+        },
+        tooltip: {callbacks: {label: ctx => ctx.dataset.label + ': ' + ctx.parsed.y + '건'}, mode: 'index', intersect: false}
+      },
+      scales: {x: {stacked: true}, y: {stacked: true, beginAtZero: true, title: {display: true, text: '완료 건수'}}}
+    }
+  });
+})();
+</script>
+<h2>📈 Lead Time 월별 추이 (평균, 90일 초과 제외)</h2><p style="color:#666;font-size:12px">Lead Time = 생성일→완료일 (일)</p><div style="background:#fff;border-radius:8px;padding:20px;box-shadow:0 2px 4px rgba(0,0,0,.1);margin:20px 0"><canvas id="ltChart" height="100"></canvas></div><script>
+new Chart(document.getElementById('ltChart'), {
+  type: 'line',
+  data: {
+    labels: ['09', '10', '11', '12', '01', '02', '03', '04', '05', '06', '07', '08'],
+    datasets: [
+      {label: '전체 Tech', data: [13.7, 13.2, 14.2, 13.1, 19.1, 15.9, 11.5, 11.1, 16.1, 12.0, 12.4, 13.5], borderColor: '#0f3460', backgroundColor: 'rgba(15,52,96,0.1)', borderWidth: 3, fill: true, tension: 0.3},
+      {label: '모빌리티서비스', data: [8.8, 9.9, 9.9, 11.1, 12.3, 10.5, 11.7, 12.6, 14.6, 12.5, 11.3, 10.3], borderColor: '#e74c3c', borderWidth: 2, tension: 0.3, borderDash: [5,3]},
+      {label: '모빌리티플랫폼', data: [15.9, 14.7, 14.9, 13.6, 21.0, 18.1, 11.2, 10.3, 16.8, 11.9, 12.5, 14.7], borderColor: '#27ae60', borderWidth: 2, tension: 0.3, borderDash: [5,3]},
+      {label: '맵플랫폼', data: [13.8, 15.4, 14.3, 14.0, 21.8, 17.0, 12.8, 12.6, 15.2, 12.0, 14.9, 15.2], borderColor: '#f39c12', borderWidth: 2, tension: 0.3, borderDash: [5,3]},
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: {legend: {position: 'top'}, tooltip: {callbacks: {label: ctx => ctx.dataset.label + ': ' + ctx.parsed.y + '일'}}},
+    scales: {y: {beginAtZero: true, title: {display: true, text: 'Lead Time (일)'}, ticks: {callback: v => v + 'd'}}, x: {}}
+  }
+});
+</script>
+<h3>모빌리티서비스 - Lead Time 추이</h3><div style="background:#fff;border-radius:8px;padding:15px;box-shadow:0 2px 4px rgba(0,0,0,.1);margin:10px 0"><canvas id="ltTeam0" height="80"></canvas></div><script>
+new Chart(document.getElementById('ltTeam0'), {
+  type: 'line',
+  data: {
+    labels: ['09', '10', '11', '12', '01', '02', '03', '04', '05', '06', '07', '08'],
+    datasets: [
+      {label: '프론트엔드', data: [6.7, 5.8, 7.2, 11.4, 8.1, 9.8, 10.2, 11.6, 10.7, 9.6, 8.4, 5.6], borderColor: '#e74c3c', borderWidth: 1.5, tension: 0.3, pointRadius: 2},
+      {label: '로컬서비스', data: [8.9, 15.4, 11.9, 9.5, 14.7, 11.6, 10.4, 9.9, 11.1, 13.7, 12.5, 16.4], borderColor: '#3498db', borderWidth: 1.5, tension: 0.3, pointRadius: 2},
+      {label: 'Search', data: [10.7, 13.8, 9.5, 12.4, 14.5, 14.7, 15.2, 21.3, 13.1, 13.8, 13.5, 11.2], borderColor: '#27ae60', borderWidth: 1.5, tension: 0.3, pointRadius: 2},
+      {label: '서비스백엔드', data: [11.7, 14.9, 12.2, 11.3, 16.6, 13.3, 12.9, 21.8, 31.8, 16.8, 14.1, 14.8], borderColor: '#f39c12', borderWidth: 1.5, tension: 0.3, pointRadius: 2},
+      {label: '온디맨드모빌리티개발', data: [10.6, 5.3, 16.2, 6.6, 7.2, 8.2, 10.7, 9.9, 11.1, 13.8, 12.1, 7.2], borderColor: '#9b59b6', borderWidth: 1.5, tension: 0.3, pointRadius: 2},
+      {label: '광고개발', data: [8.8, 5.3, 5.5, 14.8, 17.1, 5.6, 17.4, 12.7, 14.8, 7.7, 9.3, 5.1], borderColor: '#1abc9c', borderWidth: 1.5, tension: 0.3, pointRadius: 2},
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: {legend: {position: 'bottom', labels: {font: {size: 10}, boxWidth: 12}}, tooltip: {callbacks: {label: ctx => ctx.dataset.label + ': ' + ctx.parsed.y + '일'}}},
+    scales: {y: {beginAtZero: true, title: {display: true, text: '일'}, ticks: {callback: v => v + 'd'}}, x: {}}
+  }
+});
+</script>
+<h3>모빌리티플랫폼 - Lead Time 추이</h3><div style="background:#fff;border-radius:8px;padding:15px;box-shadow:0 2px 4px rgba(0,0,0,.1);margin:10px 0"><canvas id="ltTeam1" height="80"></canvas></div><script>
+new Chart(document.getElementById('ltTeam1'), {
+  type: 'line',
+  data: {
+    labels: ['09', '10', '11', '12', '01', '02', '03', '04', '05', '06', '07', '08'],
+    datasets: [
+      {label: 'Client Core', data: [11.2, 18.1, 15.0, 14.3, 25.9, 19, 11.8, 11.1, 36.5, 11.9, 16.2, 29.5], borderColor: '#e74c3c', borderWidth: 1.5, tension: 0.3, pointRadius: 2},
+      {label: 'Client Service', data: [7.7, 11.2, 10.9, 8.3, 14.9, 12.4, 7.7, 7.3, 8.3, 11.3, 11.5, 9.3], borderColor: '#3498db', borderWidth: 1.5, tension: 0.3, pointRadius: 2},
+      {label: 'DevOps', data: [9.2, 8.5, 8.1, 10.2, 9.3, 6.7, 4.1, 4.4, 7.2, 4.3, 5.2, 7.1], borderColor: '#27ae60', borderWidth: 1.5, tension: 0.3, pointRadius: 2},
+      {label: '서비스플랫폼', data: [17.3, 14.6, 18.9, 22.6, 21.2, 18.3, 16.8, 24.2, 15.4, 14.8, 13.1, 16.7], borderColor: '#f39c12', borderWidth: 1.5, tension: 0.3, pointRadius: 2},
+      {label: 'RP·교통', data: [22.7, 13.0, 21.3, 12.2, 15.8, 11.8, 13.0, 9.9, 17.2, 13.0, 8.5, 6.5], borderColor: '#9b59b6', borderWidth: 1.5, tension: 0.3, pointRadius: 2},
+      {label: 'AUTO개발', data: [26.3, 23.9, 24.1, 18.4, 29.2, 33.6, 24.9, 13.0, 18.5, 17.6, 19.1, 20.7], borderColor: '#1abc9c', borderWidth: 1.5, tension: 0.3, pointRadius: 2},
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: {legend: {position: 'bottom', labels: {font: {size: 10}, boxWidth: 12}}, tooltip: {callbacks: {label: ctx => ctx.dataset.label + ': ' + ctx.parsed.y + '일'}}},
+    scales: {y: {beginAtZero: true, title: {display: true, text: '일'}, ticks: {callback: v => v + 'd'}}, x: {}}
+  }
+});
+</script>
+<h3>맵플랫폼 - Lead Time 추이</h3><div style="background:#fff;border-radius:8px;padding:15px;box-shadow:0 2px 4px rgba(0,0,0,.1);margin:10px 0"><canvas id="ltTeam2" height="80"></canvas></div><script>
+new Chart(document.getElementById('ltTeam2'), {
+  type: 'line',
+  data: {
+    labels: ['09', '10', '11', '12', '01', '02', '03', '04', '05', '06', '07', '08'],
+    datasets: [
+      {label: '맵인프라', data: [11.8, 13.1, 11.5, 13.1, 19.9, 16.0, 16.3, 11.2, 21.7, 13.7, 10.7, 12.1], borderColor: '#e74c3c', borderWidth: 1.5, tension: 0.3, pointRadius: 2},
+      {label: '맵컨텐츠', data: [20.9, 31.7, 15.3, 14.9, 18.6, 21.8, 7.7, 18.8, 12.6, 19.3, 12.2, 34.7], borderColor: '#3498db', borderWidth: 1.5, tension: 0.3, pointRadius: 2},
+      {label: '로컬인프라', data: [12.6, 10.0, 13.2, 13.4, 14.4, 16.0, 8.7, 12.7, 7.2, 8.2, 17.5, 8.1], borderColor: '#27ae60', borderWidth: 1.5, tension: 0.3, pointRadius: 2},
+      {label: '로컬컨텐츠', data: [17.7, 21.2, 46.8, 22.1, 42.4, 23.5, 9.4, 19.9, 10.9, 16, 20.8, 7.5], borderColor: '#f39c12', borderWidth: 1.5, tension: 0.3, pointRadius: 2},
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: {legend: {position: 'bottom', labels: {font: {size: 10}, boxWidth: 12}}, tooltip: {callbacks: {label: ctx => ctx.dataset.label + ': ' + ctx.parsed.y + '일'}}},
+    scales: {y: {beginAtZero: true, title: {display: true, text: '일'}, ticks: {callback: v => v + 'd'}}, x: {}}
+  }
+});
+</script>
+<h2>⏱ Lead Time 통계 (생성→완료, 전체기간)</h2><div class="warn">⚠️ Lead Time = 이슈 생성일 → 완료일. 90일 초과 이슈는 제외 (백로그 장기체류).</div><table><tr><th>팀</th><th>건수</th><th>중앙값</th><th>평균</th></tr><tr style="background:#f0f0f0;font-weight:bold"><td>전체 Tech</td><td>25,310</td><td>5.0d</td><td>13.5d</td></tr><tr><td>프론트엔드</td><td>2047</td><td>2.0d</td><td>8.6d</td></tr><tr><td>로컬서비스</td><td>2021</td><td>4.0d</td><td>12.1d</td></tr><tr><td>Search</td><td>724</td><td>7.0d</td><td>13.7d</td></tr><tr><td>서비스백엔드</td><td>734</td><td>7.0d</td><td>16.2d</td></tr><tr><td>온디맨드모빌리티개발</td><td>563</td><td>2.0d</td><td>10.5d</td></tr><tr><td>광고개발</td><td>585</td><td>1.0d</td><td>9.3d</td></tr><tr><td>Client Core</td><td>2092</td><td>9.0d</td><td>19.4d</td></tr><tr><td>Client Service</td><td>3619</td><td>4.0d</td><td>9.7d</td></tr><tr><td>DevOps</td><td>3291</td><td>2.0d</td><td>6.4d</td></tr><tr><td>서비스플랫폼</td><td>1924</td><td>8.0d</td><td>17.3d</td></tr><tr><td>RP·교통</td><td>1482</td><td>4.0d</td><td>13.2d</td></tr><tr><td>AUTO개발</td><td>3304</td><td>14.0d</td><td>21.7d</td></tr><tr><td>맵인프라</td><td>1325</td><td>6.0d</td><td>13.7d</td></tr><tr><td>맵컨텐츠</td><td>291</td><td>14.0d</td><td>22.5d</td></tr><tr><td>로컬인프라</td><td>1083</td><td>5.0d</td><td>12.1d</td></tr><tr><td>로컬컨텐츠</td><td>183</td><td>12.0d</td><td>23.5d</td></tr></table><h2 id="로컬서비스">로컬서비스 (10명) <small style="color:#666;font-size:12px">모빌리티서비스</small></h2><table><tr><th>이름</th><th>09</th><th>10</th><th>11</th><th>12</th><th>01</th><th>02</th><th>03</th><th>04</th><th>05</th><th>06</th><th>07</th><th>08</th><th>합계</th></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%B5%9C%EC%A4%80%EC%98%81/%EB%A1%9C%EC%BB%AC%EC%84%9C%EB%B9%84%EC%8A%A4%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">최준영</a></td><td>14</td><td>11</td><td>30</td><td>13</td><td>6</td><td>11</td><td>40</td><td>41</td><td>29</td><td>35</td><td>58</td><td>46</td><td><strong>334</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9D%B4%EC%9E%A5%ED%97%8C/%EB%A1%9C%EC%BB%AC%EC%84%9C%EB%B9%84%EC%8A%A4%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">이장헌</a></td><td>50</td><td>20</td><td>8</td><td>0</td><td>26</td><td>8</td><td>28</td><td>29</td><td>24</td><td>32</td><td>45</td><td>33</td><td><strong>303</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9D%B4%EC%84%A0%EC%A0%95/%EB%A1%9C%EC%BB%AC%EC%84%9C%EB%B9%84%EC%8A%A4%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">이선정</a></td><td>39</td><td>37</td><td>41</td><td>4</td><td>2</td><td>7</td><td>44</td><td>15</td><td>29</td><td>16</td><td>34</td><td>22</td><td><strong>290</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EA%B0%95%ED%95%84%EA%B7%9C/%EB%A1%9C%EC%BB%AC%EC%84%9C%EB%B9%84%EC%8A%A4%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">강필규</a></td><td>38</td><td>18</td><td>23</td><td>2</td><td>7</td><td>17</td><td>23</td><td>28</td><td>26</td><td>20</td><td>17</td><td>60</td><td><strong>279</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EA%B9%80%EC%9C%A4%EA%B1%B4/%EB%A1%9C%EC%BB%AC%EC%84%9C%EB%B9%84%EC%8A%A4%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">김윤건</a></td><td>31</td><td>13</td><td>16</td><td>21</td><td>17</td><td>18</td><td>32</td><td>40</td><td>13</td><td>21</td><td>14</td><td>10</td><td><strong>246</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9E%A5%EC%9D%B8%ED%98%81%28Inhyuk%2C%20Jang%29/%EB%A1%9C%EC%BB%AC%EC%84%9C%EB%B9%84%EC%8A%A4%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">장인혁</a></td><td>37</td><td>20</td><td>20</td><td>22</td><td>18</td><td>4</td><td>7</td><td>23</td><td>15</td><td>14</td><td>36</td><td>11</td><td><strong>227</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EA%B9%80%EC%8A%B9%EC%84%AD/%EB%A1%9C%EC%BB%AC%EC%84%9C%EB%B9%84%EC%8A%A4%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">김승섭</a></td><td>2</td><td>2</td><td>22</td><td>9</td><td>1</td><td>2</td><td>6</td><td>20</td><td>11</td><td>13</td><td>80</td><td>10</td><td><strong>178</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EB%B0%B0%EC%A7%84%EC%9A%B0/%EB%A1%9C%EC%BB%AC%EC%84%9C%EB%B9%84%EC%8A%A4%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">배진우</a></td><td>18</td><td>4</td><td>8</td><td>2</td><td>12</td><td>12</td><td>23</td><td>13</td><td>17</td><td>15</td><td>30</td><td>22</td><td><strong>176</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9D%B4%EA%B2%BD%EB%AF%BC/%EB%A1%9C%EC%BB%AC%EC%84%9C%EB%B9%84%EC%8A%A4%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">이경민</a></td><td>0</td><td>0</td><td>0</td><td>8</td><td>13</td><td>5</td><td>23</td><td>14</td><td>12</td><td>15</td><td>26</td><td>8</td><td><strong>124</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EA%B9%80%EC%8A%B9%EA%B7%9C/%EB%A1%9C%EC%BB%AC%EC%84%9C%EB%B9%84%EC%8A%A4%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">김승규</a></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>5</td><td>5</td><td>10</td><td>12</td><td>36</td><td><strong>68</strong></td></tr><tr style="font-weight:bold;background:#f5f5f5"><td>합계</td><td>229</td><td>125</td><td>168</td><td>81</td><td>102</td><td>84</td><td>226</td><td>228</td><td>181</td><td>191</td><td>352</td><td>258</td><td>2225</td></tr></table><p style="color:#888;font-size:11px;margin:4px 0 4px">이름 클릭 → 해당 인원만 표시 / 다시 클릭 → 전체 복귀</p>
+<div style="background:#fff;border-radius:8px;padding:15px;box-shadow:0 2px 4px rgba(0,0,0,.1);margin:10px 0 30px">
+<canvas id="teamIssueChart0" height="80"></canvas></div>
+<script>
+(function() {
+  var focusedIdx_ti0 = -1;
+  new Chart(document.getElementById("teamIssueChart0"), {
+    type: "bar",
+    data: {
+      labels: ['09', '10', '11', '12', '01', '02', '03', '04', '05', '06', '07', '08'],
+      datasets: [
+        {label: "최준영", data: [14, 11, 30, 13, 6, 11, 40, 41, 29, 35, 58, 46], backgroundColor: "#e74c3c", borderColor: "#e74c3c", borderWidth: 0},
+        {label: "이장헌", data: [50, 20, 8, 0, 26, 8, 28, 29, 24, 32, 45, 33], backgroundColor: "#3498db", borderColor: "#3498db", borderWidth: 0},
+        {label: "이선정", data: [39, 37, 41, 4, 2, 7, 44, 15, 29, 16, 34, 22], backgroundColor: "#27ae60", borderColor: "#27ae60", borderWidth: 0},
+        {label: "강필규", data: [38, 18, 23, 2, 7, 17, 23, 28, 26, 20, 17, 60], backgroundColor: "#f39c12", borderColor: "#f39c12", borderWidth: 0},
+        {label: "김윤건", data: [31, 13, 16, 21, 17, 18, 32, 40, 13, 21, 14, 10], backgroundColor: "#9b59b6", borderColor: "#9b59b6", borderWidth: 0},
+        {label: "장인혁", data: [37, 20, 20, 22, 18, 4, 7, 23, 15, 14, 36, 11], backgroundColor: "#1abc9c", borderColor: "#1abc9c", borderWidth: 0},
+        {label: "김승섭", data: [2, 2, 22, 9, 1, 2, 6, 20, 11, 13, 80, 10], backgroundColor: "#e67e22", borderColor: "#e67e22", borderWidth: 0},
+        {label: "배진우", data: [18, 4, 8, 2, 12, 12, 23, 13, 17, 15, 30, 22], backgroundColor: "#2c3e50", borderColor: "#2c3e50", borderWidth: 0},
+        {label: "이경민", data: [0, 0, 0, 8, 13, 5, 23, 14, 12, 15, 26, 8], backgroundColor: "#d35400", borderColor: "#d35400", borderWidth: 0},
+        {label: "김승규", data: [0, 0, 0, 0, 0, 0, 0, 5, 5, 10, 12, 36], backgroundColor: "#16a085", borderColor: "#16a085", borderWidth: 0},
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: "bottom",
+          labels: {font: {size: 10}, boxWidth: 12},
+          onClick: function(e, legendItem, legend) {
+            var chart = legend.chart;
+            var idx = legendItem.datasetIndex;
+            if (focusedIdx_ti0 === idx) {
+              focusedIdx_ti0 = -1;
+              chart.data.datasets.forEach(function(ds, i) { chart.setDatasetVisibility(i, true); });
+            } else {
+              focusedIdx_ti0 = idx;
+              chart.data.datasets.forEach(function(ds, i) { chart.setDatasetVisibility(i, i === idx); });
+            }
+            chart.update();
+          }
+        },
+        tooltip: {mode: "index", intersect: false, callbacks: {label: ctx => ctx.dataset.label + ": " + ctx.parsed.y + "건"}}
+      },
+      scales: {
+        x: {stacked: true},
+        y: {stacked: true, beginAtZero: true, title: {display: true, text: "완료 건수"}}
+      }
+    }
+  });
+})();
+</script><h2 id="프론트엔드">프론트엔드 (8명) <small style="color:#666;font-size:12px">모빌리티서비스</small></h2><table><tr><th>이름</th><th>09</th><th>10</th><th>11</th><th>12</th><th>01</th><th>02</th><th>03</th><th>04</th><th>05</th><th>06</th><th>07</th><th>08</th><th>합계</th></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EA%B9%80%ED%83%9C%EA%B2%BD/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">김태경</a></td><td>44</td><td>61</td><td>35</td><td>13</td><td>33</td><td>42</td><td>22</td><td>14</td><td>9</td><td>55</td><td>108</td><td>23</td><td><strong>459</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EB%AC%B8%ED%95%9C%EB%82%98/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">문한나</a></td><td>15</td><td>17</td><td>16</td><td>23</td><td>23</td><td>18</td><td>38</td><td>38</td><td>22</td><td>21</td><td>36</td><td>138</td><td><strong>405</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9D%B4%EB%8F%99%EA%B1%B4/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">이동건</a></td><td>31</td><td>23</td><td>32</td><td>22</td><td>20</td><td>20</td><td>25</td><td>54</td><td>14</td><td>17</td><td>26</td><td>27</td><td><strong>311</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EB%B0%95%EC%84%B1%EC%A7%84%28parksungjin%29/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">박성진</a></td><td>47</td><td>13</td><td>11</td><td>12</td><td>30</td><td>12</td><td>26</td><td>53</td><td>17</td><td>16</td><td>25</td><td>8</td><td><strong>270</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%84%9D%EA%B4%91%ED%98%B8/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">석광호</a></td><td>38</td><td>7</td><td>22</td><td>5</td><td>17</td><td>6</td><td>15</td><td>31</td><td>26</td><td>15</td><td>15</td><td>31</td><td><strong>228</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9E%A5%ED%98%9C%EC%A7%84/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">장혜진</a></td><td>15</td><td>13</td><td>12</td><td>27</td><td>12</td><td>8</td><td>17</td><td>8</td><td>19</td><td>21</td><td>32</td><td>26</td><td><strong>210</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%98%A4%ED%98%9C%EB%A6%B0/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">오혜린</a></td><td>7</td><td>4</td><td>12</td><td>25</td><td>15</td><td>9</td><td>35</td><td>20</td><td>7</td><td>11</td><td>24</td><td>15</td><td><strong>184</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9E%A5%ED%95%98%EB%8B%88/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">장하니</a></td><td>2</td><td>7</td><td>7</td><td>8</td><td>6</td><td>5</td><td>8</td><td>11</td><td>3</td><td>10</td><td>12</td><td>12</td><td><strong>91</strong></td></tr><tr style="font-weight:bold;background:#f5f5f5"><td>합계</td><td>199</td><td>145</td><td>147</td><td>135</td><td>156</td><td>120</td><td>186</td><td>229</td><td>117</td><td>166</td><td>278</td><td>280</td><td>2158</td></tr></table><p style="color:#888;font-size:11px;margin:4px 0 4px">이름 클릭 → 해당 인원만 표시 / 다시 클릭 → 전체 복귀</p>
+<div style="background:#fff;border-radius:8px;padding:15px;box-shadow:0 2px 4px rgba(0,0,0,.1);margin:10px 0 30px">
+<canvas id="teamIssueChart1" height="80"></canvas></div>
+<script>
+(function() {
+  var focusedIdx_ti1 = -1;
+  new Chart(document.getElementById("teamIssueChart1"), {
+    type: "bar",
+    data: {
+      labels: ['09', '10', '11', '12', '01', '02', '03', '04', '05', '06', '07', '08'],
+      datasets: [
+        {label: "김태경", data: [44, 61, 35, 13, 33, 42, 22, 14, 9, 55, 108, 23], backgroundColor: "#e74c3c", borderColor: "#e74c3c", borderWidth: 0},
+        {label: "문한나", data: [15, 17, 16, 23, 23, 18, 38, 38, 22, 21, 36, 138], backgroundColor: "#3498db", borderColor: "#3498db", borderWidth: 0},
+        {label: "이동건", data: [31, 23, 32, 22, 20, 20, 25, 54, 14, 17, 26, 27], backgroundColor: "#27ae60", borderColor: "#27ae60", borderWidth: 0},
+        {label: "박성진", data: [47, 13, 11, 12, 30, 12, 26, 53, 17, 16, 25, 8], backgroundColor: "#f39c12", borderColor: "#f39c12", borderWidth: 0},
+        {label: "석광호", data: [38, 7, 22, 5, 17, 6, 15, 31, 26, 15, 15, 31], backgroundColor: "#9b59b6", borderColor: "#9b59b6", borderWidth: 0},
+        {label: "장혜진", data: [15, 13, 12, 27, 12, 8, 17, 8, 19, 21, 32, 26], backgroundColor: "#1abc9c", borderColor: "#1abc9c", borderWidth: 0},
+        {label: "오혜린", data: [7, 4, 12, 25, 15, 9, 35, 20, 7, 11, 24, 15], backgroundColor: "#e67e22", borderColor: "#e67e22", borderWidth: 0},
+        {label: "장하니", data: [2, 7, 7, 8, 6, 5, 8, 11, 3, 10, 12, 12], backgroundColor: "#2c3e50", borderColor: "#2c3e50", borderWidth: 0},
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: "bottom",
+          labels: {font: {size: 10}, boxWidth: 12},
+          onClick: function(e, legendItem, legend) {
+            var chart = legend.chart;
+            var idx = legendItem.datasetIndex;
+            if (focusedIdx_ti1 === idx) {
+              focusedIdx_ti1 = -1;
+              chart.data.datasets.forEach(function(ds, i) { chart.setDatasetVisibility(i, true); });
+            } else {
+              focusedIdx_ti1 = idx;
+              chart.data.datasets.forEach(function(ds, i) { chart.setDatasetVisibility(i, i === idx); });
+            }
+            chart.update();
+          }
+        },
+        tooltip: {mode: "index", intersect: false, callbacks: {label: ctx => ctx.dataset.label + ": " + ctx.parsed.y + "건"}}
+      },
+      scales: {
+        x: {stacked: true},
+        y: {stacked: true, beginAtZero: true, title: {display: true, text: "완료 건수"}}
+      }
+    }
+  });
+})();
+</script><h2 id="서비스백엔드">서비스백엔드 (5명) <small style="color:#666;font-size:12px">모빌리티서비스</small></h2><table><tr><th>이름</th><th>09</th><th>10</th><th>11</th><th>12</th><th>01</th><th>02</th><th>03</th><th>04</th><th>05</th><th>06</th><th>07</th><th>08</th><th>합계</th></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%8B%AC%EC%84%B1%EC%9B%90/%EC%84%9C%EB%B9%84%EC%8A%A4%EB%B0%B1%EC%97%94%EB%93%9C%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">심성원</a></td><td>33</td><td>11</td><td>12</td><td>10</td><td>15</td><td>24</td><td>20</td><td>16</td><td>26</td><td>19</td><td>26</td><td>18</td><td><strong>230</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%ED%99%8D%EC%9D%B8%EC%84%9D/%EC%84%9C%EB%B9%84%EC%8A%A4%EB%B0%B1%EC%97%94%EB%93%9C%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">홍인석</a></td><td>16</td><td>17</td><td>8</td><td>15</td><td>21</td><td>28</td><td>19</td><td>13</td><td>3</td><td>27</td><td>23</td><td>33</td><td><strong>223</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%A7%80%EB%AA%85%EC%A3%BC/%EC%84%9C%EB%B9%84%EC%8A%A4%EB%B0%B1%EC%97%94%EB%93%9C%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">지명주</a></td><td>9</td><td>11</td><td>7</td><td>8</td><td>11</td><td>6</td><td>15</td><td>10</td><td>21</td><td>21</td><td>17</td><td>26</td><td><strong>162</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EB%AF%BC%EB%8F%99%ED%98%84/%EC%84%9C%EB%B9%84%EC%8A%A4%EB%B0%B1%EC%97%94%EB%93%9C%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">민동현</a></td><td>14</td><td>8</td><td>12</td><td>16</td><td>12</td><td>5</td><td>18</td><td>8</td><td>12</td><td>20</td><td>17</td><td>18</td><td><strong>160</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EA%B9%80%EA%B8%B0%ED%98%84/%EC%84%9C%EB%B9%84%EC%8A%A4%EB%B0%B1%EC%97%94%EB%93%9C%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">김기현</a></td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>9</td><td>1</td><td>10</td><td>14</td><td>10</td><td>7</td><td><strong>52</strong></td></tr><tr style="font-weight:bold;background:#f5f5f5"><td>합계</td><td>72</td><td>47</td><td>39</td><td>49</td><td>60</td><td>63</td><td>81</td><td>48</td><td>72</td><td>101</td><td>93</td><td>102</td><td>827</td></tr></table><p style="color:#888;font-size:11px;margin:4px 0 4px">이름 클릭 → 해당 인원만 표시 / 다시 클릭 → 전체 복귀</p>
+<div style="background:#fff;border-radius:8px;padding:15px;box-shadow:0 2px 4px rgba(0,0,0,.1);margin:10px 0 30px">
+<canvas id="teamIssueChart2" height="80"></canvas></div>
+<script>
+(function() {
+  var focusedIdx_ti2 = -1;
+  new Chart(document.getElementById("teamIssueChart2"), {
+    type: "bar",
+    data: {
+      labels: ['09', '10', '11', '12', '01', '02', '03', '04', '05', '06', '07', '08'],
+      datasets: [
+        {label: "심성원", data: [33, 11, 12, 10, 15, 24, 20, 16, 26, 19, 26, 18], backgroundColor: "#e74c3c", borderColor: "#e74c3c", borderWidth: 0},
+        {label: "홍인석", data: [16, 17, 8, 15, 21, 28, 19, 13, 3, 27, 23, 33], backgroundColor: "#3498db", borderColor: "#3498db", borderWidth: 0},
+        {label: "지명주", data: [9, 11, 7, 8, 11, 6, 15, 10, 21, 21, 17, 26], backgroundColor: "#27ae60", borderColor: "#27ae60", borderWidth: 0},
+        {label: "민동현", data: [14, 8, 12, 16, 12, 5, 18, 8, 12, 20, 17, 18], backgroundColor: "#f39c12", borderColor: "#f39c12", borderWidth: 0},
+        {label: "김기현", data: [0, 0, 0, 0, 1, 0, 9, 1, 10, 14, 10, 7], backgroundColor: "#9b59b6", borderColor: "#9b59b6", borderWidth: 0},
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: "bottom",
+          labels: {font: {size: 10}, boxWidth: 12},
+          onClick: function(e, legendItem, legend) {
+            var chart = legend.chart;
+            var idx = legendItem.datasetIndex;
+            if (focusedIdx_ti2 === idx) {
+              focusedIdx_ti2 = -1;
+              chart.data.datasets.forEach(function(ds, i) { chart.setDatasetVisibility(i, true); });
+            } else {
+              focusedIdx_ti2 = idx;
+              chart.data.datasets.forEach(function(ds, i) { chart.setDatasetVisibility(i, i === idx); });
+            }
+            chart.update();
+          }
+        },
+        tooltip: {mode: "index", intersect: false, callbacks: {label: ctx => ctx.dataset.label + ": " + ctx.parsed.y + "건"}}
+      },
+      scales: {
+        x: {stacked: true},
+        y: {stacked: true, beginAtZero: true, title: {display: true, text: "완료 건수"}}
+      }
+    }
+  });
+})();
+</script><h2 id="Search">Search (7명) <small style="color:#666;font-size:12px">모빌리티서비스</small></h2><table><tr><th>이름</th><th>09</th><th>10</th><th>11</th><th>12</th><th>01</th><th>02</th><th>03</th><th>04</th><th>05</th><th>06</th><th>07</th><th>08</th><th>합계</th></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EA%B9%80%EC%A7%80%EC%9B%85/Search%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">김지웅</a></td><td>0</td><td>0</td><td>0</td><td>0</td><td>2</td><td>12</td><td>5</td><td>21</td><td>18</td><td>27</td><td>24</td><td>39</td><td><strong>148</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9D%B4%EB%8C%80%ED%9D%AC/Search%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">이대희</a></td><td>17</td><td>12</td><td>24</td><td>30</td><td>15</td><td>25</td><td>17</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td><strong>141</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9D%B4%EB%AA%85%ED%9C%98/Search%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">이명휘</a></td><td>0</td><td>0</td><td>4</td><td>14</td><td>9</td><td>12</td><td>19</td><td>13</td><td>10</td><td>18</td><td>22</td><td>17</td><td><strong>138</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EA%B9%80%EC%9A%A9%EC%9A%B0/Search%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">김용우</a></td><td>11</td><td>12</td><td>4</td><td>7</td><td>7</td><td>7</td><td>19</td><td>15</td><td>4</td><td>14</td><td>0</td><td>13</td><td><strong>113</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EA%B9%80%EC%A7%80%EC%9C%A4/Search%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">김지윤</a></td><td>13</td><td>9</td><td>3</td><td>1</td><td>1</td><td>6</td><td>12</td><td>8</td><td>13</td><td>15</td><td>15</td><td>4</td><td><strong>100</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EA%B3%A0%EC%86%8C%ED%9D%AC%28Go%20Sohee%29/Search%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">고소희</a></td><td>8</td><td>3</td><td>13</td><td>2</td><td>5</td><td>0</td><td>7</td><td>6</td><td>10</td><td>1</td><td>13</td><td>23</td><td><strong>91</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%96%91%EC%A7%80%ED%9B%88/Search%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">양지훈</a></td><td>2</td><td>22</td><td>10</td><td>0</td><td>0</td><td>0</td><td>5</td><td>0</td><td>1</td><td>1</td><td>3</td><td>1</td><td><strong>45</strong></td></tr><tr style="font-weight:bold;background:#f5f5f5"><td>합계</td><td>51</td><td>58</td><td>58</td><td>54</td><td>39</td><td>62</td><td>84</td><td>64</td><td>56</td><td>76</td><td>77</td><td>97</td><td>776</td></tr></table><p style="color:#888;font-size:11px;margin:4px 0 4px">이름 클릭 → 해당 인원만 표시 / 다시 클릭 → 전체 복귀</p>
+<div style="background:#fff;border-radius:8px;padding:15px;box-shadow:0 2px 4px rgba(0,0,0,.1);margin:10px 0 30px">
+<canvas id="teamIssueChart3" height="80"></canvas></div>
+<script>
+(function() {
+  var focusedIdx_ti3 = -1;
+  new Chart(document.getElementById("teamIssueChart3"), {
+    type: "bar",
+    data: {
+      labels: ['09', '10', '11', '12', '01', '02', '03', '04', '05', '06', '07', '08'],
+      datasets: [
+        {label: "김지웅", data: [0, 0, 0, 0, 2, 12, 5, 21, 18, 27, 24, 39], backgroundColor: "#e74c3c", borderColor: "#e74c3c", borderWidth: 0},
+        {label: "이대희", data: [17, 12, 24, 30, 15, 25, 17, 1, 0, 0, 0, 0], backgroundColor: "#3498db", borderColor: "#3498db", borderWidth: 0},
+        {label: "이명휘", data: [0, 0, 4, 14, 9, 12, 19, 13, 10, 18, 22, 17], backgroundColor: "#27ae60", borderColor: "#27ae60", borderWidth: 0},
+        {label: "김용우", data: [11, 12, 4, 7, 7, 7, 19, 15, 4, 14, 0, 13], backgroundColor: "#f39c12", borderColor: "#f39c12", borderWidth: 0},
+        {label: "김지윤", data: [13, 9, 3, 1, 1, 6, 12, 8, 13, 15, 15, 4], backgroundColor: "#9b59b6", borderColor: "#9b59b6", borderWidth: 0},
+        {label: "고소희", data: [8, 3, 13, 2, 5, 0, 7, 6, 10, 1, 13, 23], backgroundColor: "#1abc9c", borderColor: "#1abc9c", borderWidth: 0},
+        {label: "양지훈", data: [2, 22, 10, 0, 0, 0, 5, 0, 1, 1, 3, 1], backgroundColor: "#e67e22", borderColor: "#e67e22", borderWidth: 0},
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: "bottom",
+          labels: {font: {size: 10}, boxWidth: 12},
+          onClick: function(e, legendItem, legend) {
+            var chart = legend.chart;
+            var idx = legendItem.datasetIndex;
+            if (focusedIdx_ti3 === idx) {
+              focusedIdx_ti3 = -1;
+              chart.data.datasets.forEach(function(ds, i) { chart.setDatasetVisibility(i, true); });
+            } else {
+              focusedIdx_ti3 = idx;
+              chart.data.datasets.forEach(function(ds, i) { chart.setDatasetVisibility(i, i === idx); });
+            }
+            chart.update();
+          }
+        },
+        tooltip: {mode: "index", intersect: false, callbacks: {label: ctx => ctx.dataset.label + ": " + ctx.parsed.y + "건"}}
+      },
+      scales: {
+        x: {stacked: true},
+        y: {stacked: true, beginAtZero: true, title: {display: true, text: "완료 건수"}}
+      }
+    }
+  });
+})();
+</script><h2 id="광고개발">광고개발 (3명) <small style="color:#666;font-size:12px">모빌리티서비스</small></h2><table><tr><th>이름</th><th>09</th><th>10</th><th>11</th><th>12</th><th>01</th><th>02</th><th>03</th><th>04</th><th>05</th><th>06</th><th>07</th><th>08</th><th>합계</th></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9D%B4%ED%98%84%EC%A3%BC%28Hyunjoo%20Lee%29/%EA%B4%91%EA%B3%A0%EA%B0%9C%EB%B0%9C%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">이현주</a></td><td>28</td><td>44</td><td>15</td><td>6</td><td>40</td><td>40</td><td>20</td><td>29</td><td>19</td><td>47</td><td>54</td><td>27</td><td><strong>369</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%ED%99%8D%EC%8A%B9%ED%9D%AC/%EA%B4%91%EA%B3%A0%EA%B0%9C%EB%B0%9C%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">홍승희</a></td><td>15</td><td>21</td><td>13</td><td>9</td><td>13</td><td>17</td><td>10</td><td>14</td><td>9</td><td>20</td><td>10</td><td>19</td><td><strong>170</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9E%84%EC%8A%AC%EA%B8%B0%28Seulki%20Lim%20%29/%EA%B4%91%EA%B3%A0%EA%B0%9C%EB%B0%9C%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">임슬기</a></td><td>5</td><td>20</td><td>10</td><td>1</td><td>11</td><td>17</td><td>5</td><td>4</td><td>3</td><td>4</td><td>16</td><td>11</td><td><strong>107</strong></td></tr><tr style="font-weight:bold;background:#f5f5f5"><td>합계</td><td>48</td><td>85</td><td>38</td><td>16</td><td>64</td><td>74</td><td>35</td><td>47</td><td>31</td><td>71</td><td>80</td><td>57</td><td>646</td></tr></table><p style="color:#888;font-size:11px;margin:4px 0 4px">이름 클릭 → 해당 인원만 표시 / 다시 클릭 → 전체 복귀</p>
+<div style="background:#fff;border-radius:8px;padding:15px;box-shadow:0 2px 4px rgba(0,0,0,.1);margin:10px 0 30px">
+<canvas id="teamIssueChart4" height="80"></canvas></div>
+<script>
+(function() {
+  var focusedIdx_ti4 = -1;
+  new Chart(document.getElementById("teamIssueChart4"), {
+    type: "bar",
+    data: {
+      labels: ['09', '10', '11', '12', '01', '02', '03', '04', '05', '06', '07', '08'],
+      datasets: [
+        {label: "이현주", data: [28, 44, 15, 6, 40, 40, 20, 29, 19, 47, 54, 27], backgroundColor: "#e74c3c", borderColor: "#e74c3c", borderWidth: 0},
+        {label: "홍승희", data: [15, 21, 13, 9, 13, 17, 10, 14, 9, 20, 10, 19], backgroundColor: "#3498db", borderColor: "#3498db", borderWidth: 0},
+        {label: "임슬기", data: [5, 20, 10, 1, 11, 17, 5, 4, 3, 4, 16, 11], backgroundColor: "#27ae60", borderColor: "#27ae60", borderWidth: 0},
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: "bottom",
+          labels: {font: {size: 10}, boxWidth: 12},
+          onClick: function(e, legendItem, legend) {
+            var chart = legend.chart;
+            var idx = legendItem.datasetIndex;
+            if (focusedIdx_ti4 === idx) {
+              focusedIdx_ti4 = -1;
+              chart.data.datasets.forEach(function(ds, i) { chart.setDatasetVisibility(i, true); });
+            } else {
+              focusedIdx_ti4 = idx;
+              chart.data.datasets.forEach(function(ds, i) { chart.setDatasetVisibility(i, i === idx); });
+            }
+            chart.update();
+          }
+        },
+        tooltip: {mode: "index", intersect: false, callbacks: {label: ctx => ctx.dataset.label + ": " + ctx.parsed.y + "건"}}
+      },
+      scales: {
+        x: {stacked: true},
+        y: {stacked: true, beginAtZero: true, title: {display: true, text: "완료 건수"}}
+      }
+    }
+  });
+})();
+</script><h2 id="온디맨드모빌리티개발">온디맨드모빌리티개발 (4명) <small style="color:#666;font-size:12px">모빌리티서비스</small></h2><table><tr><th>이름</th><th>09</th><th>10</th><th>11</th><th>12</th><th>01</th><th>02</th><th>03</th><th>04</th><th>05</th><th>06</th><th>07</th><th>08</th><th>합계</th></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9D%B4%EC%B0%BD%EA%B7%BC/%EC%98%A8%EB%94%94%EB%A7%A8%EB%93%9C%EB%AA%A8%EB%B9%8C%EB%A6%AC%ED%8B%B0%EA%B0%9C%EB%B0%9C%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">이창근</a></td><td>22</td><td>15</td><td>19</td><td>15</td><td>14</td><td>8</td><td>20</td><td>22</td><td>13</td><td>16</td><td>24</td><td>21</td><td><strong>209</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%ED%99%A9%ED%95%98%EA%B7%BC/%EC%98%A8%EB%94%94%EB%A7%A8%EB%93%9C%EB%AA%A8%EB%B9%8C%EB%A6%AC%ED%8B%B0%EA%B0%9C%EB%B0%9C%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">황하근</a></td><td>8</td><td>11</td><td>11</td><td>3</td><td>10</td><td>1</td><td>5</td><td>21</td><td>16</td><td>24</td><td>56</td><td>28</td><td><strong>194</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9D%B4%EC%9D%80%EC%B2%A0/%EC%98%A8%EB%94%94%EB%A7%A8%EB%93%9C%EB%AA%A8%EB%B9%8C%EB%A6%AC%ED%8B%B0%EA%B0%9C%EB%B0%9C%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">이은철</a></td><td>0</td><td>0</td><td>1</td><td>2</td><td>19</td><td>14</td><td>15</td><td>10</td><td>7</td><td>16</td><td>25</td><td>16</td><td><strong>125</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%B5%9C%EC%9D%B8%EC%84%9D/%EC%98%A8%EB%94%94%EB%A7%A8%EB%93%9C%EB%AA%A8%EB%B9%8C%EB%A6%AC%ED%8B%B0%EA%B0%9C%EB%B0%9C%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">최인석</a></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>7</td><td>12</td><td>5</td><td>25</td><td>11</td><td>4</td><td><strong>64</strong></td></tr><tr style="font-weight:bold;background:#f5f5f5"><td>합계</td><td>30</td><td>26</td><td>31</td><td>20</td><td>43</td><td>23</td><td>47</td><td>65</td><td>41</td><td>81</td><td>116</td><td>69</td><td>592</td></tr></table><p style="color:#888;font-size:11px;margin:4px 0 4px">이름 클릭 → 해당 인원만 표시 / 다시 클릭 → 전체 복귀</p>
+<div style="background:#fff;border-radius:8px;padding:15px;box-shadow:0 2px 4px rgba(0,0,0,.1);margin:10px 0 30px">
+<canvas id="teamIssueChart5" height="80"></canvas></div>
+<script>
+(function() {
+  var focusedIdx_ti5 = -1;
+  new Chart(document.getElementById("teamIssueChart5"), {
+    type: "bar",
+    data: {
+      labels: ['09', '10', '11', '12', '01', '02', '03', '04', '05', '06', '07', '08'],
+      datasets: [
+        {label: "이창근", data: [22, 15, 19, 15, 14, 8, 20, 22, 13, 16, 24, 21], backgroundColor: "#e74c3c", borderColor: "#e74c3c", borderWidth: 0},
+        {label: "황하근", data: [8, 11, 11, 3, 10, 1, 5, 21, 16, 24, 56, 28], backgroundColor: "#3498db", borderColor: "#3498db", borderWidth: 0},
+        {label: "이은철", data: [0, 0, 1, 2, 19, 14, 15, 10, 7, 16, 25, 16], backgroundColor: "#27ae60", borderColor: "#27ae60", borderWidth: 0},
+        {label: "최인석", data: [0, 0, 0, 0, 0, 0, 7, 12, 5, 25, 11, 4], backgroundColor: "#f39c12", borderColor: "#f39c12", borderWidth: 0},
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: "bottom",
+          labels: {font: {size: 10}, boxWidth: 12},
+          onClick: function(e, legendItem, legend) {
+            var chart = legend.chart;
+            var idx = legendItem.datasetIndex;
+            if (focusedIdx_ti5 === idx) {
+              focusedIdx_ti5 = -1;
+              chart.data.datasets.forEach(function(ds, i) { chart.setDatasetVisibility(i, true); });
+            } else {
+              focusedIdx_ti5 = idx;
+              chart.data.datasets.forEach(function(ds, i) { chart.setDatasetVisibility(i, i === idx); });
+            }
+            chart.update();
+          }
+        },
+        tooltip: {mode: "index", intersect: false, callbacks: {label: ctx => ctx.dataset.label + ": " + ctx.parsed.y + "건"}}
+      },
+      scales: {
+        x: {stacked: true},
+        y: {stacked: true, beginAtZero: true, title: {display: true, text: "완료 건수"}}
+      }
+    }
+  });
+})();
+</script><h2 id="AUTO개발">AUTO개발 (13명) <small style="color:#666;font-size:12px">모빌리티플랫폼</small></h2><table><tr><th>이름</th><th>09</th><th>10</th><th>11</th><th>12</th><th>01</th><th>02</th><th>03</th><th>04</th><th>05</th><th>06</th><th>07</th><th>08</th><th>합계</th></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EB%B0%95%EA%B8%B0%EC%84%B1%28Giseong%20Bak%29/AUTO%20%EA%B0%9C%EB%B0%9C%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">박기성</a></td><td>75</td><td>17</td><td>107</td><td>5</td><td>135</td><td>128</td><td>78</td><td>90</td><td>94</td><td>63</td><td>89</td><td>66</td><td><strong>947</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EA%B9%80%EC%9E%AC%EC%9B%90/AUTO%EA%B0%9C%EB%B0%9C%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">김재원</a></td><td>15</td><td>44</td><td>34</td><td>23</td><td>54</td><td>30</td><td>115</td><td>297</td><td>50</td><td>24</td><td>66</td><td>73</td><td><strong>825</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9D%B4%EC%8A%B9%EC%A0%9C%28Seungje%20Lee%29/AUTO%EA%B0%9C%EB%B0%9C%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">이승제</a></td><td>75</td><td>40</td><td>29</td><td>33</td><td>42</td><td>25</td><td>25</td><td>47</td><td>57</td><td>30</td><td>58</td><td>60</td><td><strong>521</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%A0%95%EC%9C%A0%EB%A6%AC/AUTO%EA%B0%9C%EB%B0%9C%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">정유리</a></td><td>41</td><td>24</td><td>20</td><td>12</td><td>16</td><td>15</td><td>29</td><td>31</td><td>37</td><td>29</td><td>70</td><td>76</td><td><strong>400</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9D%B4%EB%B3%91%EA%B8%B8/AUTO%EA%B0%9C%EB%B0%9C%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">이병길</a></td><td>0</td><td>0</td><td>0</td><td>9</td><td>54</td><td>16</td><td>36</td><td>25</td><td>27</td><td>131</td><td>26</td><td>23</td><td><strong>347</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9D%B4%EC%8A%B9%EC%A4%80/AUTO%EA%B0%9C%EB%B0%9C%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">이승준</a></td><td>35</td><td>17</td><td>26</td><td>22</td><td>30</td><td>13</td><td>29</td><td>14</td><td>14</td><td>33</td><td>52</td><td>47</td><td><strong>332</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%A1%B0%EC%B6%A9%ED%9A%8C/AUTO%EA%B0%9C%EB%B0%9C%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">조충회</a></td><td>32</td><td>15</td><td>24</td><td>22</td><td>55</td><td>10</td><td>24</td><td>23</td><td>14</td><td>14</td><td>15</td><td>14</td><td><strong>262</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%ED%99%8D%ED%9D%AC%EC%A0%95/AUTO%EA%B0%9C%EB%B0%9C%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">홍희정</a></td><td>2</td><td>6</td><td>9</td><td>5</td><td>28</td><td>37</td><td>14</td><td>9</td><td>3</td><td>5</td><td>5</td><td>8</td><td><strong>131</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EA%B9%80%EC%9D%98%EC%A7%84%28Eui%20Jin%20Kim%29/AUTO%EA%B0%9C%EB%B0%9C%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">김의진</a></td><td>7</td><td>8</td><td>4</td><td>17</td><td>15</td><td>9</td><td>9</td><td>7</td><td>12</td><td>11</td><td>23</td><td>8</td><td><strong>130</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9C%A4%EC%84%B1%EB%AF%BC%28Sungmin.Yoon%29/AUTO%EA%B0%9C%EB%B0%9C%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">윤성민</a></td><td>17</td><td>21</td><td>8</td><td>15</td><td>14</td><td>17</td><td>1</td><td>4</td><td>3</td><td>2</td><td>1</td><td>1</td><td><strong>104</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9E%A5%EC%B0%BD%ED%9B%88%28elijah%29/AUTO%EA%B0%9C%EB%B0%9C%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">장창훈</a></td><td>6</td><td>6</td><td>7</td><td>8</td><td>3</td><td>0</td><td>7</td><td>2</td><td>4</td><td>9</td><td>14</td><td>14</td><td><strong>80</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9D%B4%ED%9A%A8%EC%9C%A4/AUTO%EA%B0%9C%EB%B0%9C%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">이효윤</a></td><td>2</td><td>1</td><td>2</td><td>2</td><td>6</td><td>2</td><td>1</td><td>5</td><td>0</td><td>5</td><td>1</td><td>7</td><td><strong>34</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EA%B6%8C%EC%A7%84%ED%9D%AC%28jinhee.kwon%29/AUTO%EA%B0%9C%EB%B0%9C%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">권진희</a></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>2</td><td><strong>2</strong></td></tr><tr style="font-weight:bold;background:#f5f5f5"><td>합계</td><td>307</td><td>199</td><td>270</td><td>173</td><td>452</td><td>302</td><td>368</td><td>554</td><td>315</td><td>356</td><td>420</td><td>399</td><td>4115</td></tr></table><p style="color:#888;font-size:11px;margin:4px 0 4px">이름 클릭 → 해당 인원만 표시 / 다시 클릭 → 전체 복귀</p>
+<div style="background:#fff;border-radius:8px;padding:15px;box-shadow:0 2px 4px rgba(0,0,0,.1);margin:10px 0 30px">
+<canvas id="teamIssueChart6" height="80"></canvas></div>
+<script>
+(function() {
+  var focusedIdx_ti6 = -1;
+  new Chart(document.getElementById("teamIssueChart6"), {
+    type: "bar",
+    data: {
+      labels: ['09', '10', '11', '12', '01', '02', '03', '04', '05', '06', '07', '08'],
+      datasets: [
+        {label: "박기성", data: [75, 17, 107, 5, 135, 128, 78, 90, 94, 63, 89, 66], backgroundColor: "#e74c3c", borderColor: "#e74c3c", borderWidth: 0},
+        {label: "김재원", data: [15, 44, 34, 23, 54, 30, 115, 297, 50, 24, 66, 73], backgroundColor: "#3498db", borderColor: "#3498db", borderWidth: 0},
+        {label: "이승제", data: [75, 40, 29, 33, 42, 25, 25, 47, 57, 30, 58, 60], backgroundColor: "#27ae60", borderColor: "#27ae60", borderWidth: 0},
+        {label: "정유리", data: [41, 24, 20, 12, 16, 15, 29, 31, 37, 29, 70, 76], backgroundColor: "#f39c12", borderColor: "#f39c12", borderWidth: 0},
+        {label: "이병길", data: [0, 0, 0, 9, 54, 16, 36, 25, 27, 131, 26, 23], backgroundColor: "#9b59b6", borderColor: "#9b59b6", borderWidth: 0},
+        {label: "이승준", data: [35, 17, 26, 22, 30, 13, 29, 14, 14, 33, 52, 47], backgroundColor: "#1abc9c", borderColor: "#1abc9c", borderWidth: 0},
+        {label: "조충회", data: [32, 15, 24, 22, 55, 10, 24, 23, 14, 14, 15, 14], backgroundColor: "#e67e22", borderColor: "#e67e22", borderWidth: 0},
+        {label: "홍희정", data: [2, 6, 9, 5, 28, 37, 14, 9, 3, 5, 5, 8], backgroundColor: "#2c3e50", borderColor: "#2c3e50", borderWidth: 0},
+        {label: "김의진", data: [7, 8, 4, 17, 15, 9, 9, 7, 12, 11, 23, 8], backgroundColor: "#d35400", borderColor: "#d35400", borderWidth: 0},
+        {label: "윤성민", data: [17, 21, 8, 15, 14, 17, 1, 4, 3, 2, 1, 1], backgroundColor: "#16a085", borderColor: "#16a085", borderWidth: 0},
+        {label: "장창훈", data: [6, 6, 7, 8, 3, 0, 7, 2, 4, 9, 14, 14], backgroundColor: "#8e44ad", borderColor: "#8e44ad", borderWidth: 0},
+        {label: "이효윤", data: [2, 1, 2, 2, 6, 2, 1, 5, 0, 5, 1, 7], backgroundColor: "#c0392b", borderColor: "#c0392b", borderWidth: 0},
+        {label: "권진희", data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2], backgroundColor: "#2980b9", borderColor: "#2980b9", borderWidth: 0},
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: "bottom",
+          labels: {font: {size: 10}, boxWidth: 12},
+          onClick: function(e, legendItem, legend) {
+            var chart = legend.chart;
+            var idx = legendItem.datasetIndex;
+            if (focusedIdx_ti6 === idx) {
+              focusedIdx_ti6 = -1;
+              chart.data.datasets.forEach(function(ds, i) { chart.setDatasetVisibility(i, true); });
+            } else {
+              focusedIdx_ti6 = idx;
+              chart.data.datasets.forEach(function(ds, i) { chart.setDatasetVisibility(i, i === idx); });
+            }
+            chart.update();
+          }
+        },
+        tooltip: {mode: "index", intersect: false, callbacks: {label: ctx => ctx.dataset.label + ": " + ctx.parsed.y + "건"}}
+      },
+      scales: {
+        x: {stacked: true},
+        y: {stacked: true, beginAtZero: true, title: {display: true, text: "완료 건수"}}
+      }
+    }
+  });
+})();
+</script><h2 id="Client Service">Client Service (10명) <small style="color:#666;font-size:12px">모빌리티플랫폼</small></h2><table><tr><th>이름</th><th>09</th><th>10</th><th>11</th><th>12</th><th>01</th><th>02</th><th>03</th><th>04</th><th>05</th><th>06</th><th>07</th><th>08</th><th>합계</th></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EA%B9%80%EA%B2%BD%EB%AF%BC/Client%20Service%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">김경민</a></td><td>66</td><td>54</td><td>53</td><td>67</td><td>69</td><td>21</td><td>99</td><td>42</td><td>47</td><td>72</td><td>59</td><td>60</td><td><strong>709</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EA%B9%80%EC%8A%AC%EB%B9%84/Client%20Service%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">김슬비</a></td><td>4</td><td>30</td><td>36</td><td>44</td><td>13</td><td>15</td><td>79</td><td>30</td><td>33</td><td>70</td><td>45</td><td>44</td><td><strong>443</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EB%B0%A9%ED%98%84%EC%84%9C/Client%20Service%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">방현서</a></td><td>13</td><td>21</td><td>31</td><td>19</td><td>15</td><td>25</td><td>84</td><td>53</td><td>39</td><td>42</td><td>51</td><td>36</td><td><strong>429</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%ED%99%8D%EC%B0%BD%EB%B2%94/Client%20Service%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">홍창범</a></td><td>0</td><td>0</td><td>0</td><td>11</td><td>37</td><td>8</td><td>63</td><td>73</td><td>49</td><td>42</td><td>88</td><td>52</td><td><strong>423</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EA%B9%80%EB%8F%84%ED%98%95/Client%20Service%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">김도형</a></td><td>3</td><td>19</td><td>73</td><td>32</td><td>39</td><td>7</td><td>47</td><td>36</td><td>36</td><td>26</td><td>66</td><td>34</td><td><strong>418</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9C%A0%EB%AF%BC%EC%84%A0/Client%20Service%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">유민선</a></td><td>5</td><td>17</td><td>41</td><td>23</td><td>29</td><td>10</td><td>68</td><td>26</td><td>38</td><td>50</td><td>52</td><td>50</td><td><strong>409</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%97%84%EB%AF%BC%EC%84%9D/Client%20Service%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">엄민석</a></td><td>7</td><td>14</td><td>24</td><td>42</td><td>33</td><td>6</td><td>49</td><td>51</td><td>25</td><td>32</td><td>35</td><td>27</td><td><strong>345</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9D%B4%EC%A3%BC%ED%97%8C/Client%20Service%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">이주헌</a></td><td>0</td><td>0</td><td>0</td><td>0</td><td>12</td><td>46</td><td>89</td><td>69</td><td>41</td><td>9</td><td>22</td><td>27</td><td><strong>315</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9D%B4%EA%B7%9C%EC%84%9D/Client%20Service%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">이규석</a></td><td>20</td><td>12</td><td>11</td><td>5</td><td>15</td><td>2</td><td>47</td><td>27</td><td>24</td><td>19</td><td>31</td><td>30</td><td><strong>243</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%B5%9C%EC%A7%80%EC%97%B0%28Choi%20Ji%20Yeon%29/Client%20Service%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">최지연</a></td><td>4</td><td>8</td><td>7</td><td>7</td><td>12</td><td>18</td><td>18</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td><strong>75</strong></td></tr><tr style="font-weight:bold;background:#f5f5f5"><td>합계</td><td>122</td><td>175</td><td>276</td><td>250</td><td>274</td><td>158</td><td>643</td><td>408</td><td>332</td><td>362</td><td>449</td><td>360</td><td>3809</td></tr></table><p style="color:#888;font-size:11px;margin:4px 0 4px">이름 클릭 → 해당 인원만 표시 / 다시 클릭 → 전체 복귀</p>
+<div style="background:#fff;border-radius:8px;padding:15px;box-shadow:0 2px 4px rgba(0,0,0,.1);margin:10px 0 30px">
+<canvas id="teamIssueChart7" height="80"></canvas></div>
+<script>
+(function() {
+  var focusedIdx_ti7 = -1;
+  new Chart(document.getElementById("teamIssueChart7"), {
+    type: "bar",
+    data: {
+      labels: ['09', '10', '11', '12', '01', '02', '03', '04', '05', '06', '07', '08'],
+      datasets: [
+        {label: "김경민", data: [66, 54, 53, 67, 69, 21, 99, 42, 47, 72, 59, 60], backgroundColor: "#e74c3c", borderColor: "#e74c3c", borderWidth: 0},
+        {label: "김슬비", data: [4, 30, 36, 44, 13, 15, 79, 30, 33, 70, 45, 44], backgroundColor: "#3498db", borderColor: "#3498db", borderWidth: 0},
+        {label: "방현서", data: [13, 21, 31, 19, 15, 25, 84, 53, 39, 42, 51, 36], backgroundColor: "#27ae60", borderColor: "#27ae60", borderWidth: 0},
+        {label: "홍창범", data: [0, 0, 0, 11, 37, 8, 63, 73, 49, 42, 88, 52], backgroundColor: "#f39c12", borderColor: "#f39c12", borderWidth: 0},
+        {label: "김도형", data: [3, 19, 73, 32, 39, 7, 47, 36, 36, 26, 66, 34], backgroundColor: "#9b59b6", borderColor: "#9b59b6", borderWidth: 0},
+        {label: "유민선", data: [5, 17, 41, 23, 29, 10, 68, 26, 38, 50, 52, 50], backgroundColor: "#1abc9c", borderColor: "#1abc9c", borderWidth: 0},
+        {label: "엄민석", data: [7, 14, 24, 42, 33, 6, 49, 51, 25, 32, 35, 27], backgroundColor: "#e67e22", borderColor: "#e67e22", borderWidth: 0},
+        {label: "이주헌", data: [0, 0, 0, 0, 12, 46, 89, 69, 41, 9, 22, 27], backgroundColor: "#2c3e50", borderColor: "#2c3e50", borderWidth: 0},
+        {label: "이규석", data: [20, 12, 11, 5, 15, 2, 47, 27, 24, 19, 31, 30], backgroundColor: "#d35400", borderColor: "#d35400", borderWidth: 0},
+        {label: "최지연", data: [4, 8, 7, 7, 12, 18, 18, 1, 0, 0, 0, 0], backgroundColor: "#16a085", borderColor: "#16a085", borderWidth: 0},
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: "bottom",
+          labels: {font: {size: 10}, boxWidth: 12},
+          onClick: function(e, legendItem, legend) {
+            var chart = legend.chart;
+            var idx = legendItem.datasetIndex;
+            if (focusedIdx_ti7 === idx) {
+              focusedIdx_ti7 = -1;
+              chart.data.datasets.forEach(function(ds, i) { chart.setDatasetVisibility(i, true); });
+            } else {
+              focusedIdx_ti7 = idx;
+              chart.data.datasets.forEach(function(ds, i) { chart.setDatasetVisibility(i, i === idx); });
+            }
+            chart.update();
+          }
+        },
+        tooltip: {mode: "index", intersect: false, callbacks: {label: ctx => ctx.dataset.label + ": " + ctx.parsed.y + "건"}}
+      },
+      scales: {
+        x: {stacked: true},
+        y: {stacked: true, beginAtZero: true, title: {display: true, text: "완료 건수"}}
+      }
+    }
+  });
+})();
+</script><h2 id="DevOps">DevOps (8명) <small style="color:#666;font-size:12px">모빌리티플랫폼</small></h2><table><tr><th>이름</th><th>09</th><th>10</th><th>11</th><th>12</th><th>01</th><th>02</th><th>03</th><th>04</th><th>05</th><th>06</th><th>07</th><th>08</th><th>합계</th></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%98%A4%ED%83%9C%EA%B2%BD/DevOps%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">오태경</a></td><td>19</td><td>27</td><td>44</td><td>39</td><td>39</td><td>46</td><td>116</td><td>164</td><td>60</td><td>62</td><td>62</td><td>34</td><td><strong>712</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9D%B4%ED%83%9C%EC%9A%B0/DevOps%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">이태우</a></td><td>61</td><td>35</td><td>56</td><td>42</td><td>46</td><td>38</td><td>50</td><td>69</td><td>47</td><td>41</td><td>45</td><td>43</td><td><strong>573</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%96%91%EC%8B%9C%EC%9A%A9/DevOps%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">양시용</a></td><td>40</td><td>22</td><td>43</td><td>21</td><td>30</td><td>53</td><td>80</td><td>32</td><td>35</td><td>53</td><td>63</td><td>44</td><td><strong>516</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%A1%B0%ED%98%84%EC%98%81/DevOps%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">조현영</a></td><td>35</td><td>11</td><td>11</td><td>20</td><td>31</td><td>43</td><td>107</td><td>85</td><td>48</td><td>51</td><td>35</td><td>30</td><td><strong>507</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9D%B4%EB%B2%94%ED%99%95/DevOps%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">이범확</a></td><td>12</td><td>12</td><td>36</td><td>18</td><td>7</td><td>14</td><td>33</td><td>65</td><td>36</td><td>41</td><td>33</td><td>37</td><td><strong>344</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%B1%84%EC%9D%80%EC%84%B1/DevOps%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">채은성</a></td><td>34</td><td>13</td><td>7</td><td>24</td><td>11</td><td>33</td><td>30</td><td>21</td><td>13</td><td>95</td><td>25</td><td>24</td><td><strong>330</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EA%B6%8C%EC%83%81%ED%9B%88/DevOps%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">권상훈</a></td><td>35</td><td>12</td><td>16</td><td>14</td><td>34</td><td>17</td><td>35</td><td>26</td><td>16</td><td>21</td><td>36</td><td>12</td><td><strong>274</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%B2%9C%EB%8F%99%EB%AF%BC/DevOps%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">천동민</a></td><td>45</td><td>16</td><td>26</td><td>13</td><td>11</td><td>14</td><td>1</td><td>1</td><td>0</td><td>0</td><td>1</td><td>7</td><td><strong>135</strong></td></tr><tr style="font-weight:bold;background:#f5f5f5"><td>합계</td><td>281</td><td>148</td><td>239</td><td>191</td><td>209</td><td>258</td><td>452</td><td>463</td><td>255</td><td>364</td><td>300</td><td>231</td><td>3391</td></tr></table><p style="color:#888;font-size:11px;margin:4px 0 4px">이름 클릭 → 해당 인원만 표시 / 다시 클릭 → 전체 복귀</p>
+<div style="background:#fff;border-radius:8px;padding:15px;box-shadow:0 2px 4px rgba(0,0,0,.1);margin:10px 0 30px">
+<canvas id="teamIssueChart8" height="80"></canvas></div>
+<script>
+(function() {
+  var focusedIdx_ti8 = -1;
+  new Chart(document.getElementById("teamIssueChart8"), {
+    type: "bar",
+    data: {
+      labels: ['09', '10', '11', '12', '01', '02', '03', '04', '05', '06', '07', '08'],
+      datasets: [
+        {label: "오태경", data: [19, 27, 44, 39, 39, 46, 116, 164, 60, 62, 62, 34], backgroundColor: "#e74c3c", borderColor: "#e74c3c", borderWidth: 0},
+        {label: "이태우", data: [61, 35, 56, 42, 46, 38, 50, 69, 47, 41, 45, 43], backgroundColor: "#3498db", borderColor: "#3498db", borderWidth: 0},
+        {label: "양시용", data: [40, 22, 43, 21, 30, 53, 80, 32, 35, 53, 63, 44], backgroundColor: "#27ae60", borderColor: "#27ae60", borderWidth: 0},
+        {label: "조현영", data: [35, 11, 11, 20, 31, 43, 107, 85, 48, 51, 35, 30], backgroundColor: "#f39c12", borderColor: "#f39c12", borderWidth: 0},
+        {label: "이범확", data: [12, 12, 36, 18, 7, 14, 33, 65, 36, 41, 33, 37], backgroundColor: "#9b59b6", borderColor: "#9b59b6", borderWidth: 0},
+        {label: "채은성", data: [34, 13, 7, 24, 11, 33, 30, 21, 13, 95, 25, 24], backgroundColor: "#1abc9c", borderColor: "#1abc9c", borderWidth: 0},
+        {label: "권상훈", data: [35, 12, 16, 14, 34, 17, 35, 26, 16, 21, 36, 12], backgroundColor: "#e67e22", borderColor: "#e67e22", borderWidth: 0},
+        {label: "천동민", data: [45, 16, 26, 13, 11, 14, 1, 1, 0, 0, 1, 7], backgroundColor: "#2c3e50", borderColor: "#2c3e50", borderWidth: 0},
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: "bottom",
+          labels: {font: {size: 10}, boxWidth: 12},
+          onClick: function(e, legendItem, legend) {
+            var chart = legend.chart;
+            var idx = legendItem.datasetIndex;
+            if (focusedIdx_ti8 === idx) {
+              focusedIdx_ti8 = -1;
+              chart.data.datasets.forEach(function(ds, i) { chart.setDatasetVisibility(i, true); });
+            } else {
+              focusedIdx_ti8 = idx;
+              chart.data.datasets.forEach(function(ds, i) { chart.setDatasetVisibility(i, i === idx); });
+            }
+            chart.update();
+          }
+        },
+        tooltip: {mode: "index", intersect: false, callbacks: {label: ctx => ctx.dataset.label + ": " + ctx.parsed.y + "건"}}
+      },
+      scales: {
+        x: {stacked: true},
+        y: {stacked: true, beginAtZero: true, title: {display: true, text: "완료 건수"}}
+      }
+    }
+  });
+})();
+</script><h2 id="Client Core">Client Core (8명) <small style="color:#666;font-size:12px">모빌리티플랫폼</small></h2><table><tr><th>이름</th><th>09</th><th>10</th><th>11</th><th>12</th><th>01</th><th>02</th><th>03</th><th>04</th><th>05</th><th>06</th><th>07</th><th>08</th><th>합계</th></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EA%B9%80%EC%A2%85%EC%9D%BC/Client%20Core%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">김종일</a></td><td>77</td><td>32</td><td>58</td><td>35</td><td>75</td><td>17</td><td>54</td><td>37</td><td>32</td><td>72</td><td>33</td><td>149</td><td><strong>671</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9D%B4%ED%9D%AC%EC%9A%A9/Client%20Core%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">이희용</a></td><td>0</td><td>0</td><td>0</td><td>3</td><td>1</td><td>7</td><td>25</td><td>16</td><td>144</td><td>25</td><td>82</td><td>247</td><td><strong>550</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%ED%99%8D%EC%A7%84%EC%B2%A0/Client%20Core%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">홍진철</a></td><td>40</td><td>20</td><td>29</td><td>75</td><td>78</td><td>23</td><td>34</td><td>5</td><td>19</td><td>27</td><td>74</td><td>24</td><td><strong>448</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9C%A4%EC%84%B1%ED%98%84/Client%20Core%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">윤성현</a></td><td>19</td><td>41</td><td>39</td><td>52</td><td>63</td><td>17</td><td>30</td><td>44</td><td>21</td><td>8</td><td>7</td><td>11</td><td><strong>352</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9D%B4%EC%83%81%EC%9B%85/Client%20Core%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">이상웅</a></td><td>13</td><td>19</td><td>28</td><td>35</td><td>37</td><td>27</td><td>19</td><td>28</td><td>9</td><td>5</td><td>24</td><td>16</td><td><strong>260</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%B5%9C%ED%98%84%EC%84%9D/Client%20Core%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">최현석</a></td><td>6</td><td>14</td><td>16</td><td>17</td><td>20</td><td>11</td><td>15</td><td>11</td><td>15</td><td>29</td><td>22</td><td>12</td><td><strong>188</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EA%B9%80%EC%98%81%EC%88%98/Client%20Core%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">김영수</a></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>9</td><td>9</td><td>21</td><td>14</td><td>21</td><td>8</td><td>9</td><td><strong>91</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%A0%95%EC%8B%9C%EC%9B%90/Client%20Core%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">정시원</a></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>3</td><td>2</td><td>5</td><td>6</td><td>3</td><td>14</td><td><strong>33</strong></td></tr><tr style="font-weight:bold;background:#f5f5f5"><td>합계</td><td>155</td><td>126</td><td>170</td><td>217</td><td>274</td><td>111</td><td>189</td><td>164</td><td>259</td><td>193</td><td>253</td><td>482</td><td>2593</td></tr></table><p style="color:#888;font-size:11px;margin:4px 0 4px">이름 클릭 → 해당 인원만 표시 / 다시 클릭 → 전체 복귀</p>
+<div style="background:#fff;border-radius:8px;padding:15px;box-shadow:0 2px 4px rgba(0,0,0,.1);margin:10px 0 30px">
+<canvas id="teamIssueChart9" height="80"></canvas></div>
+<script>
+(function() {
+  var focusedIdx_ti9 = -1;
+  new Chart(document.getElementById("teamIssueChart9"), {
+    type: "bar",
+    data: {
+      labels: ['09', '10', '11', '12', '01', '02', '03', '04', '05', '06', '07', '08'],
+      datasets: [
+        {label: "김종일", data: [77, 32, 58, 35, 75, 17, 54, 37, 32, 72, 33, 149], backgroundColor: "#e74c3c", borderColor: "#e74c3c", borderWidth: 0},
+        {label: "이희용", data: [0, 0, 0, 3, 1, 7, 25, 16, 144, 25, 82, 247], backgroundColor: "#3498db", borderColor: "#3498db", borderWidth: 0},
+        {label: "홍진철", data: [40, 20, 29, 75, 78, 23, 34, 5, 19, 27, 74, 24], backgroundColor: "#27ae60", borderColor: "#27ae60", borderWidth: 0},
+        {label: "윤성현", data: [19, 41, 39, 52, 63, 17, 30, 44, 21, 8, 7, 11], backgroundColor: "#f39c12", borderColor: "#f39c12", borderWidth: 0},
+        {label: "이상웅", data: [13, 19, 28, 35, 37, 27, 19, 28, 9, 5, 24, 16], backgroundColor: "#9b59b6", borderColor: "#9b59b6", borderWidth: 0},
+        {label: "최현석", data: [6, 14, 16, 17, 20, 11, 15, 11, 15, 29, 22, 12], backgroundColor: "#1abc9c", borderColor: "#1abc9c", borderWidth: 0},
+        {label: "김영수", data: [0, 0, 0, 0, 0, 9, 9, 21, 14, 21, 8, 9], backgroundColor: "#e67e22", borderColor: "#e67e22", borderWidth: 0},
+        {label: "정시원", data: [0, 0, 0, 0, 0, 0, 3, 2, 5, 6, 3, 14], backgroundColor: "#2c3e50", borderColor: "#2c3e50", borderWidth: 0},
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: "bottom",
+          labels: {font: {size: 10}, boxWidth: 12},
+          onClick: function(e, legendItem, legend) {
+            var chart = legend.chart;
+            var idx = legendItem.datasetIndex;
+            if (focusedIdx_ti9 === idx) {
+              focusedIdx_ti9 = -1;
+              chart.data.datasets.forEach(function(ds, i) { chart.setDatasetVisibility(i, true); });
+            } else {
+              focusedIdx_ti9 = idx;
+              chart.data.datasets.forEach(function(ds, i) { chart.setDatasetVisibility(i, i === idx); });
+            }
+            chart.update();
+          }
+        },
+        tooltip: {mode: "index", intersect: false, callbacks: {label: ctx => ctx.dataset.label + ": " + ctx.parsed.y + "건"}}
+      },
+      scales: {
+        x: {stacked: true},
+        y: {stacked: true, beginAtZero: true, title: {display: true, text: "완료 건수"}}
+      }
+    }
+  });
+})();
+</script><h2 id="서비스플랫폼">서비스플랫폼 (9명) <small style="color:#666;font-size:12px">모빌리티플랫폼</small></h2><table><tr><th>이름</th><th>09</th><th>10</th><th>11</th><th>12</th><th>01</th><th>02</th><th>03</th><th>04</th><th>05</th><th>06</th><th>07</th><th>08</th><th>합계</th></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9D%B4%EC%9E%AC%ED%95%9C/%EC%84%9C%EB%B9%84%EC%8A%A4%ED%94%8C%EB%9E%AB%ED%8F%BC%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">이재한</a></td><td>49</td><td>40</td><td>59</td><td>28</td><td>22</td><td>7</td><td>21</td><td>37</td><td>36</td><td>48</td><td>60</td><td>66</td><td><strong>473</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9D%B4%EC%9C%A4%ED%98%B8/%EC%84%9C%EB%B9%84%EC%8A%A4%ED%94%8C%EB%9E%AB%ED%8F%BC%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">이윤호</a></td><td>15</td><td>8</td><td>24</td><td>23</td><td>42</td><td>5</td><td>16</td><td>14</td><td>18</td><td>102</td><td>37</td><td>55</td><td><strong>359</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%8B%AC%EC%A7%80%ED%98%84/%EC%84%9C%EB%B9%84%EC%8A%A4%ED%94%8C%EB%9E%AB%ED%8F%BC%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">심지현</a></td><td>17</td><td>14</td><td>27</td><td>11</td><td>44</td><td>9</td><td>26</td><td>27</td><td>25</td><td>33</td><td>25</td><td>18</td><td><strong>276</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9D%B4%EB%AF%BC%EC%98%81/%EC%84%9C%EB%B9%84%EC%8A%A4%ED%94%8C%EB%9E%AB%ED%8F%BC%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">이민영</a></td><td>19</td><td>17</td><td>12</td><td>27</td><td>16</td><td>5</td><td>12</td><td>34</td><td>18</td><td>52</td><td>18</td><td>29</td><td><strong>259</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%B5%9C%EC%84%B1%ED%99%98/%EC%84%9C%EB%B9%84%EC%8A%A4%ED%94%8C%EB%9E%AB%ED%8F%BC%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">최성환</a></td><td>18</td><td>22</td><td>9</td><td>11</td><td>19</td><td>5</td><td>9</td><td>17</td><td>28</td><td>16</td><td>42</td><td>16</td><td><strong>212</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%ED%97%88%EA%B0%80%EA%B2%BD/%EC%84%9C%EB%B9%84%EC%8A%A4%ED%94%8C%EB%9E%AB%ED%8F%BC%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">허가경</a></td><td>10</td><td>5</td><td>3</td><td>18</td><td>20</td><td>10</td><td>23</td><td>9</td><td>14</td><td>36</td><td>27</td><td>9</td><td><strong>184</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9D%B4%EC%A4%91%EA%B7%BC/%EC%84%9C%EB%B9%84%EC%8A%A4%ED%94%8C%EB%9E%AB%ED%8F%BC%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">이중근</a></td><td>0</td><td>2</td><td>0</td><td>16</td><td>2</td><td>12</td><td>22</td><td>25</td><td>13</td><td>36</td><td>34</td><td>21</td><td><strong>183</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EA%B9%80%EC%9D%80%ED%98%9C/%EC%84%9C%EB%B9%84%EC%8A%A4%ED%94%8C%EB%9E%AB%ED%8F%BC%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">김은혜</a></td><td>15</td><td>7</td><td>5</td><td>4</td><td>7</td><td>1</td><td>13</td><td>19</td><td>9</td><td>21</td><td>30</td><td>17</td><td><strong>148</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9D%B4%EC%A0%95%EC%A3%BC/%EC%84%9C%EB%B9%84%EC%8A%A4%ED%94%8C%EB%9E%AB%ED%8F%BC%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">이정주</a></td><td>16</td><td>6</td><td>7</td><td>12</td><td>9</td><td>2</td><td>23</td><td>10</td><td>6</td><td>25</td><td>11</td><td>4</td><td><strong>131</strong></td></tr><tr style="font-weight:bold;background:#f5f5f5"><td>합계</td><td>159</td><td>121</td><td>146</td><td>150</td><td>181</td><td>56</td><td>165</td><td>192</td><td>167</td><td>369</td><td>284</td><td>235</td><td>2225</td></tr></table><p style="color:#888;font-size:11px;margin:4px 0 4px">이름 클릭 → 해당 인원만 표시 / 다시 클릭 → 전체 복귀</p>
+<div style="background:#fff;border-radius:8px;padding:15px;box-shadow:0 2px 4px rgba(0,0,0,.1);margin:10px 0 30px">
+<canvas id="teamIssueChart10" height="80"></canvas></div>
+<script>
+(function() {
+  var focusedIdx_ti10 = -1;
+  new Chart(document.getElementById("teamIssueChart10"), {
+    type: "bar",
+    data: {
+      labels: ['09', '10', '11', '12', '01', '02', '03', '04', '05', '06', '07', '08'],
+      datasets: [
+        {label: "이재한", data: [49, 40, 59, 28, 22, 7, 21, 37, 36, 48, 60, 66], backgroundColor: "#e74c3c", borderColor: "#e74c3c", borderWidth: 0},
+        {label: "이윤호", data: [15, 8, 24, 23, 42, 5, 16, 14, 18, 102, 37, 55], backgroundColor: "#3498db", borderColor: "#3498db", borderWidth: 0},
+        {label: "심지현", data: [17, 14, 27, 11, 44, 9, 26, 27, 25, 33, 25, 18], backgroundColor: "#27ae60", borderColor: "#27ae60", borderWidth: 0},
+        {label: "이민영", data: [19, 17, 12, 27, 16, 5, 12, 34, 18, 52, 18, 29], backgroundColor: "#f39c12", borderColor: "#f39c12", borderWidth: 0},
+        {label: "최성환", data: [18, 22, 9, 11, 19, 5, 9, 17, 28, 16, 42, 16], backgroundColor: "#9b59b6", borderColor: "#9b59b6", borderWidth: 0},
+        {label: "허가경", data: [10, 5, 3, 18, 20, 10, 23, 9, 14, 36, 27, 9], backgroundColor: "#1abc9c", borderColor: "#1abc9c", borderWidth: 0},
+        {label: "이중근", data: [0, 2, 0, 16, 2, 12, 22, 25, 13, 36, 34, 21], backgroundColor: "#e67e22", borderColor: "#e67e22", borderWidth: 0},
+        {label: "김은혜", data: [15, 7, 5, 4, 7, 1, 13, 19, 9, 21, 30, 17], backgroundColor: "#2c3e50", borderColor: "#2c3e50", borderWidth: 0},
+        {label: "이정주", data: [16, 6, 7, 12, 9, 2, 23, 10, 6, 25, 11, 4], backgroundColor: "#d35400", borderColor: "#d35400", borderWidth: 0},
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: "bottom",
+          labels: {font: {size: 10}, boxWidth: 12},
+          onClick: function(e, legendItem, legend) {
+            var chart = legend.chart;
+            var idx = legendItem.datasetIndex;
+            if (focusedIdx_ti10 === idx) {
+              focusedIdx_ti10 = -1;
+              chart.data.datasets.forEach(function(ds, i) { chart.setDatasetVisibility(i, true); });
+            } else {
+              focusedIdx_ti10 = idx;
+              chart.data.datasets.forEach(function(ds, i) { chart.setDatasetVisibility(i, i === idx); });
+            }
+            chart.update();
+          }
+        },
+        tooltip: {mode: "index", intersect: false, callbacks: {label: ctx => ctx.dataset.label + ": " + ctx.parsed.y + "건"}}
+      },
+      scales: {
+        x: {stacked: true},
+        y: {stacked: true, beginAtZero: true, title: {display: true, text: "완료 건수"}}
+      }
+    }
+  });
+})();
+</script><h2 id="RP·교통">RP·교통 (9명) <small style="color:#666;font-size:12px">모빌리티플랫폼</small></h2><table><tr><th>이름</th><th>09</th><th>10</th><th>11</th><th>12</th><th>01</th><th>02</th><th>03</th><th>04</th><th>05</th><th>06</th><th>07</th><th>08</th><th>합계</th></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%ED%97%88%EA%B8%B0%EC%B2%A0/RP%C2%B7%EA%B5%90%ED%86%B5%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">허기철</a></td><td>41</td><td>46</td><td>92</td><td>12</td><td>23</td><td>16</td><td>15</td><td>24</td><td>18</td><td>33</td><td>35</td><td>27</td><td><strong>382</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EB%B0%95%EC%84%B1%EC%9A%A9/RP%C2%B7%EA%B5%90%ED%86%B5%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">박성용</a></td><td>1</td><td>2</td><td>13</td><td>5</td><td>7</td><td>27</td><td>19</td><td>31</td><td>6</td><td>22</td><td>107</td><td>90</td><td><strong>330</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%ED%99%A9%EC%9E%AC%EC%97%B0/RP%C2%B7%EA%B5%90%ED%86%B5%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">황재연</a></td><td>10</td><td>11</td><td>10</td><td>18</td><td>11</td><td>19</td><td>30</td><td>35</td><td>25</td><td>36</td><td>27</td><td>37</td><td><strong>269</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EA%B0%95%ED%98%95%EA%B5%AC/RP%C2%B7%EA%B5%90%ED%86%B5%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">강형구</a></td><td>10</td><td>12</td><td>10</td><td>18</td><td>14</td><td>3</td><td>15</td><td>16</td><td>19</td><td>26</td><td>18</td><td>24</td><td><strong>185</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EA%B9%80%EC%A2%85%EC%A3%BC/RP%C2%B7%EA%B5%90%ED%86%B5%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">김종주</a></td><td>20</td><td>0</td><td>14</td><td>9</td><td>14</td><td>9</td><td>17</td><td>19</td><td>13</td><td>20</td><td>36</td><td>4</td><td><strong>175</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%ED%97%88%EC%9B%90%EC%B2%A0/RP%C2%B7%EA%B5%90%ED%86%B5%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">허원철</a></td><td>30</td><td>8</td><td>25</td><td>8</td><td>15</td><td>6</td><td>11</td><td>15</td><td>11</td><td>17</td><td>4</td><td>13</td><td><strong>163</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%B5%9C%EB%B3%91%EA%B8%B0/RP%C2%B7%EA%B5%90%ED%86%B5%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">최병기</a></td><td>11</td><td>9</td><td>15</td><td>5</td><td>5</td><td>2</td><td>3</td><td>3</td><td>6</td><td>12</td><td>5</td><td>3</td><td><strong>79</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%A1%B0%ED%98%95%EC%9A%B1/RP%C2%B7%EA%B5%90%ED%86%B5%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">조형욱</a></td><td>40</td><td>12</td><td>12</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td><strong>65</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EA%B9%80%EC%97%B0%EB%AF%BC/RP%C2%B7%EA%B5%90%ED%86%B5%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">김연민</a></td><td>0</td><td>3</td><td>0</td><td>0</td><td>2</td><td>1</td><td>1</td><td>0</td><td>0</td><td>1</td><td>3</td><td>1</td><td><strong>12</strong></td></tr><tr style="font-weight:bold;background:#f5f5f5"><td>합계</td><td>163</td><td>103</td><td>191</td><td>75</td><td>91</td><td>83</td><td>111</td><td>143</td><td>98</td><td>168</td><td>235</td><td>199</td><td>1660</td></tr></table><p style="color:#888;font-size:11px;margin:4px 0 4px">이름 클릭 → 해당 인원만 표시 / 다시 클릭 → 전체 복귀</p>
+<div style="background:#fff;border-radius:8px;padding:15px;box-shadow:0 2px 4px rgba(0,0,0,.1);margin:10px 0 30px">
+<canvas id="teamIssueChart11" height="80"></canvas></div>
+<script>
+(function() {
+  var focusedIdx_ti11 = -1;
+  new Chart(document.getElementById("teamIssueChart11"), {
+    type: "bar",
+    data: {
+      labels: ['09', '10', '11', '12', '01', '02', '03', '04', '05', '06', '07', '08'],
+      datasets: [
+        {label: "허기철", data: [41, 46, 92, 12, 23, 16, 15, 24, 18, 33, 35, 27], backgroundColor: "#e74c3c", borderColor: "#e74c3c", borderWidth: 0},
+        {label: "박성용", data: [1, 2, 13, 5, 7, 27, 19, 31, 6, 22, 107, 90], backgroundColor: "#3498db", borderColor: "#3498db", borderWidth: 0},
+        {label: "황재연", data: [10, 11, 10, 18, 11, 19, 30, 35, 25, 36, 27, 37], backgroundColor: "#27ae60", borderColor: "#27ae60", borderWidth: 0},
+        {label: "강형구", data: [10, 12, 10, 18, 14, 3, 15, 16, 19, 26, 18, 24], backgroundColor: "#f39c12", borderColor: "#f39c12", borderWidth: 0},
+        {label: "김종주", data: [20, 0, 14, 9, 14, 9, 17, 19, 13, 20, 36, 4], backgroundColor: "#9b59b6", borderColor: "#9b59b6", borderWidth: 0},
+        {label: "허원철", data: [30, 8, 25, 8, 15, 6, 11, 15, 11, 17, 4, 13], backgroundColor: "#1abc9c", borderColor: "#1abc9c", borderWidth: 0},
+        {label: "최병기", data: [11, 9, 15, 5, 5, 2, 3, 3, 6, 12, 5, 3], backgroundColor: "#e67e22", borderColor: "#e67e22", borderWidth: 0},
+        {label: "조형욱", data: [40, 12, 12, 0, 0, 0, 0, 0, 0, 1, 0, 0], backgroundColor: "#2c3e50", borderColor: "#2c3e50", borderWidth: 0},
+        {label: "김연민", data: [0, 3, 0, 0, 2, 1, 1, 0, 0, 1, 3, 1], backgroundColor: "#d35400", borderColor: "#d35400", borderWidth: 0},
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: "bottom",
+          labels: {font: {size: 10}, boxWidth: 12},
+          onClick: function(e, legendItem, legend) {
+            var chart = legend.chart;
+            var idx = legendItem.datasetIndex;
+            if (focusedIdx_ti11 === idx) {
+              focusedIdx_ti11 = -1;
+              chart.data.datasets.forEach(function(ds, i) { chart.setDatasetVisibility(i, true); });
+            } else {
+              focusedIdx_ti11 = idx;
+              chart.data.datasets.forEach(function(ds, i) { chart.setDatasetVisibility(i, i === idx); });
+            }
+            chart.update();
+          }
+        },
+        tooltip: {mode: "index", intersect: false, callbacks: {label: ctx => ctx.dataset.label + ": " + ctx.parsed.y + "건"}}
+      },
+      scales: {
+        x: {stacked: true},
+        y: {stacked: true, beginAtZero: true, title: {display: true, text: "완료 건수"}}
+      }
+    }
+  });
+})();
+</script><h2 id="맵인프라">맵인프라 (14명) <small style="color:#666;font-size:12px">맵플랫폼</small></h2><table><tr><th>이름</th><th>09</th><th>10</th><th>11</th><th>12</th><th>01</th><th>02</th><th>03</th><th>04</th><th>05</th><th>06</th><th>07</th><th>08</th><th>합계</th></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9D%B4%EC%B1%84%EA%B2%BD%28chaegyeongYi%29/%EB%A7%B5%EC%9D%B8%ED%94%84%EB%9D%BC%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">이채경</a></td><td>16</td><td>13</td><td>9</td><td>19</td><td>2</td><td>4</td><td>13</td><td>17</td><td>8</td><td>15</td><td>12</td><td>30</td><td><strong>158</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EA%B9%80%ED%98%84%EC%A4%80/%EB%A7%B5%EC%9D%B8%ED%94%84%EB%9D%BC%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">김현준</a></td><td>14</td><td>9</td><td>5</td><td>11</td><td>4</td><td>8</td><td>29</td><td>19</td><td>2</td><td>17</td><td>11</td><td>27</td><td><strong>156</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%ED%95%9C%EC%9D%B8%EA%B7%9C/%EB%A7%B5%EC%9D%B8%ED%94%84%EB%9D%BC%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">한인규</a></td><td>8</td><td>12</td><td>12</td><td>9</td><td>13</td><td>7</td><td>14</td><td>8</td><td>7</td><td>10</td><td>14</td><td>40</td><td><strong>154</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EA%B9%80%EC%98%81%EB%B3%B5/%EB%A7%B5%EC%9D%B8%ED%94%84%EB%9D%BC%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">김영복</a></td><td>11</td><td>11</td><td>22</td><td>11</td><td>5</td><td>4</td><td>19</td><td>16</td><td>11</td><td>11</td><td>18</td><td>13</td><td><strong>152</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EB%B0%95%ED%83%9C%ED%98%84/%EB%A7%B5%EC%9D%B8%ED%94%84%EB%9D%BC%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">박태현</a></td><td>8</td><td>3</td><td>3</td><td>13</td><td>14</td><td>3</td><td>13</td><td>10</td><td>14</td><td>21</td><td>33</td><td>16</td><td><strong>151</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9D%B4%EA%B1%B4%EC%98%81/%EB%A7%B5%EC%9D%B8%ED%94%84%EB%9D%BC%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">이건영</a></td><td>7</td><td>3</td><td>8</td><td>17</td><td>15</td><td>10</td><td>17</td><td>24</td><td>14</td><td>12</td><td>12</td><td>8</td><td><strong>147</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9E%A5%EC%98%81%EC%97%B0/%EB%A7%B5%EC%9D%B8%ED%94%84%EB%9D%BC%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">장영연</a></td><td>12</td><td>5</td><td>10</td><td>9</td><td>11</td><td>5</td><td>10</td><td>4</td><td>17</td><td>18</td><td>12</td><td>27</td><td><strong>140</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EA%B9%80%ED%9D%AC%EC%B2%A0/%EB%A7%B5%EC%9D%B8%ED%94%84%EB%9D%BC%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">김희철</a></td><td>11</td><td>8</td><td>8</td><td>7</td><td>3</td><td>5</td><td>11</td><td>15</td><td>7</td><td>12</td><td>19</td><td>27</td><td><strong>133</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EA%B9%80%EC%98%88%EB%A6%AC/%EB%A7%B5%EC%9D%B8%ED%94%84%EB%9D%BC%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">김예리</a></td><td>8</td><td>7</td><td>13</td><td>4</td><td>7</td><td>4</td><td>9</td><td>5</td><td>7</td><td>19</td><td>7</td><td>17</td><td><strong>107</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EA%B0%95%EA%B2%BD%EC%88%9C/%EB%A7%B5%EC%9D%B8%ED%94%84%EB%9D%BC%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">강경순</a></td><td>4</td><td>5</td><td>5</td><td>3</td><td>1</td><td>0</td><td>1</td><td>3</td><td>1</td><td>1</td><td>1</td><td>15</td><td><strong>40</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EB%B0%95%EC%A3%BC%ED%9D%AC/%EB%A7%B5%EC%9D%B8%ED%94%84%EB%9D%BC%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">박주희</a></td><td>2</td><td>2</td><td>1</td><td>0</td><td>6</td><td>1</td><td>1</td><td>2</td><td>2</td><td>2</td><td>3</td><td>18</td><td><strong>40</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9D%B4%EC%A3%BC%ED%98%84/%EB%A7%B5%EC%9D%B8%ED%94%84%EB%9D%BC%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">이주현</a></td><td>0</td><td>0</td><td>3</td><td>0</td><td>3</td><td>3</td><td>2</td><td>2</td><td>2</td><td>1</td><td>3</td><td>16</td><td><strong>35</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%A0%95%EC%9E%AC%EB%AF%BC/%EB%A7%B5%EC%9D%B8%ED%94%84%EB%9D%BC%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">정재민</a></td><td>3</td><td>0</td><td>0</td><td>2</td><td>4</td><td>1</td><td>2</td><td>4</td><td>1</td><td>2</td><td>1</td><td>14</td><td><strong>34</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9D%B4%EC%98%88%EC%A7%84/Search%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">이예진</a></td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td><strong>5</strong></td></tr><tr style="font-weight:bold;background:#f5f5f5"><td>합계</td><td>104</td><td>79</td><td>99</td><td>105</td><td>89</td><td>55</td><td>142</td><td>129</td><td>94</td><td>141</td><td>146</td><td>269</td><td>1452</td></tr></table><p style="color:#888;font-size:11px;margin:4px 0 4px">이름 클릭 → 해당 인원만 표시 / 다시 클릭 → 전체 복귀</p>
+<div style="background:#fff;border-radius:8px;padding:15px;box-shadow:0 2px 4px rgba(0,0,0,.1);margin:10px 0 30px">
+<canvas id="teamIssueChart12" height="80"></canvas></div>
+<script>
+(function() {
+  var focusedIdx_ti12 = -1;
+  new Chart(document.getElementById("teamIssueChart12"), {
+    type: "bar",
+    data: {
+      labels: ['09', '10', '11', '12', '01', '02', '03', '04', '05', '06', '07', '08'],
+      datasets: [
+        {label: "이채경", data: [16, 13, 9, 19, 2, 4, 13, 17, 8, 15, 12, 30], backgroundColor: "#e74c3c", borderColor: "#e74c3c", borderWidth: 0},
+        {label: "김현준", data: [14, 9, 5, 11, 4, 8, 29, 19, 2, 17, 11, 27], backgroundColor: "#3498db", borderColor: "#3498db", borderWidth: 0},
+        {label: "한인규", data: [8, 12, 12, 9, 13, 7, 14, 8, 7, 10, 14, 40], backgroundColor: "#27ae60", borderColor: "#27ae60", borderWidth: 0},
+        {label: "김영복", data: [11, 11, 22, 11, 5, 4, 19, 16, 11, 11, 18, 13], backgroundColor: "#f39c12", borderColor: "#f39c12", borderWidth: 0},
+        {label: "박태현", data: [8, 3, 3, 13, 14, 3, 13, 10, 14, 21, 33, 16], backgroundColor: "#9b59b6", borderColor: "#9b59b6", borderWidth: 0},
+        {label: "이건영", data: [7, 3, 8, 17, 15, 10, 17, 24, 14, 12, 12, 8], backgroundColor: "#1abc9c", borderColor: "#1abc9c", borderWidth: 0},
+        {label: "장영연", data: [12, 5, 10, 9, 11, 5, 10, 4, 17, 18, 12, 27], backgroundColor: "#e67e22", borderColor: "#e67e22", borderWidth: 0},
+        {label: "김희철", data: [11, 8, 8, 7, 3, 5, 11, 15, 7, 12, 19, 27], backgroundColor: "#2c3e50", borderColor: "#2c3e50", borderWidth: 0},
+        {label: "김예리", data: [8, 7, 13, 4, 7, 4, 9, 5, 7, 19, 7, 17], backgroundColor: "#d35400", borderColor: "#d35400", borderWidth: 0},
+        {label: "강경순", data: [4, 5, 5, 3, 1, 0, 1, 3, 1, 1, 1, 15], backgroundColor: "#16a085", borderColor: "#16a085", borderWidth: 0},
+        {label: "박주희", data: [2, 2, 1, 0, 6, 1, 1, 2, 2, 2, 3, 18], backgroundColor: "#8e44ad", borderColor: "#8e44ad", borderWidth: 0},
+        {label: "이주현", data: [0, 0, 3, 0, 3, 3, 2, 2, 2, 1, 3, 16], backgroundColor: "#c0392b", borderColor: "#c0392b", borderWidth: 0},
+        {label: "정재민", data: [3, 0, 0, 2, 4, 1, 2, 4, 1, 2, 1, 14], backgroundColor: "#2980b9", borderColor: "#2980b9", borderWidth: 0},
+        {label: "이예진", data: [0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1], backgroundColor: "#f1c40f", borderColor: "#f1c40f", borderWidth: 0},
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: "bottom",
+          labels: {font: {size: 10}, boxWidth: 12},
+          onClick: function(e, legendItem, legend) {
+            var chart = legend.chart;
+            var idx = legendItem.datasetIndex;
+            if (focusedIdx_ti12 === idx) {
+              focusedIdx_ti12 = -1;
+              chart.data.datasets.forEach(function(ds, i) { chart.setDatasetVisibility(i, true); });
+            } else {
+              focusedIdx_ti12 = idx;
+              chart.data.datasets.forEach(function(ds, i) { chart.setDatasetVisibility(i, i === idx); });
+            }
+            chart.update();
+          }
+        },
+        tooltip: {mode: "index", intersect: false, callbacks: {label: ctx => ctx.dataset.label + ": " + ctx.parsed.y + "건"}}
+      },
+      scales: {
+        x: {stacked: true},
+        y: {stacked: true, beginAtZero: true, title: {display: true, text: "완료 건수"}}
+      }
+    }
+  });
+})();
+</script><h2 id="로컬인프라">로컬인프라 (6명) <small style="color:#666;font-size:12px">맵플랫폼</small></h2><table><tr><th>이름</th><th>09</th><th>10</th><th>11</th><th>12</th><th>01</th><th>02</th><th>03</th><th>04</th><th>05</th><th>06</th><th>07</th><th>08</th><th>합계</th></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%B5%9C%EC%9B%90%EC%84%AD/%EB%A1%9C%EC%BB%AC%EC%9D%B8%ED%94%84%EB%9D%BC%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">최원섭</a></td><td>36</td><td>9</td><td>34</td><td>31</td><td>22</td><td>32</td><td>26</td><td>35</td><td>21</td><td>56</td><td>19</td><td>35</td><td><strong>356</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9D%B4%EB%8F%88%EC%88%98/%EB%A1%9C%EC%BB%AC%EC%9D%B8%ED%94%84%EB%9D%BC%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">이돈수</a></td><td>14</td><td>19</td><td>93</td><td>8</td><td>16</td><td>9</td><td>4</td><td>28</td><td>12</td><td>10</td><td>31</td><td>12</td><td><strong>256</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EA%B0%95%EB%8F%99%EC%9A%B1/%EB%A1%9C%EC%BB%AC%EC%9D%B8%ED%94%84%EB%9D%BC%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">강동욱</a></td><td>26</td><td>20</td><td>42</td><td>16</td><td>0</td><td>17</td><td>11</td><td>16</td><td>18</td><td>29</td><td>37</td><td>20</td><td><strong>252</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EA%B9%80%EC%98%81%ED%9B%88%28Young-Hoon%2C%20Kim%29/%EB%A1%9C%EC%BB%AC%EC%9D%B8%ED%94%84%EB%9D%BC%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">김영훈</a></td><td>32</td><td>28</td><td>13</td><td>11</td><td>14</td><td>15</td><td>17</td><td>9</td><td>7</td><td>14</td><td>35</td><td>12</td><td><strong>207</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EB%B0%95%EC%A2%85%EC%84%9D%28JIM%29/%EB%A1%9C%EC%BB%AC%EC%9D%B8%ED%94%84%EB%9D%BC%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">박종석</a></td><td>21</td><td>8</td><td>10</td><td>4</td><td>17</td><td>21</td><td>10</td><td>17</td><td>10</td><td>19</td><td>19</td><td>13</td><td><strong>169</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%A0%95%EC%A7%80%EC%9B%90/%EB%A1%9C%EC%BB%AC%EC%9D%B8%ED%94%84%EB%9D%BC%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">정지원B</a></td><td>0</td><td>0</td><td>0</td><td>3</td><td>2</td><td>5</td><td>7</td><td>9</td><td>1</td><td>3</td><td>12</td><td>1</td><td><strong>43</strong></td></tr><tr style="font-weight:bold;background:#f5f5f5"><td>합계</td><td>129</td><td>84</td><td>192</td><td>73</td><td>71</td><td>99</td><td>75</td><td>114</td><td>69</td><td>131</td><td>153</td><td>93</td><td>1283</td></tr></table><p style="color:#888;font-size:11px;margin:4px 0 4px">이름 클릭 → 해당 인원만 표시 / 다시 클릭 → 전체 복귀</p>
+<div style="background:#fff;border-radius:8px;padding:15px;box-shadow:0 2px 4px rgba(0,0,0,.1);margin:10px 0 30px">
+<canvas id="teamIssueChart13" height="80"></canvas></div>
+<script>
+(function() {
+  var focusedIdx_ti13 = -1;
+  new Chart(document.getElementById("teamIssueChart13"), {
+    type: "bar",
+    data: {
+      labels: ['09', '10', '11', '12', '01', '02', '03', '04', '05', '06', '07', '08'],
+      datasets: [
+        {label: "최원섭", data: [36, 9, 34, 31, 22, 32, 26, 35, 21, 56, 19, 35], backgroundColor: "#e74c3c", borderColor: "#e74c3c", borderWidth: 0},
+        {label: "이돈수", data: [14, 19, 93, 8, 16, 9, 4, 28, 12, 10, 31, 12], backgroundColor: "#3498db", borderColor: "#3498db", borderWidth: 0},
+        {label: "강동욱", data: [26, 20, 42, 16, 0, 17, 11, 16, 18, 29, 37, 20], backgroundColor: "#27ae60", borderColor: "#27ae60", borderWidth: 0},
+        {label: "김영훈", data: [32, 28, 13, 11, 14, 15, 17, 9, 7, 14, 35, 12], backgroundColor: "#f39c12", borderColor: "#f39c12", borderWidth: 0},
+        {label: "박종석", data: [21, 8, 10, 4, 17, 21, 10, 17, 10, 19, 19, 13], backgroundColor: "#9b59b6", borderColor: "#9b59b6", borderWidth: 0},
+        {label: "정지원B", data: [0, 0, 0, 3, 2, 5, 7, 9, 1, 3, 12, 1], backgroundColor: "#1abc9c", borderColor: "#1abc9c", borderWidth: 0},
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: "bottom",
+          labels: {font: {size: 10}, boxWidth: 12},
+          onClick: function(e, legendItem, legend) {
+            var chart = legend.chart;
+            var idx = legendItem.datasetIndex;
+            if (focusedIdx_ti13 === idx) {
+              focusedIdx_ti13 = -1;
+              chart.data.datasets.forEach(function(ds, i) { chart.setDatasetVisibility(i, true); });
+            } else {
+              focusedIdx_ti13 = idx;
+              chart.data.datasets.forEach(function(ds, i) { chart.setDatasetVisibility(i, i === idx); });
+            }
+            chart.update();
+          }
+        },
+        tooltip: {mode: "index", intersect: false, callbacks: {label: ctx => ctx.dataset.label + ": " + ctx.parsed.y + "건"}}
+      },
+      scales: {
+        x: {stacked: true},
+        y: {stacked: true, beginAtZero: true, title: {display: true, text: "완료 건수"}}
+      }
+    }
+  });
+})();
+</script><h2 id="맵컨텐츠">맵컨텐츠 (7명) <small style="color:#666;font-size:12px">맵플랫폼</small></h2><table><tr><th>이름</th><th>09</th><th>10</th><th>11</th><th>12</th><th>01</th><th>02</th><th>03</th><th>04</th><th>05</th><th>06</th><th>07</th><th>08</th><th>합계</th></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EA%B9%80%EC%A0%95%EC%95%84/%EB%A7%B5%EC%BB%A8%ED%85%90%EC%B8%A0%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">김정아</a></td><td>30</td><td>29</td><td>11</td><td>5</td><td>6</td><td>5</td><td>24</td><td>9</td><td>7</td><td>10</td><td>11</td><td>23</td><td><strong>170</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EA%B9%80%EC%8A%B9%EC%B2%A0/%EB%A7%B5%EC%BB%A8%ED%85%90%EC%B8%A0%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">김승철</a></td><td>6</td><td>2</td><td>0</td><td>0</td><td>1</td><td>2</td><td>2</td><td>1</td><td>0</td><td>6</td><td>2</td><td>32</td><td><strong>54</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EA%B0%95%EC%9D%B4%EC%8A%AC/%EB%A7%B5%EC%BB%A8%ED%85%90%EC%B8%A0%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">강이슬</a></td><td>2</td><td>2</td><td>0</td><td>1</td><td>8</td><td>5</td><td>3</td><td>3</td><td>4</td><td>3</td><td>1</td><td>11</td><td><strong>43</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EB%B0%95%EC%83%81%EC%97%B0/%EB%A7%B5%EC%BB%A8%ED%85%90%EC%B8%A0%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">박상연</a></td><td>3</td><td>1</td><td>7</td><td>2</td><td>1</td><td>0</td><td>0</td><td>0</td><td>6</td><td>2</td><td>1</td><td>5</td><td><strong>28</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9D%B4%ED%83%9C%EC%9A%B1/%EB%A7%B5%EC%BB%A8%ED%85%90%EC%B8%A0%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">이태욱</a></td><td>1</td><td>3</td><td>0</td><td>2</td><td>2</td><td>3</td><td>1</td><td>1</td><td>5</td><td>4</td><td>0</td><td>1</td><td><strong>23</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9D%B4%EC%A7%80%EC%9D%80/%EB%A7%B5%EC%BB%A8%ED%85%90%EC%B8%A0%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">이지은</a></td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td><strong>2</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9C%A0%ED%98%B8%EC%A7%84/%EB%A7%B5%EC%BB%A8%ED%85%90%EC%B8%A0%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">유호진</a></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td><strong>1</strong></td></tr><tr style="font-weight:bold;background:#f5f5f5"><td>합계</td><td>42</td><td>38</td><td>18</td><td>10</td><td>18</td><td>15</td><td>30</td><td>15</td><td>22</td><td>25</td><td>16</td><td>72</td><td>321</td></tr></table><p style="color:#888;font-size:11px;margin:4px 0 4px">이름 클릭 → 해당 인원만 표시 / 다시 클릭 → 전체 복귀</p>
+<div style="background:#fff;border-radius:8px;padding:15px;box-shadow:0 2px 4px rgba(0,0,0,.1);margin:10px 0 30px">
+<canvas id="teamIssueChart14" height="80"></canvas></div>
+<script>
+(function() {
+  var focusedIdx_ti14 = -1;
+  new Chart(document.getElementById("teamIssueChart14"), {
+    type: "bar",
+    data: {
+      labels: ['09', '10', '11', '12', '01', '02', '03', '04', '05', '06', '07', '08'],
+      datasets: [
+        {label: "김정아", data: [30, 29, 11, 5, 6, 5, 24, 9, 7, 10, 11, 23], backgroundColor: "#e74c3c", borderColor: "#e74c3c", borderWidth: 0},
+        {label: "김승철", data: [6, 2, 0, 0, 1, 2, 2, 1, 0, 6, 2, 32], backgroundColor: "#3498db", borderColor: "#3498db", borderWidth: 0},
+        {label: "강이슬", data: [2, 2, 0, 1, 8, 5, 3, 3, 4, 3, 1, 11], backgroundColor: "#27ae60", borderColor: "#27ae60", borderWidth: 0},
+        {label: "박상연", data: [3, 1, 7, 2, 1, 0, 0, 0, 6, 2, 1, 5], backgroundColor: "#f39c12", borderColor: "#f39c12", borderWidth: 0},
+        {label: "이태욱", data: [1, 3, 0, 2, 2, 3, 1, 1, 5, 4, 0, 1], backgroundColor: "#9b59b6", borderColor: "#9b59b6", borderWidth: 0},
+        {label: "이지은", data: [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0], backgroundColor: "#1abc9c", borderColor: "#1abc9c", borderWidth: 0},
+        {label: "유호진", data: [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0], backgroundColor: "#e67e22", borderColor: "#e67e22", borderWidth: 0},
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: "bottom",
+          labels: {font: {size: 10}, boxWidth: 12},
+          onClick: function(e, legendItem, legend) {
+            var chart = legend.chart;
+            var idx = legendItem.datasetIndex;
+            if (focusedIdx_ti14 === idx) {
+              focusedIdx_ti14 = -1;
+              chart.data.datasets.forEach(function(ds, i) { chart.setDatasetVisibility(i, true); });
+            } else {
+              focusedIdx_ti14 = idx;
+              chart.data.datasets.forEach(function(ds, i) { chart.setDatasetVisibility(i, i === idx); });
+            }
+            chart.update();
+          }
+        },
+        tooltip: {mode: "index", intersect: false, callbacks: {label: ctx => ctx.dataset.label + ": " + ctx.parsed.y + "건"}}
+      },
+      scales: {
+        x: {stacked: true},
+        y: {stacked: true, beginAtZero: true, title: {display: true, text: "완료 건수"}}
+      }
+    }
+  });
+})();
+</script><h2 id="로컬컨텐츠">로컬컨텐츠 (4명) <small style="color:#666;font-size:12px">맵플랫폼</small></h2><table><tr><th>이름</th><th>09</th><th>10</th><th>11</th><th>12</th><th>01</th><th>02</th><th>03</th><th>04</th><th>05</th><th>06</th><th>07</th><th>08</th><th>합계</th></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9D%B4%EC%9C%A0%EC%A7%84%28YooJin%20Lee%29/%EB%A1%9C%EC%BB%AC%EC%BB%A8%ED%85%90%EC%B8%A0%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">이유진</a></td><td>6</td><td>0</td><td>5</td><td>9</td><td>12</td><td>3</td><td>6</td><td>5</td><td>6</td><td>8</td><td>43</td><td>8</td><td><strong>111</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%A0%95%EB%8B%A4%EC%A0%95/%EB%A1%9C%EC%BB%AC%EC%BB%A8%ED%85%90%EC%B8%A0%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">정다정</a></td><td>14</td><td>5</td><td>11</td><td>9</td><td>14</td><td>8</td><td>4</td><td>6</td><td>2</td><td>6</td><td>7</td><td>3</td><td><strong>89</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%9D%B4%EC%98%81%EC%88%98/%EB%A1%9C%EC%BB%AC%EC%BB%A8%ED%85%90%EC%B8%A0%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">이영수B</a></td><td>3</td><td>0</td><td>1</td><td>3</td><td>2</td><td>3</td><td>1</td><td>2</td><td>0</td><td>0</td><td>0</td><td>0</td><td><strong>15</strong></td></tr><tr><td><a href="https://tmobi.atlassian.net/issues/?jql=assignee%20was%20%22%EC%84%9C%EC%A3%BC%EC%9D%80%28Seo%20Ju%20Eun%29/%EB%A1%9C%EC%BB%AC%EC%BB%A8%ED%85%90%EC%B8%A0%22%20AND%20statusCategory%20%3D%20Done%20AND%20resolved%20%3E%3D%202025-09-01%20AND%20resolved%20%3C%202026-09-01" target="_blank" style="color:#1a73e8;text-decoration:none">서주은</a></td><td>1</td><td>0</td><td>2</td><td>0</td><td>3</td><td>2</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td><strong>8</strong></td></tr><tr style="font-weight:bold;background:#f5f5f5"><td>합계</td><td>24</td><td>5</td><td>19</td><td>21</td><td>31</td><td>16</td><td>11</td><td>13</td><td>8</td><td>14</td><td>50</td><td>11</td><td>223</td></tr></table><p style="color:#888;font-size:11px;margin:4px 0 4px">이름 클릭 → 해당 인원만 표시 / 다시 클릭 → 전체 복귀</p>
+<div style="background:#fff;border-radius:8px;padding:15px;box-shadow:0 2px 4px rgba(0,0,0,.1);margin:10px 0 30px">
+<canvas id="teamIssueChart15" height="80"></canvas></div>
+<script>
+(function() {
+  var focusedIdx_ti15 = -1;
+  new Chart(document.getElementById("teamIssueChart15"), {
+    type: "bar",
+    data: {
+      labels: ['09', '10', '11', '12', '01', '02', '03', '04', '05', '06', '07', '08'],
+      datasets: [
+        {label: "이유진", data: [6, 0, 5, 9, 12, 3, 6, 5, 6, 8, 43, 8], backgroundColor: "#e74c3c", borderColor: "#e74c3c", borderWidth: 0},
+        {label: "정다정", data: [14, 5, 11, 9, 14, 8, 4, 6, 2, 6, 7, 3], backgroundColor: "#3498db", borderColor: "#3498db", borderWidth: 0},
+        {label: "이영수B", data: [3, 0, 1, 3, 2, 3, 1, 2, 0, 0, 0, 0], backgroundColor: "#27ae60", borderColor: "#27ae60", borderWidth: 0},
+        {label: "서주은", data: [1, 0, 2, 0, 3, 2, 0, 0, 0, 0, 0, 0], backgroundColor: "#f39c12", borderColor: "#f39c12", borderWidth: 0},
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: "bottom",
+          labels: {font: {size: 10}, boxWidth: 12},
+          onClick: function(e, legendItem, legend) {
+            var chart = legend.chart;
+            var idx = legendItem.datasetIndex;
+            if (focusedIdx_ti15 === idx) {
+              focusedIdx_ti15 = -1;
+              chart.data.datasets.forEach(function(ds, i) { chart.setDatasetVisibility(i, true); });
+            } else {
+              focusedIdx_ti15 = idx;
+              chart.data.datasets.forEach(function(ds, i) { chart.setDatasetVisibility(i, i === idx); });
+            }
+            chart.update();
+          }
+        },
+        tooltip: {mode: "index", intersect: false, callbacks: {label: ctx => ctx.dataset.label + ": " + ctx.parsed.y + "건"}}
+      },
+      scales: {
+        x: {stacked: true},
+        y: {stacked: true, beginAtZero: true, title: {display: true, text: "완료 건수"}}
+      }
+    }
+  });
+})();
+</script></body></html>
